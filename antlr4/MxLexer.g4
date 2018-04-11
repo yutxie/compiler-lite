@@ -1,29 +1,114 @@
 lexer grammar MxLexer;
 
+Operator
+    : SeparatorOperator
+    | AssignmentOperator
+    | InDecreaseOperator
+    | ArithmeticOperator
+    | LogicOperator
+    | BitOperator
+    | RelationshipOperator
+    ;
+
+    SeparatorOperator
+        : LPAREN | RPAREN
+        | LBRACE | RBRACE
+        | LBRACK | RBRACK
+        | SEMI | COMMA | DOT
+        ;
+
+        LPAREN : '(';
+        RPAREN : ')';
+        LBRACE : '{';
+        RBRACE : '}';
+        LBRACK : '[';
+        RBRACK : ']';
+        SEMI : ';';
+        COMMA : ',';
+        DOT : '.';
+
+    AssignmentOperator
+        : ASSIGN
+        ;
+
+        ASSIGN : '=';
+
+    InDecreaseOperator
+        : INC | DEC
+        ;
+
+        INC : '++';
+        DEC : '--';
+
+    ArithmeticOperator
+        : ADD | SUB | MUL | DIV | MOD
+        ;
+
+        ADD : '+';
+        SUB : '-';
+        MUL : '*';
+        DIV : '/';
+        MOD : '%';
+
+    LogicOperator
+        : LAND | LOR | LNOT
+        ;
+
+        LAND : '&&';
+        LOR : '||';
+        LNOT : '!';
+
+    BitOperator
+        : LSHIFT | RSHIFT | NOT | OR | AND | XOR
+        ;
+
+        LSHIFT : '<<';
+        RSHIFT : '>>';
+        NOT : '~';
+        OR : '|';
+        AND : '&';
+        XOR : '^';
+
+    RelationshipOperator
+        : LT | GT | EQUAL | LE | GE | NOTEQUAL
+        ;
+
+        LT : '<';
+        GT : '>';
+        EQUAL : '==';
+        LE : '<=';
+        GE : '>=';
+        NOTEQUAL : '!=';
+
+
 Keyword
     : VariableType
     | NullConstant
     | LogicConstant
-    | ControlStatementWord
+    | ConditionWord
+    | LoopWord
+    | JumpWord
     | ObjectiveWord
     ;
 
-    VariableType
-        : BOOL | INT | STRING | VOID
-        ;
-
-            BOOL : 'bool';
-            INT : 'int';
-            STRING : 'string';
-            VOID : 'void';
-
-    ControlStatementWord
-        : IF | FOR | WHILE | BREAK | CONTINUE | RETURN
+    ConditionWord
+        : IF | ELSE
         ;
 
             IF : 'if';
+            ELSE : 'else';
+
+    LoopWord
+        : FOR | WHILE
+        ;
+
             FOR : 'for';
             WHILE : 'while';
+
+    JumpWord
+        :  BREAK | CONTINUE | RETURN
+        ;
+        
             BREAK : 'break';
             CONTINUE : 'continue';
             RETURN : 'return';
@@ -35,6 +120,15 @@ Keyword
         CLASS : 'class';
         NEW : 'new';
         THIS : 'this';
+
+VariableType
+    : BOOL | INT | STRING | VOID
+    ;
+
+        BOOL : 'bool';
+        INT : 'int';
+        STRING : 'string';
+        VOID : 'void';
 
 Constant
     : LogicConstant
@@ -57,15 +151,19 @@ Constant
             ;
 
     StringConstant
-        :
-        ; // ATTENTION
+        : '"' (~["\\\r\n] | EscapeSequence)* '"'
+        ;
+
+            fragment EscapeSequence
+                : '\\' [btnfr"'\\]
+                ;
 
     NullConstant
         : 'null'
         ;
 
 Identifier
-    : ('a'..'z' | 'A'..'Z') ('0'..'9' | 'a'..'z' | 'A'..'Z' | '_')*
+    : [a-zA-Z] [0-9a-zA-Z_]*
     ;
 
 SpecialToken
