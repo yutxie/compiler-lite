@@ -2,88 +2,101 @@ parser grammar MxParser;
 
 options { tokenVocab = MxLexer; }
 
-definition
-    : variableDefinition
-    | functionDefinition
-    | classDefinition
+program
+    : (classDef | method)*
     ;
 
-    variableDefinition
-        : 
+classDef
+    : CLASS Identifier LBRACE classBody RBRACE
+    ;
+
+    classBody
+        : memberVariable* memberMethod
         ;
 
-    functionDefinition
-        :
+        memberVariable
+            : (VariableType | Identifier) Identifier SEMI
+            ;
+
+        memberMethod
+            : method
+            | constructionMethod
+            ;
+
+            constructionMethod
+                : Identifier LPAREN RPAREN block
+                | Identifier LPAREN formalParameter RPAREN block
+                ;
+
+method
+    : VariableType Identifier LPAREN formalParameterList? RPAREN LBRACE methodBody RBRACE
+    ;
+
+    formalParameterList
+        :  formalParameter (COMMA formalParameter)*
         ;
 
-    classDefinition
-        :
+        formalParameter
+            : VariableType Identifier (ASSIGN expression)?
+            ;
+
+    actualParameterList
+        : expression (COMMA expression)*
+        ;
+
+    methodBody
+        : statement*
+        ;
+
+block
+    : LBRACE statement* RBRACE
+    ;
+
+    blockOrStatement
+        : block
+        | statement
         ;
 
 statement
-    :
+    : (VariableType | Identifier) (Identifier (ASSIGN expression)?)+ SEMI # declarationStatement
+    | expressionList SEMI # expressionStatement
+    | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStatement
+    | FOR LPAREN expression SEMI expression SEMI expression RPAREN blockOrStatement # forStatement
+    | WHILE LPAREN expression RPAREN blockOrStatement # whileStatement
+    | RETURN expression SEMI # returnStatement
+    | BREAK SEMI # breakStatement
+    | CONTINUE SEMI # continueStatement
+    | SEMI # emptyStatement
     ;
 
 expression
-    : singleTermExpression
-    | doubleTermExpression
+    : Identifier # identifierExpression
+    | Constant # constantExpression
+    | THIS # thisExpression
+    | expression bop=DOT (Identifier | THIS) # memberAccessExpression
+    | expression LPAREN actualParameterList? RPAREN # methodCallExpression
+    | NEW creator # newExpression
+    | expression postfix=(INC | DEC) # unaryExpression
+    | prefix=(INC | DEC) expression # unaryExpression
+    | prefix=(ADD | SUB) expression # unaryExpression
+    | prefix=(NOT | LNOT) expression # unaryExpression
+    | expression bop=(MUL | DIV | MOD) expression # binaryExpression
+    | expression bop=(ADD | SUB) expression # binaryExpression
+    | expression bop=(LSHIFT | RSHIFT) expression # binaryExpression
+    | expression bop=(LE | GE | LT | GT) expression # binaryExpression
+    | expression bop=(EQUAL | NOTEQUAL) expression # binaryExpression
+    | expression bop=AND expression # binaryExpression
+    | expression bop=XOR expression # binaryExpression
+    | expression bop=OR expression # binaryExpression
+    | expression bop=LAND expression # binaryExpression
+    | expression bop=LOR expression # binaryExpression
+    | expression bop=ASSIGN expression # binaryExpression
     ;
 
-    singleTermExpression
-        : primary
-        | postExpression
-        | prfExpression
-        | parExpression
-        | newExpression
+    creator
+        : 
         ;
 
-        primary
-            : THIS
-            | Constant
-            | Identifier
-            ;
-
-        postExpression
-            : expression postfix=('++' | '--')
-            ;
-
-        preExpression
-            : prefix=('+' | '-' | '++' | '--') expression
-            : prefix=('~' | '!') expression
-            ;
-
-        parExpression
-            : '(' expression ')'
-            ;
-
-        newExpression
-            : NEW Identifier
-            | NEW methodCall
-            ;
-
-    doubleTermExpression
-        : arithmeticExpression
-        | dotExpression
-        | indexExpression
-        | methodCall
-        ;
-
-        arithmeticExpression
-            : expression bop=AssignmentOperator expression
-            | expression bop=ArithmeticOperator expression
-            | expression bop=('==' | '!=' | '&&' | '||') epxression
-            | expression bop=('<<' | '>>' | '&' | '|' | '^') epxression
-            | expression bop=RelationshipOperator expression
-            ;
-
-        dotExpression
-            : expression bop=DOT (Identifier | methodCall | THIS)
-            ;
-
-        indexExpression
-            : expression LBRACK expression RBRACK
-            ;
-
-        methodCall
-            :
-            ;
+expressionList
+    : expression (COMMA expression)*
+    ;

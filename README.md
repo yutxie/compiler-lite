@@ -1,6 +1,12 @@
 # compiler-lite
 ACM Class 2018 Compiler
 
+## To-Do
+
+- creator
+- check parser.g4
+- after g4...
+
 ## Structure
 
 ### Lexer
@@ -14,7 +20,11 @@ ACM Class 2018 Compiler
 
 ### Parser
 
-
+- program: class/method
+- class: memberVariable/memberMethod
+- method (function)
+- block / statement: declaration/expression/condition/loop/jump/empty
+- expression
 
 ## Reference
 
