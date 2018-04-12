@@ -1,4 +1,4 @@
-// Generated from d:\Users\DELL\Desktop\compiler-lite\antlr4\MxLexer.g4 by ANTLR 4.7.1
+// Generated from d:\Users\DELL\Desktop\compiler-lite\antlr4/MxLexer.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

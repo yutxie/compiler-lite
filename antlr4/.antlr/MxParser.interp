@@ -42,11 +42,6 @@ null
 '!='
 null
 null
-'bool'
-'int'
-'string'
-'void'
-null
 'if'
 'else'
 null
@@ -60,6 +55,11 @@ null
 'class'
 'new'
 'this'
+null
+'bool'
+'int'
+'string'
+'void'
 null
 null
 null
@@ -86,7 +86,7 @@ RBRACK
 SEMI
 COMMA
 DOT
-AssignOperator
+AssignmentOperator
 ASSIGN
 InDecreaseOperator
 INC
@@ -116,11 +116,6 @@ LE
 GE
 NOTEQUAL
 Keyword
-VariableType
-BOOL
-INT
-STRING
-VOID
 ConditionWord
 IF
 ELSE
@@ -135,6 +130,11 @@ ObjectiveWord
 CLASS
 NEW
 THIS
+VariableType
+BOOL
+INT
+STRING
+VOID
 Constant
 LogicConstant
 IntegerConstant

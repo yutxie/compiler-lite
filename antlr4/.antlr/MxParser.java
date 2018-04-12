@@ -17,17 +17,16 @@ public class MxParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		Operator=1, SeparatorOperator=2, LPAREN=3, RPAREN=4, LBRACE=5, RBRACE=6, 
-		LBRACK=7, RBRACK=8, SEMI=9, COMMA=10, DOT=11, AssignOperator=12, ASSIGN=13, 
+		LBRACK=7, RBRACK=8, SEMI=9, COMMA=10, DOT=11, AssignmentOperator=12, ASSIGN=13, 
 		InDecreaseOperator=14, INC=15, DEC=16, ArithmeticOperator=17, ADD=18, 
 		SUB=19, MUL=20, DIV=21, MOD=22, LogicOperator=23, LAND=24, LOR=25, LNOT=26, 
 		BitOperator=27, LSHIFT=28, RSHIFT=29, NOT=30, OR=31, AND=32, XOR=33, RelationshipOperator=34, 
-		LT=35, GT=36, EQUAL=37, LE=38, GE=39, NOTEQUAL=40, Keyword=41, VariableType=42, 
-		BOOL=43, INT=44, STRING=45, VOID=46, ConditionWord=47, IF=48, ELSE=49, 
-		LoopWord=50, FOR=51, WHILE=52, JumpWord=53, BREAK=54, CONTINUE=55, RETURN=56, 
-		ObjectiveWord=57, CLASS=58, NEW=59, THIS=60, Constant=61, LogicConstant=62, 
-		IntegerConstant=63, StringConstant=64, NullConstant=65, Identifier=66, 
-		SpecialToken=67, WhiteSpace=68, NewLine=69, Comment=70, LineComment=71, 
-		BlockComment=72;
+		LT=35, GT=36, EQUAL=37, LE=38, GE=39, NOTEQUAL=40, Keyword=41, ConditionWord=42, 
+		IF=43, ELSE=44, LoopWord=45, FOR=46, WHILE=47, JumpWord=48, BREAK=49, 
+		CONTINUE=50, RETURN=51, ObjectiveWord=52, CLASS=53, NEW=54, THIS=55, VariableType=56, 
+		BOOL=57, INT=58, STRING=59, VOID=60, Constant=61, LogicConstant=62, IntegerConstant=63, 
+		StringConstant=64, NullConstant=65, Identifier=66, SpecialToken=67, WhiteSpace=68, 
+		NewLine=69, Comment=70, LineComment=71, BlockComment=72;
 	public static final int
 		RULE_definition = 0, RULE_variableDefinition = 1, RULE_functionDefinition = 2, 
 		RULE_classDefinition = 3, RULE_statement = 4, RULE_expression = 5;
@@ -41,20 +40,20 @@ public class MxParser extends Parser {
 		"'.'", null, "'='", null, "'++'", "'--'", null, "'+'", "'-'", "'*'", "'/'", 
 		"'%'", null, "'&&'", "'||'", "'!'", null, "'<<'", "'>>'", "'~'", "'|'", 
 		"'&'", "'^'", null, "'<'", "'>'", "'=='", "'<='", "'>='", "'!='", null, 
-		null, "'bool'", "'int'", "'string'", "'void'", null, "'if'", "'else'", 
-		null, "'for'", "'while'", null, "'break'", "'continue'", "'return'", null, 
-		"'class'", "'new'", "'this'", null, null, null, null, "'null'"
+		null, "'if'", "'else'", null, "'for'", "'while'", null, "'break'", "'continue'", 
+		"'return'", null, "'class'", "'new'", "'this'", null, "'bool'", "'int'", 
+		"'string'", "'void'", null, null, null, null, "'null'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "Operator", "SeparatorOperator", "LPAREN", "RPAREN", "LBRACE", "RBRACE", 
-		"LBRACK", "RBRACK", "SEMI", "COMMA", "DOT", "AssignOperator", "ASSIGN", 
+		"LBRACK", "RBRACK", "SEMI", "COMMA", "DOT", "AssignmentOperator", "ASSIGN", 
 		"InDecreaseOperator", "INC", "DEC", "ArithmeticOperator", "ADD", "SUB", 
 		"MUL", "DIV", "MOD", "LogicOperator", "LAND", "LOR", "LNOT", "BitOperator", 
 		"LSHIFT", "RSHIFT", "NOT", "OR", "AND", "XOR", "RelationshipOperator", 
-		"LT", "GT", "EQUAL", "LE", "GE", "NOTEQUAL", "Keyword", "VariableType", 
-		"BOOL", "INT", "STRING", "VOID", "ConditionWord", "IF", "ELSE", "LoopWord", 
-		"FOR", "WHILE", "JumpWord", "BREAK", "CONTINUE", "RETURN", "ObjectiveWord", 
-		"CLASS", "NEW", "THIS", "Constant", "LogicConstant", "IntegerConstant", 
+		"LT", "GT", "EQUAL", "LE", "GE", "NOTEQUAL", "Keyword", "ConditionWord", 
+		"IF", "ELSE", "LoopWord", "FOR", "WHILE", "JumpWord", "BREAK", "CONTINUE", 
+		"RETURN", "ObjectiveWord", "CLASS", "NEW", "THIS", "VariableType", "BOOL", 
+		"INT", "STRING", "VOID", "Constant", "LogicConstant", "IntegerConstant", 
 		"StringConstant", "NullConstant", "Identifier", "SpecialToken", "WhiteSpace", 
 		"NewLine", "Comment", "LineComment", "BlockComment"
 	};
