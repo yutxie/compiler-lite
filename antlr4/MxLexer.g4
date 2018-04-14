@@ -82,7 +82,7 @@ Operator
 
 
 Keyword
-    : VariableType
+    : PrimitiveType
     | NullConstant
     | LogicConstant
     | ConditionWord
@@ -121,7 +121,7 @@ Keyword
         NEW : 'new';
         THIS : 'this';
 
-VariableType
+PrimitiveType
     : BOOL | INT | STRING | VOID
     ;
 

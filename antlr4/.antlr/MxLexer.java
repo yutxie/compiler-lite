@@ -23,7 +23,7 @@ public class MxLexer extends Lexer {
 		BitOperator=27, LSHIFT=28, RSHIFT=29, NOT=30, OR=31, AND=32, XOR=33, RelationshipOperator=34, 
 		LT=35, GT=36, EQUAL=37, LE=38, GE=39, NOTEQUAL=40, Keyword=41, ConditionWord=42, 
 		IF=43, ELSE=44, LoopWord=45, FOR=46, WHILE=47, JumpWord=48, BREAK=49, 
-		CONTINUE=50, RETURN=51, ObjectiveWord=52, CLASS=53, NEW=54, THIS=55, VariableType=56, 
+		CONTINUE=50, RETURN=51, ObjectiveWord=52, CLASS=53, NEW=54, THIS=55, PrimitiveType=56, 
 		BOOL=57, INT=58, STRING=59, VOID=60, Constant=61, LogicConstant=62, IntegerConstant=63, 
 		StringConstant=64, NullConstant=65, Identifier=66, SpecialToken=67, WhiteSpace=68, 
 		NewLine=69, Comment=70, LineComment=71, BlockComment=72;
@@ -43,7 +43,7 @@ public class MxLexer extends Lexer {
 		"LSHIFT", "RSHIFT", "NOT", "OR", "AND", "XOR", "RelationshipOperator", 
 		"LT", "GT", "EQUAL", "LE", "GE", "NOTEQUAL", "Keyword", "ConditionWord", 
 		"IF", "ELSE", "LoopWord", "FOR", "WHILE", "JumpWord", "BREAK", "CONTINUE", 
-		"RETURN", "ObjectiveWord", "CLASS", "NEW", "THIS", "VariableType", "BOOL", 
+		"RETURN", "ObjectiveWord", "CLASS", "NEW", "THIS", "PrimitiveType", "BOOL", 
 		"INT", "STRING", "VOID", "Constant", "LogicConstant", "IntegerConstant", 
 		"DecimalConstant", "StringConstant", "EscapeSequence", "NullConstant", 
 		"Identifier", "SpecialToken", "WhiteSpace", "NewLine", "Comment", "LineComment", 
@@ -67,7 +67,7 @@ public class MxLexer extends Lexer {
 		"LSHIFT", "RSHIFT", "NOT", "OR", "AND", "XOR", "RelationshipOperator", 
 		"LT", "GT", "EQUAL", "LE", "GE", "NOTEQUAL", "Keyword", "ConditionWord", 
 		"IF", "ELSE", "LoopWord", "FOR", "WHILE", "JumpWord", "BREAK", "CONTINUE", 
-		"RETURN", "ObjectiveWord", "CLASS", "NEW", "THIS", "VariableType", "BOOL", 
+		"RETURN", "ObjectiveWord", "CLASS", "NEW", "THIS", "PrimitiveType", "BOOL", 
 		"INT", "STRING", "VOID", "Constant", "LogicConstant", "IntegerConstant", 
 		"StringConstant", "NullConstant", "Identifier", "SpecialToken", "WhiteSpace", 
 		"NewLine", "Comment", "LineComment", "BlockComment"

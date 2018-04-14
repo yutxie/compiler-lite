@@ -130,7 +130,7 @@ ObjectiveWord
 CLASS
 NEW
 THIS
-VariableType
+PrimitiveType
 BOOL
 INT
 STRING
@@ -204,7 +204,7 @@ ObjectiveWord
 CLASS
 NEW
 THIS
-VariableType
+PrimitiveType
 BOOL
 INT
 STRING

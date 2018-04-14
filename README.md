@@ -3,9 +3,7 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- creator
-- check parser.g4
-- after g4...
+- translate parse tree to AST
 
 ## Structure
 

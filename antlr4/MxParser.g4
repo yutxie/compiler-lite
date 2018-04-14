@@ -3,41 +3,40 @@ parser grammar MxParser;
 options { tokenVocab = MxLexer; }
 
 program
-    : (classDef | method)*
+    : (classDefinition | methodDefinition | statement)*
     ;
 
-classDef
+classDefinition
     : CLASS Identifier LBRACE classBody RBRACE
     ;
 
     classBody
-        : memberVariable* memberMethod
+        : memberVariable* memberMethod*
         ;
 
         memberVariable
-            : (VariableType | Identifier) Identifier SEMI
+            : variableType Identifier SEMI
             ;
 
         memberMethod
-            : method
-            | constructionMethod
+            : constructionMethodDefinition
+            | methodDefinition
             ;
 
-            constructionMethod
-                : Identifier LPAREN RPAREN block
-                | Identifier LPAREN formalParameter RPAREN block
+            constructionMethodDefinition
+                : Identifier LPAREN formalParameterList? RPAREN block
                 ;
 
-method
-    : VariableType Identifier LPAREN formalParameterList? RPAREN LBRACE methodBody RBRACE
+methodDefinition
+    : variableType Identifier LPAREN formalParameterList? RPAREN LBRACE methodBody RBRACE
     ;
 
     formalParameterList
-        :  formalParameter (COMMA formalParameter)*
+        : formalParameter (COMMA formalParameter)*
         ;
 
         formalParameter
-            : VariableType Identifier (ASSIGN expression)?
+            : variableType Identifier (ASSIGN expression)?
             ;
 
     actualParameterList
@@ -46,7 +45,7 @@ method
 
     methodBody
         : statement*
-        ;
+        ; // ATTENTION: return ...
 
 block
     : LBRACE statement* RBRACE
@@ -58,7 +57,8 @@ block
         ;
 
 statement
-    : (VariableType | Identifier) (Identifier (ASSIGN expression)?)+ SEMI # declarationStatement
+    : variableType Identifier (ASSIGN expression)?
+        (COMMA Identifier (ASSIGN expression)?)* SEMI # DefinitionStatement
     | expressionList SEMI # expressionStatement
     | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStatement
     | FOR LPAREN expression SEMI expression SEMI expression RPAREN blockOrStatement # forStatement
@@ -74,6 +74,7 @@ expression
     | Constant # constantExpression
     | THIS # thisExpression
     | expression bop=DOT (Identifier | THIS) # memberAccessExpression
+    | expression LBRACK expression RBRACK # indexAccessExpression
     | expression LPAREN actualParameterList? RPAREN # methodCallExpression
     | NEW creator # newExpression
     | expression postfix=(INC | DEC) # unaryExpression
@@ -94,8 +95,19 @@ expression
     ;
 
     creator
-        : 
-        ;
+        : variableType actualParameterList
+        ; // ATTENTION: int a = new int[...](...) is literally legal
+
+        variableType
+            : (Identifier | PrimitiveType) # nonArrayVariableType
+            | (Identifier | PrimitiveType) arrayCreatorRest # arrayVariableType
+            ;
+
+        arrayCreatorRest
+            : LBRACK (RBRACK (LBRACK RBRACK)* 
+                        | expression RBRACK (LBRACK expression RBRACK)* (LBRACK RBRACK)*)
+            ;
+
 
 expressionList
     : expression (COMMA expression)*
