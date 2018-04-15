@@ -24,6 +24,25 @@ ACM Class 2018 Compiler
 - block / statement: declaration/expression/condition/loop/jump/empty
 - expression
 
+## Commands
+
+- antlr4
+
+  ```CQL
+  cd /usr/local/lib
+  sudo curl -O https://www.antlr.org/download/antlr-4.7.1-complete.jar
+  export CLASSPATH=".:/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH"
+  alias antlr4='java -jar /usr/local/lib/antlr-4.7.1-complete.jar'
+  alias grun='java org.antlr.v4.gui.TestRig'
+
+  antlr4 Grammar
+  javac *.java
+  grun Grammar rule -tree/tokens
+  java AstVisitor
+  ```
+
+  ​
+
 ## Reference
 
 - 自制编译器 - 青木峰郎
