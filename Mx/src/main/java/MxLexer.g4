@@ -108,7 +108,7 @@ Keyword
     JumpWord
         :  BREAK | CONTINUE | RETURN
         ;
-        
+
             BREAK : 'break';
             CONTINUE : 'continue';
             RETURN : 'return';
@@ -116,7 +116,7 @@ Keyword
     ObjectiveWord
         : CLASS | NEW | THIS
         ;
-        
+
         CLASS : 'class';
         NEW : 'new';
         THIS : 'this';

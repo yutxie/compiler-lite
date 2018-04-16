@@ -104,7 +104,7 @@ expression
             ;
 
         arrayCreatorRest
-            : LBRACK (RBRACK (LBRACK RBRACK)* 
+            : LBRACK (RBRACK (LBRACK RBRACK)*
                         | expression RBRACK (LBRACK expression RBRACK)* (LBRACK RBRACK)*)
             ;
 
