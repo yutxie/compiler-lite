@@ -3,7 +3,7 @@ parser grammar MxParser;
 options { tokenVocab = MxLexer; }
 
 program
-    : (classDefinition | methodDefinition | statement)*
+    : (classDefinition | methodDefinition | definitionStatement)*
     ;
 
 classDefinition
@@ -57,8 +57,7 @@ block
         ;
 
 statement
-    : variableType Identifier (ASSIGN expression)?
-        (COMMA Identifier (ASSIGN expression)?)* SEMI # DefinitionStatement
+    : definitionStatement # definitionStatement
     | expressionList SEMI # expressionStatement
     | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStatement
     | FOR LPAREN expression SEMI expression SEMI expression RPAREN blockOrStatement # forStatement
@@ -69,33 +68,43 @@ statement
     | SEMI # emptyStatement
     ;
 
+    definitionStatement
+        : definitionExpression SEMI
+        ;
+
 expression
     : Identifier # identifierExpression
     | Constant # constantExpression
     | THIS # thisExpression
-    | expression bop=DOT (Identifier | THIS) # memberAccessExpression
-    | expression LBRACK expression RBRACK # indexAccessExpression
-    | expression LPAREN actualParameterList? RPAREN # methodCallExpression
+    | definitionExpression # definitionExpression
+    | expression op=DOT (Identifier | THIS) # memberAccessExpression
+    | caller=expression LBRACK index=expression RBRACK # indexAccessExpression
+    | caller=expression LPAREN actual_parameter_list=actualParameterList? RPAREN # methodCallExpression
+    | LPAREN expression RPAREN # parensExpression
     | NEW creator # newExpression
     | expression postfix=(INC | DEC) # unaryExpression
     | prefix=(INC | DEC) expression # unaryExpression
     | prefix=(ADD | SUB) expression # unaryExpression
     | prefix=(NOT | LNOT) expression # unaryExpression
-    | expression bop=(MUL | DIV | MOD) expression # binaryExpression
-    | expression bop=(ADD | SUB) expression # binaryExpression
-    | expression bop=(LSHIFT | RSHIFT) expression # binaryExpression
-    | expression bop=(LE | GE | LT | GT) expression # binaryExpression
-    | expression bop=(EQUAL | NOTEQUAL) expression # binaryExpression
-    | expression bop=AND expression # binaryExpression
-    | expression bop=XOR expression # binaryExpression
-    | expression bop=OR expression # binaryExpression
-    | expression bop=LAND expression # binaryExpression
-    | expression bop=LOR expression # binaryExpression
-    | expression bop=ASSIGN expression # binaryExpression
+    | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpression
+    | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpression
+    | lhs=expression op=(LSHIFT | RSHIFT) rhs=expression # binaryExpression
+    | lhs=expression op=(LE | GE | LT | GT) rhs=expression # binaryExpression
+    | lhs=expression op=(EQUAL | NOTEQUAL) rhs=expression # binaryExpression
+    | lhs=expression op=AND rhs=expression # binaryExpression
+    | lhs=expression op=XOR rhs=expression # binaryExpression
+    | lhs=expression op=OR rhs=expression # binaryExpression
+    | lhs=expression op=LAND rhs=expression # binaryExpression
+    | lhs=expression op=LOR rhs=expression # binaryExpression
+    | lhs=expression op=ASSIGN rhs=expression # binaryExpression
     ;
 
+    definitionExpression
+        : variableType id=Identifier (ASSIGN init_value=expression)?
+        ;
+
     creator
-        : variableType actualParameterList
+        : variableType (LPAREN actualParameterList? RPAREN)?
         ; // ATTENTION: int a = new int[...](...) is literally legal
 
         variableType

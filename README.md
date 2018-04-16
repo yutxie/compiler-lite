@@ -24,6 +24,38 @@ ACM Class 2018 Compiler
 - block / statement: declaration/expression/condition/loop/jump/empty
 - expression
 
+### AST
+
+- ClassDefinitionNode
+- MethodDefinitionNode
+- BlockNode/StatementNode
+  - DefinitionStatementNode
+  - ExpressionStatementNode
+  - If/For/WhileStatementNode
+  - ReturnStatementNode
+  - Break/ContinueStatementNode
+- ExpressionNode
+  - IdentifierExpressionNode
+  - ConstantExpressionNode
+  - ThisExpressionNode
+  - DefinitionExpressionNode
+  - MemberAccessExpressionNode
+  - IndexAccessExpressionNode
+  - MethodCallExpressionNode
+  - NewExpressionNode
+  - UnaryExpressionNode
+    - PostfixInc/DecNode
+    - PrefixInc/DecNode
+    - NegateNode
+    - Not/LnotNode
+  - BinaryExpressionNode
+    - Mul/Div/Mod/Add/SubNode
+    - Lshift/RshiftNode
+    - Le/Ge/Lt/GtNode
+    - Equal/NotEqualNode
+    - And/Xor/Or/Land/LorNode
+    - AssignNode
+
 ## Commands
 
 - antlr4
