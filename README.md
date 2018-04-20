@@ -3,8 +3,7 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- check built CST
-- check AstBuilder
+- ​
 
 ## Structure
 
@@ -69,10 +68,9 @@ ACM Class 2018 Compiler
   alias antlr4='java -jar /usr/local/lib/antlr-4.7.1-complete.jar'
   alias grun='java org.antlr.v4.gui.TestRig'
 
-  antlr4 Grammar
+  antlr4 Grammar.g4
   javac *.java
-  grun Grammar rule -tree/tokens
-  java AstVisitor
+  grun Grammar rule -tree/tokens < code/xxx.txt
   ```
 
   ​
