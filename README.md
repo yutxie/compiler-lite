@@ -3,58 +3,60 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- translate parse tree to AST
+- check built CST
+- check AstBuilder
 
 ## Structure
 
 ### Lexer
 
 - Operator: Separator/Assignment/In(De)crease/Arithmetic/Logic/Relationship
-- Keyword
-- VariableType
+- Keyword: PrimitiveType/etc
 - Constant: Logic/Integer/String/Null
 - Identifier
 - SpecialToken: WhiteSpace/NewLine/Comment
 
 ### Parser
 
-- program: class/method
-- class: memberVariable/memberMethod
-- method (function)
-- block / statement: declaration/expression/condition/loop/jump/empty
-- expression
+- program: classDefinition/methodDefinition/definitionStatement
+- classDefinition: memberVariable/memberMethod
+- method(function)Definition
+- block/statement: definition/expression/condition/loop/jump/empty
+- expression: identifier/constant/this/definition/memberAccess/indexAccess/methodCall/parens/new/unary/binary
 
-### AST
+### AstNode Hierarchy
 
+- ProgramNode
 - ClassDefinitionNode
 - MethodDefinitionNode
+  - ConstructionMethodDefinitionNode
 - BlockNode/StatementNode
-  - DefinitionStatementNode
   - ExpressionStatementNode
+    - PrimaryNode
+      - IdentifierExpressionNode
+      - ConstantExpressionNode
+      - ThisExpressionNode
+    - DefinitionExpressionNode
+    - MemberAccessExpressionNode
+    - IndexAccessExpressionNode
+    - MethodCallExpressionNode
+    - NewExpressionNode
+    - UnaryExpressionNode
+      - PostfixInc/DecNode
+      - PrefixInc/DecNode
+      - NegateNode
+      - Not/LnotNode
+    - BinaryExpressionNode
+      - Mul/Div/Mod/Add/SubNode
+      - Lshift/RshiftNode
+      - Le/Ge/Lt/GtNode
+      - Equal/NotEqualNode
+      - And/Xor/Or/Land/LorNode
+      - AssignNode
   - If/For/WhileStatementNode
   - ReturnStatementNode
   - Break/ContinueStatementNode
-- ExpressionNode
-  - IdentifierExpressionNode
-  - ConstantExpressionNode
-  - ThisExpressionNode
-  - DefinitionExpressionNode
-  - MemberAccessExpressionNode
-  - IndexAccessExpressionNode
-  - MethodCallExpressionNode
-  - NewExpressionNode
-  - UnaryExpressionNode
-    - PostfixInc/DecNode
-    - PrefixInc/DecNode
-    - NegateNode
-    - Not/LnotNode
-  - BinaryExpressionNode
-    - Mul/Div/Mod/Add/SubNode
-    - Lshift/RshiftNode
-    - Le/Ge/Lt/GtNode
-    - Equal/NotEqualNode
-    - And/Xor/Or/Land/LorNode
-    - AssignNode
+  - EmptyStatementNode
 
 ## Commands
 

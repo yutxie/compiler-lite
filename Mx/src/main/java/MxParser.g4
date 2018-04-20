@@ -7,28 +7,21 @@ program
     ;
 
 classDefinition
-    : CLASS Identifier LBRACE classBody RBRACE
+    : CLASS Identifier LBRACE memberVariable* 
+        (constructionMethodDefinition | methodDefinition)* RBRACE
     ;
 
-    classBody
-        : memberVariable* memberMethod*
+    memberVariable
+        : variableType Identifier SEMI
         ;
 
-        memberVariable
-            : variableType Identifier SEMI
-            ;
-
-        memberMethod
-            : constructionMethodDefinition
-            | methodDefinition
-            ;
-
-            constructionMethodDefinition
-                : Identifier LPAREN formalParameterList? RPAREN block
-                ;
+    constructionMethodDefinition
+        : Identifier LPAREN formalParameterList? RPAREN block
+        ;
 
 methodDefinition
-    : variableType Identifier LPAREN formalParameterList? RPAREN LBRACE methodBody RBRACE
+    : variableType Identifier 
+        LPAREN formalParameterList? RPAREN LBRACE block RBRACE
     ;
 
     formalParameterList
@@ -43,10 +36,6 @@ methodDefinition
         : expression (COMMA expression)*
         ;
 
-    methodBody
-        : statement*
-        ; // ATTENTION: return ...
-
 block
     : LBRACE statement* RBRACE
     ;
@@ -57,15 +46,15 @@ block
         ;
 
 statement
-    : definitionStatement # definitionStatement
-    | expressionList SEMI # expressionStatement
-    | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStatement
-    | FOR LPAREN expression SEMI expression SEMI expression RPAREN blockOrStatement # forStatement
-    | WHILE LPAREN expression RPAREN blockOrStatement # whileStatement
-    | RETURN expression SEMI # returnStatement
-    | BREAK SEMI # breakStatement
-    | CONTINUE SEMI # continueStatement
-    | SEMI # emptyStatement
+    : definitionStatement # definitionStat
+    | expression SEMI # expressionStat
+    | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStat
+    | FOR LPAREN init=expression? SEMI condition=expression SEMI after_block=expression? RPAREN blockOrStatement # forStat
+    | WHILE LPAREN expression RPAREN blockOrStatement # whileStat
+    | RETURN expression? SEMI # returnStat
+    | BREAK SEMI # breakStat
+    | CONTINUE SEMI # continueStat
+    | SEMI # emptyStat
     ;
 
     definitionStatement
@@ -73,34 +62,34 @@ statement
         ;
 
 expression
-    : Identifier # identifierExpression
-    | Constant # constantExpression
-    | THIS # thisExpression
-    | definitionExpression # definitionExpression
-    | expression op=DOT (Identifier | THIS) # memberAccessExpression
-    | caller=expression LBRACK index=expression RBRACK # indexAccessExpression
-    | caller=expression LPAREN actual_parameter_list=actualParameterList? RPAREN # methodCallExpression
-    | LPAREN expression RPAREN # parensExpression
-    | NEW creator # newExpression
-    | expression postfix=(INC | DEC) # unaryExpression
-    | prefix=(INC | DEC) expression # unaryExpression
-    | prefix=(ADD | SUB) expression # unaryExpression
-    | prefix=(NOT | LNOT) expression # unaryExpression
-    | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpression
-    | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpression
-    | lhs=expression op=(LSHIFT | RSHIFT) rhs=expression # binaryExpression
-    | lhs=expression op=(LE | GE | LT | GT) rhs=expression # binaryExpression
-    | lhs=expression op=(EQUAL | NOTEQUAL) rhs=expression # binaryExpression
-    | lhs=expression op=AND rhs=expression # binaryExpression
-    | lhs=expression op=XOR rhs=expression # binaryExpression
-    | lhs=expression op=OR rhs=expression # binaryExpression
-    | lhs=expression op=LAND rhs=expression # binaryExpression
-    | lhs=expression op=LOR rhs=expression # binaryExpression
-    | lhs=expression op=ASSIGN rhs=expression # binaryExpression
+    : Identifier # identifierExpr
+    | Constant # constantExpr
+    | THIS # thisExpr
+    | caller=expression op=DOT member=expression # memberAccessExpr
+    | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
+    | caller=expression LPAREN actualParameterList? RPAREN # methodCallExpr
+    | LPAREN expression RPAREN # parensExpr
+    | NEW creator # newExpr
+    | expression postfix=(INC | DEC) # unaryExpr
+    | prefix=(INC | DEC) expression # unaryExpr
+    | prefix=(ADD | SUB) expression # unaryExpr
+    | prefix=(NOT | LNOT) expression # unaryExpr
+    | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpr
+    | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpr
+    | lhs=expression op=(LSHIFT | RSHIFT) rhs=expression # binaryExpr
+    | lhs=expression op=(LE | GE | LT | GT) rhs=expression # binaryExpr
+    | lhs=expression op=(EQUAL | NOTEQUAL) rhs=expression # binaryExpr
+    | lhs=expression op=AND rhs=expression # binaryExpr
+    | lhs=expression op=XOR rhs=expression # binaryExpr
+    | lhs=expression op=OR rhs=expression # binaryExpr
+    | lhs=expression op=LAND rhs=expression # binaryExpr
+    | lhs=expression op=LOR rhs=expression # binaryExpr
+    | definitionExpression # definitionExpr
+    | lhs=expression op=ASSIGN rhs=expression # binaryExpr
     ;
 
     definitionExpression
-        : variableType id=Identifier (ASSIGN init_value=expression)?
+        : variableType Identifier (ASSIGN expression)?
         ;
 
     creator
@@ -114,10 +103,5 @@ expression
 
         arrayCreatorRest
             : LBRACK (RBRACK (LBRACK RBRACK)*
-                        | expression RBRACK (LBRACK expression RBRACK)* (LBRACK RBRACK)*)
+                | expression RBRACK (LBRACK expression RBRACK)* (LBRACK RBRACK)*)
             ;
-
-
-expressionList
-    : expression (COMMA expression)*
-    ;
