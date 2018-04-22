@@ -22,7 +22,7 @@ public class LocalResolver implements AstVisitor {
         ToplevelScope toplevelScope = new ToplevelScope();
         scopeStack.add(toplevelScope);
 
-        for (Entity def : ast.definitions())
+//        for (Entity def : ast.definitions())
     }
 
     @Override

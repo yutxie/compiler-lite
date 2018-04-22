@@ -7,7 +7,7 @@ import java.util.*;
 
 public class NewExpressionNode extends ExpressionStatementNode {
 
-    public VariableType variableType;
+    public TypeNode variableType;
     public List<ExpressionStatementNode> actualParameterList;
     
     public NewExpressionNode() {
@@ -16,7 +16,7 @@ public class NewExpressionNode extends ExpressionStatementNode {
 
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        PrintTool.printSpaceAndStr(tab, "variableType: " + variableType.getVariableTypeStr());
+        variableType.printInformation(tab + 1);
         for (ExpressionStatementNode item : actualParameterList)
             item.printInformation(tab + 1);
     }

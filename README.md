@@ -3,7 +3,7 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- ​transform to visitor interface
+- LocalResolver
 
 ## Structure
 
@@ -52,6 +52,7 @@ ACM Class 2018 Compiler
       - Equal/NotEqualNode
       - And/Xor/Or/Land/LorNode
       - AssignNode
+    - TypeNode
   - If/For/WhileStatementNode
   - ReturnStatementNode
   - Break/ContinueStatementNode
@@ -74,6 +75,10 @@ ACM Class 2018 Compiler
   ```
 
   ​
+
+## Hint
+
+- visitor interface
 
 ## Reference
 

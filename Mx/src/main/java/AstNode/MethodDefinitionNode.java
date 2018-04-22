@@ -7,7 +7,7 @@ import java.util.*;
 
 public class MethodDefinitionNode extends AstNode {
 
-    public VariableType returnType;
+    public TypeNode returnType;
     public IdentifierExpressionNode identifier;
     public List<DefinitionExpressionNode> formalArgumentList;
     public BlockNode block;
@@ -18,7 +18,7 @@ public class MethodDefinitionNode extends AstNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        PrintTool.printSpaceAndStr(tab, "returnType: " + returnType.getVariableTypeStr());
+        returnType.printInformation(tab + 1);
         identifier.printInformation(tab + 1);
         for (DefinitionExpressionNode item : formalArgumentList)
             item.printInformation(tab + 1);

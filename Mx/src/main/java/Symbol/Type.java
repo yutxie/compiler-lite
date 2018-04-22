@@ -2,14 +2,9 @@ package Symbol;
 
 import java.lang.*;
 
-public class Type {
+public abstract class Type {
 
-    public String typeStr;
-
-    public Type(String str) {
-        typeStr = str;
-    }
-    public String getVariableTypeStr() {
-        return typeStr;
+    public String getTypeName() {
+        return this.getClass().getName();
     }
 }

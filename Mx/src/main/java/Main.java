@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String args[]) throws IOException {
-        String path = "code/694.txt";
+        String path = "code/2.txt";
          AstNode ast = AstBuilder.buildAst(path);
          ast.printInformation(0);
     }
