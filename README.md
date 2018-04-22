@@ -3,7 +3,7 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- ​
+- ​transform to visitor interface
 
 ## Structure
 
