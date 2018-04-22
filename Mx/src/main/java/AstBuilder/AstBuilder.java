@@ -1,9 +1,7 @@
 package AstBuilder;
 
 import AstNode.*;
-import AstNode.BinaryExpressionNode.BinaryOp;
-import AstNode.UnaryExpressionNode.UnaryOp;
-import Symbol.*;
+import Symbol.Type.*;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -26,7 +24,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitClassDefinition(MxParser.ClassDefinitionContext context) {
         ClassDefinitionNode res = new ClassDefinitionNode();
-        res.identifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.className = context.Identifier().getText();
         for (MxParser.MemberVariableContext item : context.memberVariable())
             res.memberVariableList.add((DefinitionExpressionNode)visit(item));
         for (MxParser.MethodDefinitionContext item : context.methodDefinition())
@@ -39,7 +37,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitMemberVariable(MxParser.MemberVariableContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
         res.variableType = (TypeNode)visit(context.variableType());
-        res.variableIdentifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.variableName = context.Identifier().getText();
         res.initValue = null;
         return res;
     }
@@ -47,7 +45,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitConstructionMethodDefinition(MxParser.ConstructionMethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
         res.returnType = new TypeNode(new ClassTypeReference(context.Identifier().getText()));
-        res.identifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.methodName = context.Identifier().getText();
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
             res.formalArgumentList.add((DefinitionExpressionNode)visit(item));
         res.block = (BlockNode)visit(context.block());
@@ -57,7 +55,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitMethodDefinition(MxParser.MethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
         res.returnType = (TypeNode)visit(context.variableType());
-        res.identifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.methodName = context.Identifier().getText();
         if (context.formalParameterList() != null)
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
             res.formalArgumentList.add((DefinitionExpressionNode)visit(item));
@@ -68,7 +66,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitFormalParameter(MxParser.FormalParameterContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
         res.variableType = (TypeNode)visit(context.variableType());
-        res.variableIdentifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.variableName = context.Identifier().getText();
         res.initValue = null;
         return res;
     }
@@ -147,12 +145,13 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     }
 
     @Override public AstNode visitIdentifierExpr(MxParser.IdentifierExprContext context) {
-        IdentifierExpressionNode res = new IdentifierExpressionNode(context.getText());
+        VariableNode res = new VariableNode();
+        res.variableName = context.getText();
         return res;
     }
 
     @Override public AstNode visitConstantExpr(MxParser.ConstantExprContext context) {
-        ConstantExpressionNode res = new ConstantExpressionNode();
+        ConstantNode res = new ConstantNode();
         res.constantStr = context.getText();
         switch(context.constant().getRuleIndex()) {
             case MxLexer.LogicConstant: res.exprTypeReference = new PrimitiveTypeReference("bool"); break;
@@ -164,7 +163,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     }
 
     @Override public AstNode visitThisExpr(MxParser.ThisExprContext context) {
-        return new ThisExpressionNode();
+        return new ThisNode();
     }
 
     @Override public AstNode visitMemberAccessExpr(MxParser.MemberAccessExprContext context) {
@@ -260,7 +259,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitDefinitionExpression(MxParser.DefinitionExpressionContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
         res.variableType = (TypeNode)visit(context.variableType());
-        res.variableIdentifier = new IdentifierExpressionNode(context.Identifier().getText());
+        res.variableName = context.Identifier().getText();
         if (context.expression() == null) res.initValue = null;
         else res.initValue = (ExpressionStatementNode)visit(context.expression());
         return res;
@@ -285,7 +284,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         return res;
     }
 
-    public static AstNode buildAst(String path) throws IOException {
+    public ProgramNode buildAst(String path) throws IOException {
 
         InputStream is = new FileInputStream(path);
         ANTLRInputStream input = new ANTLRInputStream(is);
@@ -295,6 +294,6 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         AstBuilder builder = new AstBuilder();
 
         ParseTree cst = parser.program();
-        return builder.visit(cst);
+        return (ProgramNode)builder.visit(cst);
     }
 }

@@ -1,11 +1,13 @@
 package AstNode;
 
+import Tool.*;
+
 import java.util.*;
 
 // ------------------------ class definition ----------------------
 public class ClassDefinitionNode extends AstNode {
 
-    public IdentifierExpressionNode identifier;
+    public String className;
     public List<DefinitionExpressionNode> memberVariableList;
     public List<MethodDefinitionNode> memberMethodList;
     public List<MethodDefinitionNode> memberConstructionMethodList;
@@ -18,7 +20,7 @@ public class ClassDefinitionNode extends AstNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        identifier.printInformation(tab + 1);
+        PrintTool.printSpaceAndStr(tab, "name: " + className);
         for (DefinitionExpressionNode item : memberVariableList)
             item.printInformation(tab + 1);
         for (MethodDefinitionNode item : memberMethodList)

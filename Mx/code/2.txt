@@ -8,10 +8,10 @@ class sometimes {
 }
 
 int main() {
-    sometimes kepp = new sometimes;
-    kepp.naive = 0;
+    sometimes keep = new sometimes;
+    keep.naive = 0;
     while (getInt() < Wallace) {
-        kepp.make_money();
+        keep.make_money();
     }
     return 0;
 }

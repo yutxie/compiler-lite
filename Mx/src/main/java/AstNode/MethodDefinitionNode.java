@@ -1,6 +1,5 @@
 package AstNode;
 
-import Symbol.*;
 import Tool.*;
 
 import java.util.*;
@@ -8,7 +7,7 @@ import java.util.*;
 public class MethodDefinitionNode extends AstNode {
 
     public TypeNode returnType;
-    public IdentifierExpressionNode identifier;
+    public String methodName;
     public List<DefinitionExpressionNode> formalArgumentList;
     public BlockNode block;
 
@@ -18,8 +17,8 @@ public class MethodDefinitionNode extends AstNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
+        PrintTool.printSpaceAndStr(tab, "methodName: " + methodName);
         returnType.printInformation(tab + 1);
-        identifier.printInformation(tab + 1);
         for (DefinitionExpressionNode item : formalArgumentList)
             item.printInformation(tab + 1);
         block.printInformation(tab + 1);

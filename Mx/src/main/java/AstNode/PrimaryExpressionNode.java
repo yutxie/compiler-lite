@@ -1,3 +1,3 @@
 package AstNode;
 
-abstract class PrimaryExpressionNode extends ExpressionStatementNode {}
+public abstract class PrimaryExpressionNode extends ExpressionStatementNode {}

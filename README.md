@@ -3,7 +3,11 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- LocalResolver
+- semantic analysis
+
+## To-Fix
+
+- regarded null as instance of void
 
 ## Structure
 

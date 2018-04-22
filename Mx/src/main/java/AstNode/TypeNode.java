@@ -1,6 +1,8 @@
 package AstNode;
 
-import Symbol.*;
+import Symbol.Type.Type;
+import Symbol.Type.TypeReference;
+import Symbol.Type.TypeTypeReference;
 import Tool.*;
 
 public class TypeNode extends ExpressionStatementNode {
@@ -8,9 +10,12 @@ public class TypeNode extends ExpressionStatementNode {
     public Type type;
     public TypeReference typeReference;
 
-    public TypeNode() {}
+    public TypeNode() {
+        exprTypeReference = new TypeTypeReference();
+    }
 
     public TypeNode(TypeReference typeReference) {
+        this();
         this.typeReference = typeReference;
     }
 

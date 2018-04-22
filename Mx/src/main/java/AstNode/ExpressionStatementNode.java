@@ -1,8 +1,8 @@
 package AstNode;
 
-import Symbol.*;
+import Symbol.Type.Type;
+import Symbol.Type.TypeReference;
 import Tool.*;
-import com.sun.xml.internal.bind.v2.model.core.TypeRef;
 
 public abstract class ExpressionStatementNode extends StatementNode {
     
