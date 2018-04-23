@@ -10,6 +10,30 @@ import java.io.*;
 
 public class AstBuilder extends MxBaseVisitor<AstNode> {
 
+    private VariableType getVariableTypeReference(MxParser.VariableTypeContext context) {
+        VariableType res;
+        if (context instanceof MxParser.ArrayVariableTypeContext) {
+            MxParser.ArrayVariableTypeContext context_ = (MxParser.ArrayVariableTypeContext)context;
+            ArrayType res_ = new ArrayType();
+            if (context_.Identifier() != null)
+                res_.nonArrayType = new ClassType(context_.Identifier().getText());
+            else res_.nonArrayType = new PrimitiveType(context_.primitiveType().getText());
+            res_.dim = context_.arrayCreatorRest().LBRACK().size();
+            for (TerminalNode item : context_.arrayCreatorRest().IntegerConstant())
+                res_.dimList.addLast(new Integer(item.getText()));
+            res_.dimStr = context_.arrayCreatorRest().getText();
+            res = res_;
+        } else {
+            MxParser.NonArrayVariableTypeContext context_ =
+                    (MxParser.NonArrayVariableTypeContext)context;
+            NonArrayType res_;
+            if (context_.Identifier() != null)
+                res_ = new ClassType(context_.Identifier().getText());
+            else res_ = new PrimitiveType(context_.primitiveType().getText());
+            res = res_;
+        }
+        return res;
+    }
 
     @Override public AstNode visitProgram(MxParser.ProgramContext context) {
         ProgramNode res = new ProgramNode();
@@ -36,7 +60,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitMemberVariable(MxParser.MemberVariableContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
-        res.variableType = (TypeNode)visit(context.variableType());
+        res.variableTypeReference = getVariableTypeReference(context.variableType());
         res.variableName = context.Identifier().getText();
         res.initValue = null;
         return res;
@@ -44,7 +68,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitConstructionMethodDefinition(MxParser.ConstructionMethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
-        res.returnType = new TypeNode(new ClassTypeReference(context.Identifier().getText()));
+        res.returnTypeReference = new ClassType(context.Identifier().getText());
         res.methodName = context.Identifier().getText();
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
             res.formalArgumentList.add((DefinitionExpressionNode)visit(item));
@@ -54,7 +78,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitMethodDefinition(MxParser.MethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
-        res.returnType = (TypeNode)visit(context.variableType());
+        res.returnTypeReference = getVariableTypeReference(context.variableType());
         res.methodName = context.Identifier().getText();
         if (context.formalParameterList() != null)
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
@@ -65,7 +89,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     
     @Override public AstNode visitFormalParameter(MxParser.FormalParameterContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
-        res.variableType = (TypeNode)visit(context.variableType());
+        res.variableTypeReference = getVariableTypeReference(context.variableType());
         res.variableName = context.Identifier().getText();
         res.initValue = null;
         return res;
@@ -144,21 +168,17 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         return (DefinitionExpressionNode)visit(context.definitionExpression());
     }
 
-    @Override public AstNode visitIdentifierExpr(MxParser.IdentifierExprContext context) {
-        VariableNode res = new VariableNode();
-        res.variableName = context.getText();
-        return res;
-    }
-
     @Override public AstNode visitConstantExpr(MxParser.ConstantExprContext context) {
         ConstantNode res = new ConstantNode();
         res.constantStr = context.getText();
-        switch(context.constant().getRuleIndex()) {
-            case MxLexer.LogicConstant: res.exprTypeReference = new PrimitiveTypeReference("bool"); break;
-            case MxLexer.IntegerConstant: res.exprTypeReference = new PrimitiveTypeReference("int"); break;
-            case MxLexer.StringConstant: res.exprTypeReference = new PrimitiveTypeReference("string"); break;
-            case MxLexer.NullConstant: res.exprTypeReference = new PrimitiveTypeReference("null"); break;
-        }
+        if (context.constant().LogicConstant() != null)
+            res.exprTypeReference = new PrimitiveType("bool");
+        if (context.constant().IntegerConstant() != null)
+            res.exprTypeReference = new PrimitiveType("int");
+        if (context.constant().StringConstant() != null)
+            res.exprTypeReference = new PrimitiveType("string");
+        if (context.constant().NullConstant() != null)
+            res.exprTypeReference = new PrimitiveType("null");
         return res;
     }
 
@@ -195,8 +215,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitNewExpr(MxParser.NewExprContext context) {
         NewExpressionNode res = new NewExpressionNode();
-        res.exprTypeReference = new PrimitiveTypeReference("void");
-        res.variableType = (TypeNode)visit(context.creator().variableType());
+        res.variableTypeReference = getVariableTypeReference(context.creator().variableType());
         if (context.creator().actualParameterList() != null)
         for (MxParser.ExpressionContext item : context.creator().actualParameterList().expression())
             res.actualParameterList.add((ExpressionStatementNode)visit(item));
@@ -258,29 +277,16 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override public AstNode visitDefinitionExpression(MxParser.DefinitionExpressionContext context) {
         DefinitionExpressionNode res = new DefinitionExpressionNode();
-        res.variableType = (TypeNode)visit(context.variableType());
+        res.variableTypeReference = getVariableTypeReference(context.variableType());
         res.variableName = context.Identifier().getText();
         if (context.expression() == null) res.initValue = null;
         else res.initValue = (ExpressionStatementNode)visit(context.expression());
         return res;
     }
 
-    @Override public AstNode visitNonArrayVariableType(MxParser.NonArrayVariableTypeContext context) {
-        TypeNode res = new TypeNode();
-        if (context.Identifier() == null)
-            res.typeReference = new PrimitiveTypeReference(context.getText());
-        else res.typeReference = new ClassTypeReference(context.getText());
-        return res;
-    }
-
-    @Override public AstNode visitArrayVariableType(MxParser.ArrayVariableTypeContext context) {
-        TypeNode res = new TypeNode();
-        ArrayTypeReference tmp = new ArrayTypeReference();
-        tmp.dimStr = context.arrayCreatorRest().getText();
-        if (context.Identifier() == null)
-            tmp.typeReference = new PrimitiveTypeReference(context.primitiveType().getText());
-        else tmp.typeReference = new ClassTypeReference(context.Identifier().getText());
-        res.typeReference = tmp;
+    @Override
+    public AstNode visitIdentifierExpr(MxParser.IdentifierExprContext context) {
+        ReferenceNode res = new ReferenceNode(context.getText());
         return res;
     }
 

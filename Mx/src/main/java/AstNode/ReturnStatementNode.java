@@ -6,6 +6,7 @@ public class ReturnStatementNode extends StatementNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        if (returnValue != null) returnValue.printInformation(tab + 1);
+        if (returnValue != null)
+        returnValue.printInformation(tab + 1);
     }
 }

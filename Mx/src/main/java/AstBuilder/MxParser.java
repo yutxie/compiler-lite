@@ -1,9 +1,13 @@
-package AstBuilder;// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java\Mx.g4 by ANTLR 4.7
+// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java/AstBuilder\Mx.g4 by ANTLR 4.7
+package AstBuilder;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MxParser extends Parser {
@@ -88,7 +92,7 @@ public class MxParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "AstBuilder/Mx.g4"; }
+	public String getGrammarFileName() { return "Mx.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -2258,11 +2262,9 @@ public class MxParser extends Parser {
 		public TerminalNode RBRACK(int i) {
 			return getToken(MxParser.RBRACK, i);
 		}
-		public List<ExpressionContext> expression() {
-			return getRuleContexts(ExpressionContext.class);
-		}
-		public ExpressionContext expression(int i) {
-			return getRuleContext(ExpressionContext.class,i);
+		public List<TerminalNode> IntegerConstant() { return getTokens(MxParser.IntegerConstant); }
+		public TerminalNode IntegerConstant(int i) {
+			return getToken(MxParser.IntegerConstant, i);
 		}
 		public ArrayCreatorRestContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2292,7 +2294,7 @@ public class MxParser extends Parser {
 			{
 			setState(266);
 			match(LBRACK);
-			setState(293);
+			setState(292);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case RBRACK:
@@ -2319,30 +2321,13 @@ public class MxParser extends Parser {
 				}
 				}
 				break;
-			case LPAREN:
-			case INC:
-			case DEC:
-			case ADD:
-			case SUB:
-			case LNOT:
-			case NOT:
-			case NEW:
-			case THIS:
-			case BOOL:
-			case INT:
-			case STRING:
-			case VOID:
-			case LogicConstant:
 			case IntegerConstant:
-			case StringConstant:
-			case NullConstant:
-			case Identifier:
 				{
 				setState(275);
-				expression(0);
+				match(IntegerConstant);
 				setState(276);
 				match(RBRACK);
-				setState(283);
+				setState(282);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -2352,31 +2337,31 @@ public class MxParser extends Parser {
 						setState(277);
 						match(LBRACK);
 						setState(278);
-						expression(0);
+						match(IntegerConstant);
 						setState(279);
 						match(RBRACK);
 						}
 						} 
 					}
-					setState(285);
+					setState(284);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,28,_ctx);
 				}
-				setState(290);
+				setState(289);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(286);
+						setState(285);
 						match(LBRACK);
-						setState(287);
+						setState(286);
 						match(RBRACK);
 						}
 						} 
 					}
-					setState(292);
+					setState(291);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,29,_ctx);
 				}
@@ -2429,7 +2414,7 @@ public class MxParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(295);
+			setState(294);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << BOOL) | (1L << INT) | (1L << STRING) | (1L << VOID))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2483,7 +2468,7 @@ public class MxParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(297);
+			setState(296);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LogicConstant) | (1L << IntegerConstant) | (1L << StringConstant) | (1L << NullConstant))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2550,7 +2535,7 @@ public class MxParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\39\u012e\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\39\u012d\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\3\2\3\2\3\2\7\2,\n\2\f\2\16\2/\13\2\3\3\3\3\3\3\3"+
@@ -2570,17 +2555,17 @@ public class MxParser extends Parser {
 		"\16\u00f2\13\16\3\17\3\17\3\17\3\17\5\17\u00f8\n\17\3\20\3\20\3\20\5\20"+
 		"\u00fd\n\20\3\20\5\20\u0100\n\20\3\21\3\21\5\21\u0104\n\21\3\21\3\21\5"+
 		"\21\u0108\n\21\3\21\5\21\u010b\n\21\3\22\3\22\3\22\3\22\7\22\u0111\n\22"+
-		"\f\22\16\22\u0114\13\22\3\22\3\22\3\22\3\22\3\22\3\22\7\22\u011c\n\22"+
-		"\f\22\16\22\u011f\13\22\3\22\3\22\7\22\u0123\n\22\f\22\16\22\u0126\13"+
-		"\22\5\22\u0128\n\22\3\23\3\23\3\24\3\24\3\24\2\3\32\25\2\4\6\b\n\f\16"+
-		"\20\22\24\26\30\32\34\36 \"$&\2\13\3\2\r\16\3\2\17\20\4\2\26\26\31\31"+
-		"\3\2\21\23\3\2\27\30\4\2\35\36 !\4\2\37\37\"\"\3\2-\60\3\2\61\64\2\u0155"+
-		"\2-\3\2\2\2\4\60\3\2\2\2\6B\3\2\2\2\bF\3\2\2\2\nN\3\2\2\2\fW\3\2\2\2\16"+
-		"_\3\2\2\2\20e\3\2\2\2\22m\3\2\2\2\24x\3\2\2\2\26\u00a5\3\2\2\2\30\u00a7"+
-		"\3\2\2\2\32\u00bb\3\2\2\2\34\u00f3\3\2\2\2\36\u00f9\3\2\2\2 \u010a\3\2"+
-		"\2\2\"\u010c\3\2\2\2$\u0129\3\2\2\2&\u012b\3\2\2\2(,\5\4\3\2),\5\n\6\2"+
-		"*,\5\30\r\2+(\3\2\2\2+)\3\2\2\2+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2"+
-		"\2.\3\3\2\2\2/-\3\2\2\2\60\61\7*\2\2\61\62\7\65\2\2\62\66\7\5\2\2\63\65"+
+		"\f\22\16\22\u0114\13\22\3\22\3\22\3\22\3\22\3\22\7\22\u011b\n\22\f\22"+
+		"\16\22\u011e\13\22\3\22\3\22\7\22\u0122\n\22\f\22\16\22\u0125\13\22\5"+
+		"\22\u0127\n\22\3\23\3\23\3\24\3\24\3\24\2\3\32\25\2\4\6\b\n\f\16\20\22"+
+		"\24\26\30\32\34\36 \"$&\2\13\3\2\r\16\3\2\17\20\4\2\26\26\31\31\3\2\21"+
+		"\23\3\2\27\30\4\2\35\36 !\4\2\37\37\"\"\3\2-\60\3\2\61\64\2\u0154\2-\3"+
+		"\2\2\2\4\60\3\2\2\2\6B\3\2\2\2\bF\3\2\2\2\nN\3\2\2\2\fW\3\2\2\2\16_\3"+
+		"\2\2\2\20e\3\2\2\2\22m\3\2\2\2\24x\3\2\2\2\26\u00a5\3\2\2\2\30\u00a7\3"+
+		"\2\2\2\32\u00bb\3\2\2\2\34\u00f3\3\2\2\2\36\u00f9\3\2\2\2 \u010a\3\2\2"+
+		"\2\"\u010c\3\2\2\2$\u0128\3\2\2\2&\u012a\3\2\2\2(,\5\4\3\2),\5\n\6\2*"+
+		",\5\30\r\2+(\3\2\2\2+)\3\2\2\2+*\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2\2"+
+		".\3\3\2\2\2/-\3\2\2\2\60\61\7*\2\2\61\62\7\65\2\2\62\66\7\5\2\2\63\65"+
 		"\5\6\4\2\64\63\3\2\2\2\658\3\2\2\2\66\64\3\2\2\2\66\67\3\2\2\2\67=\3\2"+
 		"\2\28\66\3\2\2\29<\5\b\5\2:<\5\n\6\2;9\3\2\2\2;:\3\2\2\2<?\3\2\2\2=;\3"+
 		"\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\6\2\2A\5\3\2\2\2BC\5 \21\2CD"+
@@ -2646,19 +2631,19 @@ public class MxParser extends Parser {
 		"\u0104\7\65\2\2\u0102\u0104\5$\23\2\u0103\u0101\3\2\2\2\u0103\u0102\3"+
 		"\2\2\2\u0104\u010b\3\2\2\2\u0105\u0108\7\65\2\2\u0106\u0108\5$\23\2\u0107"+
 		"\u0105\3\2\2\2\u0107\u0106\3\2\2\2\u0108\u0109\3\2\2\2\u0109\u010b\5\""+
-		"\22\2\u010a\u0103\3\2\2\2\u010a\u0107\3\2\2\2\u010b!\3\2\2\2\u010c\u0127"+
+		"\22\2\u010a\u0103\3\2\2\2\u010a\u0107\3\2\2\2\u010b!\3\2\2\2\u010c\u0126"+
 		"\7\7\2\2\u010d\u0112\7\b\2\2\u010e\u010f\7\7\2\2\u010f\u0111\7\b\2\2\u0110"+
 		"\u010e\3\2\2\2\u0111\u0114\3\2\2\2\u0112\u0110\3\2\2\2\u0112\u0113\3\2"+
-		"\2\2\u0113\u0128\3\2\2\2\u0114\u0112\3\2\2\2\u0115\u0116\5\32\16\2\u0116"+
-		"\u011d\7\b\2\2\u0117\u0118\7\7\2\2\u0118\u0119\5\32\16\2\u0119\u011a\7"+
-		"\b\2\2\u011a\u011c\3\2\2\2\u011b\u0117\3\2\2\2\u011c\u011f\3\2\2\2\u011d"+
-		"\u011b\3\2\2\2\u011d\u011e\3\2\2\2\u011e\u0124\3\2\2\2\u011f\u011d\3\2"+
-		"\2\2\u0120\u0121\7\7\2\2\u0121\u0123\7\b\2\2\u0122\u0120\3\2\2\2\u0123"+
-		"\u0126\3\2\2\2\u0124\u0122\3\2\2\2\u0124\u0125\3\2\2\2\u0125\u0128\3\2"+
-		"\2\2\u0126\u0124\3\2\2\2\u0127\u010d\3\2\2\2\u0127\u0115\3\2\2\2\u0128"+
-		"#\3\2\2\2\u0129\u012a\t\t\2\2\u012a%\3\2\2\2\u012b\u012c\t\n\2\2\u012c"+
-		"\'\3\2\2\2!+-\66;=IR\\cjqx\u0085\u008a\u0090\u009d\u00a5\u00bb\u00e9\u00ee"+
-		"\u00f0\u00f7\u00fc\u00ff\u0103\u0107\u010a\u0112\u011d\u0124\u0127";
+		"\2\2\u0113\u0127\3\2\2\2\u0114\u0112\3\2\2\2\u0115\u0116\7\62\2\2\u0116"+
+		"\u011c\7\b\2\2\u0117\u0118\7\7\2\2\u0118\u0119\7\62\2\2\u0119\u011b\7"+
+		"\b\2\2\u011a\u0117\3\2\2\2\u011b\u011e\3\2\2\2\u011c\u011a\3\2\2\2\u011c"+
+		"\u011d\3\2\2\2\u011d\u0123\3\2\2\2\u011e\u011c\3\2\2\2\u011f\u0120\7\7"+
+		"\2\2\u0120\u0122\7\b\2\2\u0121\u011f\3\2\2\2\u0122\u0125\3\2\2\2\u0123"+
+		"\u0121\3\2\2\2\u0123\u0124\3\2\2\2\u0124\u0127\3\2\2\2\u0125\u0123\3\2"+
+		"\2\2\u0126\u010d\3\2\2\2\u0126\u0115\3\2\2\2\u0127#\3\2\2\2\u0128\u0129"+
+		"\t\t\2\2\u0129%\3\2\2\2\u012a\u012b\t\n\2\2\u012b\'\3\2\2\2!+-\66;=IR"+
+		"\\cjqx\u0085\u008a\u0090\u009d\u00a5\u00bb\u00e9\u00ee\u00f0\u00f7\u00fc"+
+		"\u00ff\u0103\u0107\u010a\u0112\u011c\u0123\u0126";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -1,9 +1,13 @@
-package AstBuilder;// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java\Mx.g4 by ANTLR 4.7
+// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java/AstBuilder\Mx.g4 by ANTLR 4.7
+package AstBuilder;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MxLexer extends Lexer {
@@ -98,7 +102,7 @@ public class MxLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "AstBuilder/Mx.g4"; }
+	public String getGrammarFileName() { return "Mx.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

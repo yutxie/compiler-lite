@@ -103,7 +103,7 @@ expression
 
         arrayCreatorRest
             : LBRACK (RBRACK (LBRACK RBRACK)*
-                | expression RBRACK (LBRACK expression RBRACK)* (LBRACK RBRACK)*)
+                | IntegerConstant RBRACK (LBRACK IntegerConstant RBRACK)* (LBRACK RBRACK)*)
             ;
 
 // ------------------ lexer ----------------------

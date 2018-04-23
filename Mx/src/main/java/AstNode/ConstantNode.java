@@ -1,13 +1,17 @@
 package AstNode;
 
-import Tool.*;
+import Symbol.Type.VariableType;
+
+import static Tool.PrintTool.*;
 
 public class ConstantNode extends PrimaryExpressionNode {
     
+    public VariableType exprTypeReference;
     public String constantStr;
-    
+
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        PrintTool.printSpaceAndStr(tab, "constantStr: " + constantStr);
+        printSpaceAndStr(tab, "exprTypeReference: " + exprTypeReference.getTypeName());
+        printSpaceAndStr(tab, "constantStr: " + constantStr);
     }
 }

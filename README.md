@@ -35,32 +35,26 @@ ACM Class 2018 Compiler
   - ConstructionMethodDefinitionNode
 - BlockNode/StatementNode
   - ExpressionStatementNode
-    - PrimaryNode
-      - IdentifierExpressionNode
-      - ConstantExpressionNode
-      - ThisExpressionNode
+    - PrimaryNode: ReferenceNode, ConstantNode, ThisNode
     - DefinitionExpressionNode
     - MemberAccessExpressionNode
     - IndexAccessExpressionNode
     - MethodCallExpressionNode
     - NewExpressionNode
-    - UnaryExpressionNode
-      - PostfixInc/DecNode
-      - PrefixInc/DecNode
-      - NegateNode
-      - Not/LnotNode
-    - BinaryExpressionNode
-      - Mul/Div/Mod/Add/SubNode
-      - Lshift/RshiftNode
-      - Le/Ge/Lt/GtNode
-      - Equal/NotEqualNode
-      - And/Xor/Or/Land/LorNode
-      - AssignNode
-    - TypeNode
+    - Unary/BinaryExpressionNode
   - If/For/WhileStatementNode
   - ReturnStatementNode
   - Break/ContinueStatementNode
   - EmptyStatementNode
+
+### Type
+
+- MethodType
+- VariableType
+  - NonArrayType
+    - PrimitiveType: int, bool, string, void, null
+    - ClassType: class defined by user
+  - ArrayType
 
 ## Commands
 

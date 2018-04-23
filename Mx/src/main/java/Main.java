@@ -11,13 +11,13 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/700.txt";
+        String path = "code/2.txt";
         AstBuilder astBuilder = new AstBuilder();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
 
-         ProgramNode ast = astBuilder.buildAst(path);
-         // ast.printInformation(0);
-        ToplevelScope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
-        toplevelScope.printInformation(0);
+        ProgramNode ast = astBuilder.buildAst(path);
+        ast.printInformation(0);
+//        ToplevelScope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
+//        toplevelScope.printInformation(0);
     }
 }

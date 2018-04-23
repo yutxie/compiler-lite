@@ -1,15 +1,14 @@
 package AstNode;
 
-import AstVisitor.*;
 import Scope.Scope;
-import Tool.*;
+import static Tool.PrintTool.*;
 
 public abstract class AstNode {
 
     public Scope scope;
 
     public void printInformation(int tab) {
-        PrintTool.printDashAndStr(tab, this.getClass().getName());
+        printDashAndStr(tab, this.getClass().getName());
     }
 }
 

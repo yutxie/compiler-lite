@@ -1,4 +1,5 @@
-package AstBuilder;// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java\Mx.g4 by ANTLR 4.7
+// Generated from D:/Users/DELL/Desktop/compiler-lite/Mx/src/main/java/AstBuilder\Mx.g4 by ANTLR 4.7
+package AstBuilder;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

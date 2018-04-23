@@ -3,7 +3,6 @@ package AstNode;
 import java.util.LinkedList;
 import java.util.List;
 
-// ------------------------- program ------------------------
 public class ProgramNode extends AstNode {
 
     public List<ClassDefinitionNode> classDefinitionList;

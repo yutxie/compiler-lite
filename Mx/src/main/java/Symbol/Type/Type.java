@@ -1,7 +1,5 @@
 package Symbol.Type;
 
-import Symbol.Symbol;
-
 import java.lang.*;
 
 public abstract class Type {

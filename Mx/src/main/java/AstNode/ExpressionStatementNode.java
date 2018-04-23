@@ -1,26 +1,22 @@
 package AstNode;
 
-import Symbol.Type.Type;
-import Symbol.Type.TypeReference;
-import Tool.*;
+import Symbol.Type.*;
+import static Tool.PrintTool.*;
 
 public abstract class ExpressionStatementNode extends StatementNode {
     
     public Type exprType;
-    public TypeReference exprTypeReference;
     public boolean leftValue;
     
     ExpressionStatementNode() {
         exprType = null;
-        exprTypeReference = null;
         leftValue = false;
     }
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        if (exprType != null) PrintTool.printSpaceAndStr(tab, "type: " + exprType.getTypeName());
-        if (exprTypeReference != null)
-            PrintTool.printSpaceAndStr(tab, "type: " + exprTypeReference.getReference());
-        PrintTool.printSpaceAndStr(tab, "leftValue: " + leftValue);
+        if (exprType != null)
+        printSpaceAndStr(tab, "type: " + exprType.getTypeName());
+        printSpaceAndStr(tab, "leftValue: " + leftValue);
     }
 }

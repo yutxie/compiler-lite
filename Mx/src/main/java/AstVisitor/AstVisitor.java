@@ -27,7 +27,6 @@ public abstract class AstVisitor {
     public void visit(ContinueStatementNode node) {}
 
     public void visit(DefinitionExpressionNode node) {
-        visit(node.variableType);
         if (node.initValue != null) visit(node.initValue);
     }
 
@@ -42,7 +41,6 @@ public abstract class AstVisitor {
         if (node instanceof NewExpressionNode) visit((NewExpressionNode)node);
         if (node instanceof UnaryExpressionNode) visit((UnaryExpressionNode)node);
         if (node instanceof BinaryExpressionNode) visit((BinaryExpressionNode)node);
-        if (node instanceof TypeNode) visit((TypeNode)node);
     }
 
     public void visit(ForStatementNode node) throws SemanticException {
@@ -74,18 +72,16 @@ public abstract class AstVisitor {
     }
 
     public void visit(MethodDefinitionNode node) throws SemanticException {
-        visit(node.returnType);
         for (DefinitionExpressionNode item : node.formalArgumentList) visit(item);
         visit(node.block);
     }
 
     public void visit(NewExpressionNode node) {
-        visit(node.variableType);
         for (ExpressionStatementNode item : node.actualParameterList) visit(item);
     }
 
     public void visit(PrimaryExpressionNode node) {
-        if (node instanceof VariableNode) visit((VariableNode)node);
+        if (node instanceof ReferenceNode) visit((ReferenceNode)node);
         if (node instanceof ConstantNode) visit((ConstantNode)node);
         if (node instanceof ThisNode) visit((ThisNode)node);
     }
@@ -95,6 +91,8 @@ public abstract class AstVisitor {
         for (MethodDefinitionNode item : node.methodDefinitionList) visit(item);
         for (DefinitionExpressionNode item : node.variableDefinitionList) visit(item);
     }
+
+    public void visit(ReferenceNode node) {}
 
     public void visit(ReturnStatementNode node) {
         if (node.returnValue != null) visit(node.returnValue);
@@ -113,13 +111,9 @@ public abstract class AstVisitor {
 
     public void visit(ThisNode node) {}
 
-    public void visit(TypeNode node) {}
-
     public void visit(UnaryExpressionNode node) {
         visit(node.inner);
     }
-
-    public void visit(VariableNode node) {}
 
     public void visit(WhileStatementNode node) throws SemanticException {
         visit(node.condition);

@@ -1,12 +1,14 @@
 package AstNode;
 
-import Tool.*;
+import Symbol.Type.*;
+import static Tool.PrintTool.*;
 
 import java.util.*;
 
 public class MethodDefinitionNode extends AstNode {
 
-    public TypeNode returnType;
+    public VariableType returnType;
+    public VariableType returnTypeReference;
     public String methodName;
     public List<DefinitionExpressionNode> formalArgumentList;
     public BlockNode block;
@@ -17,8 +19,11 @@ public class MethodDefinitionNode extends AstNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        PrintTool.printSpaceAndStr(tab, "methodName: " + methodName);
-        returnType.printInformation(tab + 1);
+        if (returnType != null)
+        printSpaceAndStr(tab, "returnType: " + returnType.getTypeName());
+        if (returnTypeReference != null)
+        printSpaceAndStr(tab, "returnTypeReference: " + returnTypeReference.getTypeName());
+        printSpaceAndStr(tab, "methodName: " + methodName);
         for (DefinitionExpressionNode item : formalArgumentList)
             item.printInformation(tab + 1);
         block.printInformation(tab + 1);
