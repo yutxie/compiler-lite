@@ -3,11 +3,12 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- semantic analysis
+- built-in method/class
+- static type check
+  - left value
+  - member access
 
 ## To-Fix
-
-- regarded null as instance of void
 
 ## Structure
 
@@ -37,8 +38,7 @@ ACM Class 2018 Compiler
   - ExpressionStatementNode
     - PrimaryNode: ReferenceNode, ConstantNode, ThisNode
     - DefinitionExpressionNode
-    - MemberAccessExpressionNode
-    - IndexAccessExpressionNode
+    - Member/IndexAccessExpressionNode
     - MethodCallExpressionNode
     - NewExpressionNode
     - Unary/BinaryExpressionNode
@@ -46,33 +46,11 @@ ACM Class 2018 Compiler
   - ReturnStatementNode
   - Break/ContinueStatementNode
   - EmptyStatementNode
-
-### Type
-
-- MethodType
-- VariableType
-  - NonArrayType
-    - PrimitiveType: int, bool, string, void, null
-    - ClassType: class defined by user
-  - ArrayType
-
-## Commands
-
-- antlr4
-
-  ```CQL
-  cd /usr/local/lib
-  sudo curl -O https://www.antlr.org/download/antlr-4.7.1-complete.jar
-  export CLASSPATH=".:/usr/local/lib/antlr-4.7.1-complete.jar:$CLASSPATH"
-  alias antlr4='java -jar /usr/local/lib/antlr-4.7.1-complete.jar'
-  alias grun='java org.antlr.v4.gui.TestRig'
-
-  antlr4 Grammar.g4
-  javac *.java
-  grun Grammar rule -tree/tokens < code/xxx.txt
-  ```
-
-  ​
+  - TypeNode
+    - MethodType
+    - VariableType
+      - NonArrayType: PrimitiveType, ClassType
+      - ArrayType
 
 ## Hint
 
@@ -81,4 +59,7 @@ ACM Class 2018 Compiler
 ## Reference
 
 - 自制编译器 - 青木峰郎
-- [hand in hand with antlr](https://github.com/alan2lin/hand_in_hand_with_antlr)
+- The Definitive ANTLR4 Reference
+- [antlr/grammars-v4 at GitHub](https://github.com/antlr/grammars-v4/tree/master/java)
+- [ANTLR4使用技巧](https://abcdabcd987.com/using-antlr4/)
+- [compiler2016 by abcdabcd987 at GitHub](https://github.com/abcdabcd987/compiler2016)

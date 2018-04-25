@@ -1,16 +1,16 @@
-package Symbol.Type;
+package AstNode;
 
 import java.util.*;
 
-public class ArrayType extends VariableType {
+public class ArrayTypeNode extends VariableTypeNode {
 
-    public NonArrayType nonArrayType;
+    public NonArrayTypeNode nonArrayTypeNode;
     public int dim;
     public LinkedList<Integer> dimList;
     public String dimStr;
 
     @Override
     public String getTypeName() {
-        return nonArrayType.getTypeName() + dimStr;
+        return nonArrayTypeNode.getTypeName() + dimStr;
     }
 }

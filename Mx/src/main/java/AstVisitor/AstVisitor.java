@@ -1,11 +1,11 @@
 package AstVisitor;
 
 import AstNode.*;
-import ErrorHandler.SemanticException;
+import ErrorHandler.*;
 
 public abstract class AstVisitor {
 
-    public void visit(BinaryExpressionNode node) {
+    public void visit(BinaryExpressionNode node) throws SemanticException {
         visit(node.lhs);
         visit(node.rhs);
     }
@@ -26,21 +26,21 @@ public abstract class AstVisitor {
 
     public void visit(ContinueStatementNode node) {}
 
-    public void visit(DefinitionExpressionNode node) {
+    public void visit(DefinitionExpressionNode node) throws SemanticException {
         if (node.initValue != null) visit(node.initValue);
     }
 
     public void visit(EmptyStatementNode node) {}
 
-    public void visit(ExpressionStatementNode node) {
+    public void visit(ExpressionStatementNode node) throws SemanticException {
         if (node instanceof PrimaryExpressionNode) visit((PrimaryExpressionNode)node);
-        if (node instanceof DefinitionExpressionNode) visit((DefinitionExpressionNode)node);
-        if (node instanceof MemberAccessExpressionNode) visit((MemberAccessExpressionNode)node);
-        if (node instanceof IndexAccessExpressionNode) visit((IndexAccessExpressionNode)node);
-        if (node instanceof MethodCallExpressionNode) visit((MethodCallExpressionNode)node);
-        if (node instanceof NewExpressionNode) visit((NewExpressionNode)node);
-        if (node instanceof UnaryExpressionNode) visit((UnaryExpressionNode)node);
-        if (node instanceof BinaryExpressionNode) visit((BinaryExpressionNode)node);
+        else if (node instanceof DefinitionExpressionNode) visit((DefinitionExpressionNode)node);
+        else if (node instanceof MemberAccessExpressionNode) visit((MemberAccessExpressionNode)node);
+        else if (node instanceof IndexAccessExpressionNode) visit((IndexAccessExpressionNode)node);
+        else if (node instanceof MethodCallExpressionNode) visit((MethodCallExpressionNode)node);
+        else if (node instanceof NewExpressionNode) visit((NewExpressionNode)node);
+        else if (node instanceof UnaryExpressionNode) visit((UnaryExpressionNode)node);
+        else if (node instanceof BinaryExpressionNode) visit((BinaryExpressionNode)node);
     }
 
     public void visit(ForStatementNode node) throws SemanticException {
@@ -56,17 +56,17 @@ public abstract class AstVisitor {
         if (node.elseBlock != null) visit(node.elseBlock);
     }
 
-    public void visit(IndexAccessExpressionNode node) {
+    public void visit(IndexAccessExpressionNode node) throws SemanticException {
         visit(node.caller);
         visit(node.index);
     }
 
-    public void visit(MemberAccessExpressionNode node) {
+    public void visit(MemberAccessExpressionNode node) throws SemanticException {
         visit(node.caller);
         visit(node.member);
     }
 
-    public void visit(MethodCallExpressionNode node) {
+    public void visit(MethodCallExpressionNode node) throws SemanticException {
         visit(node.caller);
         for (ExpressionStatementNode item : node.actualParameterList) visit(item);
     }
@@ -76,42 +76,44 @@ public abstract class AstVisitor {
         visit(node.block);
     }
 
-    public void visit(NewExpressionNode node) {
+    public void visit(NewExpressionNode node) throws SemanticException {
         for (ExpressionStatementNode item : node.actualParameterList) visit(item);
     }
 
-    public void visit(PrimaryExpressionNode node) {
+    public void visit(PrimaryExpressionNode node) throws SemanticException {
         if (node instanceof ReferenceNode) visit((ReferenceNode)node);
         if (node instanceof ConstantNode) visit((ConstantNode)node);
         if (node instanceof ThisNode) visit((ThisNode)node);
     }
 
     public void visit(ProgramNode node) throws SemanticException {
-        for (ClassDefinitionNode item : node.classDefinitionList) visit(item);
-        for (MethodDefinitionNode item : node.methodDefinitionList) visit(item);
-        for (DefinitionExpressionNode item : node.variableDefinitionList) visit(item);
+        for (AstNode item : node.childrenList) {
+            if (item instanceof ClassDefinitionNode) visit((ClassDefinitionNode)item);
+            else if (item instanceof MethodDefinitionNode) visit((MethodDefinitionNode)item);
+            else visit((DefinitionExpressionNode)item);
+        }
     }
 
-    public void visit(ReferenceNode node) {}
+    public void visit(ReferenceNode node) throws SemanticException {}
 
-    public void visit(ReturnStatementNode node) {
+    public void visit(ReturnStatementNode node) throws SemanticException {
         if (node.returnValue != null) visit(node.returnValue);
     }
 
     public void visit(StatementNode node) throws SemanticException {
         if (node instanceof ExpressionStatementNode) visit((ExpressionStatementNode)node);
-        if (node instanceof IfStatementNode) visit((IfStatementNode)node);
-        if (node instanceof ForStatementNode) visit((ForStatementNode)node);
-        if (node instanceof WhileStatementNode) visit((WhileStatementNode)node);
-        if (node instanceof ReturnStatementNode) visit((ReturnStatementNode)node);
-        if (node instanceof BreakStatementNode) visit((BreakStatementNode) node);
-        if (node instanceof ContinueStatementNode) visit((ContinueStatementNode)node);
+        else if (node instanceof IfStatementNode) visit((IfStatementNode)node);
+        else if (node instanceof ForStatementNode) visit((ForStatementNode)node);
+        else if (node instanceof WhileStatementNode) visit((WhileStatementNode)node);
+        else if (node instanceof ReturnStatementNode) visit((ReturnStatementNode)node);
+        else if (node instanceof BreakStatementNode) visit((BreakStatementNode) node);
+        else if (node instanceof ContinueStatementNode) visit((ContinueStatementNode)node);
         // if (node instanceof EmptyStatementNode) visit((EmptyStatementNode)node);
     }
 
     public void visit(ThisNode node) {}
 
-    public void visit(UnaryExpressionNode node) {
+    public void visit(UnaryExpressionNode node) throws SemanticException {
         visit(node.inner);
     }
 

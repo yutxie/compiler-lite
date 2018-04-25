@@ -10,6 +10,7 @@ public class ReferenceNode extends PrimaryExpressionNode {
 
     public String referenceName;
     public ReferenceType referenceType;
+    public AstNode definitionNode;
 
     public ReferenceNode(String str) {
         referenceName = str;
@@ -18,8 +19,10 @@ public class ReferenceNode extends PrimaryExpressionNode {
     @Override
     public void printInformation(int tab) {
         super.printInformation(tab);
+        printSpaceAndStr(tab, "referenceName: " + referenceName);
         if (referenceType != null)
         printSpaceAndStr(tab, "referenceType: " + referenceType);
-        printSpaceAndStr(tab, "referenceName: " + referenceName);
+        if (definitionNode != null)
+        printSpaceAndStr(tab, "definitionNode: " + Integer.toString(definitionNode.line));
     }
 }

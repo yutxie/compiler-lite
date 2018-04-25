@@ -1,14 +1,12 @@
 package AstNode;
 
-import Symbol.Type.*;
 import static Tool.PrintTool.*;
 
 import java.util.*;
 
 public class NewExpressionNode extends ExpressionStatementNode {
 
-    public VariableType variableType;
-    public VariableType variableTypeReference;
+    public VariableTypeNode variableType;
     public List<ExpressionStatementNode> actualParameterList;
     
     public NewExpressionNode() {
@@ -17,9 +15,7 @@ public class NewExpressionNode extends ExpressionStatementNode {
 
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        if (variableType != null)
-        printSpaceAndStr(tab, "variableType: " + variableType.getTypeName());
-        printSpaceAndStr(tab, "variableTypeReference: " + variableTypeReference.getTypeName());
+        if (variableType != null) variableType.printInformation(tab + 1);
         for (ExpressionStatementNode item : actualParameterList)
             item.printInformation(tab + 1);
     }

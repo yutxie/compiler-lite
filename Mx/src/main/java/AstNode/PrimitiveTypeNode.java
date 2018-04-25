@@ -1,6 +1,6 @@
-package Symbol.Type;
+package AstNode;
 
-public class PrimitiveType extends NonArrayType {
+public class PrimitiveTypeNode extends NonArrayTypeNode {
 
     public enum PrimitiveTypeKeyword {
         BOOL, INT, STRING, VOID, NULL
@@ -8,7 +8,7 @@ public class PrimitiveType extends NonArrayType {
 
     public PrimitiveTypeKeyword type;
 
-    public PrimitiveType(String str) {
+    public PrimitiveTypeNode(String str) {
         if (str.equals("bool")) this.type = PrimitiveTypeKeyword.BOOL;
         if (str.equals("int")) this.type = PrimitiveTypeKeyword.INT;
         if (str.equals("string")) this.type = PrimitiveTypeKeyword.STRING;
@@ -23,7 +23,7 @@ public class PrimitiveType extends NonArrayType {
             case VOID: return "void";
             case NULL: return "null";
             case STRING: return "string";
+            default: return "";
         }
-        return "";
     }
 }

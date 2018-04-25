@@ -7,7 +7,7 @@ program
     ;
 
 classDefinition
-    : CLASS Identifier LBRACE memberVariable* 
+    : CLASS Identifier LBRACE memberVariable*
         (constructionMethodDefinition | methodDefinition)* RBRACE
     ;
 
@@ -20,7 +20,7 @@ classDefinition
         ;
 
 methodDefinition
-    : variableType Identifier 
+    : variableType Identifier
         LPAREN formalParameterList? RPAREN block
     ;
 

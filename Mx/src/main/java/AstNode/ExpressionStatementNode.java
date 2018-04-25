@@ -1,11 +1,10 @@
 package AstNode;
 
-import Symbol.Type.*;
 import static Tool.PrintTool.*;
 
 public abstract class ExpressionStatementNode extends StatementNode {
     
-    public Type exprType;
+    public TypeNode exprType;
     public boolean leftValue;
     
     ExpressionStatementNode() {
@@ -15,8 +14,7 @@ public abstract class ExpressionStatementNode extends StatementNode {
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        if (exprType != null)
-        printSpaceAndStr(tab, "type: " + exprType.getTypeName());
-        printSpaceAndStr(tab, "leftValue: " + leftValue);
+        if (exprType != null) exprType.printInformation(tab + 1);
+        if (leftValue == true) printSpaceAndStr(tab, "leftValue: " + leftValue);
     }
 }

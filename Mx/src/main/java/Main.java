@@ -1,23 +1,22 @@
 import AstNode.*;
-import AstBuilder.AstBuilder;;
+import AstBuilder.*;;
 import AstVisitor.*;
 import Scope.*;
-import Symbol.*;
-import Tool.*;
-
-import java.io.IOException;
 
 public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/2.txt";
+        String path = "code/6.txt";
         AstBuilder astBuilder = new AstBuilder();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
+        TypeDefinitionChecker typeDefinitionChecker = new TypeDefinitionChecker();
 
-        ProgramNode ast = astBuilder.buildAst(path);
-        ast.printInformation(0);
-//        ToplevelScope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
+        ProgramNode prog = astBuilder.buildAst(path);
+        ToplevelScope toplevelScope = scopeTreeBuilder.buildScopeTree(prog);
+        typeDefinitionChecker.checkTypeDefinition(prog);
+
+        prog.printInformation(0);
 //        toplevelScope.printInformation(0);
     }
 }

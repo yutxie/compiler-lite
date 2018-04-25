@@ -2,7 +2,6 @@ package AstVisitor;
 
 import AstNode.*;
 import Scope.*;
-import Symbol.*;
 import ErrorHandler.*;
 
 import java.util.*;
@@ -10,11 +9,9 @@ import java.util.*;
 public class ScopeTreeBuilder extends AstVisitor {
 
     public LinkedList<Scope> scopeStack;
-    public ConstantTable constantTable;
 
     public ScopeTreeBuilder() {
         this.scopeStack = new LinkedList<Scope>();
-        this.constantTable = new ConstantTable();
     }
 
     public ToplevelScope buildScopeTree(ProgramNode prog) throws Exception {
@@ -43,8 +40,13 @@ public class ScopeTreeBuilder extends AstVisitor {
             toplevelScope.define(item);
         for (MethodDefinitionNode item : node.methodDefinitionList)
             toplevelScope.define(item);
-        for (DefinitionExpressionNode item : node.variableDefinitionList)
-            toplevelScope.define(item);
+        MethodDefinitionNode main = toplevelScope.methodDefinitionMap.get("main");
+        if (main == null)
+            throw new SemanticException("no method name \"main\"");
+        else if (!main.returnType.getTypeName().equals("int"))
+            throw new SemanticException("return type of \"main\" must be \"int\"");
+        else if (!main.formalArgumentList.isEmpty())
+            throw new SemanticException("\"main\" can not have parameters");
         toplevelScope.astNode = node;
         scopeStack.addLast(toplevelScope);
         super.visit(node);
@@ -53,8 +55,6 @@ public class ScopeTreeBuilder extends AstVisitor {
 
     @Override public void visit(ClassDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
-        for (DefinitionExpressionNode item : node.memberVariableList)
-            scope.define(item);
         for (MethodDefinitionNode item : node.memberMethodList)
             scope.define(item);
         for (MethodDefinitionNode item : node.memberConstructionMethodList)
@@ -67,8 +67,6 @@ public class ScopeTreeBuilder extends AstVisitor {
 
     @Override public void visit(MethodDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
-        for (DefinitionExpressionNode item : node.formalArgumentList)
-            scope.define(item);
         scope.astNode = node;
         pushScope(scope);
         super.visit(node);
@@ -77,12 +75,37 @@ public class ScopeTreeBuilder extends AstVisitor {
 
     @Override public void visit(BlockNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
-        for (StatementNode item : node.statementList)
-            if (item instanceof DefinitionExpressionNode)
-                scope.define((DefinitionExpressionNode)item);
         scope.astNode = node;
         pushScope(scope);
         super.visit(node);
         node.scope = popScope();
+    }
+
+    @Override public void visit(DefinitionExpressionNode node) throws SemanticException {
+        currentScope().define(node);
+        super.visit(node);
+    }
+
+    @Override public void visit(MemberAccessExpressionNode node) throws SemanticException {
+        visit(node.caller);
+        try {
+            visit(node.member);
+        } catch (SemanticException exception) {}
+    }
+
+    @Override public void visit(ReferenceNode node) throws SemanticException {
+        AstNode definitionNode;
+        try {
+            definitionNode = currentScope().get(node.referenceName);
+        } catch (SemanticException exception) {
+            throw new SemanticException(node.line, exception.getMessage());
+        }
+        if (definitionNode instanceof ClassDefinitionNode)
+            node.referenceType = ReferenceNode.ReferenceType.CLASS;
+        else if (definitionNode instanceof MethodDefinitionNode)
+            node.referenceType = ReferenceNode.ReferenceType.METHOD;
+        else if (definitionNode instanceof DefinitionExpressionNode)
+            node.referenceType = ReferenceNode.ReferenceType.VARIABLE;
+        node.definitionNode = definitionNode;
     }
 }

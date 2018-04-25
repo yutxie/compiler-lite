@@ -1,0 +1,34 @@
+class array__ {
+    
+    // jagged array
+    int size() {}
+}
+
+class string__ {
+    
+    int length() {}
+    string__ substring(int left, int right) {}
+    int parseInt() {}
+    int ord(int pos) {}
+    // operator +
+}
+
+void print(string str) {
+
+}
+
+void println(string str) {
+    print(str + "\n");
+}
+
+string getString() {
+
+}
+
+int getInt() {
+
+}
+
+string toString(int i) {
+
+}
