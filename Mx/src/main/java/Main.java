@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/699.txt";
+        String path = "code/program.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -21,7 +21,6 @@ public class Main {
         typeDefinitionChecker.checkTypeDefinition(prog);
         staticTypeChecker.checkStaticType(prog);
         classTypeResolver.resolveClassType(prog);
-
-        prog.printInformation(0);
+//        prog.printInformation(0);
     }
 }
