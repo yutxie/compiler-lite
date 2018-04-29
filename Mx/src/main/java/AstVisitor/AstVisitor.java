@@ -117,6 +117,32 @@ public abstract class AstVisitor {
         visit(node.inner);
     }
 
+    public void visit(TypeNode node) throws SemanticException {
+        if (node instanceof MethodTypeNode) visit((MethodTypeNode)node);
+        else visit((VariableTypeNode)node);
+    }
+
+    public void visit(MethodTypeNode node) {}
+
+    public void visit(VariableTypeNode node) throws SemanticException {
+        if (node instanceof ArrayTypeNode) visit((ArrayTypeNode)node);
+        else visit((NonArrayTypeNode)node);
+    }
+
+    public void visit(ArrayTypeNode node) throws SemanticException {
+        visit(node.innerTypeNode);
+        if (node.size != null) visit(node.size);
+    }
+
+    public void visit(NonArrayTypeNode node) throws SemanticException {
+        if (node instanceof PrimitiveTypeNode) visit((PrimitiveTypeNode)node);
+        else visit((ClassTypeNode)node);
+    }
+
+    public void visit(PrimitiveTypeNode node) {}
+
+    public void visit(ClassTypeNode node) throws SemanticException {}
+
     public void visit(WhileStatementNode node) throws SemanticException {
         visit(node.condition);
         visit(node.block);

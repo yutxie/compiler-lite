@@ -49,7 +49,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitConstructionMethodDefinition(MxParser.ConstructionMethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
         res.line = context.start.getLine();
-        res.returnType = new ClassTypeNode((ReferenceNode)visit(context.Identifier()));
+        res.returnType = new ClassTypeNode(context.Identifier().getText());
         res.methodName = context.Identifier().getText();
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
             res.formalArgumentList.add((DefinitionExpressionNode)visit(item));
@@ -172,7 +172,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         if (context.constant().IntegerConstant() != null)
             res.exprType = new PrimitiveTypeNode("int");
         if (context.constant().StringConstant() != null)
-            res.exprType = new PrimitiveTypeNode("string");
+            res.exprType = new ClassTypeNode("string");
         if (context.constant().NullConstant() != null)
             res.exprType = new PrimitiveTypeNode("null");
         return res;
@@ -298,20 +298,20 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
 
     @Override
     public AstNode visitArrayVariableType(MxParser.ArrayVariableTypeContext context) {
-        ArrayTypeNode res = new ArrayTypeNode();
-        res.line = context.start.getLine();
+        int dim = context.arrayCreatorRest().LBRACK().size();
+        int dimOfExpr = context.arrayCreatorRest().expression().size();
+        VariableTypeNode res, tmp;
         if (context.Identifier() != null)
-            res.nonArrayTypeNode = new ClassTypeNode((ReferenceNode)visit(context.Identifier()));
-        else res.nonArrayTypeNode = new PrimitiveTypeNode(context.primitiveType().getText());
-        res.dim = context.arrayCreatorRest().LBRACK().size();
-        for (TerminalNode item : context.arrayCreatorRest().IntegerConstant())
-            res.dimList.addLast(new Integer(item.getText()));
-        res.dimStr = context.arrayCreatorRest().getText();
-        return res;
-    }
-
-    ReferenceNode visitIdentifierTerminalNode(TerminalNode context) {
-        ReferenceNode res = new ReferenceNode(context.getText());
+            res = new ClassTypeNode(context.Identifier().getText());
+        else res = new PrimitiveTypeNode(context.primitiveType().getText());
+        for (int i = 0; i < dim; ++i) {
+            tmp = new ArrayTypeNode();
+            ((ArrayTypeNode) tmp).innerTypeNode = res;
+            if (i < dimOfExpr) ((ArrayTypeNode) tmp).size =
+                (ExpressionStatementNode)visit(context.arrayCreatorRest().expression(i));
+            res = tmp;
+        }
+        res.line = context.start.getLine();
         return res;
     }
 
@@ -319,15 +319,32 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     public AstNode visitNonArrayVariableType(MxParser.NonArrayVariableTypeContext context) {
         NonArrayTypeNode res;
         if (context.Identifier() != null)
-            res = new ClassTypeNode(visitIdentifierTerminalNode(context.Identifier()));
+            res = new ClassTypeNode(context.Identifier().getText());
         else res = new PrimitiveTypeNode(context.primitiveType().getText());
         res.line = context.start.getLine();
         return res;
     }
 
+    InputStream addBuiltInCode(String path) throws IOException {
+        OutputStream os = new FileOutputStream("code/tmp.txt");
+        InputStream is = new FileInputStream(path);
+        int b;
+        while((b = is.read()) != -1) {
+            os.write(b);
+        }
+        is.close();
+        is = new FileInputStream("code/builtin.txt");
+        while((b = is.read()) != -1) {
+            os.write(b);
+        }
+        is.close();
+        os.close();
+        return new FileInputStream("code/tmp.txt");
+    }
+
     public ProgramNode buildAst(String path) throws IOException {
 
-        InputStream is = new FileInputStream(path);
+        InputStream is = addBuiltInCode(path);
         ANTLRInputStream input = new ANTLRInputStream(is);
         MxLexer lexer = new MxLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);

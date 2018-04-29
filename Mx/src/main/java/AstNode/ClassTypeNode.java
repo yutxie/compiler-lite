@@ -2,14 +2,15 @@ package AstNode;
 
 public class ClassTypeNode extends NonArrayTypeNode {
 
-    public ReferenceNode referenceClass;
+    public String referenceClassName;
+    public ClassDefinitionNode referenceClass;
 
-    public ClassTypeNode(ReferenceNode node) {
-        referenceClass = node;
+    public ClassTypeNode(String str) {
+        referenceClassName = str;
     }
 
     @Override
     public String getTypeName() {
-        return referenceClass.referenceName;
+        return referenceClassName;
     }
 }

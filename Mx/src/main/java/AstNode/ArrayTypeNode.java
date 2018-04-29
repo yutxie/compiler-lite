@@ -4,13 +4,19 @@ import java.util.*;
 
 public class ArrayTypeNode extends VariableTypeNode {
 
-    public NonArrayTypeNode nonArrayTypeNode;
-    public int dim;
-    public LinkedList<Integer> dimList;
-    public String dimStr;
+    public VariableTypeNode innerTypeNode;
+    public ExpressionStatementNode size;
 
     @Override
     public String getTypeName() {
-        return nonArrayTypeNode.getTypeName() + dimStr;
+        if (size == null) return innerTypeNode.getTypeName() + "[]";
+        else return innerTypeNode.getTypeName() + "[" + size.toString() + "]";
+    }
+
+    public boolean contain(ArrayTypeNode node) {
+        if (size != null && node.size == null) return false;
+        if (innerTypeNode instanceof ArrayTypeNode && node.innerTypeNode instanceof ArrayTypeNode)
+            return ((ArrayTypeNode) innerTypeNode).contain((ArrayTypeNode) node.innerTypeNode);
+        else return innerTypeNode.getTypeName().equals(node.innerTypeNode.getTypeName());
     }
 }

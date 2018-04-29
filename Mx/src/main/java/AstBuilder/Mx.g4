@@ -62,18 +62,14 @@ statement
         ;
 
 expression
-    : Identifier # identifierExpr
-    | constant # constantExpr
-    | THIS # thisExpr
-    | caller=expression op=DOT member=expression # memberAccessExpr
-    | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
+    : expression postfix=(INC | DEC) # unaryExpr
     | caller=expression LPAREN actualParameterList? RPAREN # methodCallExpr
-    | LPAREN expression RPAREN # parensExpr
-    | NEW creator # newExpr
-    | expression postfix=(INC | DEC) # unaryExpr
+    | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
+    | caller=expression op=DOT member=expression # memberAccessExpr
     | prefix=(INC | DEC) expression # unaryExpr
     | prefix=(ADD | SUB) expression # unaryExpr
     | prefix=(NOT | LNOT) expression # unaryExpr
+    | NEW creator # newExpr
     | lhs=expression op=(MUL | DIV | MOD) rhs=expression # binaryExpr
     | lhs=expression op=(ADD | SUB) rhs=expression # binaryExpr
     | lhs=expression op=(LSHIFT | RSHIFT) rhs=expression # binaryExpr
@@ -86,6 +82,10 @@ expression
     | lhs=expression op=LOR rhs=expression # binaryExpr
     | definitionExpression # definitionExpr
     | lhs=expression op=ASSIGN rhs=expression # binaryExpr
+    | Identifier # identifierExpr
+    | constant # constantExpr
+    | THIS # thisExpr
+    | LPAREN expression RPAREN # parensExpr
     ;
 
     definitionExpression
@@ -97,14 +97,14 @@ expression
         ; // ATTENTION: int a = new int[...](...) is literally legal
 
         variableType
-            : (Identifier | primitiveType) # nonArrayVariableType
-            | (Identifier | primitiveType) arrayCreatorRest # arrayVariableType
+            : (Identifier | primitiveType) arrayCreatorRest # arrayVariableType
+            | (Identifier | primitiveType) # nonArrayVariableType
             ;
 
-        arrayCreatorRest
-            : LBRACK (RBRACK (LBRACK RBRACK)*
-                | IntegerConstant RBRACK (LBRACK IntegerConstant RBRACK)* (LBRACK RBRACK)*)
-            ;
+            arrayCreatorRest
+                : (LBRACK expression RBRACK)+ (LBRACK RBRACK)*
+                | (LBRACK RBRACK)+
+                ;
 
 // ------------------ lexer ----------------------
 
@@ -154,12 +154,12 @@ NEW : 'new';
 THIS : 'this';
 
 primitiveType
-    : BOOL | INT | STRING | VOID
+    : BOOL | INT | VOID
     ;
 
     BOOL : 'bool';
     INT : 'int';
-    STRING : 'string';
+//    STRING : 'string';
     VOID : 'void';
 
 constant

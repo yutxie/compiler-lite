@@ -1,13 +1,15 @@
-class array__ {
+
+
+class array {
     
     // jagged array
     int size() {}
 }
 
-class string__ {
+class string {
     
     int length() {}
-    string__ substring(int left, int right) {}
+    string substring(int left, int right) {}
     int parseInt() {}
     int ord(int pos) {}
     // operator +

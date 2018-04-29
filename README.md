@@ -3,12 +3,14 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- built-in method/class
 - static type check
   - left value
   - member access
 
 ## To-Fix
+
+- array的嵌套结构
+- 自动类型转换
 
 ## Structure
 
@@ -33,7 +35,6 @@ ACM Class 2018 Compiler
 - ProgramNode
 - ClassDefinitionNode
 - MethodDefinitionNode
-  - ConstructionMethodDefinitionNode
 - BlockNode/StatementNode
   - ExpressionStatementNode
     - PrimaryNode: ReferenceNode, ConstantNode, ThisNode

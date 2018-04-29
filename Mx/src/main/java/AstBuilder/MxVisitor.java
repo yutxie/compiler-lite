@@ -147,19 +147,19 @@ public interface MxVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNewExpr(MxParser.NewExprContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code thisExpr}
-	 * labeled alternative in {@link MxParser#expression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitThisExpr(MxParser.ThisExprContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code definitionExpr}
 	 * labeled alternative in {@link MxParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDefinitionExpr(MxParser.DefinitionExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code thisExpr}
+	 * labeled alternative in {@link MxParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThisExpr(MxParser.ThisExprContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code methodCallExpr}
 	 * labeled alternative in {@link MxParser#expression}.
@@ -229,19 +229,19 @@ public interface MxVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreator(MxParser.CreatorContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code nonArrayVariableType}
-	 * labeled alternative in {@link MxParser#variableType}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNonArrayVariableType(MxParser.NonArrayVariableTypeContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code arrayVariableType}
 	 * labeled alternative in {@link MxParser#variableType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitArrayVariableType(MxParser.ArrayVariableTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code nonArrayVariableType}
+	 * labeled alternative in {@link MxParser#variableType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNonArrayVariableType(MxParser.NonArrayVariableTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MxParser#arrayCreatorRest}.
 	 * @param ctx the parse tree

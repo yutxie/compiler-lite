@@ -4,7 +4,7 @@ import static Tool.PrintTool.*;
 
 public abstract class ExpressionStatementNode extends StatementNode {
     
-    public TypeNode exprType;
+    public VariableTypeNode exprType;
     public boolean leftValue;
     
     ExpressionStatementNode() {

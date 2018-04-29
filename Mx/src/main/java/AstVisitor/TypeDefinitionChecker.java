@@ -20,7 +20,7 @@ public class TypeDefinitionChecker extends AstVisitor {
 
     public void checkTypeDefinition(ProgramNode prog) throws SemanticException {
         visit(prog);
-        topsort();
+//        topsort();
     }
 
     void topsort() throws SemanticException {
@@ -57,7 +57,7 @@ public class TypeDefinitionChecker extends AstVisitor {
 
     boolean isVoidArray(VariableTypeNode variableType) {
         if (variableType instanceof ArrayTypeNode)
-            if (isVoid(((ArrayTypeNode)variableType).nonArrayTypeNode))
+            if (isVoid(((ArrayTypeNode)variableType).innerTypeNode))
                 return true;
         return false;
     }
@@ -91,7 +91,7 @@ public class TypeDefinitionChecker extends AstVisitor {
     @Override public void visit(ClassDefinitionNode node) throws SemanticException {
         for (DefinitionExpressionNode item : node.memberVariableList) {
             VariableTypeNode tmp = item.variableType;
-            if (tmp instanceof ArrayTypeNode) tmp = ((ArrayTypeNode)tmp).nonArrayTypeNode;
+            if (tmp instanceof ArrayTypeNode) tmp = ((ArrayTypeNode)tmp).innerTypeNode;
             if (tmp instanceof ClassTypeNode) {
                 String className = tmp.getTypeName();
                 indgreeMap.put(className, indgreeMap.get(className) + 1);
