@@ -127,8 +127,8 @@
       <find>parens</find>
       <find>Array</find>
       <find>instanceof</find>
-      <find />
-      <find />
+      <find>[&quot; + Integer.toString(node.line) + &quot;]&quot;</find>
+      <find>lineStr(node.line) +</find>
       <find>visitProg</find>
       <find>visit(Pro</find>
       <find>DefinitionExpressionNode</find>
@@ -139,7 +139,7 @@
       <find>Identifier</find>
       <find>identifier</find>
       <find>MemberA</find>
-      <find />
+      <find>new ClassType</find>
       <find>visitIdentifier</find>
       <find>visitIdentifierTerminalNode</find>
       <find>classtype</find>
@@ -154,10 +154,10 @@
     </findStrings>
     <replaceStrings>
       <replace>definition</replace>
-      <replace />
-      <replace />
+      <replace>static class</replace>
+      <replace>public static</replace>
       <replace>primitiveType</replace>
-      <replace />
+      <replace>&quot; + lineStr(node.line)</replace>
       <replace>node.line,</replace>
       <replace>identifier</replace>
     </replaceStrings>
@@ -226,7 +226,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-20" />
     <option name="y" value="-19" />
     <option name="width" value="1237" />
