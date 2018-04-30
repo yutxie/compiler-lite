@@ -28,7 +28,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
@@ -49,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AstBuilder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AstBuilder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="156">
@@ -169,8 +169,8 @@
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ParentLinker.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
   </component>
@@ -768,20 +768,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+        <state relative-caret-position="156">
+          <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
+        <state relative-caret-position="76">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
