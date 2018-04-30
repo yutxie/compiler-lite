@@ -326,8 +326,8 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     }
 
     InputStream addBuiltInCode(String path) throws IOException {
-        String dir = "../Mx/";
-//        String dir = "";
+//        String dir = "../Mx/";
+        String dir = "";
         OutputStream os = new FileOutputStream(dir + "code/tmp.txt");
         InputStream is = new FileInputStream(path);
         int b;
