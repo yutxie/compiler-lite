@@ -72,8 +72,6 @@ public class StaticTypeChecker extends AstVisitor {
     @Override
     public void visit(IndexAccessExpressionNode node) throws SemanticException {
         super.visit(node);
-        if (node.caller instanceof NewExpressionNode)
-            throw new SemanticException(node.line, "invalid dim of array");
         if (!(node.caller.exprType instanceof ArrayTypeNode))
             throw new SemanticException(node.line, "the index access caller must be an array");
         if (!(node.index.exprType instanceof PrimitiveTypeNode))

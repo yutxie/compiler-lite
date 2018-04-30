@@ -1,6 +1,7 @@
 package AstBuilder;
 
 import AstNode.*;
+import ErrorHandler.*;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -8,6 +9,8 @@ import java.lang.*;
 import java.io.*;
 
 public class AstBuilder extends MxBaseVisitor<AstNode> {
+
+    SemanticException detectedError;
 
     @Override public AstNode visitProgram(MxParser.ProgramContext context) {
         ProgramNode res = new ProgramNode();
@@ -197,6 +200,8 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitIndexAccessExpr(MxParser.IndexAccessExprContext context) {
         IndexAccessExpressionNode res = new IndexAccessExpressionNode();
         res.line = context.start.getLine();
+        if (context.caller instanceof MxParser.NewExprContext)
+            detectedError = new SemanticException(res.line, "invalid dim of array");
         res.caller = (ExpressionStatementNode)visit(context.caller);
         res.index = (ExpressionStatementNode)visit(context.index);
         return res;
@@ -346,7 +351,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         return new FileInputStream(dir + "code/tmp.txt");
     }
 
-    public ProgramNode buildAst(String path) throws IOException {
+    public ProgramNode buildAst(String path) throws IOException, SemanticException {
 
         InputStream is = addBuiltInCode(path);
         ANTLRInputStream input = new ANTLRInputStream(is);
@@ -356,6 +361,9 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         AstBuilder builder = new AstBuilder();
 
         ParseTree cst = parser.program();
-        return (ProgramNode)builder.visit(cst);
+        ProgramNode prog = (ProgramNode)builder.visit(cst);
+        if (builder.detectedError != null)
+            throw builder.detectedError;
+        return prog;
     }
 }
