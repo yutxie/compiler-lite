@@ -326,20 +326,22 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     }
 
     InputStream addBuiltInCode(String path) throws IOException {
-        OutputStream os = new FileOutputStream("code/tmp.txt");
+        String dir = "../Mx/";
+//        String dir = "";
+        OutputStream os = new FileOutputStream(dir + "code/tmp.txt");
         InputStream is = new FileInputStream(path);
         int b;
         while((b = is.read()) != -1) {
             os.write(b);
         }
         is.close();
-        is = new FileInputStream("code/builtin.txt");
+        is = new FileInputStream(dir + "code/builtin.txt");
         while((b = is.read()) != -1) {
             os.write(b);
         }
         is.close();
         os.close();
-        return new FileInputStream("code/tmp.txt");
+        return new FileInputStream(dir + "code/tmp.txt");
     }
 
     public ProgramNode buildAst(String path) throws IOException {
