@@ -83,8 +83,8 @@ public class ScopeTreeBuilder extends AstVisitor {
     }
 
     @Override public void visit(DefinitionExpressionNode node) throws SemanticException {
-        currentScope().define(node);
         super.visit(node);
+        currentScope().define(node);
     }
 
     @Override public void visit(MemberAccessExpressionNode node) throws SemanticException {
