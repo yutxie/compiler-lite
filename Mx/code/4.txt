@@ -1,8 +1,0 @@
-class string__ {
-    
-    int length() {}
-    string__ substring(int left, int right) {}
-    int parseInt() {}
-    int ord(int pos) {}
-    // operator +
-}

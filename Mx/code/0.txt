@@ -1,4 +1,0 @@
-int main() {
-    println("too young too simple.");
-    return 0;
-}

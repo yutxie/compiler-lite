@@ -3,14 +3,11 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- static type check
-  - left value
-  - member access
+- semantic analysis
 
 ## To-Fix
 
-- array的嵌套结构
-- 自动类型转换
+- auto type transform
 
 ## Structure
 
