@@ -137,6 +137,23 @@ public class StaticTypeChecker extends AstVisitor {
         ExpressionStatementNode lhs = node.lhs;
         ExpressionStatementNode rhs = node.rhs;
         switch (node.op) {
+            case ADD:
+                if (lhs.exprType instanceof ClassTypeNode && rhs.exprType instanceof ClassTypeNode) {
+                    if (!((ClassTypeNode) lhs.exprType).referenceClassName.equals("string") ||
+                        !((ClassTypeNode) rhs.exprType).referenceClassName.equals("string"))
+                        throw new SemanticException(node.line, "only string class instance can add");
+                } else if (!lhs.exprType.isPrimitiveType(INT) ||
+                           !rhs.exprType.isPrimitiveType(INT))
+                            throw new SemanticException(node.line, "only int can add");
+                node.exprType = lhs.exprType;
+                break;
+            case OR: case AND: case XOR:
+            case DIV: case MOD: case MUL: case SUB:
+            case LSHIFT: case RSHIFT:
+                if (!lhs.exprType.isPrimitiveType(INT) || !rhs.exprType.isPrimitiveType(INT))
+                    throw new SemanticException(node.line, "opt like this must operate on int");
+                node.exprType = lhs.exprType;
+                break;
             case ASSIGN:
                 if (!lhs.leftValue)
                     throw new SemanticException(node.line, "value must be assigned to a leftValue");
@@ -226,6 +243,7 @@ public class StaticTypeChecker extends AstVisitor {
         AstNode methodDefinition = node.parent;
         while (!(methodDefinition instanceof MethodDefinitionNode))
             methodDefinition = methodDefinition.parent;
+        if (node.returnValue != null)
         if (!node.returnValue.exprType.equalTo(((MethodDefinitionNode) methodDefinition).returnType))
             throw new SemanticException(node.line, "return value type error");
     }

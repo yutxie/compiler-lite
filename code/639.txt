@@ -143,3 +143,25 @@ int main(){
 
 	return 0;
 }
+
+
+/*!! metadata:
+=== comment ===
+Test basic rules-basic_test-yurongyou.mx
+=== is_public ===
+True
+=== assert ===
+success_compile
+=== timeout ===
+0
+=== input ===
+
+=== phase ===
+semantic pretest
+=== output ===
+
+=== exitcode ===
+
+
+!!*/
+

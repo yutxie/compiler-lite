@@ -1721,11 +1721,11 @@ public class MxParser extends Parser {
 						((MemberAccessExprContext)_localctx).caller = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(188);
-						if (!(precpred(_ctx, 22))) throw new FailedPredicateException(this, "precpred(_ctx, 22)");
+						if (!(precpred(_ctx, 23))) throw new FailedPredicateException(this, "precpred(_ctx, 23)");
 						setState(189);
 						((MemberAccessExprContext)_localctx).op = match(DOT);
 						setState(190);
-						((MemberAccessExprContext)_localctx).member = expression(23);
+						((MemberAccessExprContext)_localctx).member = expression(24);
 						}
 						break;
 					case 2:
@@ -1945,7 +1945,7 @@ public class MxParser extends Parser {
 						((IndexAccessExprContext)_localctx).caller = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_expression);
 						setState(230);
-						if (!(precpred(_ctx, 23))) throw new FailedPredicateException(this, "precpred(_ctx, 23)");
+						if (!(precpred(_ctx, 22))) throw new FailedPredicateException(this, "precpred(_ctx, 22)");
 						setState(231);
 						match(LBRACK);
 						setState(232);
@@ -2503,7 +2503,7 @@ public class MxParser extends Parser {
 	private boolean expression_sempred(ExpressionContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 22);
+			return precpred(_ctx, 23);
 		case 1:
 			return precpred(_ctx, 16);
 		case 2:
@@ -2529,7 +2529,7 @@ public class MxParser extends Parser {
 		case 12:
 			return precpred(_ctx, 24);
 		case 13:
-			return precpred(_ctx, 23);
+			return precpred(_ctx, 22);
 		case 14:
 			return precpred(_ctx, 21);
 		}
@@ -2604,8 +2604,8 @@ public class MxParser extends Parser {
 		"\2\2\u00b9\u00ba\5\32\16\2\u00ba\u00bb\7\4\2\2\u00bb\u00bd\3\2\2\2\u00bc"+
 		"\u00ab\3\2\2\2\u00bc\u00ae\3\2\2\2\u00bc\u00b0\3\2\2\2\u00bc\u00b2\3\2"+
 		"\2\2\u00bc\u00b4\3\2\2\2\u00bc\u00b5\3\2\2\2\u00bc\u00b6\3\2\2\2\u00bc"+
-		"\u00b7\3\2\2\2\u00bc\u00b8\3\2\2\2\u00bd\u00f1\3\2\2\2\u00be\u00bf\f\30"+
-		"\2\2\u00bf\u00c0\7\13\2\2\u00c0\u00f0\5\32\16\31\u00c1\u00c2\f\22\2\2"+
+		"\u00b7\3\2\2\2\u00bc\u00b8\3\2\2\2\u00bd\u00f1\3\2\2\2\u00be\u00bf\f\31"+
+		"\2\2\u00bf\u00c0\7\13\2\2\u00c0\u00f0\5\32\16\32\u00c1\u00c2\f\22\2\2"+
 		"\u00c2\u00c3\t\5\2\2\u00c3\u00f0\5\32\16\23\u00c4\u00c5\f\21\2\2\u00c5"+
 		"\u00c6\t\3\2\2\u00c6\u00f0\5\32\16\22\u00c7\u00c8\f\20\2\2\u00c8\u00c9"+
 		"\t\6\2\2\u00c9\u00f0\5\32\16\21\u00ca\u00cb\f\17\2\2\u00cb\u00cc\t\7\2"+
@@ -2617,7 +2617,7 @@ public class MxParser extends Parser {
 		"\u00dd\f\t\2\2\u00dd\u00de\7\25\2\2\u00de\u00f0\5\32\16\n\u00df\u00e0"+
 		"\f\7\2\2\u00e0\u00e1\7\f\2\2\u00e1\u00f0\5\32\16\b\u00e2\u00e3\f\32\2"+
 		"\2\u00e3\u00e5\7\3\2\2\u00e4\u00e6\5\20\t\2\u00e5\u00e4\3\2\2\2\u00e5"+
-		"\u00e6\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00f0\7\4\2\2\u00e8\u00e9\f\31"+
+		"\u00e6\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00f0\7\4\2\2\u00e8\u00e9\f\30"+
 		"\2\2\u00e9\u00ea\7\7\2\2\u00ea\u00eb\5\32\16\2\u00eb\u00ec\7\b\2\2\u00ec"+
 		"\u00f0\3\2\2\2\u00ed\u00ee\f\27\2\2\u00ee\u00f0\t\2\2\2\u00ef\u00be\3"+
 		"\2\2\2\u00ef\u00c1\3\2\2\2\u00ef\u00c4\3\2\2\2\u00ef\u00c7\3\2\2\2\u00ef"+

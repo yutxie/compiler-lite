@@ -1,5 +1,7 @@
 package AstNode;
 
+import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
+
 public class VariableTypeNode extends TypeNode {
 
     public boolean isPrimitiveType(PrimitiveTypeNode.PrimitiveTypeKeyword type) {

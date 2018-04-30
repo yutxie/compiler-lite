@@ -33,7 +33,12 @@ public class PrimitiveTypeNode extends NonArrayTypeNode {
             case VOID: return node.isPrimitiveType(PrimitiveTypeKeyword.VOID);
             case BOOL: return node.isPrimitiveType(PrimitiveTypeKeyword.BOOL);
             case INT: return node.isPrimitiveType(PrimitiveTypeKeyword.INT);
-            case NULL: return node.isPrimitiveType(PrimitiveTypeKeyword.NULL);
+            case NULL:
+                if (node instanceof ArrayTypeNode) return true;
+                if (node instanceof ClassTypeNode)
+                    if (!((ClassTypeNode) node).referenceClassName.equals("string"))
+                        return true;
+                return false;
             default: return false;
         }
     }

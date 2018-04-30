@@ -63,8 +63,8 @@ statement
 
 expression
     : caller=expression LPAREN actualParameterList? RPAREN # methodCallExpr
-    | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
     | caller=expression op=DOT member=expression # memberAccessExpr
+    | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
     | expression postfix=(INC | DEC) # unaryExpr
     | prefix=(INC | DEC) expression # unaryExpr
     | prefix=(ADD | SUB) expression # unaryExpr

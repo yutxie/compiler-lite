@@ -2,6 +2,8 @@ package AstNode;
 
 import java.util.*;
 
+import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.NULL;
+
 public class ArrayTypeNode extends VariableTypeNode {
 
     public VariableTypeNode innerTypeNode;
@@ -22,6 +24,7 @@ public class ArrayTypeNode extends VariableTypeNode {
 
     @Override
     public boolean equalTo(VariableTypeNode node) {
+        if (node.isPrimitiveType(NULL)) return true;
         if (!(node instanceof ArrayTypeNode)) return false;
         return innerTypeNode.equalTo(((ArrayTypeNode) node).innerTypeNode);
     }
