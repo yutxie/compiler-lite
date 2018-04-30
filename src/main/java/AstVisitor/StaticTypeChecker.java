@@ -126,8 +126,10 @@ public class StaticTypeChecker extends AstVisitor {
                 node.leftValue = true;
                 break;
             case POSTFIX_DEC: case POSTFIX_INC:
-                if (!node.inner.leftValue || !node.inner.exprType.isPrimitiveType(INT))
+                if (!node.inner.leftValue)
                     throw new SemanticException(node.line, "x++ must operate on leftValue int");
+                if (!node.inner.exprType.isPrimitiveType(INT))
+                    throw new SemanticException(node.line, "x++ must operate on int");
                 break;
         }
         node.exprType = node.inner.exprType;
@@ -180,9 +182,12 @@ public class StaticTypeChecker extends AstVisitor {
                 node.exprType = new PrimitiveTypeNode("bool");
                 break;
             case GE: case LE: case GT: case LT:
-                if (!lhs.exprType.isPrimitiveType(INT) ||
-                    !rhs.exprType.isPrimitiveType(INT))
-                    throw new SemanticException(node.line, "lhs and rhs must be int");
+                if (!lhs.exprType.equalTo(rhs.exprType))
+                    throw new SemanticException(node.line, "type of lhs and rhs must be the same");
+                if (!lhs.exprType.isPrimitiveType(INT) &&
+                    !lhs.exprType.isPrimitiveType(BOOL) &&
+                    !lhs.exprType.equalTo(new ClassTypeNode("string")))
+                    throw new SemanticException(node.line, "only support relation btw int, bool, string");
                 node.exprType = new PrimitiveTypeNode("bool");
                 break;
             default:
