@@ -9,11 +9,11 @@ import java.util.*;
 public abstract class Scope {
 
     public AstNode astNode;
-    public Map<String, ClassDefinitionNode> classDefinitionMap;
-    public Map<String, MethodDefinitionNode> methodDefinitionMap;
-    public Map<String, DefinitionExpressionNode> variableDefinitionMap;
-    public Set<String> nameSet;
-    public List<LocalScope> childrenList;
+    public HashMap<String, ClassDefinitionNode> classDefinitionMap;
+    public HashMap<String, MethodDefinitionNode> methodDefinitionMap;
+    public HashMap<String, DefinitionExpressionNode> variableDefinitionMap;
+    public HashSet<String> nameSet;
+    public LinkedList<LocalScope> childrenList;
 
     public Scope() {
         classDefinitionMap = new HashMap<String, ClassDefinitionNode>();

@@ -27,6 +27,7 @@ public class ScopeTreeBuilder extends AstVisitor {
     public void pushScope(LocalScope scope) throws SemanticException {
         scope.parent = currentScope();
         scope.parent.childrenList.add(scope);
+//        scope.nameSet = (HashSet<String>) scope.parent.nameSet.clone();
         scopeStack.addLast(scope);
     }
 
@@ -55,28 +56,28 @@ public class ScopeTreeBuilder extends AstVisitor {
 
     @Override public void visit(ClassDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
+        pushScope(scope);
         for (MethodDefinitionNode item : node.memberMethodList)
             scope.define(item);
         for (MethodDefinitionNode item : node.memberConstructionMethodList)
             scope.define(item);
         scope.astNode = node;
-        pushScope(scope);
         super.visit(node);
         node.scope = popScope();
     }
 
     @Override public void visit(MethodDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
-        scope.astNode = node;
         pushScope(scope);
+        scope.astNode = node;
         super.visit(node);
         node.scope = popScope();
     }
 
     @Override public void visit(BlockNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
-        scope.astNode = node;
         pushScope(scope);
+        scope.astNode = node;
         super.visit(node);
         node.scope = popScope();
     }

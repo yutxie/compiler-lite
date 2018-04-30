@@ -49,7 +49,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitConstructionMethodDefinition(MxParser.ConstructionMethodDefinitionContext context) {
         MethodDefinitionNode res = new MethodDefinitionNode();
         res.line = context.start.getLine();
-        res.returnType = new ClassTypeNode(context.Identifier().getText());
+        res.returnType = new PrimitiveTypeNode("void");
         res.methodName = context.Identifier().getText();
         if (context.formalParameterList() != null)
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
@@ -306,7 +306,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         if (context.Identifier() != null)
             res = new ClassTypeNode(context.Identifier().getText());
         else res = new PrimitiveTypeNode(context.primitiveType().getText());
-        for (int i = 0; i < dim; ++i) {
+        for (int i = dim - 1; i >= 0; --i) {
             tmp = new ArrayTypeNode();
             ((ArrayTypeNode) tmp).innerTypeNode = res;
             if (i < dimOfExpr) ((ArrayTypeNode) tmp).size =

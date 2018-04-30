@@ -19,20 +19,11 @@
       <file leaf-file-name="StaticTypeChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="154" column="45" selection-start-line="154" selection-start-column="45" selection-end-line="154" selection-end-column="45" />
+            <state relative-caret-position="155">
+              <caret line="75" column="75" selection-start-line="75" selection-start-column="75" selection-end-line="75" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mx.g4" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/Mx.g4">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -41,28 +32,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="190">
-              <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+              <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PrimitiveTypeNode.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
             </state>
           </provider>
         </entry>
@@ -79,14 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>visitNew</find>
-      <find>ClassTypeNode</find>
-      <find>visitDefinitionExpression</find>
-      <find>visitDefinitionExpre</find>
-      <find>Identifier</find>
-      <find>identifier</find>
-      <find>MemberA</find>
-      <find>new ClassType</find>
       <find>visitIdentifier</find>
       <find>visitIdentifierTerminalNode</find>
       <find>classtype</find>
@@ -109,6 +74,14 @@
       <find>Defi</find>
       <find>MethodCall</find>
       <find>Index</find>
+      <find>new Local</find>
+      <find>throw</find>
+      <find>Cla</find>
+      <find>Class</find>
+      <find>visitDefinitionEx</find>
+      <find>visitArr</find>
+      <find>statement</find>
+      <find>IndexAccess</find>
     </findStrings>
     <replaceStrings>
       <replace>definition</replace>
@@ -126,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/MethodNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ClassDefinitionNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ReturnStatementNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/VariableReferenceNode.java" />
@@ -150,7 +122,6 @@
         <option value="$PROJECT_DIR$/src/main/java/Scope/ToplevelScope.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tool/PrintTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/ErrorHandler/SemanticException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Scope/Scope.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ProgramNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ConstantNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/MethodTypeNode.java" />
@@ -161,20 +132,22 @@
         <option value="$PROJECT_DIR$/src/main/java/AstNode/NewExpressionNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ReferenceNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ClassTypeResolver.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/AstNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/TypeDefinitionChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/BlockNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ParentLinker.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ClassTypeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstBuilder/Mx.g4" />
+        <option value="$PROJECT_DIR$/src/main/java/Scope/Scope.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ParentLinker.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstBuilder/.antlr/Java.g4" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
@@ -222,14 +195,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="AstBuilder" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
@@ -383,7 +348,7 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23981553" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="7" weight="0.2874074" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="7" weight="0.28635016" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -438,15 +403,9 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java</url>
-          <line>182</line>
+          <line>184</line>
           <properties />
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java</url>
-          <line>68</line>
-          <properties />
-          <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/AstVisitor/ClassTypeResolver.java</url>
@@ -462,8 +421,16 @@
           </properties>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java</url>
+          <line>218</line>
+          <properties class="AstVisitor.StaticTypeChecker" method="visit">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="42" />
+      <option name="time" value="48" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -492,13 +459,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/MemberAccessExpressionNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/IndexAccessExpressionNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -641,13 +601,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Scope/Scope.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="49" column="86" selection-start-line="49" selection-start-column="86" selection-end-line="49" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ReferenceNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -659,13 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1349">
-          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -714,41 +660,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ClassTypeResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ParentLinker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="170" column="65" selection-start-line="170" selection-start-column="65" selection-end-line="170" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="53" column="49" selection-start-line="53" selection-start-column="49" selection-end-line="53" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -759,23 +674,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/Mx.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="67" column="4" selection-start-line="67" selection-start-column="4" selection-end-line="67" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -783,17 +681,89 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="30" column="34" lean-forward="true" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ClassTypeResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Scope/Scope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        <state relative-caret-position="136">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/Mx.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="87" column="30" selection-start-line="87" selection-start-column="30" selection-end-line="87" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/.antlr/Java.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="478" column="23" lean-forward="true" selection-start-line="478" selection-start-column="23" selection-end-line="478" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#13338#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="309" column="17" selection-start-line="309" selection-start-column="17" selection-end-line="309" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/ParentLinker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="89" column="27" lean-forward="true" selection-start-line="89" selection-start-column="27" selection-end-line="89" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="154" column="45" selection-start-line="154" selection-start-column="45" selection-end-line="154" selection-end-column="45" />
+        <state relative-caret-position="155">
+          <caret line="75" column="75" selection-start-line="75" selection-start-column="75" selection-end-line="75" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -803,7 +773,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
-          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
+          <caret line="10" column="37" lean-forward="true" selection-start-line="10" selection-start-column="37" selection-end-line="10" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

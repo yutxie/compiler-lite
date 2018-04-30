@@ -7,8 +7,8 @@ program
     ;
 
 classDefinition
-    : CLASS Identifier LBRACE memberVariable*
-        (constructionMethodDefinition | methodDefinition)* RBRACE
+    : CLASS Identifier LBRACE
+        (memberVariable | constructionMethodDefinition | methodDefinition)* RBRACE
     ;
 
     memberVariable

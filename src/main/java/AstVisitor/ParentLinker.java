@@ -28,6 +28,10 @@ public class ParentLinker extends AstVisitor {
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
+        for (MethodDefinitionNode item : node.memberConstructionMethodList)
+            if (!item.methodName.equals(node.className))
+                throw new SemanticException(node.line,
+                    "construction method name must be the same as class");
     }
 
     @Override public void visit(MethodDefinitionNode node) throws SemanticException {
