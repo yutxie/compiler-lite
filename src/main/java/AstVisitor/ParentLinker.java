@@ -137,20 +137,40 @@ public class ParentLinker extends AstVisitor {
 
     @Override public void visit(ReturnStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
+        AstNode ancestor = node.parent;
+        while (!(ancestor instanceof MethodDefinitionNode)) {
+            if (ancestor instanceof ProgramNode)
+                throw new SemanticException(node.line, "return must be in a method definition");
+            ancestor = ancestor.parent;
+        }
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(BreakStatementNode node) {
+    @Override public void visit(BreakStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
+        AstNode ancestor = node.parent;
+        while (!(ancestor instanceof ForStatementNode) &&
+               !(ancestor instanceof WhileStatementNode)) {
+            if (ancestor instanceof ProgramNode)
+                throw new SemanticException(node.line, "break must be in a loop");
+            ancestor = ancestor.parent;
+        }
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ContinueStatementNode node) {
+    @Override public void visit(ContinueStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
+        AstNode ancestor = node.parent;
+        while (!(ancestor instanceof ForStatementNode) &&
+                !(ancestor instanceof WhileStatementNode)) {
+            if (ancestor instanceof ProgramNode)
+                throw new SemanticException(node.line, "continue must be in a loop");
+            ancestor = ancestor.parent;
+        }
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();

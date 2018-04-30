@@ -19,4 +19,10 @@ public class ArrayTypeNode extends VariableTypeNode {
             return ((ArrayTypeNode) innerTypeNode).contain((ArrayTypeNode) node.innerTypeNode);
         else return innerTypeNode.getTypeName().equals(node.innerTypeNode.getTypeName());
     }
+
+    @Override
+    public boolean equalTo(VariableTypeNode node) {
+        if (!(node instanceof ArrayTypeNode)) return false;
+        return innerTypeNode.equalTo(((ArrayTypeNode) node).innerTypeNode);
+    }
 }

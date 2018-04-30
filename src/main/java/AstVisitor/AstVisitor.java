@@ -5,16 +5,24 @@ import ErrorHandler.*;
 
 public abstract class AstVisitor {
 
+    public void visit(AstNode node) throws SemanticException {
+        if (node instanceof ProgramNode) visit((ProgramNode)node);
+        else if (node instanceof ClassDefinitionNode) visit((ClassDefinitionNode)node);
+        else if (node instanceof MethodDefinitionNode) visit((MethodDefinitionNode)node);
+        else if (node instanceof BlockNode) visit((BlockNode)node);
+        else if (node instanceof StatementNode) visit((StatementNode)node);
+    }
+
     public void visit(BinaryExpressionNode node) throws SemanticException {
         visit(node.lhs);
         visit(node.rhs);
     }
 
     public void visit(BlockNode node) throws SemanticException {
-        for (StatementNode item : node.statementList) visit(item);
+        for (AstNode item : node.childList) visit(item);
     }
 
-    public void visit(BreakStatementNode node) {}
+    public void visit(BreakStatementNode node) throws SemanticException {}
 
     public void visit(ClassDefinitionNode node) throws SemanticException {
         for (DefinitionExpressionNode item : node.memberVariableList) visit(item);
@@ -24,9 +32,10 @@ public abstract class AstVisitor {
 
     public void visit(ConstantNode node) {}
 
-    public void visit(ContinueStatementNode node) {}
+    public void visit(ContinueStatementNode node) throws SemanticException {}
 
     public void visit(DefinitionExpressionNode node) throws SemanticException {
+        visit(node.variableType);
         if (node.initValue != null) visit(node.initValue);
     }
 
@@ -41,6 +50,8 @@ public abstract class AstVisitor {
         else if (node instanceof NewExpressionNode) visit((NewExpressionNode)node);
         else if (node instanceof UnaryExpressionNode) visit((UnaryExpressionNode)node);
         else if (node instanceof BinaryExpressionNode) visit((BinaryExpressionNode)node);
+        else if (node instanceof TypeNode) visit((TypeNode)node);
+        if (node.exprType != null) visit((TypeNode) node.exprType);
     }
 
     public void visit(ForStatementNode node) throws SemanticException {
@@ -72,11 +83,13 @@ public abstract class AstVisitor {
     }
 
     public void visit(MethodDefinitionNode node) throws SemanticException {
+        visit(node.returnType);
         for (DefinitionExpressionNode item : node.formalArgumentList) visit(item);
         visit(node.block);
     }
 
     public void visit(NewExpressionNode node) throws SemanticException {
+        visit(node.variableType);
         for (ExpressionStatementNode item : node.actualParameterList) visit(item);
     }
 

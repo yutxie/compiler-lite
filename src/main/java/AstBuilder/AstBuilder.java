@@ -51,6 +51,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         res.line = context.start.getLine();
         res.returnType = new ClassTypeNode(context.Identifier().getText());
         res.methodName = context.Identifier().getText();
+        if (context.formalParameterList() != null)
         for (MxParser.FormalParameterContext item : context.formalParameterList().formalParameter())
             res.formalArgumentList.add((DefinitionExpressionNode)visit(item));
         res.block = (BlockNode)visit(context.block());
@@ -81,8 +82,9 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitBlock(MxParser.BlockContext context) {
         BlockNode res = new BlockNode();
         res.line = context.start.getLine();
-        for (MxParser.StatementContext item : context.statement())
-            res.statementList.add((StatementNode)visit(item));
+        for (MxParser.BlockOrStatementContext item : context.blockOrStatement())
+            if (item.block() != null) res.childList.add((BlockNode)visit(item.block()));
+            else res.childList.add((StatementNode)visit(item.statement()));
         return res;
     }
 
@@ -90,7 +92,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         if (context.block() != null) return (BlockNode)visit(context.block());
         BlockNode res = new BlockNode();
         res.line = context.start.getLine();
-        res.statementList.add((StatementNode)visit(context.statement()));
+        res.childList.add((StatementNode)visit(context.statement()));
         return res;
     }
 

@@ -13,4 +13,10 @@ public class ClassTypeNode extends NonArrayTypeNode {
     public String getTypeName() {
         return referenceClassName;
     }
+
+    @Override
+    public boolean equalTo(VariableTypeNode node) {
+        if (!(node instanceof ClassTypeNode)) return false;
+        return referenceClassName.equals(((ClassTypeNode) node).referenceClassName);
+    }
 }

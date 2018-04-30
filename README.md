@@ -40,15 +40,15 @@ ACM Class 2018 Compiler
     - MethodCallExpressionNode
     - NewExpressionNode
     - Unary/BinaryExpressionNode
+    - TypeNode
+      - MethodType
+      - VariableType
+        - NonArrayType: PrimitiveType, ClassType
+        - ArrayType
   - If/For/WhileStatementNode
   - ReturnStatementNode
   - Break/ContinueStatementNode
   - EmptyStatementNode
-  - TypeNode
-    - MethodType
-    - VariableType
-      - NonArrayType: PrimitiveType, ClassType
-      - ArrayType
 
 ## Hint
 

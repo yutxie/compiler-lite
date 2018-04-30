@@ -3,7 +3,7 @@ package AstNode;
 public class PrimitiveTypeNode extends NonArrayTypeNode {
 
     public enum PrimitiveTypeKeyword {
-        BOOL, INT, STRING, VOID, NULL
+        BOOL, INT, VOID, NULL //, STRING
     }
 
     public PrimitiveTypeKeyword type;
@@ -11,7 +11,7 @@ public class PrimitiveTypeNode extends NonArrayTypeNode {
     public PrimitiveTypeNode(String str) {
         if (str.equals("bool")) this.type = PrimitiveTypeKeyword.BOOL;
         if (str.equals("int")) this.type = PrimitiveTypeKeyword.INT;
-        if (str.equals("string")) this.type = PrimitiveTypeKeyword.STRING;
+//        if (str.equals("string")) this.type = PrimitiveTypeKeyword.STRING;
         if (str.equals("void")) this.type = PrimitiveTypeKeyword.VOID;
         if (str.equals("null")) this.type = PrimitiveTypeKeyword.NULL;
     }
@@ -22,8 +22,19 @@ public class PrimitiveTypeNode extends NonArrayTypeNode {
             case BOOL: return "bool";
             case VOID: return "void";
             case NULL: return "null";
-            case STRING: return "string";
+//            case STRING: return "string";
             default: return "";
+        }
+    }
+
+    @Override public boolean equalTo(VariableTypeNode node) {
+        switch (type) {
+//            case STRING: return node.isPrimitiveType(PrimitiveTypeKeyword.STRING);
+            case VOID: return node.isPrimitiveType(PrimitiveTypeKeyword.VOID);
+            case BOOL: return node.isPrimitiveType(PrimitiveTypeKeyword.BOOL);
+            case INT: return node.isPrimitiveType(PrimitiveTypeKeyword.INT);
+            case NULL: return node.isPrimitiveType(PrimitiveTypeKeyword.NULL);
+            default: return false;
         }
     }
 }

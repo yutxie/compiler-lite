@@ -37,7 +37,7 @@ methodDefinition
         ;
 
 block
-    : LBRACE statement* RBRACE
+    : LBRACE blockOrStatement* RBRACE
     ;
 
     blockOrStatement
@@ -49,7 +49,7 @@ statement
     : definitionStatement # definitionStat
     | expression SEMI # expressionStat
     | IF LPAREN expression RPAREN blockOrStatement (ELSE blockOrStatement)? # ifStat
-    | FOR LPAREN init=expression? SEMI condition=expression SEMI after_block=expression? RPAREN blockOrStatement # forStat
+    | FOR LPAREN init=expression? SEMI condition=expression? SEMI after_block=expression? RPAREN blockOrStatement # forStat
     | WHILE LPAREN expression RPAREN blockOrStatement # whileStat
     | RETURN expression? SEMI # returnStat
     | BREAK SEMI # breakStat
@@ -62,10 +62,10 @@ statement
         ;
 
 expression
-    : expression postfix=(INC | DEC) # unaryExpr
-    | caller=expression LPAREN actualParameterList? RPAREN # methodCallExpr
+    : caller=expression LPAREN actualParameterList? RPAREN # methodCallExpr
     | caller=expression LBRACK index=expression RBRACK # indexAccessExpr
     | caller=expression op=DOT member=expression # memberAccessExpr
+    | expression postfix=(INC | DEC) # unaryExpr
     | prefix=(INC | DEC) expression # unaryExpr
     | prefix=(ADD | SUB) expression # unaryExpr
     | prefix=(NOT | LNOT) expression # unaryExpr

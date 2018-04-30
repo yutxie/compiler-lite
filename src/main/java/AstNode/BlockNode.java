@@ -5,15 +5,17 @@ import java.util.List;
 
 public class BlockNode extends AstNode {
 
-    public List<StatementNode> statementList;
+    public List<AstNode> childList;
     
     public BlockNode() {
-        statementList = new LinkedList<StatementNode>();
+        childList = new LinkedList<AstNode>();
     }
     
     @Override public void printInformation(int tab) {
         super.printInformation(tab);
-        for (StatementNode item : statementList)
-            item.printInformation(tab + 1);
+        for (AstNode item : childList) {
+            if (item instanceof StatementNode) ((StatementNode)item).printInformation(tab + 1);
+            else ((BlockNode)item).printInformation(tab + 1);
+        }
     }
 }

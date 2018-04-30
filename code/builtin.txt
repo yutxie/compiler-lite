@@ -1,6 +1,6 @@
 
 
-class array {
+class array__ {
     
     // jagged array
     int size() {}
