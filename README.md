@@ -1,13 +1,9 @@
-# compiler-lite
+# Compiler-Lite
 ACM Class 2018 Compiler
 
 ## To-Do
 
-- semantic analysis
-
 ## To-Fix
-
-- auto type transform
 
 ## Structure
 
