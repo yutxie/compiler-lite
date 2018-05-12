@@ -1,7 +1,23 @@
 # Compiler-Lite
 ACM Class 2018 Compiler
 
+## Q&A
+
+- directly transform AST into CFG IR?
+- reg-reg vs. mem-mem
+  - object of class: member access
+  - array
+- control flow
+  - method call
+
 ## To-Do
+
+- designing of IR
+  - indirect triples
+  - static single assignment (SSA)
+- translating into IR
+  - expression
+  - control flow
 
 ## To-Fix
 

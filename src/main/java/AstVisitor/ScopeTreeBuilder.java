@@ -8,7 +8,7 @@ import java.util.*;
 
 public class ScopeTreeBuilder extends AstVisitor {
 
-    public LinkedList<Scope> scopeStack;
+    LinkedList<Scope> scopeStack;
 
     public ScopeTreeBuilder() {
         this.scopeStack = new LinkedList<Scope>();
@@ -20,22 +20,22 @@ public class ScopeTreeBuilder extends AstVisitor {
         return (ToplevelScope)scopeStack.getFirst();
     }
 
-    public Scope currentScope() {
+    Scope currentScope() {
         return scopeStack.getLast();
     }
 
-    public void pushScope(LocalScope scope) throws SemanticException {
+    void pushScope(LocalScope scope) throws SemanticException {
         scope.parent = currentScope();
         scope.parent.childrenList.add(scope);
 //        scope.nameSet = (HashSet<String>) scope.parent.nameSet.clone();
         scopeStack.addLast(scope);
     }
 
-    public LocalScope popScope() {
+    LocalScope popScope() {
         return (LocalScope)scopeStack.removeLast();
     }
 
-    @Override public void visit(ProgramNode node) throws SemanticException {
+    @Override void visit(ProgramNode node) throws SemanticException {
         ToplevelScope toplevelScope = new ToplevelScope();
         for (ClassDefinitionNode item : node.classDefinitionList)
             toplevelScope.define(item);
@@ -43,18 +43,18 @@ public class ScopeTreeBuilder extends AstVisitor {
             toplevelScope.define(item);
         MethodDefinitionNode main = toplevelScope.methodDefinitionMap.get("main");
         if (main == null)
-            throw new SemanticException("no method name \"main\"");
+            throw new SemanticException("no method name main");
         else if (!main.returnType.getTypeName().equals("int"))
-            throw new SemanticException("return type of \"main\" must be \"int\"");
+            throw new SemanticException(main.line, "return type of main must be int");
         else if (!main.formalArgumentList.isEmpty())
-            throw new SemanticException("\"main\" can not have parameters");
+            throw new SemanticException(main.line, "main can not have parameters");
         toplevelScope.astNode = node;
         scopeStack.addLast(toplevelScope);
         super.visit(node);
         node.scope = toplevelScope;
     }
 
-    @Override public void visit(ClassDefinitionNode node) throws SemanticException {
+    @Override void visit(ClassDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
         pushScope(scope);
         for (MethodDefinitionNode item : node.memberMethodList)
@@ -66,7 +66,7 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = popScope();
     }
 
-    @Override public void visit(MethodDefinitionNode node) throws SemanticException {
+    @Override void visit(MethodDefinitionNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
         pushScope(scope);
         scope.astNode = node;
@@ -74,7 +74,7 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = popScope();
     }
 
-    @Override public void visit(BlockNode node) throws SemanticException {
+    @Override void visit(BlockNode node) throws SemanticException {
         LocalScope scope = new LocalScope();
         pushScope(scope);
         scope.astNode = node;
@@ -82,19 +82,19 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = popScope();
     }
 
-    @Override public void visit(DefinitionExpressionNode node) throws SemanticException {
+    @Override void visit(DefinitionExpressionNode node) throws SemanticException {
         super.visit(node);
         currentScope().define(node);
     }
 
-    @Override public void visit(MemberAccessExpressionNode node) throws SemanticException {
+    @Override void visit(MemberAccessExpressionNode node) throws SemanticException {
         visit(node.caller);
         try {
             visit(node.member);
         } catch (SemanticException exception) {}
     }
 
-    @Override public void visit(ReferenceNode node) throws SemanticException {
+    @Override void visit(ReferenceNode node) throws SemanticException {
         AstNode definitionNode;
         try {
             definitionNode = currentScope().get(node.referenceName);

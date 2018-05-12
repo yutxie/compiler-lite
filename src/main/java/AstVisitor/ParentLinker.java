@@ -17,13 +17,13 @@ public class ParentLinker extends AstVisitor {
         visit(prog);
     }
 
-    @Override public void visit(ProgramNode node) throws SemanticException {
+    @Override void visit(ProgramNode node) throws SemanticException {
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ClassDefinitionNode node) throws SemanticException {
+    @Override void visit(ClassDefinitionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
@@ -34,112 +34,112 @@ public class ParentLinker extends AstVisitor {
                     "construction method name must be the same as class");
     }
 
-    @Override public void visit(MethodDefinitionNode node) throws SemanticException {
+    @Override void visit(MethodDefinitionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(BlockNode node) throws SemanticException {
+    @Override void visit(BlockNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ReferenceNode node) throws SemanticException {
+    @Override void visit(ReferenceNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ConstantNode node) {
+    @Override void visit(ConstantNode node) {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ThisNode node) {
+    @Override void visit(ThisNode node) {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(DefinitionExpressionNode node) throws SemanticException {
+    @Override void visit(DefinitionExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(MemberAccessExpressionNode node) throws SemanticException {
+    @Override void visit(MemberAccessExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(IndexAccessExpressionNode node) throws SemanticException {
+    @Override void visit(IndexAccessExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(MethodCallExpressionNode node) throws SemanticException {
+    @Override void visit(MethodCallExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(NewExpressionNode node) throws SemanticException {
+    @Override void visit(NewExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(UnaryExpressionNode node) throws SemanticException {
+    @Override void visit(UnaryExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(BinaryExpressionNode node) throws SemanticException {
+    @Override void visit(BinaryExpressionNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(IfStatementNode node) throws SemanticException {
+    @Override void visit(IfStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ForStatementNode node) throws SemanticException {
+    @Override void visit(ForStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(WhileStatementNode node) throws SemanticException {
+    @Override void visit(WhileStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ReturnStatementNode node) throws SemanticException {
+    @Override void visit(ReturnStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         AstNode ancestor = node.parent;
         while (!(ancestor instanceof MethodDefinitionNode)) {
@@ -152,7 +152,7 @@ public class ParentLinker extends AstVisitor {
         stack.removeLast();
     }
 
-    @Override public void visit(BreakStatementNode node) throws SemanticException {
+    @Override void visit(BreakStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         AstNode ancestor = node.parent;
         while (!(ancestor instanceof ForStatementNode) &&
@@ -166,7 +166,7 @@ public class ParentLinker extends AstVisitor {
         stack.removeLast();
     }
 
-    @Override public void visit(ContinueStatementNode node) throws SemanticException {
+    @Override void visit(ContinueStatementNode node) throws SemanticException {
         node.parent = stack.getLast();
         AstNode ancestor = node.parent;
         while (!(ancestor instanceof ForStatementNode) &&
@@ -180,35 +180,35 @@ public class ParentLinker extends AstVisitor {
         stack.removeLast();
     }
 
-    @Override public void visit(EmptyStatementNode node) {
+    @Override void visit(EmptyStatementNode node) {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(MethodTypeNode node) {
+    @Override void visit(MethodTypeNode node) {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(PrimitiveTypeNode node) {
+    @Override void visit(PrimitiveTypeNode node) {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ClassTypeNode node) throws SemanticException {
+    @Override void visit(ClassTypeNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);
         stack.removeLast();
     }
 
-    @Override public void visit(ArrayTypeNode node) throws SemanticException {
+    @Override void visit(ArrayTypeNode node) throws SemanticException {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);

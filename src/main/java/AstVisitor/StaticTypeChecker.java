@@ -15,7 +15,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(ReferenceNode node) {
+    void visit(ReferenceNode node) {
         if (node.referenceType == ReferenceNode.ReferenceType.VARIABLE) {
             node.exprType = ((DefinitionExpressionNode)node.definitionNode).variableType;
             node.leftValue = true;
@@ -23,14 +23,14 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(ThisNode node) {
+    void visit(ThisNode node) {
         AstNode classDefinition = node;
         while (!(classDefinition instanceof ClassDefinitionNode)) classDefinition = classDefinition.parent;
         node.exprType = new ClassTypeNode(((ClassDefinitionNode)classDefinition).className);
     }
 
     @Override
-    public void visit(MemberAccessExpressionNode node) throws SemanticException {
+    void visit(MemberAccessExpressionNode node) throws SemanticException {
         try {
             super.visit(node);
         } catch (SemanticException excpetion) {}
@@ -70,7 +70,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(IndexAccessExpressionNode node) throws SemanticException {
+    void visit(IndexAccessExpressionNode node) throws SemanticException {
         super.visit(node);
         if (!(node.caller.exprType instanceof ArrayTypeNode))
             throw new SemanticException(node.line, "the index access caller must be an array");
@@ -83,7 +83,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(MethodCallExpressionNode node) throws SemanticException {
+    void visit(MethodCallExpressionNode node) throws SemanticException {
         super.visit(node);
         if (!(node.caller instanceof ReferenceNode))
             throw new SemanticException(node.line, "caller must be a method reference");
@@ -109,13 +109,13 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(NewExpressionNode node) throws SemanticException {
+    void visit(NewExpressionNode node) throws SemanticException {
         super.visit(node);
         node.exprType = node.variableType;
     }
 
     @Override
-    public void visit(UnaryExpressionNode node) throws SemanticException {
+    void visit(UnaryExpressionNode node) throws SemanticException {
         super.visit(node);
         switch (node.op) {
             case PREFIX_DEC: case PREFIX_INC:
@@ -134,7 +134,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(BinaryExpressionNode node) throws SemanticException {
+    void visit(BinaryExpressionNode node) throws SemanticException {
         super.visit(node);
         ExpressionStatementNode lhs = node.lhs;
         ExpressionStatementNode rhs = node.rhs;
@@ -197,7 +197,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(ForStatementNode node) throws SemanticException {
+    void visit(ForStatementNode node) throws SemanticException {
         super.visit(node);
         if (node.condition == null) return;
         if (!node.condition.exprType.isPrimitiveType(BOOL))
@@ -205,21 +205,21 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(IfStatementNode node) throws SemanticException {
+    void visit(IfStatementNode node) throws SemanticException {
         super.visit(node);
         if (!node.condition.exprType.isPrimitiveType(BOOL))
             throw new SemanticException(node.line, "condition must be type of bool");
     }
 
     @Override
-    public void visit(WhileStatementNode node) throws SemanticException {
+    void visit(WhileStatementNode node) throws SemanticException {
         super.visit(node);
         if (!node.condition.exprType.isPrimitiveType(BOOL))
             throw new SemanticException(node.line, "condition must be type of bool");
     }
 
     @Override
-    public void visit(DefinitionExpressionNode node) throws SemanticException {
+    void visit(DefinitionExpressionNode node) throws SemanticException {
         super.visit(node);
         if (node.initValue == null) return;
         VariableTypeNode variableType = node.variableType;
@@ -235,7 +235,7 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(MethodDefinitionNode node) throws SemanticException {
+    void visit(MethodDefinitionNode node) throws SemanticException {
         super.visit(node);
         for (DefinitionExpressionNode item : node.formalArgumentList)
             if (item.variableType.isPrimitiveType(VOID))
@@ -243,13 +243,15 @@ public class StaticTypeChecker extends AstVisitor {
     }
 
     @Override
-    public void visit(ReturnStatementNode node) throws SemanticException {
+    void visit(ReturnStatementNode node) throws SemanticException {
         super.visit(node);
-        AstNode methodDefinition = node.parent;
-        while (!(methodDefinition instanceof MethodDefinitionNode))
-            methodDefinition = methodDefinition.parent;
-        if (node.returnValue != null)
-        if (!node.returnValue.exprType.equalTo(((MethodDefinitionNode) methodDefinition).returnType))
-            throw new SemanticException(node.line, "return value type error");
+        AstNode tmp = node.parent;
+        while (!(tmp instanceof MethodDefinitionNode)) tmp = tmp.parent;
+        MethodDefinitionNode methodDefinition = (MethodDefinitionNode)tmp;
+        if (node.returnValue != null) {
+            if (!node.returnValue.exprType.equalTo(methodDefinition.returnType))
+                throw new SemanticException(node.line, "return value type error");
+        } else if (!methodDefinition.returnType.isPrimitiveType(VOID))
+            throw new SemanticException(node.line, "return type is not void");
     }
 }

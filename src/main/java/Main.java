@@ -1,5 +1,5 @@
 import AstNode.*;
-import AstBuilder.*;;
+import AstBuilder.*;
 import AstVisitor.*;
 import Scope.*;
 
@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/program.txt";
-//        String path = "code/new_failure.txt";
+//        String path = "code/program.txt";
+        String path = "code/639.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();

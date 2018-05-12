@@ -62,25 +62,25 @@ public class TypeDefinitionChecker extends AstVisitor {
         return false;
     }
 
-    @Override public void visit(MethodDefinitionNode node) throws SemanticException {
+    @Override void visit(MethodDefinitionNode node) throws SemanticException {
         if (isVoidArray(node.returnType))
             throw new SemanticException(node.line, "return an array of void");
         super.visit(node);
     }
 
-    @Override public void visit(DefinitionExpressionNode node) throws SemanticException {
+    @Override void visit(DefinitionExpressionNode node) throws SemanticException {
         if (isVoid(node.variableType) || isVoidArray(node.variableType))
             throw new SemanticException(node.line, "define a variable of void type");
         super.visit(node);
     }
 
-    @Override public void visit(NewExpressionNode node) throws SemanticException {
+    @Override void visit(NewExpressionNode node) throws SemanticException {
         if (isVoid(node.variableType) || isVoidArray(node.variableType))
             throw new SemanticException(node.line, "new operator on void type");
         super.visit(node);
     }
 
-    @Override public void visit(ProgramNode node) throws SemanticException {
+    @Override void visit(ProgramNode node) throws SemanticException {
         for (ClassDefinitionNode item : node.classDefinitionList) {
             indgreeMap.put(item.className, 0);
             edgeMap.put(item.className, new LinkedList<String>());
@@ -88,7 +88,7 @@ public class TypeDefinitionChecker extends AstVisitor {
         super.visit(node);
     }
 
-    @Override public void visit(ClassDefinitionNode node) throws SemanticException {
+    @Override void visit(ClassDefinitionNode node) throws SemanticException {
         for (DefinitionExpressionNode item : node.memberVariableList) {
             VariableTypeNode tmp = item.variableType;
             if (tmp instanceof ArrayTypeNode) tmp = ((ArrayTypeNode)tmp).innerTypeNode;

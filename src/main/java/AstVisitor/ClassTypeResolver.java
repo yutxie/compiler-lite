@@ -14,7 +14,7 @@ public class ClassTypeResolver extends AstVisitor{
     }
 
     @Override
-    public void visit(ClassTypeNode node) throws SemanticException {
+    void visit(ClassTypeNode node) throws SemanticException {
         String className = node.referenceClassName;
         ClassDefinitionNode classDefinition = toplevelScope.classDefinitionMap.get(className);
         if (classDefinition == null) throw new SemanticException(node.line, "no such class");
