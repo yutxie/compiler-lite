@@ -30,8 +30,8 @@ public class ScopeTreeBuilder extends AstVisitor {
         scopeStack.addLast(scope);
     }
 
-    Scope popScope() {
-        return scopeStack.removeLast();
+    void popScope() {
+        scopeStack.removeLast();
     }
 
     @Override void visit(ProgramNode node) throws Exception {
@@ -61,24 +61,27 @@ public class ScopeTreeBuilder extends AstVisitor {
         for (MethodDefinitionNode item : node.memberConstructionMethodList)
             scope.define(item);
         scope.astNode = node;
+        node.scope = currentScope();
         super.visit(node);
-        node.scope = popScope();
+        popScope();
     }
 
     @Override void visit(MethodDefinitionNode node) throws Exception {
         Scope scope = new Scope();
         pushScope(scope);
         scope.astNode = node;
+        node.scope = currentScope();
         super.visit(node);
-        node.scope = popScope();
+        popScope();
     }
 
     @Override void visit(BlockNode node) throws Exception {
         Scope scope = new Scope();
         pushScope(scope);
         scope.astNode = node;
+        node.scope = currentScope();
         super.visit(node);
-        node.scope = popScope();
+        popScope();
     }
 
     @Override void visit(StatementNode node) throws Exception {

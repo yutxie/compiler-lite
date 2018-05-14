@@ -121,7 +121,7 @@ public abstract class AstVisitor {
         else if (node instanceof ReturnStatementNode) visit((ReturnStatementNode)node);
         else if (node instanceof BreakStatementNode) visit((BreakStatementNode) node);
         else if (node instanceof ContinueStatementNode) visit((ContinueStatementNode)node);
-        // if (node instanceof EmptyStatementNode) visit((EmptyStatementNode)node);
+        else if (node instanceof EmptyStatementNode) visit((EmptyStatementNode)node);
     }
 
     void visit(ThisNode node) throws Exception {}

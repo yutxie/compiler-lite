@@ -90,12 +90,13 @@ public class Scope {
     }
 
     public AstNode get(String name) throws SemanticException {
-        ClassDefinitionNode classDefinitionNode = getClass(name);
-        MethodDefinitionNode methodDefinitionNode = getMethod(name);
-        DefinitionExpressionNode variableDefinitionNode = getVar(name);
+        ClassDefinitionNode classDefinitionNode = classDefinitionMap.get(name);
+        MethodDefinitionNode methodDefinitionNode = methodDefinitionMap.get(name);
+        DefinitionExpressionNode variableDefinitionNode = variableDefinitionMap.get(name);
         if (classDefinitionNode != null) return classDefinitionNode;
         if (methodDefinitionNode != null) return methodDefinitionNode;
         if (variableDefinitionNode != null) return variableDefinitionNode;
+        if (parent != null) return parent.get(name);
         throw new SemanticException("no such entity named \"" + name + "\"");
     }
 

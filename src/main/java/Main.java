@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/program.txt";
+        String path = "code/astram.txt";
 //        String path = "code/639.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
@@ -16,12 +16,12 @@ public class Main {
         StaticTypeChecker staticTypeChecker = new StaticTypeChecker();
         ClassTypeResolver classTypeResolver = new ClassTypeResolver();
 
-        ProgramNode prog = astBuilder.buildAst(path);
-        parentLinker.linkParent(prog);
-        Scope toplevelScope = scopeTreeBuilder.buildScopeTree(prog);
-        typeDefinitionChecker.checkTypeDefinition(prog);
-        staticTypeChecker.checkStaticType(prog);
-        classTypeResolver.resolveClassType(prog);
-//        prog.printInformation(0);
+        ProgramNode ast = astBuilder.buildAst(path);
+        parentLinker.linkParent(ast);
+        Scope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
+        typeDefinitionChecker.checkTypeDefinition(ast);
+        staticTypeChecker.checkStaticType(ast);
+        classTypeResolver.resolveClassType(ast);
+//        ast.printInformation(0);
     }
 }
