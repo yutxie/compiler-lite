@@ -14,29 +14,28 @@ public class ScopeTreeBuilder extends AstVisitor {
         this.scopeStack = new LinkedList<Scope>();
     }
 
-    public ToplevelScope buildScopeTree(ProgramNode prog) throws Exception {
+    public Scope buildScopeTree(ProgramNode prog) throws Exception {
         visit(prog);
         if (scopeStack.size() != 1) throw new Exception("size of scopeStack is not 1");
-        return (ToplevelScope)scopeStack.getFirst();
+        return scopeStack.getFirst();
     }
 
     Scope currentScope() {
         return scopeStack.getLast();
     }
 
-    void pushScope(LocalScope scope) throws SemanticException {
+    void pushScope(Scope scope) throws SemanticException {
         scope.parent = currentScope();
         scope.parent.childrenList.add(scope);
-//        scope.nameSet = (HashSet<String>) scope.parent.nameSet.clone();
         scopeStack.addLast(scope);
     }
 
-    LocalScope popScope() {
-        return (LocalScope)scopeStack.removeLast();
+    Scope popScope() {
+        return scopeStack.removeLast();
     }
 
-    @Override void visit(ProgramNode node) throws SemanticException {
-        ToplevelScope toplevelScope = new ToplevelScope();
+    @Override void visit(ProgramNode node) throws Exception {
+        Scope toplevelScope = new Scope();
         for (ClassDefinitionNode item : node.classDefinitionList)
             toplevelScope.define(item);
         for (MethodDefinitionNode item : node.methodDefinitionList)
@@ -54,8 +53,8 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = toplevelScope;
     }
 
-    @Override void visit(ClassDefinitionNode node) throws SemanticException {
-        LocalScope scope = new LocalScope();
+    @Override void visit(ClassDefinitionNode node) throws Exception {
+        Scope scope = new Scope();
         pushScope(scope);
         for (MethodDefinitionNode item : node.memberMethodList)
             scope.define(item);
@@ -66,35 +65,39 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = popScope();
     }
 
-    @Override void visit(MethodDefinitionNode node) throws SemanticException {
-        LocalScope scope = new LocalScope();
+    @Override void visit(MethodDefinitionNode node) throws Exception {
+        Scope scope = new Scope();
         pushScope(scope);
         scope.astNode = node;
         super.visit(node);
         node.scope = popScope();
     }
 
-    @Override void visit(BlockNode node) throws SemanticException {
-        LocalScope scope = new LocalScope();
+    @Override void visit(BlockNode node) throws Exception {
+        Scope scope = new Scope();
         pushScope(scope);
         scope.astNode = node;
         super.visit(node);
         node.scope = popScope();
     }
 
-    @Override void visit(DefinitionExpressionNode node) throws SemanticException {
+    @Override void visit(StatementNode node) throws Exception {
+        node.scope = node.parent.scope;
         super.visit(node);
-        currentScope().define(node);
     }
 
-    @Override void visit(MemberAccessExpressionNode node) throws SemanticException {
-        visit(node.caller);
-        try {
-            visit(node.member);
-        } catch (SemanticException exception) {}
+    @Override void visit(ExpressionStatementNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(PrimaryExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
     }
 
     @Override void visit(ReferenceNode node) throws SemanticException {
+        node.scope = node.parent.scope;
         AstNode definitionNode;
         try {
             definitionNode = currentScope().get(node.referenceName);
@@ -108,5 +111,58 @@ public class ScopeTreeBuilder extends AstVisitor {
         else if (definitionNode instanceof DefinitionExpressionNode)
             node.referenceType = ReferenceNode.ReferenceType.VARIABLE;
         node.definitionNode = definitionNode;
+    }
+
+    @Override void visit(ConstantNode node) {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(ThisNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(DefinitionExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+        currentScope().define(node);
+    }
+
+    @Override void visit(MemberAccessExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        visit(node.caller);
+        try {
+            visit(node.member);
+        } catch (SemanticException exception) {}
+    }
+
+    @Override void visit(IndexAccessExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+    @Override void visit(MethodCallExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(NewExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(UnaryExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(BinaryExpressionNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(TypeNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
     }
 }

@@ -1,6 +1,6 @@
 package AstNode;
 
-public class WhileStatementNode extends StatementNode {
+public class WhileStatementNode extends LoopStatementNode {
     
     public ExpressionStatementNode condition;
     public BlockNode block;

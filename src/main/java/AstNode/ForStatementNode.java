@@ -1,6 +1,6 @@
 package AstNode;
 
-public class ForStatementNode extends StatementNode {
+public class ForStatementNode extends LoopStatementNode {
 
     public ExpressionStatementNode init;
     public ExpressionStatementNode condition;

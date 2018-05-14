@@ -7,8 +7,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-//        String path = "code/program.txt";
-        String path = "code/639.txt";
+        String path = "code/program.txt";
+//        String path = "code/639.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -18,7 +18,7 @@ public class Main {
 
         ProgramNode prog = astBuilder.buildAst(path);
         parentLinker.linkParent(prog);
-        ToplevelScope toplevelScope = scopeTreeBuilder.buildScopeTree(prog);
+        Scope toplevelScope = scopeTreeBuilder.buildScopeTree(prog);
         typeDefinitionChecker.checkTypeDefinition(prog);
         staticTypeChecker.checkStaticType(prog);
         classTypeResolver.resolveClassType(prog);

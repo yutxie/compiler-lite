@@ -2,25 +2,43 @@ package Scope;
 
 import AstNode.*;
 import ErrorHandler.*;
+import IRCode.*;
+
 import static Tool.PrintTool.*;
 
 import java.util.*;
 
-public abstract class Scope {
+public class Scope {
 
+    public Scope parent;
     public AstNode astNode;
     public HashMap<String, ClassDefinitionNode> classDefinitionMap;
     public HashMap<String, MethodDefinitionNode> methodDefinitionMap;
     public HashMap<String, DefinitionExpressionNode> variableDefinitionMap;
     public HashSet<String> nameSet;
-    public LinkedList<LocalScope> childrenList;
+    public LinkedList<Scope> childrenList;
+    public HashMap<String, Register> regMap;
 
     public Scope() {
         classDefinitionMap = new HashMap<String, ClassDefinitionNode>();
         methodDefinitionMap = new HashMap<String, MethodDefinitionNode>();
         variableDefinitionMap = new HashMap<String, DefinitionExpressionNode>();
         nameSet = new HashSet<String>();
-        childrenList = new LinkedList<LocalScope>();
+        childrenList = new LinkedList<Scope>();
+        regMap = new HashMap<String, Register>();
+    }
+
+    public void define(String regName, Register reg) throws Exception {
+        if (regMap.get(regName) != null)
+            throw new Exception("reg " + regName + " dupllicated");
+        else regMap.put(regName, reg);
+    }
+
+    public Register getReg(String regName) throws Exception {
+        Register reg = regMap.get(regName);
+        if (reg != null) return reg;
+        else if (parent != null) return parent.getReg(regName);
+        else throw new Exception("no such reg named " + regName);
     }
 
     public void define(ClassDefinitionNode node) throws SemanticException {
@@ -50,14 +68,34 @@ public abstract class Scope {
         else throw new SemanticException(node.line, "duplicated variable definition");
     }
 
+    public ClassDefinitionNode getClass(String name) {
+        ClassDefinitionNode res = classDefinitionMap.get(name);
+        if (res != null) return res;
+        else if (parent != null) return parent.getClass(name);
+        else return null;
+    }
+
+    public MethodDefinitionNode getMethod(String name) {
+        MethodDefinitionNode res = methodDefinitionMap.get(name);
+        if (res != null) return res;
+        else if (parent != null) return parent.getMethod(name);
+        else return null;
+    }
+
+    public DefinitionExpressionNode getVar(String name) {
+        DefinitionExpressionNode res = variableDefinitionMap.get(name);
+        if (res != null) return res;
+        else if (parent != null) return parent.getVar(name);
+        else return null;
+    }
+
     public AstNode get(String name) throws SemanticException {
-        ClassDefinitionNode classDefinitionNode = classDefinitionMap.get(name);
-        MethodDefinitionNode methodDefinitionNode = methodDefinitionMap.get(name);
-        DefinitionExpressionNode variableDefinitionNode = variableDefinitionMap.get(name);
+        ClassDefinitionNode classDefinitionNode = getClass(name);
+        MethodDefinitionNode methodDefinitionNode = getMethod(name);
+        DefinitionExpressionNode variableDefinitionNode = getVar(name);
         if (classDefinitionNode != null) return classDefinitionNode;
         if (methodDefinitionNode != null) return methodDefinitionNode;
         if (variableDefinitionNode != null) return variableDefinitionNode;
-        if (this instanceof LocalScope) return ((LocalScope) this).parent.get(name);
         throw new SemanticException("no such entity named \"" + name + "\"");
     }
 
@@ -77,7 +115,7 @@ public abstract class Scope {
         printSpaceAndStr(tab, "=variable definition:");
         for (String key : variableDefinitionMap.keySet())
             printSpaceAndStr(tab, " =" + variableDefinitionMap.get(key).variableName);
-        for (LocalScope item : childrenList)
+        for (Scope item : childrenList)
             item.printInformation(tab + 1);
     }
 }

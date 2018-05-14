@@ -4,7 +4,7 @@ import java.util.*;
 
 public class MethodCallExpressionNode extends ExpressionStatementNode {
 
-    public ExpressionStatementNode caller;
+    public ReferenceNode caller;
     public List<ExpressionStatementNode> actualParameterList;
 
     public MethodCallExpressionNode() {

@@ -210,7 +210,7 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
     @Override public AstNode visitMethodCallExpr(MxParser.MethodCallExprContext context) {
         MethodCallExpressionNode res = new MethodCallExpressionNode();
         res.line = context.start.getLine();
-        res.caller = (ExpressionStatementNode)visit(context.caller);
+        res.caller = (ReferenceNode) visit(context.caller);
         if (context.actualParameterList() != null)
         for (MxParser.ExpressionContext item : context.actualParameterList().expression())
             res.actualParameterList.add((ExpressionStatementNode)visit(item));

@@ -1,6 +1,3 @@
 package IRCode;
 
-public class IRCode {
-
-
-}
+public abstract class IRCode {}
