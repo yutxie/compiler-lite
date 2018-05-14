@@ -18,4 +18,14 @@ public class Calculate extends IRCode {
     public Register lhs;
     public Register rhs0;
     public Register rhs1;
+
+    @Override
+    public void printInformation() {
+        String lhsStr = String.valueOf(lhs.id());
+        String rhs0Str = String.valueOf(rhs0.id());
+        String rhs1Str = "";
+        if (rhs1 != null) rhs1Str = String.valueOf(rhs1.id());
+        System.out.println("calculate " + lhsStr + " = " +
+            rhs0Str + " " + type.toString() + " " + rhs1Str);
+    }
 }
