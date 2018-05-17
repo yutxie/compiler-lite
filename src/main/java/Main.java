@@ -10,8 +10,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/program.txt";
-//        String path = "code/0.txt";
+//        String path = "code/program.txt";
+        String path = "code/2.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -28,7 +28,8 @@ public class Main {
         classTypeResolver.resolveClassType(ast);
 //        ast.printInformation(0);
 
-//        LinkedList<IRCode> irCodeList = irGenerator.generateIR(ast);
+        LinkedList<IRCode> irCodeList = irGenerator.generateIR(ast);
 //        for (IRCode item : irCodeList) item.printInformation();
+        irGenerator.printIRList();
     }
 }

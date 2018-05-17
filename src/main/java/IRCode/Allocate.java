@@ -1,6 +1,7 @@
 package IRCode;
 
 import AstNode.*;
+import IRCode.Register.Register;
 
 public class Allocate extends IRCode {
 

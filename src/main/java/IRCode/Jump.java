@@ -1,13 +1,17 @@
 package IRCode;
 
+import IRCode.Register.Register;
+
 public class Jump extends IRCode {
 
     public Register condition;
     public String targetLabel;
-    public IRCode target;
+//    public int target;
 
     @Override
     public void printInformation() {
-        System.out.println("lalala");
+        String conditionStr = "";
+        if (condition != null) conditionStr = condition.id();
+        System.out.println("jump " + targetLabel + " when " + conditionStr);
     }
 }

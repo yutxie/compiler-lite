@@ -2,7 +2,7 @@ package Scope;
 
 import AstNode.*;
 import ErrorHandler.*;
-import IRCode.*;
+import IRCode.Register.Register;
 
 import static Tool.PrintTool.*;
 

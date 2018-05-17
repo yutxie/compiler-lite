@@ -36,6 +36,7 @@ public class ScopeTreeBuilder extends AstVisitor {
 
     @Override void visit(ProgramNode node) throws Exception {
         Scope toplevelScope = new Scope();
+        node.scope = toplevelScope;
         for (ClassDefinitionNode item : node.classDefinitionList)
             toplevelScope.define(item);
         for (MethodDefinitionNode item : node.methodDefinitionList)
@@ -50,7 +51,6 @@ public class ScopeTreeBuilder extends AstVisitor {
         toplevelScope.astNode = node;
         scopeStack.addLast(toplevelScope);
         super.visit(node);
-        node.scope = toplevelScope;
     }
 
     @Override void visit(ClassDefinitionNode node) throws Exception {
@@ -76,6 +76,15 @@ public class ScopeTreeBuilder extends AstVisitor {
     }
 
     @Override void visit(BlockNode node) throws Exception {
+        Scope scope = new Scope();
+        pushScope(scope);
+        scope.astNode = node;
+        node.scope = currentScope();
+        super.visit(node);
+        popScope();
+    }
+
+    @Override void visit(ForStatementNode node) throws Exception {
         Scope scope = new Scope();
         pushScope(scope);
         scope.astNode = node;

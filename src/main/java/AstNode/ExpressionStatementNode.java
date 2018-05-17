@@ -1,6 +1,6 @@
 package AstNode;
 
-import IRCode.Register;
+import IRCode.Register.Register;
 
 import static Tool.PrintTool.*;
 

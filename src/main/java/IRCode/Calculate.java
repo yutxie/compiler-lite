@@ -1,5 +1,7 @@
 package IRCode;
 
+import IRCode.Register.Register;
+
 public class Calculate extends IRCode {
 
     public enum Type {

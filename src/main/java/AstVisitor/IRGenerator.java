@@ -1,22 +1,48 @@
 package AstVisitor;
 
 import AstNode.*;
-import ErrorHandler.*;
 import IRCode.*;
+import IRCode.Register.*;
+import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
 import java.util.*;
 
 public class IRGenerator extends AstVisitor {
 
     LinkedList<IRCode> irCodeList;
+    HashMap<String, Integer> labelMap;
+    LinkedList<String> ifStack;
+    LinkedList<String> loopEndStack;
+    int ifCnt;
+    int loopBeginCnt;
+    int loopEndCnt;
 
     public IRGenerator() {
         irCodeList = new LinkedList<IRCode>();
+        labelMap = new HashMap<String, Integer>();
+        ifStack = new LinkedList<String>();
+        loopEndStack = new LinkedList<String>();
+        ifCnt = 0;
+        loopBeginCnt = 0;
+        loopEndCnt = 0;
     }
 
     public LinkedList<IRCode> generateIR(ProgramNode prog) throws Exception {
         visit(prog);
         return irCodeList;
+    }
+
+    public void printIRList() {
+        int n = irCodeList.size();
+        String[] label = new String[n + 1];
+        for (String key : labelMap.keySet())
+            label[labelMap.get(key)] = key;
+        for (int i = 0; i < n; ++i) {
+            if (label[i] != null) System.out.print(label[i] + ":\t");
+            else System.out.print("\t\t");
+            irCodeList.get(i).printInformation();
+        }
+        if (label[n] != null) System.out.println(label[n] + ":");
     }
 
     @Override
@@ -34,31 +60,32 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(MethodDefinitionNode node) throws Exception {
-        super.visit(node);
+//        System.out.println(node.methodName + ": " + irCodeList.size());
         if (node.parent instanceof ClassDefinitionNode) {
-            ClassTypeNode classTypeNode =
-                new ClassTypeNode(((ClassDefinitionNode) node.parent).className);
-            classTypeNode.referenceClass = (ClassDefinitionNode) node.parent;
             node.scope.define("this", new Register());
-        }
-        // ATTENTION: no return
+            String className = ((ClassDefinitionNode) node.parent).className;
+            labelMap.put(className + "_" + node.methodName, irCodeList.size());
+        } else labelMap.put(node.methodName, irCodeList.size());
+        super.visit(node);
+        Return ir = new Return();
+        if (!node.returnType.isPrimitiveType(VOID))
+            ir.returnValue = new Register();
+        irCodeList.addLast(ir);
     }
 
     ///////////////////// expression //////////////////////////////
 
     @Override
     void visit(ReferenceNode node) throws Exception {
+        if (node.referenceType != ReferenceNode.ReferenceType.VARIABLE) return;
         if (node.definitionNode.parent instanceof ClassDefinitionNode) {
-            node.reg = new Register();
-            MemberAcess ir = new MemberAcess();
-            Register thisReg = node.scope.getReg("this");
-            ir.lhs = node.reg;
-            ir.callerReg = thisReg;
+            MemberRegister reg = new MemberRegister();
+            reg.object = node.scope.getReg("this");
             ClassDefinitionNode classNode =
                 (ClassDefinitionNode) node.definitionNode.parent;
-            ir.memberVar =
+            reg.memberVar =
                 (DefinitionExpressionNode) classNode.scope.get(node.referenceName);
-            irCodeList.addLast(ir);
+            node.reg = reg;
         }
         else node.reg = node.scope.getReg(node.referenceName);
     }
@@ -84,7 +111,8 @@ public class IRGenerator extends AstVisitor {
             Calculate ir = new Calculate();
             ir.type = Calculate.Type.ASSIGN;
             ir.lhs = var;
-            ir.rhs0 = node.initValue.reg;
+            ir.rhs0 = var;
+            ir.rhs1 = node.initValue.reg;
             irCodeList.addLast(ir);
         }
     }
@@ -102,27 +130,22 @@ public class IRGenerator extends AstVisitor {
             // ATTENTION: void
             ir.callerReg = node.caller.reg;
             ir.method = (MethodDefinitionNode) memberCaller.definitionNode;
-            irCodeList.addLast(ir);
         } else if (node.member instanceof ReferenceNode) {
+            MemberRegister reg = new MemberRegister();
+            reg.object = node.caller.reg;
             ReferenceNode member = (ReferenceNode) node.member;
-            MemberAcess ir = new MemberAcess();
-            node.reg = new Register();
-            ir.lhs = node.reg;
-            ir.callerReg = node.caller.reg;
-            ir.memberVar = (DefinitionExpressionNode) member.definitionNode;
-            irCodeList.addLast(ir);
+            reg.memberVar = (DefinitionExpressionNode) member.definitionNode;
+            node.reg = reg;
         } else throw new Exception("member error");
     }
 
     @Override
     void visit(IndexAccessExpressionNode node) throws Exception {
         super.visit(node);
-        node.reg = new Register();
-        IndexAcess ir = new IndexAcess();
-        ir.lhs = node.reg;
-        ir.callerReg = node.caller.reg;
-        ir.indexReg = node.index.reg;
-        irCodeList.addLast(ir);
+        IndexRegister reg = new IndexRegister();
+        reg.array = node.caller.reg;
+        reg.index = node.index.reg;
+        node.reg = reg;
     }
 
     @Override
@@ -148,20 +171,46 @@ public class IRGenerator extends AstVisitor {
     @Override
     void visit(UnaryExpressionNode node) throws Exception {
         super.visit(node);
+        Calculate ir;
         switch (node.op) {
-            case PREFIX_INC: case PREFIX_DEC: node.reg = node.inner.reg; break;
-            default: node.reg = new Register(); break;
+            case NOT: case LNOT: case NEGATE:
+                ir = new Calculate();
+                ir.lhs = node.reg = new Register();
+                ir.rhs0 = node.inner.reg;
+                switch (node.op) {
+                    case NOT: ir.type = Calculate.Type.NOT; break;
+                    case LNOT: ir.type = Calculate.Type.LNOT; break;
+                    case NEGATE: ir.type = Calculate.Type.NEGATE; break;
+                }
+                irCodeList.addLast(ir);
+                break;
+            case PREFIX_DEC: case PREFIX_INC:
+                ir = new Calculate();
+                ir.lhs = node.reg = node.inner.reg;
+                ir.rhs0 = node.inner.reg;
+                if (node.op == UnaryExpressionNode.UnaryOp.PREFIX_DEC)
+                    ir.type = Calculate.Type.DEC;
+                else ir.type = Calculate.Type.INC;
+                irCodeList.addLast(ir);
+                break;
+            case POSTFIX_DEC: case POSTFIX_INC:
+                ir = new Calculate();
+                ir.lhs = node.reg = new Register();
+                ir.rhs0 = ir.lhs;
+                ir.rhs1 = node.inner.reg;
+                ir.type = Calculate.Type.ASSIGN;
+                irCodeList.addLast(ir);
+
+                ir = new Calculate();
+                ir.lhs = node.inner.reg;
+                ir.rhs0 = node.inner.reg;
+                if (node.op == UnaryExpressionNode.UnaryOp.POSTFIX_DEC)
+                    ir.type = Calculate.Type.DEC;
+                else ir.type = Calculate.Type.INC;
+                irCodeList.addLast(ir);
+                break;
         }
-        Calculate ir = new Calculate();
-        ir.lhs = node.reg;
-        ir.rhs0 = node.inner.reg;
-        switch (node.op) {
-            case NOT: ir.type = Calculate.Type.NOT; break;
-            case LNOT: ir.type = Calculate.Type.LNOT; break;
-            case NEGATE: ir.type = Calculate.Type.NEGATE; break;
-            case PREFIX_DEC: case POSTFIX_DEC: ir.type = Calculate.Type.DEC; break;
-            case PREFIX_INC: case POSTFIX_INC: ir.type = Calculate.Type.INC; break;
-        }
+
     }
 
     @Override
@@ -196,40 +245,82 @@ public class IRGenerator extends AstVisitor {
             case NOTEQUAL: ir.type = Calculate.Type.NOTEQUAL; break;
             case ASSIGN: ir.type = Calculate.Type.ASSIGN; break;
         }
+        irCodeList.addLast(ir);
     }
 
     ////////////////////////////// control flow /////////////////////////////
 
     @Override
-    void visit(IfStatementNode node) {
+    void visit(IfStatementNode node) throws Exception {
+        Jump ir = new Jump();
+        visit(node.condition);
+        ir.condition = node.condition.reg;
+        ir.targetLabel = "if_" + ++ifCnt;
+        ifStack.addLast(ir.targetLabel);
+        irCodeList.addLast(ir);
+        visit(node.ifBlock);
 
+        labelMap.put(ifStack.getLast(), irCodeList.size());
+        ifStack.removeLast();
+        if (node.elseBlock != null) visit(node.elseBlock);
     }
 
     @Override
-    void visit(ForStatementNode node) {
+    void visit(ForStatementNode node) throws Exception {
+        visit(node.init);
 
+        labelMap.put("loop_beg_" + ++loopBeginCnt, irCodeList.size());
+        Jump ir = new Jump();
+        visit(node.condition);
+        ir.condition = node.condition.reg;
+        ir.targetLabel = "loop_end_" + ++loopEndCnt;
+        loopEndStack.addLast(ir.targetLabel);
+        irCodeList.addLast(ir);
+
+        visit(node.block);
+        visit(node.afterBlock);
+
+        labelMap.put(loopEndStack.getLast(), irCodeList.size());
+        loopEndStack.removeLast();
     }
 
     @Override
-    void visit(WhileStatementNode node) {
+    void visit(WhileStatementNode node) throws Exception {
+        labelMap.put("loop_beg_" + ++loopBeginCnt, irCodeList.size());
+        Jump ir = new Jump();
+        visit(node.condition);
+        ir.condition = node.condition.reg;
+        ir.targetLabel = "loop_end_" + ++loopEndCnt;
+        loopEndStack.addLast(ir.targetLabel);
+        irCodeList.addLast(ir);
 
+        visit(node.block);
 
-    }
-
-    @Override
-    void visit(ReturnStatementNode node) {
-        Return ir = new Return();
-        if (node.returnValue != null)
-            ir.returnValue = node.returnValue.reg;
+        labelMap.put(loopEndStack.getLast(), irCodeList.size());
+        loopEndStack.removeLast();
     }
 
     @Override
     void visit(BreakStatementNode node) {
-
+        Jump ir = new Jump();
+        ir.targetLabel = loopEndStack.getLast();
+        irCodeList.addLast(ir);
     }
 
     @Override
     void visit(ContinueStatementNode node) {
+        Jump ir = new Jump();
+        ir.targetLabel = "loop_beg_" + loopBeginCnt;
+        irCodeList.addLast(ir);
+    }
 
+    @Override
+    void visit(ReturnStatementNode node) throws Exception {
+        Return ir = new Return();
+        if (node.returnValue != null) {
+            visit(node.returnValue);
+            ir.returnValue = node.returnValue.reg;
+        }
+        irCodeList.addLast(ir);
     }
 }

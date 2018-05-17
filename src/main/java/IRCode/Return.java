@@ -1,5 +1,7 @@
 package IRCode;
 
+import IRCode.Register.Register;
+
 public class Return extends IRCode{
 
     public Register returnValue;

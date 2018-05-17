@@ -3,21 +3,13 @@ ACM Class 2018 Compiler
 
 ## Q&A
 
-- directly transform AST into CFG IR?
-- reg-reg vs. mem-mem
-  - object of class: member access
-  - array
-- control flow
-  - method call
-
 ## To-Do
 
-- designing of IR
-  - indirect triples
+- control flow statement: jump label
+- IR -> codegen without CFG
+- optimization
   - static single assignment (SSA)
-- translating into IR
-  - expression
-  - control flow
+  - control flow graph
 
 ## To-Fix
 
@@ -57,10 +49,29 @@ ACM Class 2018 Compiler
       - VariableType
         - NonArrayType: PrimitiveType, ClassType
         - ArrayType
-  - If/For/WhileStatementNode
+  - IfStatement
+  - LoopStatement: For/WhileStatementNode
   - ReturnStatementNode
   - Break/ContinueStatementNode
   - EmptyStatementNode
+
+### Scope Tree
+
+- mapped to AST
+- also as symbol table
+
+## Register
+
+- (normal) Register
+- Member/IndexRegister: implement with load & store
+
+### IR Code
+
+- Allocate
+- Calculate
+- MethodCall
+- Return
+- Jump
 
 ## Hint
 

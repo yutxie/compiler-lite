@@ -1,6 +1,7 @@
-package IRCode;
+package IRCode.Register;
 
 import AstNode.*;
+import IRCode.IRCode;
 
 public class Register {
 

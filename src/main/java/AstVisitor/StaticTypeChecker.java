@@ -44,13 +44,12 @@ public class StaticTypeChecker extends AstVisitor {
         if (node.member instanceof ReferenceNode) {
             ReferenceNode member = (ReferenceNode)node.member;
             member.referenceType = ReferenceNode.ReferenceType.VARIABLE;
-//            if (member.referenceType != ReferenceNode.ReferenceType.VARIABLE)
-//                throw new SemanticException(node.line, "member must be a variable reference or method call");
             DefinitionExpressionNode memberVariableDefinition =
                 classDefinition.scope.variableDefinitionMap.get(member.referenceName);
             if (memberVariableDefinition == null)
                 throw new SemanticException(node.line,
                     "class \"" + classDefinition.className + "\" does not has such a member");
+            member.definitionNode = memberVariableDefinition;
             node.exprType = memberVariableDefinition.variableType;
             node.leftValue = true;
         } else if (node.member instanceof MethodCallExpressionNode) {
@@ -63,6 +62,7 @@ public class StaticTypeChecker extends AstVisitor {
             if (memberMethodDefinition == null)
                 throw new SemanticException(node.line,
                     "class \"" + classDefinition.className + "\" does not has such a member");
+            member.definitionNode = memberMethodDefinition;
             node.exprType = memberMethodDefinition.returnType;
         }
         else
