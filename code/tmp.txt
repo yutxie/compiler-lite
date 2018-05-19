@@ -1,7 +1,5 @@
 int main() {
-    int a = 1;
-    int b = 5;
-    int c = a + b;
+    println("too young too simple.");
     return 0;
 }
 

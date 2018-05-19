@@ -4,6 +4,8 @@ import AstVisitor.*;
 import IRCode.IRCode;
 import Scope.*;
 
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.*;
 
 public class Main {
@@ -11,7 +13,6 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
         String path = "code/program.txt";
-//        String path = "code/0.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -26,9 +27,13 @@ public class Main {
         typeDefinitionChecker.checkTypeDefinition(ast);
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
-//        ast.printInformation(0);
 
-//        LinkedList<IRCode> irCodeList = irGenerator.generateIR(ast);
-//        for (IRCode item : irCodeList) item.printInformation();
+        PrintStream file_os = new PrintStream(new FileOutputStream("code/aha.cc"));
+        PrintStream os = System.out;
+        NoMercyPrinter nomercy = new NoMercyPrinter(os);
+        nomercy.aha_print(ast);
+
+        nomercy = new NoMercyPrinter(file_os);
+        nomercy.aha_print(ast);
     }
 }
