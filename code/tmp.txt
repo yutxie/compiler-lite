@@ -1,5 +1,21 @@
+class AAA {
+    int a;
+    int b;
+
+    AAA() {
+    a = 12;
+    b = 13;
+    }
+
+}
+
 int main() {
-    println("too young too simple.");
+    AAA [][] b = new AAA[2][];
+
+    b[0] = new AAA[3];
+
+    println(toString(b[0][0].a));
+
     return 0;
 }
 

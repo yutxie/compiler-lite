@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6f70849-ff8d-401a-a239-1719480a2d91" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/code/nomercy_pre.cc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/nomercy_pre.cc" beforeDir="false" afterPath="$PROJECT_DIR$/code/nomercy_pre.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/tmp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/tmp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,18 +21,38 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Mx$Main.ic" NAME="Main Coverage Results" MODIFIED="1524669067371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.65766335">
+    <splitter split-orientation="horizontal" split-proportion="0.7864814">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="318">
-                  <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
+                <state relative-caret-position="108">
+                  <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="0.txt" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/code/0.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="234">
+                  <caret line="13" selection-start-line="13" selection-end-line="13" />
                 </state>
               </provider>
             </entry>
@@ -41,13 +60,62 @@
           <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="112">
-                  <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+                <state relative-caret-position="270">
+                  <caret line="215" column="110" selection-start-line="215" selection-start-column="110" selection-end-line="215" selection-end-column="110" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#1539#1540#0" expanded="true" />
-                    <element signature="e#1581#1582#0" expanded="true" />
+                    <element signature="method#visit#1;class#NoMercyPrinter#0" />
+                    <element signature="method#visit#4;class#NoMercyPrinter#0" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="nomercy_pre.cc" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="294">
+                  <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tmp.txt" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/code/tmp.txt">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-162">
+                  <caret line="3" selection-start-line="3" selection-end-line="3" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="474">
+                  <caret line="53" selection-start-line="53" selection-end-line="53" />
+                  <folding>
+                    <element signature="method#visit#1;class#AstVisitor#0" />
+                    <element signature="method#visit#2;class#AstVisitor#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="VariableTypeNode.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="108">
+                  <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PrimitiveTypeNode.java" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="272">
+                  <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
                 </state>
               </provider>
             </entry>
@@ -56,34 +124,16 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/IRGenerator.java">
+          <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-288">
-                  <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+                <state relative-caret-position="337">
+                  <caret line="406" column="53" selection-start-line="406" selection-start-column="53" selection-end-line="406" selection-end-column="53" />
                   <folding>
                     <element signature="imports" expanded="true" />
-                    <element signature="e#209#210#0" expanded="true" />
-                    <element signature="e#262#263#0" expanded="true" />
+                    <element signature="method#visit#1;class#NoMercyPrinter#0" />
+                    <element signature="method#visit#4;class#NoMercyPrinter#0" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1788">
-                  <caret line="109" selection-start-line="109" selection-end-line="110" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ArrayTypeNode.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="72">
-                  <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
                 </state>
               </provider>
             </entry>
@@ -102,36 +152,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>visitDefinitionEx</find>
-      <find>visitArr</find>
-      <find>statement</find>
-      <find>IndexAccess</find>
-      <find>DefinitionEx</find>
-      <find>dim</find>
-      <find>visitInde</find>
-      <find>Return</find>
-      <find>public</find>
-      <find>regInScope</find>
-      <find>memberVarAcess</find>
-      <find>Member</find>
-      <find>new Register</find>
-      <find>ReferenceNode</find>
-      <find>visit(ReferenceNode</find>
-      <find>LocalScope</find>
-      <find>(Scope)</find>
-      <find>visitClassDefinition</find>
-      <find>push</find>
-      <find>label</find>
-      <find>get(</find>
-      <find>popScope</find>
-      <find>visit(Emp</find>
-      <find>visit(Sta</find>
       <find>prog</find>
       <find>hashCode</find>
       <find>returnS</find>
       <find>this.visit</find>
       <find>aha_</find>
       <find>MethodDe</find>
+      <find>bina</find>
+      <find>throw</find>
+      <find>DefinitionExpressionNode</find>
+      <find>ExpressionStatementNode</find>
+      <find>Definitio</find>
+      <find>Index</find>
+      <find>A</find>
+      <find>Arra</find>
+      <find>New</find>
+      <find>Method</find>
+      <find>Class</find>
+      <find>Program</find>
+      <find>D</find>
+      <find>get_arglist</find>
+      <find>println</find>
+      <find>print&quot;</find>
+      <find>MethodDefinition</find>
+      <find>[</find>
+      <find>Definition</find>
+      <find>getTypeName</find>
+      <find>private</find>
+      <find>get_ty</find>
+      <find>new</find>
+      <find>NewEx</find>
     </findStrings>
     <replaceStrings>
       <replace>definition</replace>
@@ -153,8 +203,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/NonArrayTypeNode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/DefinitionExpressionNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/MethodDefinitionNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/NewExpressionNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ReferenceNode.java" />
@@ -190,7 +238,6 @@
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Scope/Scope.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/IRCode.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tool/PrintTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Register.java" />
@@ -201,8 +248,11 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Calculate.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Allocate.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Return.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/code/tmp.txt" />
         <option value="$PROJECT_DIR$/code/nomercy_pre.cc" />
+        <option value="$PROJECT_DIR$/code/0.txt" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" />
       </list>
     </option>
@@ -224,10 +274,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="113" />
-    <option name="y" value="43" />
-    <option name="width" value="1400" />
-    <option name="height" value="1024" />
+    <option name="x" value="65" />
+    <option name="y" value="-4" />
+    <option name="width" value="1409" />
+    <option name="height" value="1084" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -235,7 +285,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -267,26 +316,11 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="AstVisitor" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="Tool" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -307,7 +341,7 @@
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/output-dir" value="D:\Users\DELL\Desktop\compiler-lite\Mx\src\main\java" />
-    <property name="SearchEverywhereHistoryKey" value="build&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstBuilder/AstBuilder.java&#10;Main.java&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java&#10;Main&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java" />
+    <property name="SearchEverywhereHistoryKey" value="tmp&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/tmp.txt&#10;nom&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstVisitor/NoMercyPrinter.java&#10;build&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstBuilder/AstBuilder.java&#10;Main.java&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java&#10;Main&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -407,12 +441,21 @@
       <option name="presentableId" value="Default" />
       <updated>1523805533378</updated>
       <workItem from="1526766298154" duration="27000" />
-      <workItem from="1526766344283" duration="4054000" />
+      <workItem from="1526766344283" duration="9141000" />
+      <workItem from="1526845953295" duration="7402000" />
     </task>
+    <task id="LOCAL-00001" summary="initial no mercy printer">
+      <created>1526770644690</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1526770644690</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4081000" />
+    <option name="totallyTimeSpent" value="16570000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
@@ -420,73 +463,46 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32482123" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32789317" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4678243" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14177898" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3278856" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.40059346" />
-      <window_info anchor="bottom" id="Tool Output" order="7" weight="0.32740742" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Coverage" order="4" side_tool="true" weight="0.3289777" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="7" weight="0.28635016" />
-    </layout>
-    <layout-to-restore>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32482123" />
+      <window_info anchor="right" id="Palette&#9;" order="9" />
+      <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32882884" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Tool Output" order="8" weight="0.32884902" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.32884902" />
-      <window_info id="UI Designer" order="4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32884902" />
-      <window_info anchor="right" id="Maven Projects" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39910313" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3286219" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.32789317" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.45250255" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
+      <window_info id="Designer" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14663073" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3270242" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info id="Favorites" order="4" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.40059346" />
+      <window_info anchor="bottom" id="Tool Output" order="10" weight="0.32740742" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Coverage" order="7" side_tool="true" weight="0.3289777" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.32882884" />
-      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.3289777" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20983858" />
-    </layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="11" weight="0.28635016" />
+    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial no mercy printer" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial no mercy printer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -515,7 +531,7 @@
           <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -549,10 +565,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/VariableRegister.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/ClassRegister.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/PrimitiveRegister.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/ArrayRegister.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/ConstantRegister.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/NonArrayRegister.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Register/Jump.java" />
@@ -560,16 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -628,9 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="94" column="90" selection-start-line="94" selection-start-column="90" selection-end-line="94" selection-end-column="90" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -666,10 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="10" column="45" selection-start-line="10" selection-start-column="45" selection-end-line="10" selection-end-column="45" />
-          <folding>
-            <element signature="e#155#156#0" expanded="true" />
-            <element signature="e#209#210#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -726,10 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
-          <folding>
-            <element signature="e#191#192#0" expanded="true" />
-            <element signature="e#235#236#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -737,24 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="10" selection-start-line="10" selection-end-line="13" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding>
-            <element signature="e#140#141#0" expanded="true" />
-            <element signature="e#188#189#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,22 +744,6 @@
           <caret line="187" column="37" selection-start-line="187" selection-start-column="37" selection-end-line="187" selection-end-column="37" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/aha.c">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/tmp.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="1" lean-forward="true" selection-start-line="4" selection-end-line="38" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/0.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/program.txt">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -807,20 +764,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1788">
-          <caret line="109" selection-start-line="109" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/DefinitionExpressionNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -828,27 +771,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/builtin.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
@@ -862,14 +788,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ProgramNode.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="24" column="28" selection-start-line="24" selection-start-column="28" selection-end-line="24" selection-end-column="28" />
+        <state relative-caret-position="324">
+          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/Exception.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/NewExpressionNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding>
+            <element signature="e#140#141#0" expanded="true" />
+            <element signature="e#188#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1581#1582#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/594.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar!/java/lang/String.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="712" selection-start-line="712" selection-end-line="712" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/tmp.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-162">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="method#visit#1;class#AstVisitor#0" />
+            <element signature="method#visit#2;class#AstVisitor#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/0.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="215" column="110" selection-start-line="215" selection-start-column="110" selection-end-line="215" selection-end-column="110" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#visit#1;class#NoMercyPrinter#0" />
+            <element signature="method#visit#4;class#NoMercyPrinter#0" />
           </folding>
         </state>
       </provider>

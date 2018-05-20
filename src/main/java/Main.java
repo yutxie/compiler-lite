@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/program.txt";
+        String path = "code/0.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -27,6 +27,8 @@ public class Main {
         typeDefinitionChecker.checkTypeDefinition(ast);
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
+
+        ast.printInformation(0);
 
         PrintStream file_os = new PrintStream(new FileOutputStream("code/aha.cc"));
         PrintStream os = System.out;
