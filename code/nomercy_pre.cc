@@ -17,15 +17,20 @@ public:
 };
 
 
-void __lib_print(string* s) {
+inline void __lib_print(string* s) {
     fputs(s->base.c_str(), stdout);
 }
 
-void __lib_println(string* s) {
+inline void __lib_println(string* s) {
     puts(s->base.c_str());
 }
 
-
-string* __lib_toString(int i) {
+inline string* __lib_toString(int i) {
     return new string(std::to_string(i));
+}
+
+inline int __lib_getInt() {
+    int ret;
+    scanf("%d", &ret);
+    return ret;
 }

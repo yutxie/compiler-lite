@@ -23,13 +23,6 @@ public class NoMercyPrinter extends AstVisitor {
         for (AstNode item : node.childrenList) {
             if (item instanceof MethodDefinitionNode) visit((MethodDefinitionNode)item);
         }
-
-        for (AstNode item : node.childrenList) {
-            if (item instanceof ClassDefinitionNode) continue;
-            else if (item instanceof MethodDefinitionNode) continue;
-            else visit((DefinitionExpressionNode)item);
-        }
-
     }
 
     @Override
@@ -57,6 +50,8 @@ public class NoMercyPrinter extends AstVisitor {
             os.println("string* toString(int i) { return __lib_toString(i); }");
         } else if (node.methodName.equals("println")) {
             os.println("void println(string* str) { __lib_println(str); }");
+        } else if (node.methodName.equals("getInt")) {
+            os.println("int getInt() { return __lib_getInt(); }");
         } else {
             // arg list
             String arg_list = get_arglist(node);
@@ -336,6 +331,10 @@ public class NoMercyPrinter extends AstVisitor {
             String arg_list = get_arglist(node);
             os.printf("%s %s(%s);\n", to_c_type(node.returnType),
                     node.methodName, arg_list);
+        }
+        for (DefinitionExpressionNode node: prog.variableDefinitionList) {
+            visit(node);
+            os.println(";");
         }
 
         visit(prog);
