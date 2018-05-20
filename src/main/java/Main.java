@@ -28,12 +28,14 @@ public class Main {
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
 
-        ast.printInformation(0);
+        // ast.printInformation(0);
 
         PrintStream file_os = new PrintStream(new FileOutputStream("code/aha.cc"));
         PrintStream os = System.out;
-        NoMercyPrinter nomercy = new NoMercyPrinter(os);
-        nomercy.aha_print(ast);
+        NoMercyPrinter nomercy;
+
+//        nomercy = new NoMercyPrinter(os);
+//        nomercy.aha_print(ast);
 
         nomercy = new NoMercyPrinter(file_os);
         nomercy.aha_print(ast);

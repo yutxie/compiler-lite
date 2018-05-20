@@ -1,8 +1,8 @@
-int main;
-class Main {
-    int main() {
-        return 0;
-    }
+int main() {
+    int[] a = new int[1];
+    a[0] = 10;
+    println(toString(a[0]));
+    return a[0] + 20;
 }
 
 class array__ {
