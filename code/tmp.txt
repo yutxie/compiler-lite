@@ -1,22 +1,8 @@
-class AAA {
-    int a;
-    int b;
-
-    AAA() {
-    a = 12;
-    b = 13;
+int main;
+class Main {
+    int main() {
+        return 0;
     }
-
-}
-
-int main() {
-    AAA [][] b = new AAA[2][];
-
-    b[0] = new AAA[3];
-
-    println(toString(b[0][0].a));
-
-    return 0;
 }
 
 class array__ {

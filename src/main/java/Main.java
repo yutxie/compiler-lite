@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-        String path = "code/0.txt";
+        String path = "code/program.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();

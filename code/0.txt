@@ -1,6 +1,6 @@
-int main() {
-    int a = 1;
-    int b = 5;
-    int c = a + b;
-    return 0;
+int main;
+class Main {
+    int main() {
+        return 0;
+    }
 }
