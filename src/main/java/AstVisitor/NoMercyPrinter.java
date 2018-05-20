@@ -78,6 +78,7 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
+        os.print("(");
         visit(node.lhs);
         switch(node.op) {
             case MUL:      os.print(" * "); break;
@@ -100,8 +101,8 @@ public class NoMercyPrinter extends AstVisitor {
             case LOR:      os.print(" || "); break;
             case ASSIGN:   os.print(" = "); break;
         }
-
         visit(node.rhs);
+        os.print(")");
     }
 
     @Override
