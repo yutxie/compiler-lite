@@ -257,7 +257,8 @@ public class NoMercyPrinter extends AstVisitor {
     @Override
     void visit(ReturnStatementNode node) throws Exception {
         os.print("return ");
-        visit(node.returnValue);
+        if (node.returnValue != null)
+            visit(node.returnValue);
         os.println(";");
     }
 
