@@ -1,3 +1,5 @@
+// pre pasted c++ library
+
 #include <string>
 #include <cstdio>
 #include <vector>

@@ -1,3 +1,7 @@
+/*
+ * Print AST to C++ code. Pass the test without mercy!
+ */
+
 package AstVisitor;
 
 import AstNode.*;
@@ -87,8 +91,6 @@ public class NoMercyPrinter extends AstVisitor {
             os.print("}\n");
         }
     }
-
-    // =============================================
 
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
@@ -313,6 +315,8 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ReferenceNode node) throws Exception {
+        // add 'LL_' to protect variable name
+        // necessary for using c2nasm.bash + nasm
         os.print("LL_" + node.referenceName);
     }
 
@@ -338,6 +342,7 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(UnaryExpressionNode node) throws Exception {
+        os.print("(");
         switch (node.op) {
             case PREFIX_DEC:
                 os.print("--");
@@ -368,6 +373,7 @@ public class NoMercyPrinter extends AstVisitor {
                 visit(node.inner);
                 break;
         }
+        os.print(")");
     }
 
     @Override
@@ -450,34 +456,5 @@ public class NoMercyPrinter extends AstVisitor {
             return node.referenceName;
     }
 
-    String current_class;
+    private String current_class;
 }
-
-// int [] a  = new int[10]  -> std::vector<int>* a = new std::vector<int>(10);
-// a[0]       : (*a)[0]
-
-// int [][] a  -> std::vector<std::vector<int>*>* a;
-// a[0][0]    : (*(*a)[0])[0]
-
-// int [][][] a  -> std::vector<std::vector<std::vector<int>*>*>*>* a;
-// a[0][0][0] : (*(*(*a)[0])[0])[0]
-
-// int [][][] a = new int[2][3][4];
-// std::vector<std::vector<std::vector<int>*>*>*>* a;
-// a = new std::vector<std::vector<std::vector<int>*>*>*>();
-// for (int i = 0; i < 2; i++)  {
-//   a[i] = new std::vector<std::vector<int>*>(3)
-//   for (int j = 0; j < 3; j++) {
-//     a[i][j] = new std::vector<int>(4);
-// }
-//
-
-// A [][]a = new A[2][3];
-// a = new std::vector<std::vector<A*>*>(2);
-// for (int i = 0; i < 2; i++) {
-//   a[i] = new std::vector<A*>(3);
-//   for (int k = 0; k < 3; k++) {  // add a new line
-//     a[i][j] = new A();
-//   }
-// }
-//
