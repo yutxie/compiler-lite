@@ -313,7 +313,7 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ReferenceNode node) throws Exception {
-        os.print(get_reference_name(node));
+        os.print("LL_" + node.referenceName);
     }
 
     @Override
