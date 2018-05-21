@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c6f70849-ff8d-401a-a239-1719480a2d91" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/objconv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/c2nasm.bash" beforeDir="false" afterPath="$PROJECT_DIR$/c2nasm.bash" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/nomercy_pre.cc" beforeDir="false" afterPath="$PROJECT_DIR$/code/nomercy_pre.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/program.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/program.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/tmp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/code/tmp.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,33 +38,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="43" selection-start-line="43" selection-end-line="54" selection-end-column="5" />
-              <folding>
-                <element signature="method#visit#1;class#AstVisitor#0" />
-                <element signature="method#visit#2;class#AstVisitor#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="program.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/program.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="258">
-              <caret line="142" selection-start-line="142" selection-end-line="142" />
+            <state relative-caret-position="-442">
+              <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#visit#1;class#NoMercyPrinter#0" />
@@ -72,14 +52,72 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="nomercy_pre.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="program.txt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/program.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="78" column="1" lean-forward="true" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StaticTypeChecker.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="377">
+              <caret line="168" column="73" lean-forward="true" selection-start-line="168" selection-start-column="73" selection-end-line="168" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ExpressionStatementNode.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="45" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="45" />
+            <state relative-caret-position="144">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TypeNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding>
+                <element signature="e#140#141#0" expanded="true" />
+                <element signature="e#188#189#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VariableTypeNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrimitiveTypeNode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="2" column="30" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="30" />
             </state>
           </provider>
         </entry>
@@ -96,14 +134,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hashCode</find>
-      <find>returnS</find>
-      <find>this.visit</find>
-      <find>aha_</find>
-      <find>MethodDe</find>
-      <find>bina</find>
-      <find>throw</find>
-      <find>DefinitionExpressionNode</find>
       <find>Definitio</find>
       <find>Index</find>
       <find>A</find>
@@ -126,6 +156,14 @@
       <find>NewEx</find>
       <find>Expression</find>
       <find>ExpressionStatementNode</find>
+      <find>N</find>
+      <find>newEx</find>
+      <find>Constant</find>
+      <find>getString</find>
+      <find>string</find>
+      <find>getInt</find>
+      <find>Binary</find>
+      <find>exit</find>
     </findStrings>
     <replaceStrings>
       <replace>definition</replace>
@@ -147,7 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/AstNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/BlockNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstNode/ClassTypeNode.java" />
@@ -176,7 +213,6 @@
         <option value="$PROJECT_DIR$/src/main/java/AstNode/WhileStatementNode.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/Scope/Scope.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/ScopeTreeBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/IRCode.java" />
@@ -191,13 +227,15 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Return.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java" />
         <option value="$PROJECT_DIR$/code/tmp.txt" />
-        <option value="$PROJECT_DIR$/code/nomercy_pre.cc" />
         <option value="$PROJECT_DIR$/code/0.txt" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/c2nasm.bash" />
         <option value="$PROJECT_DIR$/codegen.bash" />
-        <option value="$PROJECT_DIR$/code/program.txt" />
         <option value="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java" />
+        <option value="$PROJECT_DIR$/code/aha.cc" />
+        <option value="$PROJECT_DIR$/code/nomercy_pre.cc" />
+        <option value="$PROJECT_DIR$/code/program.txt" />
       </list>
     </option>
   </component>
@@ -218,9 +256,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="4">
-    <option name="x" value="450" />
+    <option name="x" value="851" />
     <option name="y" value="24" />
-    <option name="width" value="1470" />
+    <option name="width" value="1089" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -236,6 +274,11 @@
             <path>
               <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
               <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
@@ -280,7 +323,7 @@
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/output-dir" value="D:\Users\DELL\Desktop\compiler-lite\Mx\src\main\java" />
-    <property name="SearchEverywhereHistoryKey" value="As&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstVisitor/AstVisitor.java&#10;pro&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/program.txt&#10;c2nasm&#9;FILE&#9;file:///home/mercy/project/compiler-lite/c2nasm.bash&#10;se&#9;FILE&#9;file:///home/mercy/project/compiler-lite/semantic.bash&#10;tmp&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/tmp.txt&#10;nom&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstVisitor/NoMercyPrinter.java&#10;build&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstBuilder/AstBuilder.java&#10;Main.java&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java&#10;Main&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java" />
+    <property name="SearchEverywhereHistoryKey" value="pre&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/nomercy_pre.cc&#10;pro&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/program.txt&#10;aha.cc&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/aha.cc&#10;mer&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/nomercy_pre.cc&#10;As&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstVisitor/AstVisitor.java&#10;c2nasm&#9;FILE&#9;file:///home/mercy/project/compiler-lite/c2nasm.bash&#10;se&#9;FILE&#9;file:///home/mercy/project/compiler-lite/semantic.bash&#10;tmp&#9;FILE&#9;file:///home/mercy/project/compiler-lite/code/tmp.txt&#10;nom&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstVisitor/NoMercyPrinter.java&#10;build&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/AstBuilder/AstBuilder.java&#10;Main.java&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java&#10;Main&#9;FILE&#9;file:///home/mercy/project/compiler-lite/src/main/java/Main.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -381,7 +424,7 @@
       <updated>1523805533378</updated>
       <workItem from="1526766298154" duration="27000" />
       <workItem from="1526766344283" duration="9141000" />
-      <workItem from="1526845953295" duration="10965000" />
+      <workItem from="1526845953295" duration="17374000" />
     </task>
     <task id="LOCAL-00001" summary="initial no mercy printer">
       <created>1526770644690</created>
@@ -418,19 +461,32 @@
       <option name="project" value="LOCAL" />
       <updated>1526858264112</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add objconv">
+      <created>1526859249922</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1526859249922</updated>
+    </task>
+    <task id="LOCAL-00007" summary="global variable &amp; built in library">
+      <created>1526859954668</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526859954668</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20133000" />
+    <option name="totallyTimeSpent" value="26542000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="450" y="24" width="1470" height="1056" extended-state="4" />
-    <editor active="true" />
+    <frame x="851" y="24" width="1089" height="1056" extended-state="4" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32482123" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32386962" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info id="Image Layers" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -438,11 +494,11 @@
       <window_info anchor="right" id="Maven Projects" order="5" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27339643" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32492113" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17959183" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24242425" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3270242" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -472,7 +528,9 @@
     <MESSAGE value="new expression done" />
     <MESSAGE value="add codegen.bash" />
     <MESSAGE value="fix return" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix return" />
+    <MESSAGE value="add objconv" />
+    <MESSAGE value="global variable &amp; built in library" />
+    <option name="LAST_COMMIT_MESSAGE" value="global variable &amp; built in library" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -501,7 +559,7 @@
           <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="57" />
+      <option name="time" value="58" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -575,13 +633,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
           <caret line="94" column="90" selection-start-line="94" selection-start-column="90" selection-end-line="94" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="245" selection-start-line="245" selection-end-line="245" />
         </state>
       </provider>
     </entry>
@@ -716,13 +767,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/builtin.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -754,35 +798,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
-          <folding>
-            <element signature="e#140#141#0" expanded="true" />
-            <element signature="e#188#189#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ArrayTypeNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -793,23 +812,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/tmp.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-162">
           <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/aha.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-499" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/code/0.txt">
@@ -863,27 +870,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/program.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" column="45" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/AstVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="43" selection-start-line="43" selection-end-line="54" selection-end-column="5" />
+        <state relative-caret-position="368">
+          <caret line="150" column="78" lean-forward="true" selection-start-line="150" selection-start-column="78" selection-end-line="150" selection-end-column="78" />
           <folding>
             <element signature="method#visit#1;class#AstVisitor#0" />
             <element signature="method#visit#2;class#AstVisitor#0" />
@@ -891,15 +881,85 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/code/builtin.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        <state relative-caret-position="-442">
+          <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#visit#1;class#NoMercyPrinter#0" />
             <element signature="method#visit#4;class#NoMercyPrinter#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/TypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#140#141#0" expanded="true" />
+            <element signature="e#188#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/VariableTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstNode/PrimitiveTypeNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/StaticTypeChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="377">
+          <caret line="168" column="73" lean-forward="true" selection-start-line="168" selection-start-column="73" selection-end-line="168" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/aha.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="111" column="6" lean-forward="true" selection-start-line="111" selection-start-column="6" selection-end-line="111" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/nomercy_pre.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="46" column="28" selection-start-line="46" selection-start-column="28" selection-end-line="46" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/program.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="78" column="1" lean-forward="true" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
         </state>
       </provider>
     </entry>

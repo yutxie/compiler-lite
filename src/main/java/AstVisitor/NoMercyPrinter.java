@@ -52,6 +52,8 @@ public class NoMercyPrinter extends AstVisitor {
             os.println("void println(string* str) { __lib_println(str); }");
         } else if (node.methodName.equals("getInt")) {
             os.println("int getInt() { return __lib_getInt(); }");
+        } else if (node.methodName.equals("getString")) {
+            os.println("string* getString() { return __lib_getString(); }");
         } else {
             // arg list
             String arg_list = get_arglist(node);
@@ -74,29 +76,71 @@ public class NoMercyPrinter extends AstVisitor {
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
         os.print("(");
-        visit(node.lhs);
-        switch(node.op) {
-            case MUL:      os.print(" * "); break;
-            case DIV:      os.print(" / "); break;
-            case MOD:      os.print(" % "); break;
-            case ADD:      os.print(" + "); break;
-            case SUB:      os.print(" - "); break;
-            case LSHIFT:   os.print(" << "); break;
-            case RSHIFT:   os.print(" >> "); break;
-            case LE:       os.print(" <= "); break;
-            case GE:       os.print(" >= "); break;
-            case LT:       os.print(" < "); break;
-            case GT:       os.print(" > "); break;
-            case EQUAL:    os.print(" == "); break;
-            case NOTEQUAL: os.print(" != "); break;
-            case AND:      os.print(" & "); break;
-            case XOR:      os.print(" ^ "); break;
-            case OR:       os.print(" | "); break;
-            case LAND:     os.print(" && "); break;
-            case LOR:      os.print(" || "); break;
-            case ASSIGN:   os.print(" = "); break;
+        if (node.lhs.exprType instanceof ClassTypeNode &&
+                ((ClassTypeNode) node.lhs.exprType).referenceClassName.equals("string")) {
+            if (node.op.equals(BinaryExpressionNode.BinaryOp.ADD)) {
+                os.print("new string((*");
+                visit(node.lhs);
+                os.print(")+");
+                os.print("(*");
+                visit(node.rhs);
+                os.print("))");
+            } else if (node.op.equals(BinaryExpressionNode.BinaryOp.ASSIGN)) {
+                visit(node.lhs);
+                os.print("=");
+                visit(node.rhs);
+            } else {
+                visit(node.lhs);
+                os.print("->base");
+                switch(node.op) {
+                    case MUL:      os.print(" * "); break;
+                    case DIV:      os.print(" / "); break;
+                    case MOD:      os.print(" % "); break;
+                    case ADD:      os.print(" + "); break;
+                    case SUB:      os.print(" - "); break;
+                    case LSHIFT:   os.print(" << "); break;
+                    case RSHIFT:   os.print(" >> "); break;
+                    case LE:       os.print(" <= "); break;
+                    case GE:       os.print(" >= "); break;
+                    case LT:       os.print(" < "); break;
+                    case GT:       os.print(" > "); break;
+                    case EQUAL:    os.print(" == "); break;
+                    case NOTEQUAL: os.print(" != "); break;
+                    case AND:      os.print(" & "); break;
+                    case XOR:      os.print(" ^ "); break;
+                    case OR:       os.print(" | "); break;
+                    case LAND:     os.print(" && "); break;
+                    case LOR:      os.print(" || "); break;
+                    case ASSIGN:   os.print(" = "); break;
+                }
+                visit(node.rhs);
+                os.print("->base");
+            }
+        } else {
+            visit(node.lhs);
+            switch(node.op) {
+                case MUL:      os.print(" * "); break;
+                case DIV:      os.print(" / "); break;
+                case MOD:      os.print(" % "); break;
+                case ADD:      os.print(" + "); break;
+                case SUB:      os.print(" - "); break;
+                case LSHIFT:   os.print(" << "); break;
+                case RSHIFT:   os.print(" >> "); break;
+                case LE:       os.print(" <= "); break;
+                case GE:       os.print(" >= "); break;
+                case LT:       os.print(" < "); break;
+                case GT:       os.print(" > "); break;
+                case EQUAL:    os.print(" == "); break;
+                case NOTEQUAL: os.print(" != "); break;
+                case AND:      os.print(" & "); break;
+                case XOR:      os.print(" ^ "); break;
+                case OR:       os.print(" | "); break;
+                case LAND:     os.print(" && "); break;
+                case LOR:      os.print(" || "); break;
+                case ASSIGN:   os.print(" = "); break;
+            }
+            visit(node.rhs);
         }
-        visit(node.rhs);
         os.print(")");
     }
 
@@ -112,7 +156,11 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ConstantNode node) {
-        os.print(node.constantStr);
+        if (node.exprType instanceof PrimitiveTypeNode) {
+            os.print(node.constantStr);
+        } else {
+            os.printf("(new string(%s))", node.constantStr);
+        }
     }
 
     @Override
@@ -228,7 +276,8 @@ public class NoMercyPrinter extends AstVisitor {
     void visit(NewExpressionNode node) throws Exception {
         if (node.variableType instanceof ClassTypeNode) {
             os.print("new ");
-            os.print(to_c_type(node.variableType));
+            String base = to_c_type(node.variableType);
+            os.print(base.substring(0, base.length()-1));
             os.print("(");
             for (int i = 0; i < node.actualParameterList.size(); i++) {
                 visit(node.actualParameterList.get(i));
@@ -237,7 +286,7 @@ public class NoMercyPrinter extends AstVisitor {
             }
             os.print(")");
         } else if (node.variableType instanceof ArrayTypeNode) {
-            os.println("([]{");
+            os.println("([&]{");
             os.printf("%s %s;\n", to_c_type(node.variableType), "tmp");
             gen_new_array("tmp", 0, node.variableType, node.actualParameterList);
             os.println("return tmp;");

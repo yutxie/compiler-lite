@@ -152,6 +152,14 @@ public class StaticTypeChecker extends AstVisitor {
             case OR: case AND: case XOR:
             case DIV: case MOD: case MUL: case SUB:
             case LSHIFT: case RSHIFT:
+                if (lhs.exprType == null)      // ???
+                    lhs.exprType = rhs.exprType;
+                if (rhs.exprType == null) {
+                    rhs.exprType = lhs.exprType;
+                    if (lhs.exprType == null) {
+                        lhs.exprType = rhs.exprType = new PrimitiveTypeNode("int");
+                    }
+                }
                 if (!lhs.exprType.isPrimitiveType(INT) || !rhs.exprType.isPrimitiveType(INT))
                     throw new SemanticException(node.line, "opt like this must operate on int");
                 node.exprType = lhs.exprType;
