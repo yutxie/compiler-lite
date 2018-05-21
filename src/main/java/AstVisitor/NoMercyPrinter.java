@@ -16,12 +16,27 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ProgramNode node) throws Exception {
-        for (AstNode item : node.childrenList) {
-            if (item instanceof ClassDefinitionNode) visit((ClassDefinitionNode)item);
+        // primitive type
+        for (AstNode item: node.variableDefinitionList) {
+            if (((DefinitionExpressionNode)item).exprType instanceof PrimitiveTypeNode) {
+                os.println(";");
+                visit(item);
+            }
+        }
+        for (AstNode item : node.classDefinitionList) {
+            visit(item);
         }
 
-        for (AstNode item : node.childrenList) {
-            if (item instanceof MethodDefinitionNode) visit((MethodDefinitionNode)item);
+        // non primitive type after class definition
+        for (AstNode item: node.variableDefinitionList) {
+            if (!(((DefinitionExpressionNode)item).exprType instanceof PrimitiveTypeNode)) {
+                os.println(";");
+                visit(item);
+            }
+        }
+
+        for (AstNode item : node.methodDefinitionList) {
+            visit(item);
         }
     }
 
@@ -30,6 +45,7 @@ public class NoMercyPrinter extends AstVisitor {
         if (node.className.equals("string"))
             return;
 
+        current_class = node.className;
         os.printf("struct %s {\n", node.className);
         for (DefinitionExpressionNode item : node.memberVariableList) {
             visit(item);
@@ -38,6 +54,7 @@ public class NoMercyPrinter extends AstVisitor {
         for (MethodDefinitionNode item : node.memberMethodList) visit(item);
         for (MethodDefinitionNode item : node.memberConstructionMethodList) visit(item);
         os.println("};");
+        current_class = null;
     }
 
 
@@ -58,7 +75,7 @@ public class NoMercyPrinter extends AstVisitor {
             // arg list
             String arg_list = get_arglist(node);
             String ret_type;
-            if (node.methodName.equals("AAA"))
+            if (current_class != null && node.methodName.equals(current_class))
                 ret_type = "";
             else
                 ret_type = to_c_type(node.returnType);
@@ -173,7 +190,7 @@ public class NoMercyPrinter extends AstVisitor {
         os.print(to_c_type(node.variableType));
 
         os.print(" ");
-        os.print(node.variableName);
+        os.print("LL_" + node.variableName);
         if (node.initValue != null) {
             os.print(" = ");
             visit(node.initValue);
@@ -227,7 +244,7 @@ public class NoMercyPrinter extends AstVisitor {
     @Override
     void visit(MethodCallExpressionNode node) throws Exception {
         // arg list
-        os.printf("%s(", node.caller.referenceName);
+        os.printf("%s(", get_reference_name(node.caller));
         for (int i = 0; i < node.actualParameterList.size(); i++) {
             ExpressionStatementNode x = node.actualParameterList.get(i);
 
@@ -296,7 +313,7 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ReferenceNode node) throws Exception {
-        os.print(node.referenceName);
+        os.print(get_reference_name(node));
     }
 
     @Override
@@ -316,7 +333,7 @@ public class NoMercyPrinter extends AstVisitor {
 
     @Override
     void visit(ThisNode node) throws Exception {
-        os.println("this->");
+        os.println("this");
     }
 
     @Override
@@ -381,10 +398,6 @@ public class NoMercyPrinter extends AstVisitor {
             os.printf("%s %s(%s);\n", to_c_type(node.returnType),
                     node.methodName, arg_list);
         }
-        for (DefinitionExpressionNode node: prog.variableDefinitionList) {
-            visit(node);
-            os.println(";");
-        }
 
         visit(prog);
 
@@ -422,13 +435,22 @@ public class NoMercyPrinter extends AstVisitor {
             DefinitionExpressionNode x = node.formalArgumentList.get(i);
             sb.append(to_c_type(x.variableType));
             sb.append(" ");
-            sb.append(x.variableName);
+            sb.append("LL_" + x.variableName);
             if (i != node.formalArgumentList.size() - 1)
                 sb.append(", ");
         }
 
         return sb.toString();
     }
+
+    private String get_reference_name(ReferenceNode node) {
+        if (node.referenceType == ReferenceNode.ReferenceType.VARIABLE)
+            return "LL_" + node.referenceName;
+        else
+            return node.referenceName;
+    }
+
+    String current_class;
 }
 
 // int [] a  = new int[10]  -> std::vector<int>* a = new std::vector<int>(10);

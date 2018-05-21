@@ -19,9 +19,8 @@ sed -i 's|\.LC|LC|g' "$NASM_FILE"
 
 
 # strange
-sed -i 's|ch:|LL_ch|g' "$NASM_FILE"
-sed -i 's|rel ch|rel LL_ch|g' "$NASM_FILE"
 
 rm "$O_FILE"
 cat $NASM_FILE
 #nasm -felf64 main.asm && g++ -O3 main.o && ./a.out
+
