@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c6f70849-ff8d-401a-a239-1719480a2d91" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NoMercyPrinter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1674">
-              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+            <state>
+              <caret line="348" column="34" lean-forward="true" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
               <folding>
                 <element signature="e#0#16064#0" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -66,20 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tmp.txt" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tmp.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/tmp.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
               <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="aha.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code/aha.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1836">
-              <caret line="102" column="1" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -427,7 +417,7 @@
       <workItem from="1526766298154" duration="27000" />
       <workItem from="1526766344283" duration="9141000" />
       <workItem from="1526845953295" duration="23626000" />
-      <workItem from="1526876242047" duration="347000" />
+      <workItem from="1526876242047" duration="381000" />
     </task>
     <task id="LOCAL-00001" summary="initial no mercy printer">
       <created>1526770644690</created>
@@ -513,15 +503,21 @@
       <option name="project" value="LOCAL" />
       <updated>1526876453389</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="clean up">
+      <created>1526876595987</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1526876595987</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33141000" />
+    <option name="totallyTimeSpent" value="33175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="511" y="24" width="1409" height="1056" extended-state="4" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -955,13 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/aha.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="102" column="1" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/0.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -990,23 +979,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/tmp.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AstVisitor/NoMercyPrinter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1674">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        <state>
+          <caret line="348" column="34" lean-forward="true" selection-start-line="348" selection-start-column="34" selection-end-line="348" selection-end-column="34" />
           <folding>
             <element signature="e#0#16064#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#283#284#0" expanded="true" />
             <element signature="e#311#312#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/aha.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="102" column="1" selection-start-line="102" selection-start-column="1" selection-end-line="102" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/tmp.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
         </state>
       </provider>
     </entry>
