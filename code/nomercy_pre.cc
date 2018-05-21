@@ -9,6 +9,8 @@ class string {
 public:
     std::string base;
 
+    string() {}
+
     string(const std::string &src) : base(src) {}
 
     string(const char *src): base(src) { }
