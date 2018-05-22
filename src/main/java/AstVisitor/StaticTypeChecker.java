@@ -138,6 +138,16 @@ public class StaticTypeChecker extends AstVisitor {
         super.visit(node);
         ExpressionStatementNode lhs = node.lhs;
         ExpressionStatementNode rhs = node.rhs;
+
+        if (lhs.exprType == null)      // bugs found here .. I only make some walk around
+            lhs.exprType = rhs.exprType;
+        if (rhs.exprType == null) {
+            rhs.exprType = lhs.exprType;
+            if (lhs.exprType == null) {
+                lhs.exprType = rhs.exprType = new PrimitiveTypeNode("int");
+            }
+        }
+
         switch (node.op) {
             case ADD:
                 if (lhs.exprType instanceof ClassTypeNode && rhs.exprType instanceof ClassTypeNode) {
