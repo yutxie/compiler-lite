@@ -45,15 +45,13 @@ inline string* __lib_toString(int i) {
 }
 
 inline int __lib_getInt() {
-    char buf[1024];
-    fgets(buf, 1024, stdin);
     int ret;
-    sscanf(buf, "%d", &ret);
+    scanf("%d", &ret);
     return ret;
 }
 
 inline string* __lib_getString() {
     char buf[1024];
-    fgets(buf, 1024, stdin);
+    scanf("%s", buf);
     return new string(buf);
 }
