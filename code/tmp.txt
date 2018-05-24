@@ -1,16 +1,17 @@
-int main() {
+int Wallace = 1 << 10;
 
-    int n = 100;
-    int m = 1000;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            if (true) continue;
-            else break;
-        }
-        for (int j = 0; j < m; ++j);
-        if (true) break;
-        else continue;
+class sometimes {
+    int naive;
+    void make_money() {
+        this.naive++;
     }
+}
+
+int main() {
+    sometimes keep = new sometimes;
+    keep.naive = 0;
+    keep.make_money();
+    return 0;
 }
 
 class array__ {

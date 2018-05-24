@@ -1,10 +1,10 @@
 package IRCode;
 
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 public class Return extends IRCode{
 
-    public Register returnValue;
+    public Variable returnValue;
 
     @Override
     public void printInformation() {

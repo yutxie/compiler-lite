@@ -1,28 +1,28 @@
 package IRCode;
 
 import AstNode.*;
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 import java.util.*;
 
 public class MethodCall extends IRCode {
 
-    public Register lhs;
-    public Register callerReg;
-    public LinkedList<Register> actualParaRegList;
+    public Variable lhs;
+    public Variable caller;
+    public LinkedList<Variable> actualParaVarList;
     public MethodDefinitionNode method;
 
     public MethodCall() {
-        actualParaRegList = new LinkedList<Register>();
+        actualParaVarList = new LinkedList<Variable>();
     }
 
     @Override
     public void printInformation() {
         String callerStr = "";
-        if (callerReg != null) callerStr = String.valueOf(callerReg.id());
+        if (caller != null) callerStr = caller.id();
         System.out.print("call " + lhs.id() + " = " +
             callerStr + "." + method.methodName + " ");
-        for (Register item : actualParaRegList)
+        for (Variable item : actualParaVarList)
             System.out.print(item.id() + " ");
         System.out.println();
     }

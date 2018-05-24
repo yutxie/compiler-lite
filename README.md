@@ -5,11 +5,10 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- control flow statement: jump label
-- IR -> codegen without CFG
+- register allocation
+- codegen
 - optimization
-  - static single assignment (SSA)
-  - control flow graph
+  - static single assignment
 
 ## To-Fix
 
@@ -60,14 +59,15 @@ ACM Class 2018 Compiler
 - mapped to AST
 - also as symbol table
 
-## Register
+## Variable
 
-- (normal) Register
-- Member/IndexRegister: implement with load & store
+- (normal) Variable
+- Member/IndexVariable: implement with load & store
 
-### IR Code
+### IR Code (2-address code)
 
 - Allocate
+- Move
 - Calculate
 - MethodCall
 - Return

@@ -2,47 +2,46 @@ package AstVisitor;
 
 import AstNode.*;
 import IRCode.*;
-import IRCode.Register.*;
+import IRCode.Variable.*;
+
+import static AstNode.BinaryExpressionNode.BinaryOp.*;
 import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
 import java.util.*;
 
 public class IRGenerator extends AstVisitor {
 
-    LinkedList<IRCode> irCodeList;
+    ArrayList<IRCode> irCodeList;
     HashMap<String, Integer> labelMap;
-    LinkedList<String> ifStack;
-    LinkedList<String> loopEndStack;
-    int ifCnt;
-    int loopBeginCnt;
-    int loopEndCnt;
+    public LinkedList<String>[] label;
+    int ifCnt = 0;
+    int loopCnt = 0;
 
     public IRGenerator() {
-        irCodeList = new LinkedList<IRCode>();
+        irCodeList = new ArrayList<IRCode>();
         labelMap = new HashMap<String, Integer>();
-        ifStack = new LinkedList<String>();
-        loopEndStack = new LinkedList<String>();
-        ifCnt = 0;
-        loopBeginCnt = 0;
-        loopEndCnt = 0;
     }
 
-    public LinkedList<IRCode> generateIR(ProgramNode prog) throws Exception {
+    public ArrayList<IRCode> generateIR(ProgramNode prog) throws Exception {
         visit(prog);
+        int n = irCodeList.size();
+        label = new LinkedList[n + 1];
+        for (int i = 0; i <= n; ++i)
+            label[i] = new LinkedList<String>();
+        for (String key : labelMap.keySet())
+            label[labelMap.get(key)].addLast(key);
         return irCodeList;
     }
 
-    public void printIRList() {
+    public void printIRList() throws Exception {
         int n = irCodeList.size();
-        String[] label = new String[n + 1];
-        for (String key : labelMap.keySet())
-            label[labelMap.get(key)] = key;
         for (int i = 0; i < n; ++i) {
-            if (label[i] != null) System.out.print(label[i] + ":\t");
-            else System.out.print("\t\t");
+            for (String item : label[i])
+                System.out.println(item + ":");
+            System.out.print("\t\t\t\t");
             irCodeList.get(i).printInformation();
         }
-        if (label[n] != null) System.out.println(label[n] + ":");
+        if (!label[n].isEmpty()) throw new Exception("end with empty label");
     }
 
     @Override
@@ -62,15 +61,15 @@ public class IRGenerator extends AstVisitor {
     void visit(MethodDefinitionNode node) throws Exception {
 //        System.out.println(node.methodName + ": " + irCodeList.size());
         if (node.parent instanceof ClassDefinitionNode) {
-            node.scope.define("this", new Register());
+            node.scope.define("this", new Variable());
             String className = ((ClassDefinitionNode) node.parent).className;
             labelMap.put(className + "_" + node.methodName, irCodeList.size());
         } else labelMap.put(node.methodName, irCodeList.size());
         super.visit(node);
         Return ir = new Return();
         if (!node.returnType.isPrimitiveType(VOID))
-            ir.returnValue = new Register();
-        irCodeList.addLast(ir);
+            ir.returnValue = new Variable();
+        irCodeList.add(ir);
     }
 
     ///////////////////// expression //////////////////////////////
@@ -79,41 +78,39 @@ public class IRGenerator extends AstVisitor {
     void visit(ReferenceNode node) throws Exception {
         if (node.referenceType != ReferenceNode.ReferenceType.VARIABLE) return;
         if (node.definitionNode.parent instanceof ClassDefinitionNode) {
-            MemberRegister reg = new MemberRegister();
-            reg.object = node.scope.getReg("this");
+            MemberVariable var = new MemberVariable();
+            var.object = node.scope.getReg("this");
             ClassDefinitionNode classNode =
                 (ClassDefinitionNode) node.definitionNode.parent;
-            reg.memberVar =
+            var.memberVar =
                 (DefinitionExpressionNode) classNode.scope.get(node.referenceName);
-            node.reg = reg;
+            node.var = var;
         }
-        else node.reg = node.scope.getReg(node.referenceName);
+        else node.var = node.scope.getReg(node.referenceName);
     }
 
     @Override
     void visit(ConstantNode node) {
-        node.reg = new Register();
-        node.reg.initValue = node;
+        node.var = new Variable(node.constantStr + "(const)");
+        node.var.initValue = node;
     }
 
     @Override
     void visit(ThisNode node) throws Exception {
-        node.reg = node.scope.getReg("this");
+        node.var = node.scope.getReg("this");
     }
 
     @Override
     void visit(DefinitionExpressionNode node) throws Exception {
-        Register var = new Register();
+        Variable var = new Variable(node.variableName);
         node.scope.define(node.variableName, var);
         if (node.parent instanceof ProgramNode) var.global = true;
         if (node.initValue != null) {
             visit(node.initValue);
-            Calculate ir = new Calculate();
-            ir.type = Calculate.Type.ASSIGN;
+            Move ir = new Move();
             ir.lhs = var;
-            ir.rhs0 = var;
-            ir.rhs1 = node.initValue.reg;
-            irCodeList.addLast(ir);
+            ir.rhs = node.initValue.var;
+            irCodeList.add(ir);
         }
     }
 
@@ -124,90 +121,84 @@ public class IRGenerator extends AstVisitor {
             visit(node.member);
             ReferenceNode memberCaller =
                 (ReferenceNode) ((MethodCallExpressionNode) node.member).caller;
-            MethodCall ir = (MethodCall) irCodeList.getLast();
-            node.reg = new Register();
-            ir.lhs = node.reg;
+            MethodCall ir = (MethodCall) irCodeList.get(irCodeList.size() - 1);
+            node.var = new Variable();
+            ir.lhs = node.var;
             // ATTENTION: void
-            ir.callerReg = node.caller.reg;
+            ir.caller = node.caller.var;
             ir.method = (MethodDefinitionNode) memberCaller.definitionNode;
         } else if (node.member instanceof ReferenceNode) {
-            MemberRegister reg = new MemberRegister();
-            reg.object = node.caller.reg;
+            MemberVariable var = new MemberVariable();
+            var.object = node.caller.var;
             ReferenceNode member = (ReferenceNode) node.member;
-            reg.memberVar = (DefinitionExpressionNode) member.definitionNode;
-            node.reg = reg;
+            var.memberVar = (DefinitionExpressionNode) member.definitionNode;
+            node.var = var;
         } else throw new Exception("member error");
     }
 
     @Override
     void visit(IndexAccessExpressionNode node) throws Exception {
         super.visit(node);
-        IndexRegister reg = new IndexRegister();
-        reg.array = node.caller.reg;
-        reg.index = node.index.reg;
-        node.reg = reg;
+        IndexVariable var = new IndexVariable();
+        var.array = node.caller.var;
+        var.index = node.index.var;
+        node.var = var;
     }
 
     @Override
     void visit(MethodCallExpressionNode node) throws Exception {
         super.visit(node);
-        node.reg = new Register();
+        node.var = new Variable();
         MethodCall ir = new MethodCall();
-        ir.lhs = node.reg;
+        ir.lhs = node.var;
         ir.method = node.scope.getMethod(node.caller.referenceName);
         for (ExpressionStatementNode item : node.actualParameterList)
-            ir.actualParaRegList.addLast(item.reg);
-        irCodeList.addLast(ir);
+            ir.actualParaVarList.addLast(item.var);
+        irCodeList.add(ir);
     }
 
     @Override
     void visit(NewExpressionNode node) {
-        node.reg = new Register();
+        node.var = new Variable();
         Allocate ir = new Allocate();
-        ir.lhs = node.reg;
+        ir.lhs = node.var;
         ir.variableType = node.variableType;
     }
 
     @Override
     void visit(UnaryExpressionNode node) throws Exception {
         super.visit(node);
-        Calculate ir;
+        Calculate cl = new Calculate();
         switch (node.op) {
             case NOT: case LNOT: case NEGATE:
-                ir = new Calculate();
-                ir.lhs = node.reg = new Register();
-                ir.rhs0 = node.inner.reg;
+                cl.lhs = node.var = new Variable();
+                cl.rhs = node.inner.var;
                 switch (node.op) {
-                    case NOT: ir.type = Calculate.Type.NOT; break;
-                    case LNOT: ir.type = Calculate.Type.LNOT; break;
-                    case NEGATE: ir.type = Calculate.Type.NEGATE; break;
+                    case NOT: case LNOT: cl.type = Calculate.Type.NOT; break;
+                    case NEGATE: cl.type = Calculate.Type.NEG; break;
                 }
-                irCodeList.addLast(ir);
+                irCodeList.add(cl);
                 break;
             case PREFIX_DEC: case PREFIX_INC:
-                ir = new Calculate();
-                ir.lhs = node.reg = node.inner.reg;
-                ir.rhs0 = node.inner.reg;
+                cl.lhs = node.var = node.inner.var;
+                cl.rhs = node.inner.var;
                 if (node.op == UnaryExpressionNode.UnaryOp.PREFIX_DEC)
-                    ir.type = Calculate.Type.DEC;
-                else ir.type = Calculate.Type.INC;
-                irCodeList.addLast(ir);
+                    cl.type = Calculate.Type.DEC;
+                else cl.type = Calculate.Type.INC;
+                irCodeList.add(cl);
                 break;
             case POSTFIX_DEC: case POSTFIX_INC:
-                ir = new Calculate();
-                ir.lhs = node.reg = new Register();
-                ir.rhs0 = ir.lhs;
-                ir.rhs1 = node.inner.reg;
-                ir.type = Calculate.Type.ASSIGN;
-                irCodeList.addLast(ir);
+                Move mv = new Move();
+                mv.lhs = node.var = new Variable();
+                mv.rhs = node.inner.var;
+                irCodeList.add(mv);
 
-                ir = new Calculate();
-                ir.lhs = node.inner.reg;
-                ir.rhs0 = node.inner.reg;
+                cl.lhs = node.inner.var;
+                cl.rhs = node.inner.var;
                 if (node.op == UnaryExpressionNode.UnaryOp.POSTFIX_DEC)
-                    ir.type = Calculate.Type.DEC;
-                else ir.type = Calculate.Type.INC;
-                irCodeList.addLast(ir);
+                    cl.type = Calculate.Type.DEC;
+                else cl.type = Calculate.Type.INC;
+                irCodeList.add(cl);
                 break;
         }
 
@@ -216,17 +207,23 @@ public class IRGenerator extends AstVisitor {
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
         super.visit(node);
-        switch (node.op) {
-            case ASSIGN: node.reg = node.lhs.reg; break;
-            default: node.reg = new Register(); break;
+        if (node.op == ASSIGN) {
+            Move ir = new Move();
+            ir.lhs = node.var = node.lhs.var;
+            ir.rhs = node.rhs.var;
+            irCodeList.add(ir);
+            return;
         }
+        Move mv = new Move();
+        mv.lhs = node.var = new Variable();
+        mv.rhs = node.lhs.var;
+        irCodeList.add(mv);
         Calculate ir = new Calculate();
-        ir.lhs = node.reg;
-        ir.rhs0 = node.lhs.reg;
-        ir.rhs1 = node.rhs.reg; // ATTENTION: assign
+        ir.lhs = node.var;
+        ir.rhs = node.rhs.var;
         switch (node.op) {
-            case LSHIFT: ir.type = Calculate.Type.LSHIF; break;
-            case RSHIFT: ir.type = Calculate.Type.RSHIF; break;
+            case LSHIFT: ir.type = Calculate.Type.LSHIFT; break;
+            case RSHIFT: ir.type = Calculate.Type.RSHIFT; break;
             case MUL: ir.type = Calculate.Type.MUL; break;
             case DIV: ir.type = Calculate.Type.DIV; break;
             case MOD: ir.type = Calculate.Type.MOD; break;
@@ -239,79 +236,96 @@ public class IRGenerator extends AstVisitor {
             case GT: ir.type = Calculate.Type.GT; break;
             case LE: ir.type = Calculate.Type.LE; break;
             case GE: ir.type = Calculate.Type.GE; break;
-            case LOR: ir.type = Calculate.Type.LOR; break;
-            case LAND: ir.type = Calculate.Type.LAND; break;
+            case LOR: ir.type = Calculate.Type.OR; break;
+            case LAND: ir.type = Calculate.Type.AND; break;
             case EQUAL: ir.type = Calculate.Type.EQUAL; break;
             case NOTEQUAL: ir.type = Calculate.Type.NOTEQUAL; break;
-            case ASSIGN: ir.type = Calculate.Type.ASSIGN; break;
         }
-        irCodeList.addLast(ir);
+        irCodeList.add(ir);
     }
 
     ////////////////////////////// control flow /////////////////////////////
 
     @Override
     void visit(IfStatementNode node) throws Exception {
+        int ifIndex = ifCnt++;
+
         Jump ir = new Jump();
         visit(node.condition);
-        ir.condition = node.condition.reg;
-        ir.targetLabel = "if_" + ++ifCnt;
-        ifStack.addLast(ir.targetLabel);
-        irCodeList.addLast(ir);
+        ir.condition = node.condition.var;
+        ir.targetLabel = "#if_false_" + ifIndex;
+        ir.type = Jump.Type.FALSE;
+        irCodeList.add(ir);
+
+        labelMap.put("#if_true_" + ifIndex, irCodeList.size());
         visit(node.ifBlock);
 
-        labelMap.put(ifStack.getLast(), irCodeList.size());
-        ifStack.removeLast();
-        if (node.elseBlock != null) visit(node.elseBlock);
+        if (node.elseBlock != null) {
+            labelMap.put("#if_false_" + ifIndex, irCodeList.size());
+            visit(node.elseBlock);
+        }
+
+        labelMap.put("#if_end_" + ifIndex, irCodeList.size());
     }
 
     @Override
     void visit(ForStatementNode node) throws Exception {
         visit(node.init);
+        int loopIndex = loopCnt++;
 
-        labelMap.put("loop_beg_" + ++loopBeginCnt, irCodeList.size());
+        labelMap.put("#loop_cond_" + loopIndex, irCodeList.size());
         Jump ir = new Jump();
         visit(node.condition);
-        ir.condition = node.condition.reg;
-        ir.targetLabel = "loop_end_" + ++loopEndCnt;
-        loopEndStack.addLast(ir.targetLabel);
-        irCodeList.addLast(ir);
+        ir.condition = node.condition.var;
+        ir.targetLabel = "#loop_end_" + loopIndex;
+        ir.type = Jump.Type.FALSE;
+        irCodeList.add(ir);
 
+        labelMap.put("#loop_body_" + loopIndex, irCodeList.size());
         visit(node.block);
         visit(node.afterBlock);
+        ir = new Jump();
+        ir.targetLabel = "#loop_cond_" + loopIndex;
+        irCodeList.add(ir);
 
-        labelMap.put(loopEndStack.getLast(), irCodeList.size());
-        loopEndStack.removeLast();
+        labelMap.put("#loop_end_" + loopIndex, irCodeList.size());
     }
 
     @Override
     void visit(WhileStatementNode node) throws Exception {
-        labelMap.put("loop_beg_" + ++loopBeginCnt, irCodeList.size());
+        int loopIndex = loopCnt++;
+
+        labelMap.put("#loop_cond_" + loopIndex, irCodeList.size());
         Jump ir = new Jump();
         visit(node.condition);
-        ir.condition = node.condition.reg;
-        ir.targetLabel = "loop_end_" + ++loopEndCnt;
-        loopEndStack.addLast(ir.targetLabel);
-        irCodeList.addLast(ir);
+        ir.condition = node.condition.var;
+        ir.targetLabel = "#loop_end_" + loopIndex;
+        ir.type = Jump.Type.FALSE;
+        irCodeList.add(ir);
 
+        labelMap.put("#loop_body_" + loopIndex, irCodeList.size());
         visit(node.block);
+        ir = new Jump();
+        ir.targetLabel = "#loop_cond_" + loopIndex;
+        irCodeList.add(ir);
 
-        labelMap.put(loopEndStack.getLast(), irCodeList.size());
-        loopEndStack.removeLast();
+        labelMap.put("#loop_end_" + loopIndex, irCodeList.size());
     }
 
     @Override
     void visit(BreakStatementNode node) {
         Jump ir = new Jump();
-        ir.targetLabel = loopEndStack.getLast();
-        irCodeList.addLast(ir);
+        int loopIndex = loopCnt - 1;
+        ir.targetLabel = "#loop_end_" + loopIndex;
+        irCodeList.add(ir);
     }
 
     @Override
     void visit(ContinueStatementNode node) {
         Jump ir = new Jump();
-        ir.targetLabel = "loop_beg_" + loopBeginCnt;
-        irCodeList.addLast(ir);
+        int loopIndex = loopCnt - 1;
+        ir.targetLabel = "#loop_cond_" + loopIndex;
+        irCodeList.add(ir);
     }
 
     @Override
@@ -319,8 +333,8 @@ public class IRGenerator extends AstVisitor {
         Return ir = new Return();
         if (node.returnValue != null) {
             visit(node.returnValue);
-            ir.returnValue = node.returnValue.reg;
+            ir.returnValue = node.returnValue.var;
         }
-        irCodeList.addLast(ir);
+        irCodeList.add(ir);
     }
 }

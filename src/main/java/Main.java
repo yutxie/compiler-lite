@@ -2,6 +2,7 @@ import AstNode.*;
 import AstBuilder.*;
 import AstVisitor.*;
 import IRCode.IRCode;
+import IRVisitor.CFG.*;
 import Scope.*;
 
 import java.util.*;
@@ -11,7 +12,7 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
 //        String path = "code/program.txt";
-        String path = "code/2.txt";
+        String path = "code/1.txt";
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
         ScopeTreeBuilder scopeTreeBuilder = new ScopeTreeBuilder();
@@ -19,6 +20,7 @@ public class Main {
         StaticTypeChecker staticTypeChecker = new StaticTypeChecker();
         ClassTypeResolver classTypeResolver = new ClassTypeResolver();
         IRGenerator irGenerator = new IRGenerator();
+        CFGGenerator cfgGenerator = new CFGGenerator();
 
         ProgramNode ast = astBuilder.buildAst(path);
         parentLinker.linkParent(ast);
@@ -28,8 +30,10 @@ public class Main {
         classTypeResolver.resolveClassType(ast);
 //        ast.printInformation(0);
 
-        LinkedList<IRCode> irCodeList = irGenerator.generateIR(ast);
-//        for (IRCode item : irCodeList) item.printInformation();
+        ArrayList<IRCode> irCodeList = irGenerator.generateIR(ast);
+        LinkedList<String>[] label = irGenerator.label;
         irGenerator.printIRList();
+        CFG cfg = cfgGenerator.generateCFG(irCodeList, label);
+//        cfg.printInformation();
     }
 }

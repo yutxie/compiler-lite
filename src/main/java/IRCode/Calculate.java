@@ -1,33 +1,28 @@
 package IRCode;
 
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 public class Calculate extends IRCode {
 
     public enum Type {
-        ASSIGN,
-        MUL, DIV, MOD, ADD, SUB,
-        LSHIF, RSHIF,
+        INC, DEC, NEG, NOT,
+        ADD, SUB, MUL, DIV, MOD,
+        XOR, OR, AND,
+        LSHIFT, RSHIFT,
         LE, GE, LT, GT,
-        EQUAL, NOTEQUAL,
-        AND, XOR, OR, LAND, LOR,
-        NEGATE, NOT, LNOT,
-        INC, DEC
+        EQUAL, NOTEQUAL
     }
 
     public Type type;
 
-    public Register lhs;
-    public Register rhs0;
-    public Register rhs1;
+    public Variable lhs;
+    public Variable rhs;
 
     @Override
     public void printInformation() {
-        String lhsStr = String.valueOf(lhs.id());
-        String rhs0Str = String.valueOf(rhs0.id());
-        String rhs1Str = "";
-        if (rhs1 != null) rhs1Str = String.valueOf(rhs1.id());
-        System.out.println("calculate " + lhsStr + " = " +
-            rhs0Str + " " + type.toString() + " " + rhs1Str);
+        String lhsStr = lhs.id();
+        String rhsStr = "";
+        if (lhs != null) lhsStr = lhs.id();
+        System.out.println(type.toString() + " " + lhsStr + ", " + rhsStr);
     }
 }

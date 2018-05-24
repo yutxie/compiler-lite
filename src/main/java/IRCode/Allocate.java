@@ -1,11 +1,11 @@
 package IRCode;
 
 import AstNode.*;
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 public class Allocate extends IRCode {
 
-    public Register lhs;
+    public Variable lhs;
     public VariableTypeNode variableType;
 
     @Override

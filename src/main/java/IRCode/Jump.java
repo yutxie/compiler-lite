@@ -1,17 +1,22 @@
 package IRCode;
 
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 public class Jump extends IRCode {
 
-    public Register condition;
+    public enum Type {
+        TURE, FALSE
+    }
+
+    public Variable condition;
     public String targetLabel;
-//    public int target;
+    public Type type;
 
     @Override
     public void printInformation() {
-        String conditionStr = "";
-        if (condition != null) conditionStr = condition.id();
-        System.out.println("jump " + targetLabel + " when " + conditionStr);
+        System.out.print("jump " + targetLabel);
+        if (condition != null)
+            System.out.println(" when " + condition.id() + " " + type.toString());
+        else System.out.println();
     }
 }

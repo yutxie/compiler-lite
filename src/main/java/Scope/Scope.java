@@ -2,7 +2,7 @@ package Scope;
 
 import AstNode.*;
 import ErrorHandler.*;
-import IRCode.Register.Register;
+import IRCode.Variable.*;
 
 import static Tool.PrintTool.*;
 
@@ -17,7 +17,7 @@ public class Scope {
     public HashMap<String, DefinitionExpressionNode> variableDefinitionMap;
     public HashSet<String> nameSet;
     public LinkedList<Scope> childrenList;
-    public HashMap<String, Register> regMap;
+    public HashMap<String, Variable> regMap;
 
     public Scope() {
         classDefinitionMap = new HashMap<String, ClassDefinitionNode>();
@@ -25,17 +25,17 @@ public class Scope {
         variableDefinitionMap = new HashMap<String, DefinitionExpressionNode>();
         nameSet = new HashSet<String>();
         childrenList = new LinkedList<Scope>();
-        regMap = new HashMap<String, Register>();
+        regMap = new HashMap<String, Variable>();
     }
 
-    public void define(String regName, Register reg) throws Exception {
+    public void define(String regName, Variable reg) throws Exception {
         if (regMap.get(regName) != null)
             throw new Exception("reg " + regName + " dupllicated");
         else regMap.put(regName, reg);
     }
 
-    public Register getReg(String regName) throws Exception {
-        Register reg = regMap.get(regName);
+    public Variable getReg(String regName) throws Exception {
+        Variable reg = regMap.get(regName);
         if (reg != null) return reg;
         else if (parent != null) return parent.getReg(regName);
         else throw new Exception("no such reg named " + regName);
