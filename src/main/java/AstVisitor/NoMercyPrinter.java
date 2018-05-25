@@ -460,13 +460,13 @@ public class NoMercyPrinter extends AstVisitor {
 }
 
 // int [] a  = new int[10]  -> std::vector<int>* a = new std::vector<int>(10);
-// a[0]       : (*a)[0]
+// a[0]      -> (*a)[0]
 
 // int [][] a  -> std::vector<std::vector<int>*>* a;
-// a[0][0]    : (*(*a)[0])[0]
+// a[0][0]     -> (*(*a)[0])[0]
 
 // int [][][] a  -> std::vector<std::vector<std::vector<int>*>*>* a;
-// a[0][0][0] : (*(*(*a)[0])[0])[0]
+// a[0][0][0]    -> (*(*(*a)[0])[0])[0]
 
 // int [][][] a = new int[2][3][4];
 // ->
