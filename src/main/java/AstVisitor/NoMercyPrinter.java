@@ -483,9 +483,9 @@ public class NoMercyPrinter extends AstVisitor {
 // ->
 // a = new std::vector<std::vector<A*>*>(2);
 // for (int i = 0; i < 2; i++) {
-//   a[i] = new std::vector<A*>(3);
+//   (*a)[i] = new std::vector<A*>(3);
 //   for (int j = 0; j < 3; j++) {  // add a new line
-//     a[i][j] = new A();
+//     (*(*a)[i])[j] = new A();
 //   }
 // }
 //
