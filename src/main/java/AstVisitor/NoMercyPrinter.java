@@ -458,3 +458,33 @@ public class NoMercyPrinter extends AstVisitor {
 
     private String current_class;
 }
+
+// int [] a  = new int[10]  -> std::vector<int>* a = new std::vector<int>(10);
+// a[0]       : (*a)[0]
+
+// int [][] a  -> std::vector<std::vector<int>*>* a;
+// a[0][0]    : (*(*a)[0])[0]
+
+// int [][][] a  -> std::vector<std::vector<std::vector<int>*>*>* a;
+// a[0][0][0] : (*(*(*a)[0])[0])[0]
+
+// int [][][] a = new int[2][3][4];
+// ->
+// std::vector<std::vector<std::vector<int>*>*>* a;
+// a = new std::vector<std::vector<std::vector<int>*>*>(2);
+// for (int i = 0; i < 2; i++)  {
+//   (*a)[i] = new std::vector<std::vector<int>*>(3)
+//   for (int j = 0; j < 3; j++) {
+//     (*(*a)[i])[j] = new std::vector<int>(4);
+// }
+//
+
+// A [][]a = new A[2][3];
+// a = new std::vector<std::vector<A*>*>(2);
+// for (int i = 0; i < 2; i++) {
+//   a[i] = new std::vector<A*>(3);
+//   for (int j = 0; j < 3; j++) {  // add a new line
+//     a[i][j] = new A();
+//   }
+// }
+//
