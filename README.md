@@ -6,11 +6,17 @@ ACM Class 2018 Compiler
 ## To-Do
 
 - register allocation
+  - [x] liveness analysis
+  - [x] build interference graph
+  - [ ] coloring
 - codegen
 - optimization
   - static single assignment
+  - coalesce interference graph
 
 ## To-Fix
+
+- register of immediate
 
 ## Structure
 

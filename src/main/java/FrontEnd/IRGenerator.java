@@ -55,13 +55,7 @@ public class IRGenerator extends AstVisitor {
         super.visit(node);
         for (DefinitionExpressionNode para : node.formalArgumentList)
             methodEntity.formalParaVarList.addLast(para.var);
-
-        // in case there is no return in block
-        Return ins = new Return();
-        if (!node.returnType.isPrimitiveType(VOID))
-            ins.returnValue = new Variable();
-        codeList.add(ins);
-
+        codeList.addLast(new Return());
         int n = codeList.size();
         for (String key : labelMap.keySet())
             codeList.get(labelMap.get(key)).label = key;
@@ -121,7 +115,6 @@ public class IRGenerator extends AstVisitor {
             MethodCall ins = (MethodCall) codeList.get(codeList.size() - 1);
             node.var = new Variable();
             ins.lhs = node.var;
-            // ATTENTION: void
             ins.caller = node.caller.var;
             ins.method = (MethodDefinitionNode) memberCaller.definitionNode;
         } else if (node.member instanceof ReferenceNode) {

@@ -2,6 +2,8 @@ package IR.IRCode.Variable;
 
 import AstNode.*;
 
+import java.util.HashSet;
+
 public class Variable {
 
     public boolean global = false;
@@ -12,6 +14,12 @@ public class Variable {
 
     public Variable(String name) {
         this.name = name;
+    }
+
+    public HashSet<Variable> colorable() {
+        HashSet<Variable> res = new HashSet<Variable>();
+        if (!global) res.add(this);
+        return res;
     }
 
     public Variable() {

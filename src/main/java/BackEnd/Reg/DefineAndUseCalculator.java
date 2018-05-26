@@ -24,13 +24,13 @@ public class DefineAndUseCalculator {
     }
 
     public void calculateDefineAndUse(Allocate ir) {
-        ir.def.add(ir.lhs);
+        ir.def.addAll(ir.lhs.colorable());
     }
 
     public void calculateDefineAndUse(Binary ir) {
-        ir.def.add(ir.lhs);
-        ir.use.add(ir.lhs);
-        ir.use.add(ir.rhs);
+        ir.def.addAll(ir.lhs.colorable());
+        ir.use.addAll(ir.lhs.colorable());
+        ir.use.addAll(ir.rhs.colorable());
     }
 
     public void calculateDefineAndUse(Jump ir) {
@@ -38,23 +38,23 @@ public class DefineAndUseCalculator {
     }
 
     public void calculateDefineAndUse(MethodCall ir) {
-        ir.def.add(ir.lhs);
+        ir.def.addAll(ir.lhs.colorable());
         for (Variable rhs : ir.actualParaVarList)
-            ir.use.add(rhs);
+            ir.use.addAll(rhs.colorable());
     }
 
     public void calculateDefineAndUse(Move ir) {
-        ir.def.add(ir.lhs);
-        ir.use.add(ir.rhs);
+        ir.def.addAll(ir.lhs.colorable());
+        ir.use.addAll(ir.rhs.colorable());
     }
 
     public void calculateDefineAndUse(Return ir) {
         if (ir.returnValue != null)
-            ir.use.add(ir.returnValue);
+            ir.use.addAll(ir.returnValue.colorable());
     }
 
     public void calculateDefineAndUse(Unary ir) {
-        ir.def.add(ir.lhs);
-        ir.use.add(ir.lhs);
+        ir.def.addAll(ir.lhs.colorable());
+        ir.use.addAll(ir.lhs.colorable());
     }
 }
