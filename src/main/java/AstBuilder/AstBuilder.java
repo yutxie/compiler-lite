@@ -1,7 +1,7 @@
 package AstBuilder;
 
 import AstNode.*;
-import ErrorHandler.*;
+import Error.*;
 
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;

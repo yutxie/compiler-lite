@@ -1,6 +1,6 @@
 package AstNode;
 
-import IRCode.Variable.*;
+import IR.IRCode.Variable.*;
 
 import static Tool.PrintTool.*;
 

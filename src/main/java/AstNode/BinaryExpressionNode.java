@@ -1,7 +1,5 @@
 package AstNode;
 
-import AstVisitor.AstVisitor;
-
 public class BinaryExpressionNode extends ExpressionStatementNode {
 
     public enum BinaryOp {

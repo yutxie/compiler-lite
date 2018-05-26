@@ -1,9 +1,8 @@
 import AstNode.*;
 import AstBuilder.*;
-import AstVisitor.*;
-import IRCode.IRCode;
-import IRVisitor.CFG.*;
-import Scope.*;
+import BackEnd.*;
+import FrontEnd.*;
+import IR.*;
 
 import java.util.*;
 
@@ -30,10 +29,8 @@ public class Main {
         classTypeResolver.resolveClassType(ast);
 //        ast.printInformation(0);
 
-        ArrayList<IRCode> irCodeList = irGenerator.generateIR(ast);
-        LinkedList<String>[] label = irGenerator.label;
-        irGenerator.printIRList();
-        CFG cfg = cfgGenerator.generateCFG(irCodeList, label);
-//        cfg.printInformation();
+        IR ir = irGenerator.generateIR(ast);
+        cfgGenerator.generateCFG(ir);
+        ir.printInformation();
     }
 }

@@ -1,6 +1,6 @@
 package AstNode;
 
-import Scope.Scope;
+import FrontEnd.Scope;
 import static Tool.PrintTool.*;
 
 public abstract class AstNode {
