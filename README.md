@@ -9,12 +9,21 @@ ACM Class 2018 Compiler
   - [x] liveness analysis
   - [x] build interference graph
   - [ ] coloring
-- codegen
+- generate target code
+  - [ ] trivial one
+  - [ ] with optimization
 - optimization
   - static single assignment
   - coalesce interference graph
 
 ## To-Fix
+
+## Process
+
+- front end: scr -g4-> parse tree -AstBuilder-> AST -IRGenerator-> IR
+- back end:
+  - trivial: IR (var) -TrivialRegisterAllocator-> IR (spill code) -> #
+  - non-trivial: IR (linear) -CFGGenerator-> IR (CFG) -RegisterAllocator-> IR (linear, spill code) -> #
 
 ## Structure
 
