@@ -1,6 +1,6 @@
 package IR.IRCode;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class Unary extends IRCode {
 
@@ -10,10 +10,10 @@ public class Unary extends IRCode {
 
     public Type type;
 
-    public Variable lhs;
+    public Operand lhs;
 
     @Override
     public void printInformation() {
-        System.out.println(type.toString() + " " + lhs.id());
+        System.out.println(type.toString() + " " + lhs.getName());
     }
 }

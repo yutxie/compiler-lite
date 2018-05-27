@@ -1,14 +1,14 @@
 package IR.IRCode;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class Move extends IRCode{
 
-    public Variable lhs;
-    public Variable rhs;
+    public Operand lhs;
+    public Operand rhs;
 
     @Override
     public void printInformation() {
-        System.out.println("mov " + lhs.id() + " " + rhs.id());
+        System.out.println("mov " + lhs.getName() + " " + rhs.getName());
     }
 }

@@ -2,7 +2,7 @@ package FrontEnd;
 
 import AstNode.*;
 import Error.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import static Tool.PrintTool.*;
 
@@ -17,7 +17,7 @@ public class Scope {
     public HashMap<String, DefinitionExpressionNode> variableDefinitionMap;
     public HashSet<String> nameSet;
     public LinkedList<Scope> childrenList;
-    public HashMap<String, Variable> regMap;
+    public HashMap<String, Variable> varMap;
 
     public Scope() {
         classDefinitionMap = new HashMap<String, ClassDefinitionNode>();
@@ -25,20 +25,20 @@ public class Scope {
         variableDefinitionMap = new HashMap<String, DefinitionExpressionNode>();
         nameSet = new HashSet<String>();
         childrenList = new LinkedList<Scope>();
-        regMap = new HashMap<String, Variable>();
+        varMap = new HashMap<String, Variable>();
     }
 
-    public void define(String regName, Variable reg) throws Exception {
-        if (regMap.get(regName) != null)
-            throw new Exception("reg " + regName + " dupllicated");
-        else regMap.put(regName, reg);
+    public void define(String varName, Variable var) throws Exception {
+        if (varMap.get(varName) != null)
+            throw new Exception("var " + varName + " dupllicated");
+        else varMap.put(varName, var);
     }
 
-    public Variable getReg(String regName) throws Exception {
-        Variable reg = regMap.get(regName);
-        if (reg != null) return reg;
-        else if (parent != null) return parent.getReg(regName);
-        else throw new Exception("no such reg named " + regName);
+    public Variable getReg(String varName) throws Exception {
+        Variable var = varMap.get(varName);
+        if (var != null) return var;
+        else if (parent != null) return parent.getReg(varName);
+        else throw new Exception("no such var named " + varName);
     }
 
     public void define(ClassDefinitionNode node) throws SemanticException {

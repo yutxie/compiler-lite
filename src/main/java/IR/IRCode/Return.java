@@ -1,15 +1,15 @@
 package IR.IRCode;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class Return extends IRCode{
 
-    public Variable returnValue;
+    public Operand returnValue;
 
     @Override
     public void printInformation() {
         String returnValueStr = "";
-        if (returnValue != null) returnValueStr = returnValue.id();
+        if (returnValue != null) returnValueStr = returnValue.getName();
         System.out.println("return " + returnValueStr);
     }
 }

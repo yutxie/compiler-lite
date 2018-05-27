@@ -1,8 +1,5 @@
 package IR;
 
-import IR.IRCode.IRCode;
-import IR.IRCode.Variable.*;
-
 import java.util.*;
 
 public class IR {

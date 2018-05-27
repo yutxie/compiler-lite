@@ -1,29 +1,25 @@
 package IR.IRCode;
 
 import AstNode.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import java.util.*;
 
 public class MethodCall extends IRCode {
 
-    public Variable lhs;
-    public Variable caller;
-    public LinkedList<Variable> actualParaVarList;
+    public Operand lhs;
+    public Operand caller;
+    public LinkedList<Operand> actualParaVarList = new LinkedList<Operand>();
     public MethodDefinitionNode method;
-
-    public MethodCall() {
-        actualParaVarList = new LinkedList<Variable>();
-    }
 
     @Override
     public void printInformation() {
         String callerStr = "";
-        if (caller != null) callerStr = caller.id();
-        System.out.print("call " + lhs.id() + " = " +
+        if (caller != null) callerStr = caller.getName();
+        System.out.print("call " + lhs.getName() + " = " +
             callerStr + "." + method.methodName + " ");
-        for (Variable item : actualParaVarList)
-            System.out.print(item.id() + " ");
+        for (Operand item : actualParaVarList)
+            System.out.print(item.getName() + " ");
         System.out.println();
     }
     // ATTENTION: pass caller as this

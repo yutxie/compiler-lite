@@ -16,8 +16,6 @@ ACM Class 2018 Compiler
 
 ## To-Fix
 
-- register of immediate
-
 ## Structure
 
 ### Lexer

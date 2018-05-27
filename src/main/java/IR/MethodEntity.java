@@ -1,21 +1,21 @@
 package IR;
 
 import IR.IRCode.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import java.util.*;
 
 public class MethodEntity {
 
     public String methodName;
-    public LinkedList<Variable> formalParaVarList = new LinkedList<Variable>();
+    public LinkedList<Operand> formalParaVarList = new LinkedList<Operand>();
     public LinkedList<IRCode> codeList = new LinkedList<IRCode>();
     public LinkedList<BasicBlock> basicBlockList = new LinkedList<BasicBlock>();
 
     public void printInformation() {
         System.out.print(methodName + " ");
-        for (Variable para : formalParaVarList)
-            System.out.print(para.id() + " ");
+        for (Operand para : formalParaVarList)
+            System.out.print(para.getName() + " ");
         System.out.print("{\n");
         if (!basicBlockList.isEmpty())
             for (BasicBlock bb : basicBlockList) {

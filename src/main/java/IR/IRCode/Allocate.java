@@ -1,15 +1,15 @@
 package IR.IRCode;
 
 import AstNode.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class Allocate extends IRCode {
 
-    public Variable lhs;
+    public Operand lhs;
     public VariableTypeNode variableType;
 
     @Override
     public void printInformation() {
-        System.out.println("allocate " + lhs.id() + " " + variableType.getTypeName());
+        System.out.println("allocate " + lhs.getName() + " " + variableType.getTypeName());
     }
 }

@@ -1,6 +1,6 @@
 package AstNode;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import static Tool.PrintTool.*;
 
@@ -8,7 +8,7 @@ public abstract class ExpressionStatementNode extends StatementNode {
     
     public VariableTypeNode exprType;
     public boolean leftValue;
-    public Variable var;
+    public Operand value;
     
     ExpressionStatementNode() {
         exprType = null;

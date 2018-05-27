@@ -1,6 +1,6 @@
 package IR.IRCode;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class Binary extends IRCode {
 
@@ -14,11 +14,11 @@ public class Binary extends IRCode {
 
     public Type type;
 
-    public Variable lhs;
-    public Variable rhs;
+    public Operand lhs;
+    public Operand rhs;
 
     @Override
     public void printInformation() {
-        System.out.println(type.toString() + " " + lhs.id() + ", " + rhs.id());
+        System.out.println(type.toString() + " " + lhs.getName() + ", " + rhs.getName());
     }
 }

@@ -3,10 +3,9 @@ package FrontEnd;
 import AstNode.*;
 import IR.*;
 import IR.IRCode.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
-import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
 import java.util.*;
 
@@ -54,7 +53,7 @@ public class IRGenerator extends AstVisitor {
 
         super.visit(node);
         for (DefinitionExpressionNode para : node.formalArgumentList)
-            methodEntity.formalParaVarList.addLast(para.var);
+            methodEntity.formalParaVarList.addLast(para.value);
         codeList.addLast(new Return());
         int n = codeList.size();
         for (String key : labelMap.keySet())
@@ -67,42 +66,48 @@ public class IRGenerator extends AstVisitor {
     void visit(ReferenceNode node) throws Exception {
         if (node.referenceType != ReferenceNode.ReferenceType.VARIABLE) return;
         if (node.definitionNode.parent instanceof ClassDefinitionNode) {
-            MemberVariable var = new MemberVariable();
-            var.object = node.scope.getReg("this");
+            MemberVariable value = new MemberVariable();
+            value.object = node.scope.getReg("this");
             ClassDefinitionNode classNode =
                 (ClassDefinitionNode) node.definitionNode.parent;
-            var.memberVar =
+            value.memberVar =
                 (DefinitionExpressionNode) classNode.scope.get(node.referenceName);
-            node.var = var;
+            node.value = value;
         }
-        else node.var = node.scope.getReg(node.referenceName);
+        else node.value = node.scope.getReg(node.referenceName);
     }
 
     @Override
     void visit(ConstantNode node) {
-        node.var = new Variable();
-        node.var.initValue = node;
+        if (node.exprType.getTypeName().equals("string")) {
+            node.value = new Variable();
+            Allocate ins = new Allocate();
+            ins.lhs = node.value;
+            ins.variableType = node.exprType;
+            codeList.addLast(ins);
+        } else node.value = new Immediate(node);
     }
 
     @Override
     void visit(ThisNode node) throws Exception {
-        node.var = node.scope.getReg("this");
+        node.value = node.scope.getReg("this");
     }
 
     @Override
     void visit(DefinitionExpressionNode node) throws Exception {
-        node.var = new Variable(node.variableName);
-        node.scope.define(node.variableName, node.var);
-        if (node.parent instanceof ProgramNode) node.var.global = true;
+        Variable var = new Variable(node.variableName);
+        node.scope.define(node.variableName, var);
+        if (node.parent instanceof ProgramNode) var.global = true;
         if (node.initValue != null) {
             visit(node.initValue);
             Move ins = new Move();
-            ins.lhs = node.var;
-            ins.rhs = node.initValue.var;
+            ins.lhs = var;
+            ins.rhs = node.initValue.value;
             if (node.parent instanceof ProgramNode)
                 ir.global.codeList.addLast(ins);
             else codeList.add(ins);
         }
+        node.value = var;
     }
 
     @Override
@@ -113,45 +118,45 @@ public class IRGenerator extends AstVisitor {
             ReferenceNode memberCaller =
                 (ReferenceNode) ((MethodCallExpressionNode) node.member).caller;
             MethodCall ins = (MethodCall) codeList.get(codeList.size() - 1);
-            node.var = new Variable();
-            ins.lhs = node.var;
-            ins.caller = node.caller.var;
+            node.value = new Variable();
+            ins.lhs = node.value;
+            ins.caller = node.caller.value;
             ins.method = (MethodDefinitionNode) memberCaller.definitionNode;
         } else if (node.member instanceof ReferenceNode) {
-            MemberVariable var = new MemberVariable();
-            var.object = node.caller.var;
+            MemberVariable value = new MemberVariable();
+            value.object = node.caller.value;
             ReferenceNode member = (ReferenceNode) node.member;
-            var.memberVar = (DefinitionExpressionNode) member.definitionNode;
-            node.var = var;
+            value.memberVar = (DefinitionExpressionNode) member.definitionNode;
+            node.value = value;
         } else throw new Exception("member error");
     }
 
     @Override
     void visit(IndexAccessExpressionNode node) throws Exception {
         super.visit(node);
-        IndexVariable var = new IndexVariable();
-        var.array = node.caller.var;
-        var.index = node.index.var;
-        node.var = var;
+        IndexVariable value = new IndexVariable();
+        value.array = node.caller.value;
+        value.index = node.index.value;
+        node.value = value;
     }
 
     @Override
     void visit(MethodCallExpressionNode node) throws Exception {
         super.visit(node);
-        node.var = new Variable();
+        node.value = new Variable();
         MethodCall ins = new MethodCall();
-        ins.lhs = node.var;
+        ins.lhs = node.value;
         ins.method = node.scope.getMethod(node.caller.referenceName);
         for (ExpressionStatementNode item : node.actualParameterList)
-            ins.actualParaVarList.addLast(item.var);
+            ins.actualParaVarList.addLast(item.value);
         codeList.add(ins);
     }
 
     @Override
     void visit(NewExpressionNode node) {
-        node.var = new Variable();
+        node.value = new Variable();
         Allocate ins = new Allocate();
-        ins.lhs = node.var;
+        ins.lhs = node.value;
         ins.variableType = node.variableType;
     }
 
@@ -162,11 +167,11 @@ public class IRGenerator extends AstVisitor {
         Move mv = new Move();
         switch (node.op) {
             case NOT: case LNOT: case NEGATE:
-                mv.lhs = node.var = new Variable();
-                mv.rhs = node.inner.var;
+                mv.lhs = node.value = new Variable();
+                mv.rhs = node.inner.value;
                 codeList.add(mv);
 
-                cl.lhs = node.var;
+                cl.lhs = node.value;
                 switch (node.op) {
                     case NOT: case LNOT: cl.type = Unary.Type.NOT; break;
                     case NEGATE: cl.type = Unary.Type.NEG; break;
@@ -174,18 +179,18 @@ public class IRGenerator extends AstVisitor {
                 codeList.add(cl);
                 break;
             case PREFIX_DEC: case PREFIX_INC:
-                cl.lhs = node.var = node.inner.var;
+                cl.lhs = node.value = node.inner.value;
                 if (node.op == UnaryExpressionNode.UnaryOp.PREFIX_DEC)
                     cl.type = Unary.Type.DEC;
                 else cl.type = Unary.Type.INC;
                 codeList.add(cl);
                 break;
             case POSTFIX_DEC: case POSTFIX_INC:
-                mv.lhs = node.var = new Variable();
-                mv.rhs = node.inner.var;
+                mv.lhs = node.value = new Variable();
+                mv.rhs = node.inner.value;
                 codeList.add(mv);
 
-                cl.lhs = node.inner.var;
+                cl.lhs = node.inner.value;
                 if (node.op == UnaryExpressionNode.UnaryOp.POSTFIX_DEC)
                     cl.type = Unary.Type.DEC;
                 else cl.type = Unary.Type.INC;
@@ -200,18 +205,18 @@ public class IRGenerator extends AstVisitor {
         super.visit(node);
         if (node.op == ASSIGN) {
             Move ins = new Move();
-            ins.lhs = node.var = node.lhs.var;
-            ins.rhs = node.rhs.var;
+            ins.lhs = node.value = node.lhs.value;
+            ins.rhs = node.rhs.value;
             codeList.add(ins);
             return;
         }
         Move mv = new Move();
-        mv.lhs = node.var = new Variable();
-        mv.rhs = node.lhs.var;
+        mv.lhs = node.value = new Variable();
+        mv.rhs = node.lhs.value;
         codeList.add(mv);
         Binary ins = new Binary();
-        ins.lhs = node.var;
-        ins.rhs = node.rhs.var;
+        ins.lhs = node.value;
+        ins.rhs = node.rhs.value;
         switch (node.op) {
             case LSHIFT: ins.type = Binary.Type.LSHIFT; break;
             case RSHIFT: ins.type = Binary.Type.RSHIFT; break;
@@ -243,7 +248,7 @@ public class IRGenerator extends AstVisitor {
 
         Jump ins = new Jump();
         visit(node.condition);
-        ins.condition = node.condition.var;
+        ins.condition = node.condition.value;
         ins.targetLabel = "#if_false_" + ifIndex;
         ins.type = Jump.Type.FALSE;
         codeList.add(ins);
@@ -267,7 +272,7 @@ public class IRGenerator extends AstVisitor {
         labelMap.put("#loop_cond_" + loopIndex, codeList.size());
         Jump ins = new Jump();
         visit(node.condition);
-        ins.condition = node.condition.var;
+        ins.condition = node.condition.value;
         ins.targetLabel = "#loop_end_" + loopIndex;
         ins.type = Jump.Type.FALSE;
         codeList.add(ins);
@@ -289,7 +294,7 @@ public class IRGenerator extends AstVisitor {
         labelMap.put("#loop_cond_" + loopIndex, codeList.size());
         Jump ins = new Jump();
         visit(node.condition);
-        ins.condition = node.condition.var;
+        ins.condition = node.condition.value;
         ins.targetLabel = "#loop_end_" + loopIndex;
         ins.type = Jump.Type.FALSE;
         codeList.add(ins);
@@ -324,7 +329,7 @@ public class IRGenerator extends AstVisitor {
         Return ins = new Return();
         if (node.returnValue != null) {
             visit(node.returnValue);
-            ins.returnValue = node.returnValue.var;
+            ins.returnValue = node.returnValue.value;
         }
         codeList.add(ins);
     }

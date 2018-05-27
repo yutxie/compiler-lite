@@ -2,7 +2,7 @@ package BackEnd.Reg;
 
 import IR.*;
 import IR.IRCode.*;
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 public class DefineAndUseCalculator {
 
@@ -39,7 +39,7 @@ public class DefineAndUseCalculator {
 
     public void calculateDefineAndUse(MethodCall ir) {
         ir.def.addAll(ir.lhs.colorable());
-        for (Variable rhs : ir.actualParaVarList)
+        for (Operand rhs : ir.actualParaVarList)
             ir.use.addAll(rhs.colorable());
     }
 

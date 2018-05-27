@@ -1,6 +1,6 @@
 package BackEnd.Reg;
 
-import IR.IRCode.Variable.*;
+import IR.IRCode.Operand.*;
 
 import java.util.*;
 
@@ -39,9 +39,9 @@ public class InterferenceGraph {
 
     public void printInformation() {
         for (Node u : nodeSet) {
-            System.out.print(u.var.id() + ":");
+            System.out.print(u.var.getName() + ":");
             for (Node v : u.edges)
-                System.out.print(" " + v.var.id());
+                System.out.print(" " + v.var.getName());
             System.out.println();
         }
     }
