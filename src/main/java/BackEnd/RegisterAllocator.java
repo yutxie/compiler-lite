@@ -1,4 +1,4 @@
-package BackEnd.Reg;
+package BackEnd;
 
 import IR.*;
 import IR.IRCode.*;

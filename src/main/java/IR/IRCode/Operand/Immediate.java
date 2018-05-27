@@ -12,6 +12,10 @@ public class Immediate extends Operand {
         value = Integer.parseInt(node.constantStr);
     }
 
+    public Immediate(int value) {
+        this.value = value;
+    }
+
     @Override
     public HashSet<Variable> colorable() {
         return new HashSet<Variable>();

@@ -49,11 +49,11 @@ public class IRGenerator extends AstVisitor {
         ir.methodList.addLast(methodEntity);
         codeList = methodEntity.codeList;
         labelMap.clear();
-        labelMap.put("%" + methodEntity.methodName + "_entry", 0);
+//        labelMap.put("%" + methodEntity.methodName + "_entry", 0);
 
         super.visit(node);
         for (DefinitionExpressionNode para : node.formalArgumentList)
-            methodEntity.formalParaVarList.addLast(para.value);
+            methodEntity.formalParaVarList.addLast((Variable) para.value);
         codeList.addLast(new Return());
         int n = codeList.size();
         for (String key : labelMap.keySet())

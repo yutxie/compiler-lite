@@ -15,9 +15,11 @@ public class MethodCall extends IRCode {
     @Override
     public void printInformation() {
         String callerStr = "";
-        if (caller != null) callerStr = caller.getName();
-        System.out.print("call " + lhs.getName() + " = " +
-            callerStr + "." + method.methodName + " ");
+        if (caller != null) callerStr = caller.getName() + ".";
+        String lhsStr = "";
+        if (lhs != null) lhsStr = lhs.getName() + " = ";
+        System.out.print("call\t" + lhsStr +
+            callerStr + method.methodName + " ");
         for (Operand item : actualParaVarList)
             System.out.print(item.getName() + " ");
         System.out.println();

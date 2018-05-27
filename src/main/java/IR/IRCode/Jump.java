@@ -14,7 +14,7 @@ public class Jump extends IRCode {
 
     @Override
     public void printInformation() {
-        System.out.print("jump " + targetLabel);
+        System.out.print("jump\t" + targetLabel);
         if (condition != null)
             System.out.println(" when " + condition.getName() + " " + type.toString());
         else System.out.println();

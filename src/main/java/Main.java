@@ -1,13 +1,11 @@
 import AstNode.*;
 import AstBuilder.*;
 import BackEnd.*;
-import BackEnd.Reg.DefineAndUseCalculator;
-import BackEnd.Reg.RegisterAllocator;
-import BackEnd.Reg.RegisterConfig;
+import BackEnd.DefineAndUseCalculator;
+import BackEnd.RegisterAllocator;
+import BackEnd.RegisterConfig;
 import FrontEnd.*;
 import IR.*;
-
-import java.util.*;
 
 public class Main {
 
@@ -25,10 +23,12 @@ public class Main {
         IRGenerator irGenerator = new IRGenerator();
         CFGGenerator cfgGenerator = new CFGGenerator();
         DefineAndUseCalculator defineAndUseCalculator = new DefineAndUseCalculator();
+        AllVariableCalculator allVariableCalculator = new AllVariableCalculator();
         RegisterConfig registerConfig = new RegisterConfig();
         RegisterAllocator regisgerAllocator = new RegisterAllocator();
+        TrivialRegisterAllocator trivialRegisterAllocator = new TrivialRegisterAllocator();
 
-        // front end
+        ////////////////////// front end ////////////////////////////
         ProgramNode ast = astBuilder.buildAst(path);
         parentLinker.linkParent(ast);
         Scope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
@@ -37,9 +37,14 @@ public class Main {
         classTypeResolver.resolveClassType(ast);
         IR ir = irGenerator.generateIR(ast);
 
-        // back end
-        cfgGenerator.generateCFG(ir);
-        defineAndUseCalculator.calculateDefineAndUse(ir);
-        regisgerAllocator.allocateRegister(ir, registerConfig);
+        ////////////////////// back end /////////////////////////////
+        // non trivial
+//        cfgGenerator.generateCFG(ir);
+//        defineAndUseCalculator.calculateDefineAndUse(ir);
+//        regisgerAllocator.allocateRegister(ir, registerConfig);
+        // trivial
+        allVariableCalculator.calculateAllVariable(ir);
+        trivialRegisterAllocator.allocateRegister(ir, registerConfig);
+        ir.printInformation();
     }
 }

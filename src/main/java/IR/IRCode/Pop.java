@@ -2,13 +2,12 @@ package IR.IRCode;
 
 import IR.IRCode.Operand.*;
 
-public class Move extends IRCode{
+public class Pop extends IRCode {
 
-    public Operand lhs;
     public Operand rhs;
 
     @Override
     public void printInformation() {
-        System.out.println("mov\t\t" + lhs.getName() + " " + rhs.getName());
+        System.out.println("pop\t\t" + rhs.getName());
     }
 }

@@ -10,6 +10,6 @@ public class Return extends IRCode{
     public void printInformation() {
         String returnValueStr = "";
         if (returnValue != null) returnValueStr = returnValue.getName();
-        System.out.println("return " + returnValueStr);
+        System.out.println("ret\t\t" + returnValueStr);
     }
 }

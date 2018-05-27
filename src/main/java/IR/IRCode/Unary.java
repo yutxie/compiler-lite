@@ -14,6 +14,6 @@ public class Unary extends IRCode {
 
     @Override
     public void printInformation() {
-        System.out.println(type.toString() + " " + lhs.getName());
+        System.out.println(type.toString().toLowerCase() + "\t\t" + lhs.getName());
     }
 }

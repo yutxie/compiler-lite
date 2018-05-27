@@ -8,7 +8,7 @@ import java.util.*;
 public class MethodEntity {
 
     public String methodName;
-    public LinkedList<Operand> formalParaVarList = new LinkedList<Operand>();
+    public LinkedList<Variable> formalParaVarList = new LinkedList<Variable>();
     public LinkedList<IRCode> codeList = new LinkedList<IRCode>();
     public LinkedList<BasicBlock> basicBlockList = new LinkedList<BasicBlock>();
 

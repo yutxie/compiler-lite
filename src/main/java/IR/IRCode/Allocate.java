@@ -10,6 +10,6 @@ public class Allocate extends IRCode {
 
     @Override
     public void printInformation() {
-        System.out.println("allocate " + lhs.getName() + " " + variableType.getTypeName());
+        System.out.println("allocate\t" + lhs.getName() + " " + variableType.getTypeName());
     }
 }
