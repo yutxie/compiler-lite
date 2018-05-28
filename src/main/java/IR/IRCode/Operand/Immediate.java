@@ -4,12 +4,17 @@ import AstNode.*;
 
 import java.util.*;
 
+import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
+
 public class Immediate extends Operand {
 
     int value;
 
     public Immediate(ConstantNode node) {
-        value = Integer.parseInt(node.constantStr);
+        if (node.exprType.isPrimitiveType(BOOL)) {
+            if (node.constantStr.equals("true")) value = 1;
+            else value = 0;
+        } else value = Integer.parseInt(node.constantStr);
     }
 
     public Immediate(int value) {

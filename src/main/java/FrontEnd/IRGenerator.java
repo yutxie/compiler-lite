@@ -4,6 +4,7 @@ import AstNode.*;
 import IR.*;
 import IR.IRCode.*;
 import IR.IRCode.Operand.*;
+import IR.IRCode.Set;
 
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
 
@@ -210,6 +211,25 @@ public class IRGenerator extends AstVisitor {
             codeList.add(ins);
             return;
         }
+        switch (node.op) {
+            case LT: case GT: case LE: case GE: case EQUAL: case NOTEQUAL:
+                Compare cmp = new Compare();
+                cmp.rhs0 = node.lhs.value;
+                cmp.rhs1 = node.rhs.value;
+                codeList.addLast(cmp);
+                Set set = new Set();
+                set.lhs = node.value = new Variable();
+                switch (node.op) {
+                    case LT: set.type = Set.Type.SETL; break;
+                    case GT: set.type = Set.Type.SETG; break;
+                    case LE: set.type = Set.Type.SETLE; break;
+                    case GE: set.type = Set.Type.SETGE; break;
+                    case EQUAL: set.type = Set.Type.SETE; break;
+                    case NOTEQUAL: set.type = Set.Type.SETNE; break;
+                }
+                codeList.addLast(set);
+                return;
+        }
         Move mv = new Move();
         mv.lhs = node.value = new Variable();
         mv.rhs = node.lhs.value;
@@ -218,24 +238,18 @@ public class IRGenerator extends AstVisitor {
         ins.lhs = node.value;
         ins.rhs = node.rhs.value;
         switch (node.op) {
-            case LSHIFT: ins.type = Binary.Type.LSHIFT; break;
-            case RSHIFT: ins.type = Binary.Type.RSHIFT; break;
-            case MUL: ins.type = Binary.Type.MUL; break;
-            case DIV: ins.type = Binary.Type.DIV; break;
-            case MOD: ins.type = Binary.Type.MOD; break;
+//            case LSHIFT: ins.type = Binary.Type.LSHIFT; break;
+//            case RSHIFT: ins.type = Binary.Type.RSHIFT; break;
+//            case MUL: ins.type = Binary.Type.MUL; break;
+//            case DIV: ins.type = Binary.Type.DIV; break;
+//            case MOD: ins.type = Binary.Type.MOD; break;
             case ADD: ins.type = Binary.Type.ADD; break;
             case SUB: ins.type = Binary.Type.SUB; break;
             case XOR: ins.type = Binary.Type.XOR; break;
             case AND: ins.type = Binary.Type.AND; break;
             case OR: ins.type = Binary.Type.OR; break;
-            case LT: ins.type = Binary.Type.LT; break;
-            case GT: ins.type = Binary.Type.GT; break;
-            case LE: ins.type = Binary.Type.LE; break;
-            case GE: ins.type = Binary.Type.GE; break;
             case LOR: ins.type = Binary.Type.OR; break;
             case LAND: ins.type = Binary.Type.AND; break;
-            case EQUAL: ins.type = Binary.Type.EQUAL; break;
-            case NOTEQUAL: ins.type = Binary.Type.NOTEQUAL; break;
         }
         codeList.add(ins);
     }
@@ -244,68 +258,118 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(IfStatementNode node) throws Exception {
+        /*              ... condition ...
+                        cmp cond, 0
+                        jz  #if_false
+                        ... if block ...
+                        jmp #if_end
+            #if_false:  nop
+                        ... else block ...
+            #if_end:    nop
+                        ...
+        */
         int ifIndex = ifCnt++;
 
-        Jump ins = new Jump();
         visit(node.condition);
-        ins.condition = node.condition.value;
-        ins.targetLabel = "#if_false_" + ifIndex;
-        ins.type = Jump.Type.FALSE;
-        codeList.add(ins);
+        Compare cmp = new Compare();
+        cmp.rhs0 = node.condition.value;
+        cmp.rhs1 = new Immediate(0);
+        codeList.addLast(cmp);
+        Jump jump = new Jump();
+        jump.targetLabel = "#if_false_" + ifIndex;
+        jump.type = Jump.Type.JZ;
+        codeList.addLast(jump);
 
-        labelMap.put("#if_true_" + ifIndex, codeList.size());
         visit(node.ifBlock);
+        jump = new Jump();
+        jump.targetLabel = "#if_end_" + ifIndex;
+        jump.type = Jump.Type.JMP;
+        codeList.addLast(jump);
 
-        if (node.elseBlock != null) {
-            labelMap.put("#if_false_" + ifIndex, codeList.size());
-            visit(node.elseBlock);
-        }
+        labelMap.put("#if_false_" + ifIndex, codeList.size());
+        codeList.addLast(new Nop());
+        if (node.elseBlock != null) visit(node.elseBlock);
 
         labelMap.put("#if_end_" + ifIndex, codeList.size());
+        codeList.addLast(new Nop());
     }
 
     @Override
     void visit(ForStatementNode node) throws Exception {
+        /*              ... init ...
+                        jmp #loop_cond
+            #loop_body: nop
+                        ... block ...
+                        ... after block ...
+            #loop_cond: ... condition ...
+                        cmp cond, 0
+                        jnz #loop_body
+            #loop_end:  nop
+                        ...
+         */
         visit(node.init);
         int loopIndex = loopCnt++;
 
-        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
-        Jump ins = new Jump();
-        visit(node.condition);
-        ins.condition = node.condition.value;
-        ins.targetLabel = "#loop_end_" + loopIndex;
-        ins.type = Jump.Type.FALSE;
-        codeList.add(ins);
+        Jump jump = new Jump();
+        jump.targetLabel = "#loop_cond_" + loopIndex;
+        jump.type = Jump.Type.JMP;
+        codeList.addLast(jump);
 
         labelMap.put("#loop_body_" + loopIndex, codeList.size());
+        codeList.addLast(new Nop());
         visit(node.block);
         visit(node.afterBlock);
-        ins = new Jump();
-        ins.targetLabel = "#loop_cond_" + loopIndex;
-        codeList.add(ins);
+
+        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
+        visit(node.condition);
+        Compare cmp = new Compare();
+        cmp.rhs0 = node.condition.value;
+        cmp.rhs1 = new Immediate(0);
+        codeList.addLast(cmp);
+        jump = new Jump();
+        jump.targetLabel = "#loop_body_" + loopIndex;
+        jump.type = Jump.Type.JNZ;
+        codeList.add(jump);
 
         labelMap.put("#loop_end_" + loopIndex, codeList.size());
+        codeList.addLast(new Nop());
     }
 
     @Override
     void visit(WhileStatementNode node) throws Exception {
+        /*              jmp #loop_cond
+            #loop_body: nop
+                        ... block ...
+            #loop_cond: ... condition ...
+                        cmp cond, 0
+                        jnz #loop_body
+            #loop_end:  nop
+                        ...
+         */
         int loopIndex = loopCnt++;
 
-        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
-        Jump ins = new Jump();
-        visit(node.condition);
-        ins.condition = node.condition.value;
-        ins.targetLabel = "#loop_end_" + loopIndex;
-        ins.type = Jump.Type.FALSE;
-        codeList.add(ins);
+        Jump jump = new Jump();
+        jump.targetLabel = "#loop_cond_" + loopIndex;
+        jump.type = Jump.Type.JMP;
+        codeList.addLast(jump);
 
         labelMap.put("#loop_body_" + loopIndex, codeList.size());
+        codeList.addLast(new Nop());
         visit(node.block);
-        ins = new Jump();
-        ins.targetLabel = "#loop_cond_" + loopIndex;
-        codeList.add(ins);
+
+        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
+        visit(node.condition);
+        Compare cmp = new Compare();
+        cmp.rhs0 = node.condition.value;
+        cmp.rhs1 = new Immediate(0);
+        codeList.addLast(cmp);
+        jump = new Jump();
+        jump.targetLabel = "#loop_body_" + loopIndex;
+        jump.type = Jump.Type.JNZ;
+        codeList.add(jump);
 
         labelMap.put("#loop_end_" + loopIndex, codeList.size());
+        codeList.addLast(new Nop());
     }
 
     @Override
@@ -313,6 +377,7 @@ public class IRGenerator extends AstVisitor {
         Jump ins = new Jump();
         int loopIndex = loopCnt - 1;
         ins.targetLabel = "#loop_end_" + loopIndex;
+        ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
 
@@ -321,6 +386,7 @@ public class IRGenerator extends AstVisitor {
         Jump ins = new Jump();
         int loopIndex = loopCnt - 1;
         ins.targetLabel = "#loop_cond_" + loopIndex;
+        ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
 

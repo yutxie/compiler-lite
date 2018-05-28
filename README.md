@@ -10,9 +10,8 @@ ACM Class 2018 Compiler
   - [x] build interference graph
   - [ ] coloring
 - generate target code
-  - [ ] trivial one
-  - [ ] with optimization
 - optimization
+  - reduce nop: no label or exist successor
   - static single assignment
   - coalesce interference graph
 

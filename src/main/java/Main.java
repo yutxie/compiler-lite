@@ -12,7 +12,7 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
 //        String path = "code/program.txt";
-        String path = "code/3.txt";
+        String path = "code/2.txt";
 
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
@@ -36,6 +36,7 @@ public class Main {
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
         IR ir = irGenerator.generateIR(ast);
+        ir.printInformation();
 
         ////////////////////// back end /////////////////////////////
         // non trivial
@@ -43,8 +44,8 @@ public class Main {
 //        defineAndUseCalculator.calculateDefineAndUse(ir);
 //        regisgerAllocator.allocateRegister(ir, registerConfig);
         // trivial
-        allVariableCalculator.calculateAllVariable(ir);
-        trivialRegisterAllocator.allocateRegister(ir, registerConfig);
-        ir.printInformation();
+//        allVariableCalculator.calculateAllVariable(ir);
+//        trivialRegisterAllocator.allocateRegister(ir, registerConfig);
+//        ir.printInformation();
     }
 }
