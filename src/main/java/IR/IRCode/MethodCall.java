@@ -7,7 +7,7 @@ import java.util.*;
 
 public class MethodCall extends IRCode {
 
-    public Operand lhs;
+    public Operand dst;
     public Operand caller;
     public LinkedList<Operand> actualParaVarList = new LinkedList<Operand>();
     public MethodDefinitionNode method;
@@ -16,9 +16,9 @@ public class MethodCall extends IRCode {
     public void printInformation() {
         String callerStr = "";
         if (caller != null) callerStr = caller.getName() + ".";
-        String lhsStr = "";
-        if (lhs != null) lhsStr = lhs.getName() + " = ";
-        System.out.print("call\t" + lhsStr +
+        String dstStr = "";
+        if (dst != null) dstStr = dst.getName() + " = ";
+        System.out.print("call\t" + dstStr +
             callerStr + method.methodName + " ");
         for (Operand item : actualParaVarList)
             System.out.print(item.getName() + " ");

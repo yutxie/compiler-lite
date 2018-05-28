@@ -9,6 +9,8 @@ public class InterferenceGraph {
     class Node {
         Variable var;
         int degree = 0;
+        public boolean selected = false;
+        public int color = -1;
         HashSet<Node> edges = new HashSet<Node>();
 
         Node(Variable var) {
@@ -22,16 +24,20 @@ public class InterferenceGraph {
         }
     }
 
-    HashSet<Node> nodeSet = new HashSet<Node>();
+    public HashSet<Node> nodeSet = new HashSet<Node>();
     HashMap<Variable, Node> varMap = new HashMap<Variable, Node>();
+
+    public void addNode(Variable var) {
+        Node node = varMap.get(var);
+        if (node == null) {
+            varMap.put(var, node = new Node(var));
+            nodeSet.add(node);
+        }
+    }
 
     public void addEdge(Variable uVar, Variable vVar) {
         Node u = varMap.get(uVar);
-        if (u == null) varMap.put(uVar, u = new Node(uVar));
         Node v = varMap.get(vVar);
-        if (v == null) varMap.put(vVar, v = new Node(vVar));
-        nodeSet.add(u);
-        nodeSet.add(v);
         if (u == v) return;
         u.addEdge(v);
         v.addEdge(u);

@@ -6,23 +6,25 @@ import IR.IRCode.*;
 public class CFGGenerator {
 
     public void generateCFG(IR ir) {
-        for (MethodEntity methodEntity : ir.methodList) {
+        for (MethodEntity method : ir.methodList) {
             CFG cfg = new CFG();
-            int n = methodEntity.codeList.size();
-            BasicBlock currentBlock = null;
+            int n = method.codeList.size();
+            BasicBlock currentBlock = new BasicBlock(method.methodName + "_entry");
+            currentBlock.codeList.addLast(new Nop());
+            cfg.addBasicBlock(currentBlock);
             for (int i = 0; i < n; ++i) {
-                IRCode ins = methodEntity.codeList.get(i);
+                IRCode ins = method.codeList.get(i);
                 if (ins.label != null) {
                     BasicBlock node = new BasicBlock(ins.label);
-                    currentBlock = node;
                     cfg.addBasicBlock(node);
+                    cfg.addEdge(currentBlock, node);
+                    currentBlock = node;
                 }
                 currentBlock.codeList.addLast(ins);
             }
             cfg.addEdge();
-            cfg.resolveEdges();
-            for (BasicBlock bb : cfg.edgeMap.keySet())
-                methodEntity.basicBlockList.addLast(bb);
+            cfg.reduceNop();
+            method.basicBlockList = cfg.basicBlockList;
         }
     }
 }

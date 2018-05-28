@@ -4,10 +4,10 @@ import IR.IRCode.Operand.Operand;
 
 public class Push extends IRCode {
 
-    public Operand rhs;
+    public Operand src;
 
     @Override
     public void printInformation() {
-        System.out.println("push\t" + rhs.getName());
+        System.out.println("push\t" + src.getName());
     }
 }

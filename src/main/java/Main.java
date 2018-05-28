@@ -26,7 +26,6 @@ public class Main {
         AllVariableCalculator allVariableCalculator = new AllVariableCalculator();
         RegisterConfig registerConfig = new RegisterConfig();
         RegisterAllocator regisgerAllocator = new RegisterAllocator();
-        TrivialRegisterAllocator trivialRegisterAllocator = new TrivialRegisterAllocator();
 
         ////////////////////// front end ////////////////////////////
         ProgramNode ast = astBuilder.buildAst(path);
@@ -36,16 +35,14 @@ public class Main {
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
         IR ir = irGenerator.generateIR(ast);
-        ir.printInformation();
 
         ////////////////////// back end /////////////////////////////
         // non trivial
-//        cfgGenerator.generateCFG(ir);
-//        defineAndUseCalculator.calculateDefineAndUse(ir);
-//        regisgerAllocator.allocateRegister(ir, registerConfig);
-        // trivial
-//        allVariableCalculator.calculateAllVariable(ir);
-//        trivialRegisterAllocator.allocateRegister(ir, registerConfig);
+        cfgGenerator.generateCFG(ir);
+        defineAndUseCalculator.calculateDefineAndUse(ir);
+        allVariableCalculator.calculateAllVariable(ir);
 //        ir.printInformation();
+        regisgerAllocator.allocateRegister(ir, registerConfig);
+        ir.printInformation();
     }
 }

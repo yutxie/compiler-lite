@@ -4,12 +4,12 @@ import IR.IRCode.Operand.*;
 
 public class Return extends IRCode{
 
-    public Operand returnValue;
+    public Operand src;
 
     @Override
     public void printInformation() {
-        String returnValueStr = "";
-        if (returnValue != null) returnValueStr = returnValue.getName();
-        System.out.println("ret\t\t" + returnValueStr);
+        String srcStr = "";
+        if (src != null) srcStr = src.getName();
+        System.out.println("ret\t\t" + srcStr);
     }
 }

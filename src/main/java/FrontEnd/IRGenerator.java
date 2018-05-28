@@ -83,7 +83,7 @@ public class IRGenerator extends AstVisitor {
         if (node.exprType.getTypeName().equals("string")) {
             node.value = new Variable();
             Allocate ins = new Allocate();
-            ins.lhs = node.value;
+            ins.dst = node.value;
             ins.variableType = node.exprType;
             codeList.addLast(ins);
         } else node.value = new Immediate(node);
@@ -102,8 +102,8 @@ public class IRGenerator extends AstVisitor {
         if (node.initValue != null) {
             visit(node.initValue);
             Move ins = new Move();
-            ins.lhs = var;
-            ins.rhs = node.initValue.value;
+            ins.dst = var;
+            ins.src = node.initValue.value;
             if (node.parent instanceof ProgramNode)
                 ir.global.codeList.addLast(ins);
             else codeList.add(ins);
@@ -120,7 +120,7 @@ public class IRGenerator extends AstVisitor {
                 (ReferenceNode) ((MethodCallExpressionNode) node.member).caller;
             MethodCall ins = (MethodCall) codeList.get(codeList.size() - 1);
             node.value = new Variable();
-            ins.lhs = node.value;
+            ins.dst = node.value;
             ins.caller = node.caller.value;
             ins.method = (MethodDefinitionNode) memberCaller.definitionNode;
         } else if (node.member instanceof ReferenceNode) {
@@ -146,7 +146,7 @@ public class IRGenerator extends AstVisitor {
         super.visit(node);
         node.value = new Variable();
         MethodCall ins = new MethodCall();
-        ins.lhs = node.value;
+        ins.dst = node.value;
         ins.method = node.scope.getMethod(node.caller.referenceName);
         for (ExpressionStatementNode item : node.actualParameterList)
             ins.actualParaVarList.addLast(item.value);
@@ -157,7 +157,7 @@ public class IRGenerator extends AstVisitor {
     void visit(NewExpressionNode node) {
         node.value = new Variable();
         Allocate ins = new Allocate();
-        ins.lhs = node.value;
+        ins.dst = node.value;
         ins.variableType = node.variableType;
     }
 
@@ -168,11 +168,11 @@ public class IRGenerator extends AstVisitor {
         Move mv = new Move();
         switch (node.op) {
             case NOT: case LNOT: case NEGATE:
-                mv.lhs = node.value = new Variable();
-                mv.rhs = node.inner.value;
+                mv.dst = node.value = new Variable();
+                mv.src = node.inner.value;
                 codeList.add(mv);
 
-                cl.lhs = node.value;
+                cl.dst = node.value;
                 switch (node.op) {
                     case NOT: case LNOT: cl.type = Unary.Type.NOT; break;
                     case NEGATE: cl.type = Unary.Type.NEG; break;
@@ -180,18 +180,18 @@ public class IRGenerator extends AstVisitor {
                 codeList.add(cl);
                 break;
             case PREFIX_DEC: case PREFIX_INC:
-                cl.lhs = node.value = node.inner.value;
+                cl.dst = node.value = node.inner.value;
                 if (node.op == UnaryExpressionNode.UnaryOp.PREFIX_DEC)
                     cl.type = Unary.Type.DEC;
                 else cl.type = Unary.Type.INC;
                 codeList.add(cl);
                 break;
             case POSTFIX_DEC: case POSTFIX_INC:
-                mv.lhs = node.value = new Variable();
-                mv.rhs = node.inner.value;
+                mv.dst = node.value = new Variable();
+                mv.src = node.inner.value;
                 codeList.add(mv);
 
-                cl.lhs = node.inner.value;
+                cl.dst = node.inner.value;
                 if (node.op == UnaryExpressionNode.UnaryOp.POSTFIX_DEC)
                     cl.type = Unary.Type.DEC;
                 else cl.type = Unary.Type.INC;
@@ -206,19 +206,19 @@ public class IRGenerator extends AstVisitor {
         super.visit(node);
         if (node.op == ASSIGN) {
             Move ins = new Move();
-            ins.lhs = node.value = node.lhs.value;
-            ins.rhs = node.rhs.value;
+            ins.dst = node.value = node.lhs.value;
+            ins.src = node.rhs.value;
             codeList.add(ins);
             return;
         }
         switch (node.op) {
             case LT: case GT: case LE: case GE: case EQUAL: case NOTEQUAL:
                 Compare cmp = new Compare();
-                cmp.rhs0 = node.lhs.value;
-                cmp.rhs1 = node.rhs.value;
+                cmp.src0 = node.lhs.value;
+                cmp.src1 = node.rhs.value;
                 codeList.addLast(cmp);
                 Set set = new Set();
-                set.lhs = node.value = new Variable();
+                set.dst = node.value = new Variable();
                 switch (node.op) {
                     case LT: set.type = Set.Type.SETL; break;
                     case GT: set.type = Set.Type.SETG; break;
@@ -231,12 +231,12 @@ public class IRGenerator extends AstVisitor {
                 return;
         }
         Move mv = new Move();
-        mv.lhs = node.value = new Variable();
-        mv.rhs = node.lhs.value;
+        mv.dst = node.value = new Variable();
+        mv.src = node.lhs.value;
         codeList.add(mv);
         Binary ins = new Binary();
-        ins.lhs = node.value;
-        ins.rhs = node.rhs.value;
+        ins.dst = node.value;
+        ins.src = node.rhs.value;
         switch (node.op) {
 //            case LSHIFT: ins.type = Binary.Type.LSHIFT; break;
 //            case RSHIFT: ins.type = Binary.Type.RSHIFT; break;
@@ -260,115 +260,115 @@ public class IRGenerator extends AstVisitor {
     void visit(IfStatementNode node) throws Exception {
         /*              ... condition ...
                         cmp cond, 0
-                        jz  #if_false
+                        jz  if_false
                         ... if block ...
-                        jmp #if_end
-            #if_false:  nop
+                        jmp if_end
+            if_false:  nop
                         ... else block ...
-            #if_end:    nop
+            if_end:    nop
                         ...
         */
         int ifIndex = ifCnt++;
 
         visit(node.condition);
         Compare cmp = new Compare();
-        cmp.rhs0 = node.condition.value;
-        cmp.rhs1 = new Immediate(0);
+        cmp.src0 = node.condition.value;
+        cmp.src1 = new Immediate(0);
         codeList.addLast(cmp);
         Jump jump = new Jump();
-        jump.targetLabel = "#if_false_" + ifIndex;
+        jump.targetLabel = "if_false_" + ifIndex;
         jump.type = Jump.Type.JZ;
         codeList.addLast(jump);
 
         visit(node.ifBlock);
         jump = new Jump();
-        jump.targetLabel = "#if_end_" + ifIndex;
+        jump.targetLabel = "if_end_" + ifIndex;
         jump.type = Jump.Type.JMP;
         codeList.addLast(jump);
 
-        labelMap.put("#if_false_" + ifIndex, codeList.size());
+        labelMap.put("if_false_" + ifIndex, codeList.size());
         codeList.addLast(new Nop());
         if (node.elseBlock != null) visit(node.elseBlock);
 
-        labelMap.put("#if_end_" + ifIndex, codeList.size());
+        labelMap.put("if_end_" + ifIndex, codeList.size());
         codeList.addLast(new Nop());
     }
 
     @Override
     void visit(ForStatementNode node) throws Exception {
         /*              ... init ...
-                        jmp #loop_cond
-            #loop_body: nop
+                        jmp loop_cond
+            loop_body: nop
                         ... block ...
                         ... after block ...
-            #loop_cond: ... condition ...
+            loop_cond: ... condition ...
                         cmp cond, 0
-                        jnz #loop_body
-            #loop_end:  nop
+                        jnz loop_body
+            loop_end:  nop
                         ...
          */
         visit(node.init);
         int loopIndex = loopCnt++;
 
         Jump jump = new Jump();
-        jump.targetLabel = "#loop_cond_" + loopIndex;
+        jump.targetLabel = "loop_cond_" + loopIndex;
         jump.type = Jump.Type.JMP;
         codeList.addLast(jump);
 
-        labelMap.put("#loop_body_" + loopIndex, codeList.size());
+        labelMap.put("loop_body_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
         visit(node.block);
         visit(node.afterBlock);
 
-        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
+        labelMap.put("loop_cond_" + loopIndex, codeList.size());
         visit(node.condition);
         Compare cmp = new Compare();
-        cmp.rhs0 = node.condition.value;
-        cmp.rhs1 = new Immediate(0);
+        cmp.src0 = node.condition.value;
+        cmp.src1 = new Immediate(0);
         codeList.addLast(cmp);
         jump = new Jump();
-        jump.targetLabel = "#loop_body_" + loopIndex;
+        jump.targetLabel = "loop_body_" + loopIndex;
         jump.type = Jump.Type.JNZ;
         codeList.add(jump);
 
-        labelMap.put("#loop_end_" + loopIndex, codeList.size());
+        labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
     }
 
     @Override
     void visit(WhileStatementNode node) throws Exception {
-        /*              jmp #loop_cond
-            #loop_body: nop
+        /*              jmp loop_cond
+            loop_body: nop
                         ... block ...
-            #loop_cond: ... condition ...
+            loop_cond: ... condition ...
                         cmp cond, 0
-                        jnz #loop_body
-            #loop_end:  nop
+                        jnz loop_body
+            loop_end:  nop
                         ...
          */
         int loopIndex = loopCnt++;
 
         Jump jump = new Jump();
-        jump.targetLabel = "#loop_cond_" + loopIndex;
+        jump.targetLabel = "loop_cond_" + loopIndex;
         jump.type = Jump.Type.JMP;
         codeList.addLast(jump);
 
-        labelMap.put("#loop_body_" + loopIndex, codeList.size());
+        labelMap.put("loop_body_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
         visit(node.block);
 
-        labelMap.put("#loop_cond_" + loopIndex, codeList.size());
+        labelMap.put("loop_cond_" + loopIndex, codeList.size());
         visit(node.condition);
         Compare cmp = new Compare();
-        cmp.rhs0 = node.condition.value;
-        cmp.rhs1 = new Immediate(0);
+        cmp.src0 = node.condition.value;
+        cmp.src1 = new Immediate(0);
         codeList.addLast(cmp);
         jump = new Jump();
-        jump.targetLabel = "#loop_body_" + loopIndex;
+        jump.targetLabel = "loop_body_" + loopIndex;
         jump.type = Jump.Type.JNZ;
         codeList.add(jump);
 
-        labelMap.put("#loop_end_" + loopIndex, codeList.size());
+        labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
     }
 
@@ -376,7 +376,7 @@ public class IRGenerator extends AstVisitor {
     void visit(BreakStatementNode node) {
         Jump ins = new Jump();
         int loopIndex = loopCnt - 1;
-        ins.targetLabel = "#loop_end_" + loopIndex;
+        ins.targetLabel = "loop_end_" + loopIndex;
         ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
@@ -385,7 +385,7 @@ public class IRGenerator extends AstVisitor {
     void visit(ContinueStatementNode node) {
         Jump ins = new Jump();
         int loopIndex = loopCnt - 1;
-        ins.targetLabel = "#loop_cond_" + loopIndex;
+        ins.targetLabel = "loop_cond_" + loopIndex;
         ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
@@ -395,7 +395,7 @@ public class IRGenerator extends AstVisitor {
         Return ins = new Return();
         if (node.returnValue != null) {
             visit(node.returnValue);
-            ins.returnValue = node.returnValue.value;
+            ins.src = node.returnValue.value;
         }
         codeList.add(ins);
     }

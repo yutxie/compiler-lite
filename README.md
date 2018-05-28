@@ -5,17 +5,23 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- register allocation
-  - [x] liveness analysis
-  - [x] build interference graph
-  - [ ] coloring
 - generate target code
 - optimization
-  - reduce nop: no label or exist successor
+  - coloring start over
+  - reduce #reserved register
   - static single assignment
   - coalesce interference graph
+    - reduce mov x, x
+  - leaf method
+    - inline
+    - reduce sub rsp
 
 ## To-Fix
+
+- calculate def/use/all
+- shortcut in condition
+- register allocation for method parameters
+- built-in class and method
 
 ## Process
 

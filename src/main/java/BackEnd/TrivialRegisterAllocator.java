@@ -66,15 +66,15 @@ public class TrivialRegisterAllocator {
             ...
          */
         Push push = new Push();
-        push.rhs = registerConfig.get("rbp");
+        push.src = registerConfig.get("rbp");
         codeList.add(0, push);
         Move move = new Move();
-        move.lhs = registerConfig.get("rbp");
-        move.rhs = registerConfig.get("rsp");
+        move.dst = registerConfig.get("rbp");
+        move.src = registerConfig.get("rsp");
         codeList.add(1, move);
         Binary sub = new Binary();
-        sub.lhs = registerConfig.get("rsp");
-        sub.rhs = new Immediate(varToAddrMap.size() * 8);
+        sub.dst = registerConfig.get("rsp");
+        sub.src = new Immediate(varToAddrMap.size() * 8);
         sub.type = Binary.Type.SUB;
         codeList.add(2, sub);
     }
@@ -96,33 +96,33 @@ public class TrivialRegisterAllocator {
             add r0, r1
             mov a, r0 */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        if (ins.lhs instanceof Variable) ins.lhs = varToAddrMap.get(ins.lhs);
-        if (ins.rhs instanceof Variable) ins.rhs = varToAddrMap.get(ins.rhs);
-        Operand lhs;
-        if (ins.lhs instanceof Address) {
-            lhs = registerConfig.get("r0");
+        if (ins.dst instanceof Variable) ins.dst = varToAddrMap.get(ins.dst);
+        if (ins.src instanceof Variable) ins.src = varToAddrMap.get(ins.src);
+        Operand dst;
+        if (ins.dst instanceof Address) {
+            dst = registerConfig.get("r0");
             Move move = new Move();
-            move.lhs = lhs;
-            move.rhs = ins.lhs;
+            move.dst = dst;
+            move.src = ins.dst;
             res.addLast(move);
-        } else lhs = ins.lhs;
-        Operand rhs;
-        if (ins.rhs instanceof Address) {
-            rhs = registerConfig.get("r1");
+        } else dst = ins.dst;
+        Operand src;
+        if (ins.src instanceof Address) {
+            src = registerConfig.get("r1");
             Move move = new Move();
-            move.lhs = rhs;
-            move.rhs = ins.rhs;
+            move.dst = src;
+            move.src = ins.src;
             res.addLast(move);
-        } else rhs = ins.rhs;
+        } else src = ins.src;
         Binary bin = new Binary();
-        bin.lhs = lhs;
-        bin.rhs = rhs;
+        bin.dst = dst;
+        bin.src = src;
         bin.type = ins.type;
         res.addLast(bin);
-        if (ins.lhs instanceof Address) {
+        if (ins.dst instanceof Address) {
             Move move = new Move();
-            move.lhs = ins.lhs;
-            move.rhs = lhs;
+            move.dst = ins.dst;
+            move.src = dst;
             res.addLast(move);
         }
         return res;
@@ -138,29 +138,29 @@ public class TrivialRegisterAllocator {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         int offset = -8;
         for (Operand para : ins.actualParaVarList) {
-            Operand rhs;
+            Operand src;
             if (para instanceof Variable) para = varToAddrMap.get(para);
             if (para instanceof Address) {
-                rhs = registerConfig.get("r0");
+                src = registerConfig.get("r0");
                 Move move = new Move();
-                move.lhs = rhs;
-                move.rhs = para;
+                move.dst = src;
+                move.src = para;
                 res.addLast(move);
-            } else rhs = para;
+            } else src = para;
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
             addr.offestNumber = offset;
             Move move = new Move();
-            move.lhs = addr;
-            move.rhs = rhs;
+            move.dst = addr;
+            move.src = src;
             res.addLast(move);
         }
         MethodCall call = new MethodCall();
         call.method = ins.method;
         res.addLast(call);
         Move move = new Move();
-        move.lhs = ins.lhs;
-        move.rhs = registerConfig.get("rax");
+        move.dst = ins.dst;
+        move.src = registerConfig.get("rax");
         res.addLast(move);
         return res;
     }
@@ -170,17 +170,17 @@ public class TrivialRegisterAllocator {
             mov r1, b
             mov a, r1 */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        if (ins.lhs instanceof Variable) ins.lhs = varToAddrMap.get(ins.lhs);
-        if (ins.rhs instanceof Variable) ins.rhs = varToAddrMap.get(ins.rhs);
-        if (ins.rhs instanceof Address && ins.lhs instanceof Address) {
+        if (ins.dst instanceof Variable) ins.dst = varToAddrMap.get(ins.dst);
+        if (ins.src instanceof Variable) ins.src = varToAddrMap.get(ins.src);
+        if (ins.src instanceof Address && ins.dst instanceof Address) {
             Register r1 = registerConfig.get("r1");
             Move move = new Move();
-            move.lhs = r1;
-            move.rhs = ins.rhs;
+            move.dst = r1;
+            move.src = ins.src;
             res.addLast(move);
             move = new Move();
-            move.lhs = ins.lhs;
-            move.rhs = r1;
+            move.dst = ins.dst;
+            move.src = r1;
             res.addLast(move);
         } else res.addLast(ins);
         return res;
@@ -193,18 +193,18 @@ public class TrivialRegisterAllocator {
             pop rbp       |
             ret        */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        if (ins.returnValue != null) {
+        if (ins.src != null) {
             Move move = new Move();
-            move.lhs = registerConfig.get("rax");
-            move.rhs = ins.returnValue;
+            move.dst = registerConfig.get("rax");
+            move.src = ins.src;
             res.addLast(move);
         }
         Move move = new Move();
-        move.lhs = registerConfig.get("rsp");
-        move.rhs = registerConfig.get("rbp");
+        move.dst = registerConfig.get("rsp");
+        move.src = registerConfig.get("rbp");
         res.addLast(move);
         Pop pop = new Pop();
-        pop.rhs = registerConfig.get("rbp");
+        pop.dst = registerConfig.get("rbp");
         res.addLast(pop);
         res.addLast(new Return());
         return res;

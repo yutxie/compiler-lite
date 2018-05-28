@@ -7,16 +7,17 @@ import java.util.*;
 public class RegisterConfig {
 
     // R0-15
-    // RAX 16
+    // RAX 16  c2nvsm: return value
     // RCX 18
     // RDX 19
     // RBX 17
-    // RSP 20
-    // RBP 21
+    // RSP 20  top of global stack
+    // RBP 21  current stack
     // RSI 22
     // RDI 23
 
     ArrayList<Register> regList;
+    public int numOfAssignable = 16;
 
     public RegisterConfig() {
         regList = new ArrayList<Register>();

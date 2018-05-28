@@ -4,11 +4,11 @@ import IR.IRCode.Operand.*;
 
 public class Move extends IRCode{
 
-    public Operand lhs;
-    public Operand rhs;
+    public Operand dst;
+    public Operand src;
 
     @Override
     public void printInformation() {
-        System.out.println("mov\t\t" + lhs.getName() + " " + rhs.getName());
+        System.out.println("mov\t\t" + dst.getName() + " " + src.getName());
     }
 }

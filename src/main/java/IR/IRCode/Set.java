@@ -12,10 +12,10 @@ public class Set extends IRCode {
     }
 
     public Type type;
-    public Operand lhs;
+    public Operand dst;
 
     @Override
     public void printInformation() {
-        System.out.println(type.toString().toLowerCase() + "\t" + lhs.getName());
+        System.out.println(type.toString().toLowerCase() + "\t" + dst.getName());
     }
 }

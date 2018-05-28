@@ -15,11 +15,11 @@ public class Binary extends IRCode {
 
     public Type type;
 
-    public Operand lhs;
-    public Operand rhs;
+    public Operand dst;
+    public Operand src;
 
     @Override
     public void printInformation() {
-        System.out.println(type.toString().toLowerCase() + "\t\t" + lhs.getName() + ", " + rhs.getName());
+        System.out.println(type.toString().toLowerCase() + "\t\t" + dst.getName() + " " + src.getName());
     }
 }

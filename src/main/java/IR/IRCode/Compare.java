@@ -4,11 +4,11 @@ import IR.IRCode.Operand.*;
 
 public class Compare extends IRCode {
 
-    public Operand rhs0;
-    public Operand rhs1;
+    public Operand src0;
+    public Operand src1;
 
     @Override
     public void printInformation() {
-        System.out.println("cmp\t\t" + rhs0.getName() + " " + rhs1.getName());
+        System.out.println("cmp\t\t" + src0.getName() + " " + src1.getName());
     }
 }
