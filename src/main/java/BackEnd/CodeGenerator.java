@@ -36,6 +36,7 @@ public class CodeGenerator {
         else if (ins instanceof Jump) generateCode((Jump)ins);
         else if (ins instanceof MethodCall) generateCode((MethodCall)ins);
         else if (ins instanceof Move) generateCode((Move)ins);
+        else if (ins instanceof Nop) generateCode((Nop)ins);
         else if (ins instanceof Pop) generateCode((Pop)ins);
         else if (ins instanceof Push) generateCode((Push)ins);
         else if (ins instanceof Return) generateCode((Return)ins);
@@ -72,6 +73,10 @@ public class CodeGenerator {
 
     void generateCode(Move ins) throws IOException {
         write("mov", ins.dst, ins.src);
+    }
+
+    void generateCode(Nop ins) throws IOException {
+        write("nop", null, null);
     }
 
     void generateCode(Pop ins) throws IOException {

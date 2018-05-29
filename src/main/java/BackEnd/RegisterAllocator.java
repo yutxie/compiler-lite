@@ -138,16 +138,19 @@ public class RegisterAllocator {
                 toColorStack.listIterator(toColorStack.size());
         while (it.hasPrevious()) {
             InterferenceGraph.Node u = it.previous();
-            int set = 0;
+            HashSet<Integer> set = new HashSet<Integer>();
+//            System.out.println("\nu: " + u.var.getName());
             for (InterferenceGraph.Node v : u.edges) {
                 if (v.color == -1) continue;
-                set |= (1 << v.color);
+//                System.out.println("v: " + v.var.getName() + " " + v.color);
+                set.add(v.color);
             }
-            set = ~set;
-            int idx = (set & (-set)) - 1;
-            if (idx <= n) {
+            int idx;
+            for (idx = 0; idx < n; ++idx)
+                if (!set.contains(idx)) break;
+            if (idx < n) {
                 u.color = idx;
-//                System.out.println("assign color: " + u.var.getName() + " --> " + idx);
+//                System.out.println("assign color: " + u.var.getName() + " --> " + u.color);
                 assignedMap.put(u.var, registerConfig.get(registerConfig.numOfAll - idx - 1));
             }
         }

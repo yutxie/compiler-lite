@@ -330,6 +330,7 @@ public class IRGenerator extends AstVisitor {
                         else jump.type = Jump.Type.JE;
                         break;
                 }
+                codeList.addLast(jump);
                 break;
             default: trivialConditionJump(node, when, label); break;
         }
@@ -392,9 +393,7 @@ public class IRGenerator extends AstVisitor {
             loop_body: nop
                         ... block ...
                         ... after block ...
-            loop_cond: ... condition ...
-                        cmp cond, 0
-                        jnz loop_body
+            loop_cond: ... conditional jump ...
             loop_end:  nop
                         ...
          */
@@ -412,15 +411,7 @@ public class IRGenerator extends AstVisitor {
         visit(node.afterBlock);
 
         labelMap.put("loop_cond_" + loopIndex, codeList.size());
-        visit(node.condition);
-        Compare cmp = new Compare();
-        cmp.src0 = node.condition.value;
-        cmp.src1 = new Immediate(0);
-        codeList.addLast(cmp);
-        jump = new Jump();
-        jump.targetLabel = "loop_body_" + loopIndex;
-        jump.type = Jump.Type.JNZ;
-        codeList.add(jump);
+        conditionJump(node.condition, true, "loop_body_" + loopIndex);
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
@@ -431,9 +422,7 @@ public class IRGenerator extends AstVisitor {
         /*              jmp loop_cond
             loop_body: nop
                         ... block ...
-            loop_cond: ... condition ...
-                        cmp cond, 0
-                        jnz loop_body
+            loop_cond: ... conditional jump ...
             loop_end:  nop
                         ...
          */
@@ -449,15 +438,7 @@ public class IRGenerator extends AstVisitor {
         visit(node.block);
 
         labelMap.put("loop_cond_" + loopIndex, codeList.size());
-        visit(node.condition);
-        Compare cmp = new Compare();
-        cmp.src0 = node.condition.value;
-        cmp.src1 = new Immediate(0);
-        codeList.addLast(cmp);
-        jump = new Jump();
-        jump.targetLabel = "loop_body_" + loopIndex;
-        jump.type = Jump.Type.JNZ;
-        codeList.add(jump);
+        conditionJump(node.condition, true, "loop_body_" + loopIndex);
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());

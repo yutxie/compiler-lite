@@ -36,6 +36,7 @@ public class IRRewriter {
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignRegister((MethodCall)ins);
         else if (ins instanceof Move) assignRegister((Move)ins);
+        else if (ins instanceof Nop) return;
         else if (ins instanceof Return) assignRegister((Return)ins);
         else if (ins instanceof Set) assignRegister((Set)ins);
         else if (ins instanceof Unary) assignRegister((Unary)ins);
@@ -157,6 +158,7 @@ public class IRRewriter {
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignAddress((MethodCall)ins);
         else if (ins instanceof Move) assignAddress((Move)ins);
+        else if (ins instanceof Nop) return;
         else if (ins instanceof Return) assignAddress((Return)ins);
         else if (ins instanceof Set) assignAddress((Set)ins);
         else if (ins instanceof Unary) assignAddress((Unary)ins);
@@ -289,6 +291,7 @@ public class IRRewriter {
         else if (ins instanceof Jump) return dontSpillCode(ins);
         else if (ins instanceof MethodCall) return spillCode((MethodCall)ins);
         else if (ins instanceof Move) return spillCode((Move)ins);
+        else if (ins instanceof Nop) return dontSpillCode(ins);
         else if (ins instanceof Return) return spillCode((Return)ins);
         else if (ins instanceof Set) return dontSpillCode(ins); // support mem
         else if (ins instanceof Unary) return dontSpillCode(ins); // support mem
