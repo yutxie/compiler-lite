@@ -1,6 +1,6 @@
 package BackEnd;
 
-import IR.IRCode.Operand.*;
+import IRCode.Operand.*;
 
 import java.util.*;
 

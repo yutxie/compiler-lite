@@ -1,6 +1,6 @@
-package IR.IRCode;
+package IRCode;
 
-import IR.IRCode.Operand.*;
+import IRCode.Operand.*;
 
 public class Jump extends IRCode {
 

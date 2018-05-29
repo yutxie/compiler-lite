@@ -1,7 +1,14 @@
+int max(int x, int y) {
+    if (x > y) return x;
+    else return y;
+}
+
+int min(int x, int y) {
+    if (x < y) return x;
+    else return y;
+}
+
 int main() {
 
-    while (5 > 4) {
-        if (true) continue;
-        else break;
-    }
+    return max(5, 4);
 }

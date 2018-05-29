@@ -1,9 +1,9 @@
 package BackEnd;
 
 import IR.*;
-import IR.IRCode.*;
-import IR.IRCode.Operand.*;
-import IR.IRCode.Set;
+import IRCode.*;
+import IRCode.Operand.*;
+import IRCode.Set;
 
 import java.util.*;
 
@@ -33,6 +33,7 @@ public class IRRewriter {
     void assignRegister(IRCode ins) throws Exception {
         if (ins instanceof Binary) assignRegister((Binary)ins);
         else if (ins instanceof Compare) assignRegister((Compare)ins);
+        else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignRegister((MethodCall)ins);
         else if (ins instanceof Move) assignRegister((Move)ins);
         else if (ins instanceof Return) assignRegister((Return)ins);
@@ -131,7 +132,8 @@ public class IRRewriter {
             for (IRCode ins : bb.codeList) {
                 HashSet<Variable> varSet = ins.allVariable;
                 for (Variable var : varSet)
-                    assignAddress(var);
+                    if (assignedMap.get(var) == null)
+                        assignAddress(var);
             }
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
@@ -152,6 +154,7 @@ public class IRRewriter {
     void assignAddress(IRCode ins) throws Exception {
         if (ins instanceof Binary) assignAddress((Binary)ins);
         else if (ins instanceof Compare) assignAddress((Compare)ins);
+        else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignAddress((MethodCall)ins);
         else if (ins instanceof Move) assignAddress((Move)ins);
         else if (ins instanceof Return) assignAddress((Return)ins);
@@ -257,7 +260,8 @@ public class IRRewriter {
         codeList.add(1, move);
         Binary sub = new Binary();
         sub.dst = registerConfig.get("rsp");
-        sub.src = new Immediate((varToAddrMap.size() + method.formalParaVarList.size()) * 8);
+        sub.src = new Immediate((varToAddrMap.size() + method.formalParaVarList.size()) * 8 +
+            registerConfig.numOfAll * 8);
         sub.type = Binary.Type.SUB;
         codeList.add(2, sub);
     }
@@ -282,15 +286,20 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(IRCode ins) throws Exception {
         if (ins instanceof Binary) return spillCode((Binary)ins);
         else if (ins instanceof Compare) return spillCode((Compare)ins);
+        else if (ins instanceof Jump) return dontSpillCode(ins);
         else if (ins instanceof MethodCall) return spillCode((MethodCall)ins);
         else if (ins instanceof Move) return spillCode((Move)ins);
         else if (ins instanceof Return) return spillCode((Return)ins);
-//        else if (ins instanceof Set) return spillCode((Set)ins); // support mem
-//        else if (ins instanceof Unary) return spillCode((Unary)ins); // support mem
+        else if (ins instanceof Set) return dontSpillCode(ins); // support mem
+        else if (ins instanceof Unary) return dontSpillCode(ins); // support mem
         throw new Exception();
-//        LinkedList res = new LinkedList();
-//        res.addLast(ins);
-//        return res;
+
+    }
+
+    LinkedList<IRCode> dontSpillCode(IRCode ins) {
+        LinkedList res = new LinkedList();
+        res.addLast(ins);
+        return res;
     }
 
     LinkedList<IRCode> spillCode(Binary ins) {
@@ -353,12 +362,30 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(MethodCall ins) {
         // ATTENTION: assume no caller
         /*  call t = method(paraList) -->
+            store regs
             mov r8 para_i
             mov [rsp -8 -8*i] r8
             call method
+            load regs
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        int offset = -8;
+        int offset;
+
+        offset = 0;
+        for (Variable var : ins.liveOut) {
+            Register reg = assignedMap.get(var);
+            if (reg == null) continue;
+            Address addr = new Address();
+            addr.base = registerConfig.get("rsp");
+            addr.offsetNumber = offset;
+            offset += 8;
+            Move move = new Move();
+            move.dst = addr;
+            move.src = reg;
+            res.addLast(move);
+        }
+
+        offset = -24;
         for (Operand para : ins.actualParaVarList) {
             Operand src;
             if (para instanceof Address) {
@@ -379,6 +406,21 @@ public class IRRewriter {
         MethodCall call = new MethodCall();
         call.method = ins.method;
         res.addLast(call);
+
+        offset = 0;
+        for (Variable var : ins.liveOut) {
+            Register reg = assignedMap.get(var);
+            if (reg == null) continue;
+            Address addr = new Address();
+            addr.base = registerConfig.get("rsp");
+            addr.offsetNumber = offset;
+            offset += 8;
+            Move move = new Move();
+            move.dst = reg;
+            move.src = addr;
+            res.addLast(move);
+        }
+
         Move move = new Move();
         move.dst = ins.dst;
         move.src = registerConfig.get("rax");

@@ -1,7 +1,7 @@
 package BackEnd;
 
 import IR.*;
-import IR.IRCode.*;
+import IRCode.*;
 
 public class CFGGenerator {
 

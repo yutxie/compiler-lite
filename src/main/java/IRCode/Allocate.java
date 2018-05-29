@@ -1,7 +1,7 @@
-package IR.IRCode;
+package IRCode;
 
 import AstNode.*;
-import IR.IRCode.Operand.*;
+import IRCode.Operand.*;
 
 public class Allocate extends IRCode {
 

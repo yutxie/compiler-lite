@@ -1,8 +1,8 @@
 package BackEnd;
 
 import IR.*;
-import IR.IRCode.*;
-import IR.IRCode.Operand.*;
+import IRCode.*;
+import IRCode.Operand.*;
 
 public class AllVariableCalculator {
 

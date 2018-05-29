@@ -1,6 +1,6 @@
 package IR;
 
-import IR.IRCode.*;
+import IRCode.*;
 
 import java.util.*;
 

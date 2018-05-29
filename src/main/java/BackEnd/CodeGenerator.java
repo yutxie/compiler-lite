@@ -1,8 +1,8 @@
 package BackEnd;
 
 import IR.*;
-import IR.IRCode.*;
-import IR.IRCode.Operand.Operand;
+import IRCode.*;
+import IRCode.Operand.Operand;
 
 import java.io.*;
 
@@ -11,14 +11,14 @@ public class CodeGenerator {
     public void generateCode(IR ir) throws Exception {
         System.out.print("default rel\n\n");
         for (MethodEntity method : ir.methodList)
-            System.out.print(("global " + method.methodName + "\n"));
+            System.out.print("global " + method.methodName + "\n");
         System.out.print("\n");
 
         System.out.print("SECTION .text\n\n");
         for (MethodEntity method : ir.methodList) {
-            System.out.print((method.methodName + ":\n"));
+            System.out.print(method.methodName + ":\n");
             for (BasicBlock bb : method.basicBlockList) {
-                System.out.print((bb.leadLabel + ":\n"));
+                System.out.print(bb.leadLabel + ":\n");
                 for (IRCode ins : bb.codeList)
                     generateCode(ins);
             }
@@ -33,6 +33,7 @@ public class CodeGenerator {
     void generateCode(IRCode ins) throws Exception {
         if (ins instanceof Binary) generateCode((Binary)ins);
         else if (ins instanceof Compare) generateCode((Compare)ins);
+        else if (ins instanceof Jump) generateCode((Jump)ins);
         else if (ins instanceof MethodCall) generateCode((MethodCall)ins);
         else if (ins instanceof Move) generateCode((Move)ins);
         else if (ins instanceof Pop) generateCode((Pop)ins);
@@ -44,11 +45,11 @@ public class CodeGenerator {
     }
 
     void write(String opt, Operand opr0, Operand opr1) throws IOException {
-        System.out.print(("\t\t" + opt));
+        System.out.print("\t\t" + opt);
         if (opr0 != null)
-            System.out.print(("\t\t" + opr0.getName()));
+            System.out.print("\t\t" + opr0.getName());
         if (opr1 != null)
-            System.out.print((", " + opr1.getName()));
+            System.out.print(", " + opr1.getName());
         System.out.print("\n");
     }
 
@@ -60,8 +61,13 @@ public class CodeGenerator {
         write("cmp", ins.src0, ins.src1);
     }
 
+    void generateCode(Jump ins) {
+        System.out.print("\t\t" +
+            ins.type.toString().toLowerCase() + "\t\t" + ins.targetLabel + "\n");
+    }
+
     void generateCode(MethodCall ins) throws IOException {
-        System.out.print(("\t\tcall\t\t" + ins.method.methodName + "\n"));
+        System.out.print("\t\tcall\t" + ins.method.methodName + "\n");
     }
 
     void generateCode(Move ins) throws IOException {
@@ -81,7 +87,7 @@ public class CodeGenerator {
     }
 
     void generateCode(Set ins) throws IOException {
-        write("set", ins.dst, null);
+        write(ins.type.toString().toLowerCase(), ins.dst, null);
     }
 
     void generateCode(Unary ins) throws IOException {

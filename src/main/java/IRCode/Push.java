@@ -1,6 +1,6 @@
-package IR.IRCode;
+package IRCode;
 
-import IR.IRCode.Operand.Operand;
+import IRCode.Operand.Operand;
 
 public class Push extends IRCode {
 

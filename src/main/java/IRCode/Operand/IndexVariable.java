@@ -1,4 +1,4 @@
-package IR.IRCode.Operand;
+package IRCode.Operand;
 
 import java.util.HashSet;
 

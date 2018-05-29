@@ -18,9 +18,9 @@ ACM Class 2018 Compiler
 
 ## To-Fix
 
-- global allocation
-- calculate def/use/all
 - shortcut in condition
+- replace set by cmov
+- global allocation
 - built-in class and method
 
 ## Process

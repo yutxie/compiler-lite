@@ -2,7 +2,7 @@ package FrontEnd;
 
 import AstNode.*;
 import Error.*;
-import IR.IRCode.Operand.*;
+import IRCode.Operand.*;
 
 import static Tool.PrintTool.*;
 

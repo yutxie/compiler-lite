@@ -1,7 +1,7 @@
 package IR;
 
-import IR.IRCode.*;
-import IR.IRCode.Operand.*;
+import IRCode.*;
+import IRCode.Operand.*;
 
 import java.util.*;
 

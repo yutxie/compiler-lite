@@ -2,9 +2,9 @@ package FrontEnd;
 
 import AstNode.*;
 import IR.*;
-import IR.IRCode.*;
-import IR.IRCode.Operand.*;
-import IR.IRCode.Set;
+import IRCode.*;
+import IRCode.Operand.*;
+import IRCode.Set;
 
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
 

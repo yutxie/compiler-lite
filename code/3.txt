@@ -3,5 +3,8 @@ int foo(int x) {
 }
 
 int main() {
-    return foo(1);
+    int a = 1;
+    int b = 100;
+    int c = foo(a) + foo(b);
+    return c;
 }

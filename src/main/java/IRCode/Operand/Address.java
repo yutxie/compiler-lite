@@ -1,4 +1,4 @@
-package IR.IRCode.Operand;
+package IRCode.Operand;
 
 import java.util.HashSet;
 
@@ -17,7 +17,7 @@ public class Address extends Operand {
     @Override
     public String getName() {
         String offsetStr = "";
-        if (offsetNumber >= 0) offsetStr = "+" + offsetStr;
+        if (offsetNumber >= 0) offsetStr = "+" + offsetNumber;
         else offsetStr = String.valueOf(offsetNumber);
         return "qword [" + base.getName() + offsetStr + "]";
 //        String scaleStr = "";

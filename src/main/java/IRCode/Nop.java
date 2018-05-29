@@ -1,4 +1,4 @@
-package IR.IRCode;
+package IRCode;
 
 public class Nop extends IRCode {
     @Override
