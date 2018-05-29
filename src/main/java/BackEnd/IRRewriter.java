@@ -18,24 +18,27 @@ public class IRRewriter {
         this.assignedMap = assignedMap;
         this.registerConfig = registerConfig;
         assignRegister(method);
+//        method.printInformation();
         assignAddress(method);
         spillCode(method);
     }
 
     ///////////////////// assign reg //////////////////////////
-    void assignRegister(MethodEntity method) {
+    void assignRegister(MethodEntity method) throws Exception {
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
                 assignRegister(ins);
     }
 
-    void assignRegister(IRCode ins) {
+    void assignRegister(IRCode ins) throws Exception {
         if (ins instanceof Binary) assignRegister((Binary)ins);
         else if (ins instanceof Compare) assignRegister((Compare)ins);
+        else if (ins instanceof MethodCall) assignRegister((MethodCall)ins);
         else if (ins instanceof Move) assignRegister((Move)ins);
         else if (ins instanceof Return) assignRegister((Return)ins);
         else if (ins instanceof Set) assignRegister((Set)ins);
         else if (ins instanceof Unary) assignRegister((Unary)ins);
+        else throw new Exception();
     }
 
     void assignRegister(Binary ins) {
@@ -58,6 +61,20 @@ public class IRRewriter {
             Register reg = assignedMap.get(ins.src1);
             if (reg != null) ins.src1 = reg;
         }
+    }
+
+    void assignRegister(MethodCall ins) {
+        if (ins.dst instanceof Variable) {
+            Register reg = assignedMap.get(ins.dst);
+            if (reg != null) ins.dst = reg;
+        }
+        LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
+        for (Operand para : ins.actualParaVarList)
+            if (para instanceof Variable) {
+                Register reg = assignedMap.get(para);
+                newActualParaVarList.addLast(reg);
+            } else newActualParaVarList.addLast(para);
+        ins.actualParaVarList = newActualParaVarList;
     }
 
     void assignRegister(Move ins) {
@@ -98,34 +115,49 @@ public class IRRewriter {
     void assignAddress(MethodEntity method) throws Exception {
         varToAddrMap = new HashMap<Variable, Address>();
         rbpOffset = -8; // reserve space for old rbp
-        for (Variable var : method.formalParaVarList) // ATTENTION: para
-            assignAddress(var);
-        for (IRCode ins : method.codeList) {
-            HashSet<Variable> varSet = ins.allVariable;
-            for (Variable var : varSet)
-                assignAddress(var);
+        for (Variable var : method.formalParaVarList) {
+            Address addr = new Address();
+            addr.base = registerConfig.get("rbp");
+            addr.offsetNumber = rbpOffset;
+            rbpOffset -= 8;
+            Operand para = assignedMap.get(var);
+            if (para == null) para = assignAddress(var);
+            Move move = new Move();
+            move.dst = para;
+            move.src = addr;
+            method.basicBlockList.getFirst().codeList.addFirst(move);
         }
+        for (BasicBlock bb : method.basicBlockList)
+            for (IRCode ins : bb.codeList) {
+                HashSet<Variable> varSet = ins.allVariable;
+                for (Variable var : varSet)
+                    assignAddress(var);
+            }
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
                 assignAddress(ins);
     }
 
-    void assignAddress(Variable var) {
-        if (varToAddrMap.get(var) != null) return;
-        Address addr = new Address();
+    Address assignAddress(Variable var) {
+        Address addr = varToAddrMap.get(var);
+        if (addr != null) return addr;
+        addr = new Address();
         addr.base = registerConfig.get("rbp");
-        addr.offestNumber = rbpOffset;
+        addr.offsetNumber = rbpOffset;
         varToAddrMap.put(var, addr);
         rbpOffset -= 8;
+        return addr;
     }
 
     void assignAddress(IRCode ins) throws Exception {
         if (ins instanceof Binary) assignAddress((Binary)ins);
         else if (ins instanceof Compare) assignAddress((Compare)ins);
+        else if (ins instanceof MethodCall) assignAddress((MethodCall)ins);
         else if (ins instanceof Move) assignAddress((Move)ins);
         else if (ins instanceof Return) assignAddress((Return)ins);
         else if (ins instanceof Set) assignAddress((Set)ins);
         else if (ins instanceof Unary) assignAddress((Unary)ins);
+        else throw new Exception();
     }
 
     void assignAddress(Binary ins) throws Exception {
@@ -152,6 +184,21 @@ public class IRRewriter {
             if (addr == null) throw new Exception("no address assigned to " + ins.src1.getName());
             else ins.src1 = addr;
         }
+    }
+
+    void assignAddress(MethodCall ins) throws Exception {
+        if (ins.dst instanceof Variable) {
+            Address addr = varToAddrMap.get(ins.dst);
+            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
+            else ins.dst = addr;
+        }
+        LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
+        for (Operand para : ins.actualParaVarList)
+            if (para instanceof Variable) {
+                Address addr = varToAddrMap.get(para);
+                if (addr == null) throw new Exception("no address assigned to " + para.getName());
+                else newActualParaVarList.addLast(addr);
+            } else newActualParaVarList.addLast(para);
     }
 
     void assignAddress(Move ins) throws Exception {
@@ -192,12 +239,30 @@ public class IRRewriter {
     }
 
     //////////////////// spill code //////////////////////////
-    void spillCode(MethodEntity method) {
+    void spillCode(MethodEntity method) throws Exception {
         for (BasicBlock bb : method.basicBlockList)
             spillCode(bb);
+        /*  push rbp     | == enter
+            mov rbp, rsp |
+            sub rsp, #var * 8
+            ...
+         */
+        LinkedList<IRCode> codeList = method.basicBlockList.getFirst().codeList;
+        Push push = new Push();
+        push.src = registerConfig.get("rbp");
+        codeList.add(0, push);
+        Move move = new Move();
+        move.dst = registerConfig.get("rbp");
+        move.src = registerConfig.get("rsp");
+        codeList.add(1, move);
+        Binary sub = new Binary();
+        sub.dst = registerConfig.get("rsp");
+        sub.src = new Immediate((varToAddrMap.size() + method.formalParaVarList.size()) * 8);
+        sub.type = Binary.Type.SUB;
+        codeList.add(2, sub);
     }
 
-    void spillCode(BasicBlock basicBlock) {
+    void spillCode(BasicBlock basicBlock) throws Exception {
         LinkedList<LinkedList<IRCode>> codeListList = new LinkedList<LinkedList<IRCode>>();
         LinkedList<IRCode> codeList = basicBlock.codeList;
         for (ListIterator<IRCode> it = codeList.listIterator(); it.hasNext();) {
@@ -212,27 +277,9 @@ public class IRRewriter {
         for (ListIterator<LinkedList<IRCode>> it = codeListList.listIterator(); it.hasNext();) {
             codeList.addAll(codeList.size(), it.next());
         }
-        if (!basicBlock.leadLabel.endsWith("_entry")) return;
-        /*  push rbp     | == enter
-            mov rbp, rsp |
-            sub rsp, #var * 8
-            ...
-         */
-        Push push = new Push();
-        push.src = registerConfig.get("rbp");
-        codeList.add(0, push);
-        Move move = new Move();
-        move.dst = registerConfig.get("rbp");
-        move.src = registerConfig.get("rsp");
-        codeList.add(1, move);
-        Binary sub = new Binary();
-        sub.dst = registerConfig.get("rsp");
-        sub.src = new Immediate(varToAddrMap.size() * 8);
-        sub.type = Binary.Type.SUB;
-        codeList.add(2, sub);
     }
 
-    LinkedList<IRCode> spillCode(IRCode ins) {
+    LinkedList<IRCode> spillCode(IRCode ins) throws Exception {
         if (ins instanceof Binary) return spillCode((Binary)ins);
         else if (ins instanceof Compare) return spillCode((Compare)ins);
         else if (ins instanceof MethodCall) return spillCode((MethodCall)ins);
@@ -240,21 +287,22 @@ public class IRRewriter {
         else if (ins instanceof Return) return spillCode((Return)ins);
 //        else if (ins instanceof Set) return spillCode((Set)ins); // support mem
 //        else if (ins instanceof Unary) return spillCode((Unary)ins); // support mem
-        LinkedList res = new LinkedList();
-        res.addLast(ins);
-        return res;
+        throw new Exception();
+//        LinkedList res = new LinkedList();
+//        res.addLast(ins);
+//        return res;
     }
 
     LinkedList<IRCode> spillCode(Binary ins) {
         /*  bin a, b -->
-            mov r0, a
-            mov r1, b
-            add r0, r1
-            mov a, r0 */
+            mov r8, a
+            mov r9, b
+            add r8, r9
+            mov a, r8 */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Operand dst;
         if (ins.dst instanceof Address) {
-            dst = registerConfig.get("r0");
+            dst = registerConfig.get("r8");
             Move move = new Move();
             move.dst = dst;
             move.src = ins.dst;
@@ -262,7 +310,7 @@ public class IRRewriter {
         } else dst = ins.dst;
         Operand src;
         if (ins.src instanceof Address) {
-            src = registerConfig.get("r1");
+            src = registerConfig.get("r9");
             Move move = new Move();
             move.dst = src;
             move.src = ins.src;
@@ -284,8 +332,8 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Compare ins) {
         /*  cmp a, b -->
-            mov r0, b
-            cmp a, r0   */
+            mov r8, b
+            cmp a, r8   */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Operand src1;
         if (ins.src1 instanceof Address) {
@@ -305,8 +353,8 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(MethodCall ins) {
         // ATTENTION: assume no caller
         /*  call t = method(paraList) -->
-            mov r0 para_i
-            mov [rsp -8 -8*i] r0
+            mov r8 para_i
+            mov [rsp -8 -8*i] r8
             call method
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
@@ -314,7 +362,7 @@ public class IRRewriter {
         for (Operand para : ins.actualParaVarList) {
             Operand src;
             if (para instanceof Address) {
-                src = registerConfig.get("r0");
+                src = registerConfig.get("r8");
                 Move move = new Move();
                 move.dst = src;
                 move.src = para;
@@ -322,7 +370,7 @@ public class IRRewriter {
             } else src = para;
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
-            addr.offestNumber = offset;
+            addr.offsetNumber = offset;
             Move move = new Move();
             move.dst = addr;
             move.src = src;
@@ -340,18 +388,19 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Move ins) {
         /*  mov a, b -->
-            mov r1, b
-            mov a, r1 */
+            mov r9, b
+            mov a, r9 */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if (ins.dst == ins.src) return res;
         if (ins.src instanceof Address && ins.dst instanceof Address) {
-            Register r1 = registerConfig.get("r1");
+            Register r9 = registerConfig.get("r9");
             Move move = new Move();
-            move.dst = r1;
+            move.dst = r9;
             move.src = ins.src;
             res.addLast(move);
             move = new Move();
             move.dst = ins.dst;
-            move.src = r1;
+            move.src = r9;
             res.addLast(move);
         } else res.addLast(ins);
         return res;

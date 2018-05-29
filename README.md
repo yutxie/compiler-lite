@@ -18,9 +18,9 @@ ACM Class 2018 Compiler
 
 ## To-Fix
 
+- global allocation
 - calculate def/use/all
 - shortcut in condition
-- register allocation for method parameters
 - built-in class and method
 
 ## Process

@@ -1,7 +1,7 @@
-int main() {
+int foo(int x) {
+    return x;
+}
 
-    while (5 > 4) {
-        if (true) continue;
-        else break;
-    }
+int main() {
+    return foo(1);
 }

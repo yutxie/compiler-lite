@@ -145,10 +145,10 @@ public class RegisterAllocator {
             }
             set = ~set;
             int idx = (set & (-set)) - 1;
-            if (idx < n) {
-//                System.out.println("assign color: " + u.var.getName() + " --> " + idx);
+            if (idx <= n) {
                 u.color = idx;
-                assignedMap.put(u.var, registerConfig.get(idx));
+//                System.out.println("assign color: " + u.var.getName() + " --> " + idx);
+                assignedMap.put(u.var, registerConfig.get(registerConfig.numOfAll - idx - 1));
             }
         }
     }
@@ -157,6 +157,8 @@ public class RegisterAllocator {
     InterferenceGraph interGraph;
     void buildInterGraph(MethodEntity method) {
         interGraph = new InterferenceGraph();
+        for (Variable para : method.formalParaVarList)
+            interGraph.addNode(para);
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
                 for (Variable var : ins.allVariable)

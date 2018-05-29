@@ -39,7 +39,7 @@ public class TrivialRegisterAllocator {
         if (varToAddrMap.get(var) != null) return;
         Address addr = new Address();
         addr.base = registerConfig.get("rbp");
-        addr.offestNumber = rbpOffset;
+        addr.offsetNumber = rbpOffset;
         varToAddrMap.put(var, addr);
         rbpOffset -= 8;
     }
@@ -149,7 +149,7 @@ public class TrivialRegisterAllocator {
             } else src = para;
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
-            addr.offestNumber = offset;
+            addr.offsetNumber = offset;
             Move move = new Move();
             move.dst = addr;
             move.src = src;

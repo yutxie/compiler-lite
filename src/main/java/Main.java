@@ -12,7 +12,7 @@ public class Main {
     public static void main(String args[]) throws Exception {
 
 //        String path = "code/program.txt";
-        String path = "code/2.txt";
+        String path = "code/3.txt";
 
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
@@ -26,9 +26,11 @@ public class Main {
         AllVariableCalculator allVariableCalculator = new AllVariableCalculator();
         RegisterConfig registerConfig = new RegisterConfig();
         RegisterAllocator regisgerAllocator = new RegisterAllocator();
+        CodeGenerator codeGenerator = new CodeGenerator();
 
         ////////////////////// front end ////////////////////////////
         ProgramNode ast = astBuilder.buildAst(path);
+//        ast.printInformation(0);
         parentLinker.linkParent(ast);
         Scope toplevelScope = scopeTreeBuilder.buildScopeTree(ast);
         typeDefinitionChecker.checkTypeDefinition(ast);
@@ -43,6 +45,7 @@ public class Main {
         allVariableCalculator.calculateAllVariable(ir);
 //        ir.printInformation();
         regisgerAllocator.allocateRegister(ir, registerConfig);
-        ir.printInformation();
+//        ir.printInformation();
+        codeGenerator.generateCode(ir);
     }
 }
