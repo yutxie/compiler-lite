@@ -17,72 +17,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-114">
-              <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="285">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6">
-              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="185" column="5" lean-forward="true" selection-start-line="185" selection-start-column="5" selection-end-line="185" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-892">
-              <caret line="254" column="34" selection-start-line="254" selection-start-column="34" selection-end-line="254" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#assignRegister#0;class#IRRewriter#0" />
-                <element signature="method#assignRegister#1;class#IRRewriter#0" />
-                <element signature="method#assignRegister#2;class#IRRewriter#0" />
-                <element signature="method#assignRegister#3;class#IRRewriter#0" />
-                <element signature="method#assignRegister#4;class#IRRewriter#0" />
-                <element signature="method#assignRegister#5;class#IRRewriter#0" />
-                <element signature="method#assignRegister#6;class#IRRewriter#0" />
-                <element signature="method#assignRegister#7;class#IRRewriter#0" />
-                <element signature="method#assignAddress#0;class#IRRewriter#0" />
-                <element signature="method#assignAddress#3;class#IRRewriter#0" />
-                <element signature="method#assignAddress#4;class#IRRewriter#0" />
-                <element signature="method#assignAddress#5;class#IRRewriter#0" />
-                <element signature="e#7204#7213#0" expanded="true" />
-                <element signature="method#assignAddress#6;class#IRRewriter#0" />
-                <element signature="method#assignAddress#7;class#IRRewriter#0" />
-                <element signature="method#assignAddress#8;class#IRRewriter#0" />
-                <element signature="method#assignAddress#9;class#IRRewriter#0" />
-                <element signature="e#9350#9370#0" expanded="true" />
-                <element signature="e#11576#11584#0" expanded="true" />
-                <element signature="e#12627#12635#0" expanded="true" />
-                <element signature="e#13354#13362#0" expanded="true" />
-                <element signature="e#14427#14435#0" expanded="true" />
-                <element signature="method#spillCode#7;class#IRRewriter#0" />
               </folding>
             </state>
           </provider>
@@ -217,10 +158,10 @@
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/TrivialRegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/IRCode/Operand/Register.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
   </component>
@@ -243,7 +184,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,8 +223,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -408,7 +349,6 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Tool Output" order="11" weight="0.32740742" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.3249258" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -434,6 +374,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32789317" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3249258" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -824,7 +765,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-892">
+        <state relative-caret-position="1976">
           <caret line="254" column="34" selection-start-line="254" selection-start-column="34" selection-end-line="254" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -840,16 +781,10 @@
             <element signature="method#assignAddress#3;class#IRRewriter#0" />
             <element signature="method#assignAddress#4;class#IRRewriter#0" />
             <element signature="method#assignAddress#5;class#IRRewriter#0" />
-            <element signature="e#7204#7213#0" expanded="true" />
             <element signature="method#assignAddress#6;class#IRRewriter#0" />
             <element signature="method#assignAddress#7;class#IRRewriter#0" />
             <element signature="method#assignAddress#8;class#IRRewriter#0" />
             <element signature="method#assignAddress#9;class#IRRewriter#0" />
-            <element signature="e#9350#9370#0" expanded="true" />
-            <element signature="e#11576#11584#0" expanded="true" />
-            <element signature="e#12627#12635#0" expanded="true" />
-            <element signature="e#13354#13362#0" expanded="true" />
-            <element signature="e#14427#14435#0" expanded="true" />
             <element signature="method#spillCode#7;class#IRRewriter#0" />
           </folding>
         </state>
@@ -857,18 +792,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6">
+        <state relative-caret-position="228">
           <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -884,8 +809,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="185" column="5" lean-forward="true" selection-start-line="185" selection-start-column="5" selection-end-line="185" selection-end-column="5" />
+        <state relative-caret-position="109">
+          <caret line="149" column="30" lean-forward="true" selection-start-line="149" selection-start-column="30" selection-end-line="149" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
 
-//        String path = "code/program.txt";
-        String path = "code/3.txt";
+        String path = "code/program.txt";
+//        String path = "code/3.txt";
 
         AstBuilder astBuilder = new AstBuilder();
         ParentLinker parentLinker = new ParentLinker();
