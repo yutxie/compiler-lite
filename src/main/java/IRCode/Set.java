@@ -14,6 +14,8 @@ public class Set extends IRCode {
     public Type type;
     public Operand dst;
 
+//    Set() {}
+
     @Override
     public void printInformation() {
         System.out.println(type.toString().toLowerCase() + "\t" + dst.getName());

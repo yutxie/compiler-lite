@@ -5,7 +5,7 @@ import IRCode.Operand.*;
 public class Binary extends IRCode {
 
     public enum Type {
-        ADD, SUB,
+        ADD, SUB, IMUL,
         // MUL,DIV, MOD,
         XOR, OR, AND,
 //        LSHIFT, RSHIFT,

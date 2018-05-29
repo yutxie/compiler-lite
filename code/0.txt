@@ -1,6 +1,6 @@
 int main() {
-    int a = 1;
-    int b = 5;
-    int c = a + b;
-    return c;
+    int x = 10;
+    if (x == 10) x = 20;
+    else x = 30;
+    return x;
 }

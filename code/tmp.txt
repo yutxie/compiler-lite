@@ -1,14 +1,6 @@
-int max(int x, int y) {
-    if (x > y) return x;
-    else return y;
-}
-
-int min(int x, int y) {
-    if (x < y) return x;
-    else return y;
-}
-
 int main() {
-
-    return max(5, 4);
+    int x = 10;
+    if (x == 10) x = 20;
+    else x = 30;
+    return x;
 }
