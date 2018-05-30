@@ -30,7 +30,12 @@ public class Register extends Operand {
 
     @Override
     public HashSet<Variable> colorable() {
-        return null;
+        return new HashSet<Variable>();
+    }
+
+    @Override
+    public HashSet<Variable> colorableInIndexOrMember() {
+        return new HashSet<Variable>();
     }
 
     @Override

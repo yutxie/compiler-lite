@@ -27,6 +27,11 @@ public class Immediate extends Operand {
     }
 
     @Override
+    public HashSet<Variable> colorableInIndexOrMember() {
+        return new HashSet<Variable>();
+    }
+
+    @Override
     public String getName() {
         return String.valueOf(value);
     }

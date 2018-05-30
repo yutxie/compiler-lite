@@ -15,6 +15,13 @@ public class MemberVariable extends Operand {
     }
 
     @Override
+    public HashSet<Variable> colorableInIndexOrMember() {
+        HashSet<Variable> res = new HashSet<Variable>();
+        res.addAll(object.colorable());
+        return res;
+    }
+
+    @Override
     public String getName() {
         return object.getName() + "." + memberVar.variableName;
     }

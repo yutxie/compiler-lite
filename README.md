@@ -20,6 +20,7 @@ ACM Class 2018 Compiler
 
 ## To-Fix
 
+- def and use in index/member access
 - replace set by cmov
 - global allocation
 - built-in class and method

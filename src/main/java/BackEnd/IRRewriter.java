@@ -389,10 +389,26 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Allocate ins) {
         /*  allocate dst size -->
+            ... store regs ...
             mov     rdi, size
             call    malloc
+            ... load regs ...
             mov     dst, rax */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+
+        int offset = 0;
+        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+            Register reg = registerConfig.get(i);
+            Address addr = new Address();
+            addr.base = registerConfig.get("rsp");
+            addr.offsetNumber = offset;
+            offset += 8;
+            Move move = new Move();
+            move.dst = addr;
+            move.src = reg;
+            res.addLast(move);
+        }
+
         Move move = new Move();
         move.dst = registerConfig.get("rdi");
         move.src = ins.size;
@@ -401,6 +417,20 @@ public class IRRewriter {
         call.method = new MethodDefinitionNode();
         call.method.methodName = "malloc";
         res.addLast(call);
+
+        offset = 0;
+        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+            Register reg = registerConfig.get(i);
+            Address addr = new Address();
+            addr.base = registerConfig.get("rsp");
+            addr.offsetNumber = offset;
+            offset += 8;
+            move = new Move();
+            move.dst = reg;
+            move.src = addr;
+            res.addLast(move);
+        }
+
         move = new Move();
         move.dst = ins.dst;
         move.src = registerConfig.get("rax");
@@ -478,9 +508,8 @@ public class IRRewriter {
         int offset;
 
         offset = 0;
-        for (Variable var : ins.liveOut) {
-            Register reg = assignedMap.get(var);
-            if (reg == null) continue;
+        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+            Register reg = registerConfig.get(i);
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
             addr.offsetNumber = offset;
@@ -514,9 +543,8 @@ public class IRRewriter {
         res.addLast(call);
 
         offset = 0;
-        for (Variable var : ins.liveOut) {
-            Register reg = assignedMap.get(var);
-            if (reg == null) continue;
+        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+            Register reg = registerConfig.get(i);
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
             addr.offsetNumber = offset;

@@ -27,6 +27,11 @@ public class Variable extends Operand {
     }
 
     @Override
+    public HashSet<Variable> colorableInIndexOrMember() {
+        return new HashSet<Variable>();
+    }
+
+    @Override
     public String getName() {
         return "$" + name;
     }

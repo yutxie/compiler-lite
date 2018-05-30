@@ -15,12 +15,17 @@ public class Address extends Operand {
     }
 
     @Override
+    public HashSet<Variable> colorableInIndexOrMember() {
+        return new HashSet<Variable>();
+    }
+
+    @Override
     public String getName() {
         String offsetRegStr = "";
         if (offsetReg != null) offsetRegStr = "+" + offsetReg.getName() + "*8";
         String offsetStr = "";
         if (offsetNumber >= 0) offsetStr = "+" + offsetNumber;
         else offsetStr = String.valueOf(offsetNumber);
-        return "qword [" + base.getName() + offsetStr + "]";
+        return "qword [" + base.getName() + offsetRegStr + offsetStr + "]";
     }
 }

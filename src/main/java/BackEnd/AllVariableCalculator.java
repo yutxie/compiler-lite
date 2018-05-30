@@ -14,18 +14,21 @@ public class AllVariableCalculator {
     }
 
     public void calculateAllVariable(IRCode ins) throws Exception {
-        if (ins instanceof Allocate) calculateAllVariable((Allocate)ins);
-        else if (ins instanceof Binary) calculateAllVariable((Binary)ins);
-        else if (ins instanceof Compare) calculateAllVariable((Compare)ins);
-        else if (ins instanceof Jump) calculateAllVariable((Jump)ins);
-        else if (ins instanceof MethodCall) calculateAllVariable((MethodCall)ins);
-        else if (ins instanceof Move) calculateAllVariable((Move)ins);
-        else if (ins instanceof Nop) return;
-        else if (ins instanceof Push) calculateAllVariable((Push)ins);
-        else if (ins instanceof Return) calculateAllVariable((Return)ins);
-        else if (ins instanceof Set) calculateAllVariable((Set)ins);
-        else if (ins instanceof Unary) calculateAllVariable((Unary)ins);
-        else throw new Exception();
+        ins.allVariable.addAll(ins.def);
+        ins.allVariable.addAll(ins.use);
+        return;
+//        if (ins instanceof Allocate) calculateAllVariable((Allocate)ins);
+//        else if (ins instanceof Binary) calculateAllVariable((Binary)ins);
+//        else if (ins instanceof Compare) calculateAllVariable((Compare)ins);
+//        else if (ins instanceof Jump) calculateAllVariable((Jump)ins);
+//        else if (ins instanceof MethodCall) calculateAllVariable((MethodCall)ins);
+//        else if (ins instanceof Move) calculateAllVariable((Move)ins);
+//        else if (ins instanceof Nop) return;
+//        else if (ins instanceof Push) calculateAllVariable((Push)ins);
+//        else if (ins instanceof Return) calculateAllVariable((Return)ins);
+//        else if (ins instanceof Set) calculateAllVariable((Set)ins);
+//        else if (ins instanceof Unary) calculateAllVariable((Unary)ins);
+//        else throw new Exception();
     }
 
     public void calculateAllVariable(Allocate ins) {

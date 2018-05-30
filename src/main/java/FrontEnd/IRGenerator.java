@@ -192,11 +192,14 @@ public class IRGenerator extends AstVisitor {
             jump.type = Jump.Type.JMP;
             codeList.addLast(jump);
             labelMap.put("loop_body_" + loopIndex, codeList.size());
-            codeList.addLast(new Nop());
             IndexVariable indexAcess = new IndexVariable();
             indexAcess.array = res;
             indexAcess.index = iter;
             rewriteNew(indexAcess, arrayType.innerTypeNode);
+            Unary inc = new Unary();
+            inc.dst = iter;
+            inc.type = Unary.Type.INC;
+            codeList.addLast(inc);
             labelMap.put("loop_cond_" + loopIndex, codeList.size());
             Compare cmp = new Compare();
             cmp.src0 = iter;
@@ -205,6 +208,7 @@ public class IRGenerator extends AstVisitor {
             jump = new Jump();
             jump.targetLabel = "loop_body_" + loopIndex;
             jump.type = Jump.Type.JL;
+            codeList.addLast(jump);
             labelMap.put("loop_end_" + loopIndex, codeList.size());
             codeList.addLast(new Nop());
         } else throw new Exception();

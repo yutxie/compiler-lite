@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="266">
-              <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+              <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,8 +32,8 @@
       <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+            <state relative-caret-position="193">
+              <caret line="50" column="55" lean-forward="true" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
               <folding>
                 <element signature="method#generateCode#1;class#CodeGenerator#0" />
                 <element signature="method#write#0;class#CodeGenerator#0" />
@@ -47,20 +47,7 @@
                 <element signature="method#generateCode#9;class#CodeGenerator#0" />
                 <element signature="method#generateCode#10;class#CodeGenerator#0" />
                 <element signature="method#generateCode#11;class#CodeGenerator#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="153" column="48" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
-                <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
+                <element signature="method#generateCode#12;class#CodeGenerator#0" />
               </folding>
             </state>
           </provider>
@@ -69,24 +56,25 @@
       <file leaf-file-name="AllVariableCalculator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+            <state relative-caret-position="288">
+              <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
               <folding>
-                <element signature="e#1351#1352#0" expanded="true" />
-                <element signature="e#1410#1411#0" expanded="true" />
-                <element signature="method#calculateAllVariable#3;class#AllVariableCalculator#0" />
-                <element signature="method#calculateAllVariable#4;class#AllVariableCalculator#0" />
-                <element signature="method#calculateAllVariable#5;class#AllVariableCalculator#0" />
-                <element signature="method#calculateAllVariable#6;class#AllVariableCalculator#0" />
-                <element signature="method#calculateAllVariable#7;class#AllVariableCalculator#0" />
-                <element signature="e#2228#2229#0" expanded="true" />
-                <element signature="e#2287#2288#0" expanded="true" />
-                <element signature="method#calculateAllVariable#9;class#AllVariableCalculator#0" />
-                <element signature="e#2480#2481#0" expanded="true" />
-                <element signature="e#2539#2540#0" expanded="true" />
-                <element signature="e#2590#2591#0" expanded="true" />
-                <element signature="e#2649#2650#0" expanded="true" />
+                <element signature="e#1328#1329#0" expanded="true" />
+                <element signature="e#1387#1388#0" expanded="true" />
+                <element signature="e#2210#2211#0" expanded="true" />
+                <element signature="e#2269#2270#0" expanded="true" />
+                <element signature="e#2462#2463#0" expanded="true" />
+                <element signature="e#2521#2522#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefineAndUseCalculator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="90" column="55" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -103,10 +91,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rhs</find>
-      <find>assignAddressToVariable</find>
-      <find>src</find>
-      <find>loop_cond_</find>
       <find>System</find>
       <find>build</find>
       <find>Sys</find>
@@ -133,10 +117,12 @@
       <find>r9</find>
       <find>indexAccess</find>
       <find>new Allocate</find>
+      <find>int i</find>
+      <find>int i = 0</find>
+      <find>colorable()</find>
+      <find>colorableInIndexOrMember</find>
     </findStrings>
     <replaceStrings>
-      <replace>Binary</replace>
-      <replace>Unary</replace>
       <replace>insList</replace>
       <replace>codeList</replace>
       <replace>addAll</replace>
@@ -165,6 +151,8 @@
       <replace>LinkedList&lt;IRCode&gt;</replace>
       <replace>rewriteIndexAndMember</replace>
       <replace>memberAccess</replace>
+      <replace>int i = 8</replace>
+      <replace>colorable(false)</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -173,12 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/IR/IR.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/Reg/RegisterAllocator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AstNode/ExpressionStatementNode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/Scope.java" />
-        <option value="$PROJECT_DIR$/src/main/java/IR/IRCode/Operand/MemberVariable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/IR/IRCode/Operand/IndexVariable.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/Reg/InterferenceGraph.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/Reg/DefineAndUseCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/IRCode/Operand/Operand.java" />
@@ -215,14 +197,20 @@
         <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/ScopeTreeBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/ParentLinker.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IndexAndMemberRewriter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Operand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Variable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Register.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/MemberVariable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Immediate.java" />
+        <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/IndexVariable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -289,15 +277,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="IRCode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="IRCode" type="462c0819:PsiDirectoryNode" />
-              <item name="Operand" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -491,12 +470,6 @@
           <properties />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="119" />
-        </line-breakpoint>
       </breakpoints>
       <option name="time" value="121" />
     </breakpoint-manager>
@@ -615,31 +588,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Operand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Variable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IR/IR.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="28" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Immediate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -748,13 +700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="8" column="4" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="16" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="43" column="60" selection-start-line="43" selection-start-column="60" selection-end-line="43" selection-end-column="60" />
         </state>
       </provider>
     </entry>
@@ -939,81 +884,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="271" selection-start-line="271" selection-end-line="271" />
+        <state relative-caret-position="329">
+          <caret line="153" column="48" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
           <folding>
-            <element signature="method#rewriteIR#0;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#0;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#1;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#2;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#3;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#4;class#IRRewriter#0" />
-            <element signature="method#rewriteIndexAndMember#5;class#IRRewriter#0" />
-            <element signature="e#4831#5106#0" />
-            <element signature="e#5320#5595#0" />
-            <element signature="e#5599#5874#0" />
-            <element signature="e#5825#6100#0" />
-            <element signature="e#6048#6323#0" />
-            <element signature="method#assignRegister#0;class#IRRewriter#0" />
-            <element signature="method#assignRegister#1;class#IRRewriter#0" />
-            <element signature="method#assignRegister#1;class#IRRewriter#0" />
-            <element signature="method#assignRegister#2;class#IRRewriter#0" />
-            <element signature="method#assignRegister#4;class#IRRewriter#0" />
-            <element signature="method#assignRegister#5;class#IRRewriter#0" />
-            <element signature="method#assignRegister#4;class#IRRewriter#0" />
-            <element signature="method#assignRegister#5;class#IRRewriter#0" />
-            <element signature="method#assignAddress#0;class#IRRewriter#0" />
-            <element signature="method#getAddress#0;class#IRRewriter#0" />
-            <element signature="method#assignAddress#2;class#IRRewriter#0" />
-            <element signature="method#assignAddress#3;class#IRRewriter#0" />
-            <element signature="method#assignAddress#4;class#IRRewriter#0" />
-            <element signature="method#assignAddress#4;class#IRRewriter#0" />
-            <element signature="method#assignAddress#6;class#IRRewriter#0" />
-            <element signature="method#assignAddress#7;class#IRRewriter#0" />
-            <element signature="method#assignAddress#8;class#IRRewriter#0" />
-            <element signature="method#assignAddress#9;class#IRRewriter#0" />
-            <element signature="method#assignAddress#10;class#IRRewriter#0" />
-            <element signature="method#spillCode#0;class#IRRewriter#0" />
-            <element signature="method#spillCode#1;class#IRRewriter#0" />
-            <element signature="method#spillCode#2;class#IRRewriter#0" />
-            <element signature="method#dontSpillCode#0;class#IRRewriter#0" />
-            <element signature="method#spillCode#3;class#IRRewriter#0" />
-            <element signature="method#spillCode#4;class#IRRewriter#0" />
-            <element signature="method#spillCode#4;class#IRRewriter#0" />
-            <element signature="method#spillCode#5;class#IRRewriter#0" />
-            <element signature="method#spillCode#6;class#IRRewriter#0" />
-            <element signature="method#spillCode#7;class#IRRewriter#0" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+            <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="23" column="60" lean-forward="true" selection-start-line="23" selection-start-column="60" selection-end-line="23" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/IndexVariable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/MemberVariable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="215" column="50" selection-start-line="215" selection-start-column="50" selection-end-line="215" selection-end-column="50" />
+        <state relative-caret-position="288">
+          <caret line="183" column="31" lean-forward="true" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
           <folding>
             <element signature="method#generateIR#0;class#IRGenerator#0" />
             <element signature="method#visit#0;class#IRGenerator#0" />
@@ -1029,8 +915,6 @@
             <element signature="method#visit#9;class#IRGenerator#0" />
             <element signature="method#visit#11;class#IRGenerator#0" />
             <element signature="method#visit#12;class#IRGenerator#0" />
-            <element signature="e#8510#8556#0" />
-            <element signature="e#9575#9639#0" />
             <element signature="method#conditionJump#0;class#IRGenerator#0" />
             <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
             <element signature="method#conditionJump#1;class#IRGenerator#0" />
@@ -1045,52 +929,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="153" column="48" selection-start-line="153" selection-start-column="48" selection-end-line="153" selection-end-column="48" />
+        <state relative-caret-position="-221">
+          <caret line="495" column="5" lean-forward="true" selection-start-line="495" selection-start-column="5" selection-end-line="495" selection-end-column="5" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
-            <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
-          <folding>
-            <element signature="e#1351#1352#0" expanded="true" />
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="method#calculateAllVariable#3;class#AllVariableCalculator#0" />
-            <element signature="method#calculateAllVariable#4;class#AllVariableCalculator#0" />
-            <element signature="method#calculateAllVariable#5;class#AllVariableCalculator#0" />
-            <element signature="method#calculateAllVariable#6;class#AllVariableCalculator#0" />
-            <element signature="method#calculateAllVariable#7;class#AllVariableCalculator#0" />
-            <element signature="e#2228#2229#0" expanded="true" />
-            <element signature="e#2287#2288#0" expanded="true" />
-            <element signature="method#calculateAllVariable#9;class#AllVariableCalculator#0" />
-            <element signature="e#2480#2481#0" expanded="true" />
-            <element signature="e#2539#2540#0" expanded="true" />
-            <element signature="e#2590#2591#0" expanded="true" />
-            <element signature="e#2649#2650#0" expanded="true" />
+            <element signature="e#340#725#0" />
+            <element signature="e#731#1493#0" />
+            <element signature="e#1499#2423#0" />
+            <element signature="e#2429#3969#0" />
+            <element signature="e#3975#4254#0" />
+            <element signature="e#4260#4535#0" />
+            <element signature="e#4541#4821#0" />
+            <element signature="e#6269#6530#0" />
+            <element signature="e#6536#6764#0" />
+            <element signature="e#6770#7502#0" />
+            <element signature="e#7643#7768#0" />
+            <element signature="e#7774#7904#0" />
+            <element signature="e#8766#9878#0" />
+            <element signature="e#9884#10207#0" />
+            <element signature="e#10518#11241#0" />
+            <element signature="e#11247#11390#0" />
+            <element signature="e#11396#11535#0" />
+            <element signature="e#11691#12038#0" />
+            <element signature="e#12044#12181#0" />
+            <element signature="e#12187#12284#0" />
+            <element signature="e#12290#12384#0" />
+            <element signature="e#12390#12486#0" />
+            <element signature="e#12492#13442#0" />
+            <element signature="e#13448#14028#0" />
+            <element signature="e#14034#14851#0" />
+            <element signature="e#14857#14998#0" />
+            <element signature="e#16803#16811#0" expanded="true" />
+            <element signature="e#17854#17862#0" expanded="true" />
+            <element signature="e#18626#18634#0" expanded="true" />
+            <element signature="e#19538#20183#0" />
+            <element signature="e#20189#20931#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state relative-caret-position="193">
+          <caret line="50" column="55" lean-forward="true" selection-start-line="50" selection-start-column="55" selection-end-line="50" selection-end-column="55" />
           <folding>
             <element signature="method#generateCode#1;class#CodeGenerator#0" />
             <element signature="method#write#0;class#CodeGenerator#0" />
@@ -1104,14 +986,110 @@
             <element signature="method#generateCode#9;class#CodeGenerator#0" />
             <element signature="method#generateCode#10;class#CodeGenerator#0" />
             <element signature="method#generateCode#11;class#CodeGenerator#0" />
+            <element signature="method#generateCode#12;class#CodeGenerator#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Variable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#595#596#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+          <folding>
+            <element signature="e#385#386#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="37" column="37" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
+          <folding>
+            <element signature="e#856#857#0" expanded="true" />
+            <element signature="e#883#884#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/MemberVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <folding>
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#294#295#0" expanded="true" />
+            <element signature="e#412#422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Immediate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="30" column="37" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="e#678#679#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/IndexVariable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+          <folding>
+            <element signature="e#370#380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Operand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="4" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+          <folding>
+            <element signature="e#1328#1329#0" expanded="true" />
+            <element signature="e#1387#1388#0" expanded="true" />
+            <element signature="e#2210#2211#0" expanded="true" />
+            <element signature="e#2269#2270#0" expanded="true" />
+            <element signature="e#2462#2463#0" expanded="true" />
+            <element signature="e#2521#2522#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="90" column="55" selection-start-line="90" selection-start-column="31" selection-end-line="90" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
-          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

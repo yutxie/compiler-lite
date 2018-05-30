@@ -47,7 +47,6 @@ public class Main {
 //        ir.printInformation();
         defineAndUseCalculator.calculateDefineAndUse(ir);
         allVariableCalculator.calculateAllVariable(ir);
-//        ir.printInformation();
         regisgerAllocator.allocateRegister(ir, registerConfig);
 //        ir.printInformation();
         codeGenerator.generateCode(ir);
