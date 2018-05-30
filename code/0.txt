@@ -1,5 +1,23 @@
 int main() {
-    int[][] a = new int[1][1];
-    a[0][0] = 10;
-    return a[0][0] + 20;
+    int la = 5;
+    int lb = 10;
+    int[] a;
+    int[] b = new int[lb];
+    a = new int[la];
+
+    int cnt = 0;
+    int i;
+    int j;
+    for (j = 0; j < la; ++j)
+        a[j] = ++cnt;
+    for (j = 0; j < la; ++j)
+        b[j] = ++cnt;
+    for (j = la; j < lb; ++j)
+        b[j] = ++cnt;
+
+    int sum = 0;
+    for (i = 0; i < la; ++i) sum = sum + a[i];
+    // for (i = 0; i < lb; ++i) sum = sum + b[i];
+
+    return a[0];
 }

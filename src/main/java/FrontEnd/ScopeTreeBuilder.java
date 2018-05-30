@@ -176,4 +176,24 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.scope = node.parent.scope;
         super.visit(node);
     }
+
+    @Override void visit(NonArrayTypeNode node) throws SemanticException {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(PrimitiveTypeNode node) {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(ClassTypeNode node) throws SemanticException {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
+
+    @Override void visit(ArrayTypeNode node) throws Exception {
+        node.scope = node.parent.scope;
+        super.visit(node);
+    }
 }

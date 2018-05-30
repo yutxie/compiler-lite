@@ -1,5 +1,6 @@
 package BackEnd;
 
+import AstNode.DefinitionExpressionNode;
 import IR.*;
 import IRCode.*;
 import IRCode.Set;
@@ -69,8 +70,10 @@ public class MultiIndexAndMemberRewriter {
         } else if (oprand instanceof MemberVariable) {
             MemberVariable memberAccess = (MemberVariable) oprand;
             Operand object = rewriteMultiIndexandMember(memberAccess.object, codeList, false);
+            DefinitionExpressionNode memberVar = memberAccess.memberVar;
             memberAccess = new MemberVariable();
             memberAccess.object = object;
+            memberAccess.memberVar = memberVar;
             if (outest) return memberAccess;
             else {
                 Variable tmp = new Variable();
