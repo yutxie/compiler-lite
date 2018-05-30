@@ -80,13 +80,14 @@ public class IRGenerator extends AstVisitor {
     }
 
     @Override
-    void visit(ConstantNode node) {
+    void visit(ConstantNode node) throws Exception {
         if (node.exprType.getTypeName().equals("string")) {
-            node.value = new Variable();
-            Allocate ins = new Allocate();
-            ins.dst = node.value;
-            ins.variableType = node.exprType;
-            codeList.addLast(ins);
+//            node.value = new Variable();
+//            Allocate ins = new Allocate();
+//            ins.dst = node.value;
+//            ins.variableType = node.exprType;
+//            codeList.addLast(ins);
+            throw new Exception();
         } else node.value = new Immediate(node);
     }
 
@@ -154,12 +155,65 @@ public class IRGenerator extends AstVisitor {
         codeList.add(ins);
     }
 
+    void rewriteNew(Operand res, TypeNode type) throws Exception {
+        if (type instanceof ClassTypeNode) { // new class
+            ClassDefinitionNode classDef = ((ClassTypeNode) type).referenceClass;
+            if (classDef.memberConstructionMethodList.isEmpty()) {
+                Allocate allocate = new Allocate();
+                allocate.dst = res;
+                allocate.size = new Immediate(classDef.memberVariableList.size());
+                codeList.addLast(allocate);
+            } else {
+                // ATTENTION: call construction method
+                throw new Exception();
+            }
+        } else if (type instanceof PrimitiveTypeNode) return;
+        else if (type instanceof ArrayTypeNode) {
+            ArrayTypeNode arrayType = (ArrayTypeNode) type;
+            if (arrayType.size == null) return; // new int[]
+            /*  res = new unit[size];
+                i = 0;
+                while (i < size)
+                    res[i] = new unit;  */
+            visit(arrayType.size);
+            Operand size = arrayType.size.value;
+            Allocate allocate = new Allocate();
+            allocate.dst = res;
+            allocate.size = size;
+            codeList.addLast(allocate);
+            Variable iter = new Variable();
+            Move move = new Move();
+            move.dst = iter;
+            move.src = new Immediate(0);
+            codeList.addLast(move);
+            int loopIndex = loopCnt++;
+            Jump jump = new Jump();
+            jump.targetLabel = "loop_cond_" + loopIndex;
+            jump.type = Jump.Type.JMP;
+            codeList.addLast(jump);
+            labelMap.put("loop_body_" + loopIndex, codeList.size());
+            codeList.addLast(new Nop());
+            IndexVariable indexAcess = new IndexVariable();
+            indexAcess.array = res;
+            indexAcess.index = iter;
+            rewriteNew(indexAcess, arrayType.innerTypeNode);
+            labelMap.put("loop_cond_" + loopIndex, codeList.size());
+            Compare cmp = new Compare();
+            cmp.src0 = iter;
+            cmp.src1 = size;
+            codeList.addLast(cmp);
+            jump = new Jump();
+            jump.targetLabel = "loop_body_" + loopIndex;
+            jump.type = Jump.Type.JL;
+            labelMap.put("loop_end_" + loopIndex, codeList.size());
+            codeList.addLast(new Nop());
+        } else throw new Exception();
+    }
+
     @Override
-    void visit(NewExpressionNode node) {
+    void visit(NewExpressionNode node) throws Exception {
         node.value = new Variable();
-        Allocate ins = new Allocate();
-        ins.dst = node.value;
-        ins.variableType = node.variableType;
+        rewriteNew(node.value, node.variableType);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package BackEnd;
 
+import AstNode.ClassDefinitionNode;
+import AstNode.DefinitionExpressionNode;
+import AstNode.MethodDefinitionNode;
 import IR.*;
 import IRCode.*;
 import IRCode.Operand.*;
@@ -17,10 +20,140 @@ public class IRRewriter {
                    RegisterConfig registerConfig) throws Exception {
         this.assignedMap = assignedMap;
         this.registerConfig = registerConfig;
+        rewriteIndexAndMember(method);
         assignRegister(method);
-//        method.printInformation();
         assignAddress(method);
         spillCode(method);
+    }
+
+    //////////////////// rewrite index and member /////////////
+    void rewriteIndexAndMember(MethodEntity method) throws Exception {
+        for (BasicBlock bb : method.basicBlockList) {
+            LinkedList<LinkedList<IRCode>> codeListList = new LinkedList<LinkedList<IRCode>>();
+            LinkedList<IRCode> codeList = bb.codeList;
+            for (ListIterator<IRCode> it = codeList.listIterator(); it.hasNext();) {
+                IRCode ins = it.next();
+                codeListList.addLast(rewriteIndexAndMember(ins));
+            }
+            codeList.clear();
+            for (ListIterator<LinkedList<IRCode>> it = codeListList.listIterator(); it.hasNext();) {
+                codeList.addAll(codeList.size(), it.next());
+            }
+        }
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(IRCode ins) throws Exception {
+        if (ins instanceof Allocate) return rewriteIndexAndMember((Allocate)ins);
+        else if (ins instanceof Binary) return rewriteIndexAndMember((Binary)ins);
+        else if (ins instanceof Compare) return rewriteIndexAndMember((Compare)ins);
+        else if (ins instanceof Jump) return dontSpillCode(ins); // the same as spill code
+        else if (ins instanceof MethodCall) return rewriteIndexAndMember((MethodCall)ins);
+        else if (ins instanceof Move) return rewriteIndexAndMember((Move)ins);
+        else if (ins instanceof Nop) return dontSpillCode(ins);
+        else if (ins instanceof Return) return rewriteIndexAndMember((Return)ins);
+        else if (ins instanceof Set) return rewriteIndexAndMember((Set)ins);
+        else if (ins instanceof Unary) return rewriteIndexAndMember((Unary)ins);
+        throw new Exception();
+    }
+
+    Operand rewriteIndexAndMember(Operand oprand, LinkedList<IRCode> codeList) {
+        if (oprand instanceof IndexVariable) {
+            IndexVariable indexAccess = (IndexVariable) oprand;
+            Register base = registerConfig.get("r8"); // ATTENTION
+            Register index = registerConfig.get("r9");
+            Move move = new Move();
+            move.dst = base;
+            move.src = indexAccess.array;
+            codeList.addLast(move);
+            move = new Move();
+            move.dst = index;
+            move.src = indexAccess.index;
+            codeList.addLast(move);
+            Address addr = new Address();
+            addr.base = base;
+            addr.offsetReg = index;
+            return addr;
+        } else if (oprand instanceof MemberVariable) {
+            MemberVariable memberAccess = (MemberVariable) oprand;
+            Register base = registerConfig.get("r8"); // ATTENTION
+            Move move = new Move();
+            move.dst = base;
+            move.src = memberAccess.object;
+            codeList.addLast(move);
+            int index = 0;
+            ClassDefinitionNode classDef = (ClassDefinitionNode) memberAccess.memberVar.parent;
+            for (DefinitionExpressionNode memberVarDef : classDef.memberVariableList)
+                if (memberVarDef != memberAccess.memberVar) ++index;
+                else break;
+            Address addr = new Address();
+            addr.base = base;
+            addr.offsetNumber = index * 8;
+            return addr;
+        } else return oprand;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Allocate ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.size = rewriteIndexAndMember(ins.size, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Binary ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.src = rewriteIndexAndMember(ins.src, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Compare ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.src0 = rewriteIndexAndMember(ins.src0, res);
+        ins.src1 = rewriteIndexAndMember(ins.src1, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(MethodCall ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
+        for (Operand para : ins.actualParaVarList)
+            newActualParaVarList.addLast(rewriteIndexAndMember(para, res));
+        ins.actualParaVarList = newActualParaVarList;
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Move ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.src = rewriteIndexAndMember(ins.src, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Return ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.src = rewriteIndexAndMember(ins.src, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Set ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> rewriteIndexAndMember(Unary ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        res.addLast(ins);
+        return res;
     }
 
     ///////////////////// assign reg //////////////////////////
@@ -30,8 +163,17 @@ public class IRRewriter {
                 assignRegister(ins);
     }
 
+    Operand assignRegister(Operand var) {
+        if (var instanceof Variable) {
+            Register reg = assignedMap.get(var);
+            if (reg == null) return var;
+            else return reg;
+        } else return var;
+    }
+
     void assignRegister(IRCode ins) throws Exception {
-        if (ins instanceof Binary) assignRegister((Binary)ins);
+        if (ins instanceof Allocate) assignRegister((Allocate)ins);
+        else if (ins instanceof Binary) assignRegister((Binary)ins);
         else if (ins instanceof Compare) assignRegister((Compare)ins);
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignRegister((MethodCall)ins);
@@ -43,72 +185,44 @@ public class IRRewriter {
         else throw new Exception();
     }
 
+    void assignRegister(Allocate ins) {
+        ins.dst = assignRegister(ins.dst);
+        ins.size = assignRegister(ins.size);
+    }
+
     void assignRegister(Binary ins) {
-        if (ins.dst instanceof Variable) {
-            Register reg = assignedMap.get(ins.dst);
-            if (reg != null) ins.dst = reg;
-        }
-        if (ins.src instanceof Variable) {
-            Register reg = assignedMap.get(ins.src);
-            if (reg != null) ins.src = reg;
-        }
+        ins.dst = assignRegister(ins.dst);
+        ins.src = assignRegister(ins.src);
     }
 
     void assignRegister(Compare ins) {
-        if (ins.src0 instanceof Variable) {
-            Register reg = assignedMap.get(ins.src0);
-            if (reg != null) ins.src0 = reg;
-        }
-        if (ins.src1 instanceof Variable) {
-            Register reg = assignedMap.get(ins.src1);
-            if (reg != null) ins.src1 = reg;
-        }
+        ins.src0 = assignRegister(ins.src0);
+        ins.src1 = assignRegister(ins.src1);
     }
 
     void assignRegister(MethodCall ins) {
-        if (ins.dst instanceof Variable) {
-            Register reg = assignedMap.get(ins.dst);
-            if (reg != null) ins.dst = reg;
-        }
+        ins.dst = assignRegister(ins.dst);
         LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
         for (Operand para : ins.actualParaVarList)
-            if (para instanceof Variable) {
-                Register reg = assignedMap.get(para);
-                newActualParaVarList.addLast(reg);
-            } else newActualParaVarList.addLast(para);
+            newActualParaVarList.addLast(assignRegister(para));
         ins.actualParaVarList = newActualParaVarList;
     }
 
     void assignRegister(Move ins) {
-        if (ins.dst instanceof Variable) {
-            Register reg = assignedMap.get(ins.dst);
-            if (reg != null) ins.dst = reg;
-        }
-        if (ins.src instanceof Variable) {
-            Register reg = assignedMap.get(ins.src);
-            if (reg != null) ins.src = reg;
-        }
+        ins.dst = assignRegister(ins.dst);
+        ins.src = assignRegister(ins.src);
     }
 
     void assignRegister(Return ins) {
-        if (ins.src instanceof Variable) {
-            Register reg = assignedMap.get(ins.src);
-            if (reg != null) ins.src = reg;
-        }
+        ins.src = assignRegister(ins.src);
     }
 
     void assignRegister(Set ins) {
-        if (ins.dst instanceof Variable) {
-            Register reg = assignedMap.get(ins.dst);
-            if (reg != null) ins.dst = reg;
-        }
+        ins.dst = assignRegister(ins.dst);
     }
 
     void assignRegister(Unary ins) {
-        if (ins.dst instanceof Variable) {
-            Register reg = assignedMap.get(ins.dst);
-            if (reg != null) ins.dst = reg;
-        }
+        ins.dst = assignRegister(ins.dst);
     }
 
     //////////////////// assign addr //////////////////////////
@@ -123,7 +237,7 @@ public class IRRewriter {
             addr.offsetNumber = rbpOffset;
             rbpOffset -= 8;
             Operand para = assignedMap.get(var);
-            if (para == null) para = assignAddress(var);
+            if (para == null) para = getAddress(var);
             Move move = new Move();
             move.dst = para;
             move.src = addr;
@@ -134,14 +248,14 @@ public class IRRewriter {
                 HashSet<Variable> varSet = ins.allVariable;
                 for (Variable var : varSet)
                     if (assignedMap.get(var) == null)
-                        assignAddress(var);
+                        getAddress(var);
             }
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
                 assignAddress(ins);
     }
 
-    Address assignAddress(Variable var) {
+    Address getAddress(Variable var) {
         Address addr = varToAddrMap.get(var);
         if (addr != null) return addr;
         addr = new Address();
@@ -152,8 +266,17 @@ public class IRRewriter {
         return addr;
     }
 
+    Operand assignAddress(Operand var) throws Exception {
+        if (var instanceof Variable) {
+            Address addr = varToAddrMap.get(var);
+            if (addr == null) throw new Exception("no address assigned to " + var.getName());
+            else return addr;
+        } else return var;
+    }
+
     void assignAddress(IRCode ins) throws Exception {
-        if (ins instanceof Binary) assignAddress((Binary)ins);
+        if (ins instanceof Allocate) assignAddress((Allocate)ins);
+        else if (ins instanceof Binary) assignAddress((Binary)ins);
         else if (ins instanceof Compare) assignAddress((Compare)ins);
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignAddress((MethodCall)ins);
@@ -165,82 +288,44 @@ public class IRRewriter {
         else throw new Exception();
     }
 
+    void assignAddress(Allocate ins) throws Exception {
+        ins.dst = assignAddress(ins.dst);
+        ins.size = assignAddress(ins.size);
+    }
+
     void assignAddress(Binary ins) throws Exception {
-        if (ins.dst instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.dst);
-            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
-            else ins.dst = addr;
-        }
-        if (ins.src instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.src);
-            if (addr == null) throw new Exception("no address assigned to " + ins.src.getName());
-            else ins.src = addr;
-        }
+        ins.dst = assignAddress(ins.dst);
+        ins.src = assignAddress(ins.src);
     }
 
     void assignAddress(Compare ins) throws Exception {
-        if (ins.src0 instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.src0);
-            if (addr == null) throw new Exception("no address assigned to " + ins.src0.getName());
-            else ins.src0 = addr;
-        }
-        if (ins.src1 instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.src1);
-            if (addr == null) throw new Exception("no address assigned to " + ins.src1.getName());
-            else ins.src1 = addr;
-        }
+        ins.src0 = assignAddress(ins.src0);
+        ins.src1 = assignAddress(ins.src1);
     }
 
     void assignAddress(MethodCall ins) throws Exception {
-        if (ins.dst instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.dst);
-            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
-            else ins.dst = addr;
-        }
+        ins.dst = assignAddress(ins.dst);
         LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
         for (Operand para : ins.actualParaVarList)
-            if (para instanceof Variable) {
-                Address addr = varToAddrMap.get(para);
-                if (addr == null) throw new Exception("no address assigned to " + para.getName());
-                else newActualParaVarList.addLast(addr);
-            } else newActualParaVarList.addLast(para);
+            newActualParaVarList.addLast(assignAddress(para));
+        ins.actualParaVarList = newActualParaVarList;
     }
 
     void assignAddress(Move ins) throws Exception {
-        if (ins.dst instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.dst);
-            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
-            else ins.dst = addr;
-        }
-        if (ins.src instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.src);
-            if (addr == null) throw new Exception("no address assigned to " + ins.src.getName());
-            else ins.src = addr;
-        }
+        ins.dst = assignAddress(ins.dst);
+        ins.src = assignAddress(ins.src);
     }
 
     void assignAddress(Return ins) throws Exception {
-        if (ins.src instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.src);
-            if (addr == null) throw new Exception("no address assigned to " + ins.src.getName());
-            else ins.src = addr;
-        }
+        ins.src = assignAddress(ins.src);
     }
 
     void assignAddress(Set ins) throws Exception {
-        if (ins.dst instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.dst);
-            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
-            else ins.dst = addr;
-        }
+        ins.dst = assignAddress(ins.dst);
     }
 
     void assignAddress(Unary ins) throws Exception {
-        if (ins.dst instanceof Variable) {
-            Address addr = varToAddrMap.get(ins.dst);
-            if (addr == null) throw new Exception("no address assigned to " + ins.dst.getName());
-            else ins.dst = addr;
-        }
+        ins.dst = assignAddress(ins.dst);
     }
 
     //////////////////// spill code //////////////////////////
@@ -273,11 +358,7 @@ public class IRRewriter {
         LinkedList<IRCode> codeList = basicBlock.codeList;
         for (ListIterator<IRCode> it = codeList.listIterator(); it.hasNext();) {
             IRCode ins = it.next();
-//            System.out.print("=========== ");
-//            ins.printInformation();
             codeListList.addLast(spillCode(ins));
-//            for (IRCode item : codeListList.getLast())
-//                item.printInformation();
         }
         codeList.clear();
         for (ListIterator<LinkedList<IRCode>> it = codeListList.listIterator(); it.hasNext();) {
@@ -286,7 +367,8 @@ public class IRRewriter {
     }
 
     LinkedList<IRCode> spillCode(IRCode ins) throws Exception {
-        if (ins instanceof Binary) return spillCode((Binary)ins);
+        if (ins instanceof Allocate) return spillCode((Allocate)ins);
+        else if (ins instanceof Binary) return spillCode((Binary)ins);
         else if (ins instanceof Compare) return spillCode((Compare)ins);
         else if (ins instanceof Jump) return dontSpillCode(ins);
         else if (ins instanceof MethodCall) return spillCode((MethodCall)ins);
@@ -302,6 +384,27 @@ public class IRRewriter {
     LinkedList<IRCode> dontSpillCode(IRCode ins) {
         LinkedList res = new LinkedList();
         res.addLast(ins);
+        return res;
+    }
+
+    LinkedList<IRCode> spillCode(Allocate ins) {
+        /*  allocate dst size -->
+            mov     rdi, size
+            call    malloc
+            mov     dst, rax */
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        Move move = new Move();
+        move.dst = registerConfig.get("rdi");
+        move.src = ins.size;
+        res.addLast(move);
+        MethodCall call = new MethodCall();
+        call.method = new MethodDefinitionNode();
+        call.method.methodName = "malloc";
+        res.addLast(call);
+        move = new Move();
+        move.dst = ins.dst;
+        move.src = registerConfig.get("rax");
+        res.addLast(move);
         return res;
     }
 

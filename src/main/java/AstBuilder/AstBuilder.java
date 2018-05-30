@@ -226,8 +226,8 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         res.line = context.start.getLine();
         res.variableType = (VariableTypeNode)visit(context.creator().variableType());
         if (context.creator().actualParameterList() != null)
-        for (MxParser.ExpressionContext item : context.creator().actualParameterList().expression())
-            res.actualParameterList.add((ExpressionStatementNode)visit(item));
+            for (MxParser.ExpressionContext item : context.creator().actualParameterList().expression())
+                res.actualParameterList.add((ExpressionStatementNode) visit(item));
         return res;
     }
 

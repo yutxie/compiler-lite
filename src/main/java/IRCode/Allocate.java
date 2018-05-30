@@ -6,10 +6,10 @@ import IRCode.Operand.*;
 public class Allocate extends IRCode {
 
     public Operand dst;
-    public VariableTypeNode variableType;
+    public Operand size;
 
     @Override
     public void printInformation() {
-        System.out.println("allocate\t" + dst.getName() + " " + variableType.getTypeName());
+        System.out.println("allocate\t" + dst.getName() + " " + size.getName());
     }
 }

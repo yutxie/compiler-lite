@@ -22,6 +22,7 @@ public class Main {
         ClassTypeResolver classTypeResolver = new ClassTypeResolver();
         IRGenerator irGenerator = new IRGenerator();
         CFGGenerator cfgGenerator = new CFGGenerator();
+        MultiIndexAndMemberRewriter multiIndexAndMemberRewriter = new MultiIndexAndMemberRewriter();
         DefineAndUseCalculator defineAndUseCalculator = new DefineAndUseCalculator();
         AllVariableCalculator allVariableCalculator = new AllVariableCalculator();
         RegisterConfig registerConfig = new RegisterConfig();
@@ -37,10 +38,13 @@ public class Main {
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
         IR ir = irGenerator.generateIR(ast);
+//        ir.printInformation();
 
         ////////////////////// back end /////////////////////////////
         // non trivial
         cfgGenerator.generateCFG(ir);
+        multiIndexAndMemberRewriter.rewriteMultiIndexandMember(ir);
+//        ir.printInformation();
         defineAndUseCalculator.calculateDefineAndUse(ir);
         allVariableCalculator.calculateAllVariable(ir);
 //        ir.printInformation();

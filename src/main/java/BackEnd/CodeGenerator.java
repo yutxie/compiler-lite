@@ -14,6 +14,9 @@ public class CodeGenerator {
             System.out.print("global " + method.methodName + "\n");
         System.out.print("\n");
 
+        System.out.print("extern malloc\n");
+        System.out.print("\n");
+
         System.out.print("SECTION .text\n\n");
         for (MethodEntity method : ir.methodList) {
             System.out.print(method.methodName + ":\n");

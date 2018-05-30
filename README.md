@@ -5,7 +5,9 @@ ACM Class 2018 Compiler
 
 ## To-Do
 
-- generate target code
+- generate code
+  - array and malloc
+  - class member var and method
 - optimization
   - coloring start over
   - reduce #reserved register
@@ -18,7 +20,6 @@ ACM Class 2018 Compiler
 
 ## To-Fix
 
-- shortcut in condition
 - replace set by cmov
 - global allocation
 - built-in class and method
@@ -94,6 +95,7 @@ ACM Class 2018 Compiler
 ## Hint
 
 - visitor interface
+- local var instead of stack
 
 ## Reference
 

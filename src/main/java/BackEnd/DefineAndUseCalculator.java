@@ -6,26 +6,27 @@ import IRCode.Operand.*;
 
 public class DefineAndUseCalculator {
 
-    public void calculateDefineAndUse(IR ir) {
+    public void calculateDefineAndUse(IR ir) throws Exception {
         for (MethodEntity methodEntity : ir.methodList)
             for (BasicBlock bb : methodEntity.basicBlockList)
                 for (IRCode ins : bb.codeList)
                     calculateDefineAndUse(ins);
     }
 
-    public void calculateDefineAndUse(IRCode ins) {
+    public void calculateDefineAndUse(IRCode ins) throws Exception {
         if (ins instanceof Allocate) calculateDefineAndUse((Allocate)ins);
         else if (ins instanceof Binary) calculateDefineAndUse((Binary)ins);
         else if (ins instanceof Compare) calculateDefineAndUse((Compare)ins);
         else if (ins instanceof Jump) calculateDefineAndUse((Jump)ins);
         else if (ins instanceof MethodCall) calculateDefineAndUse((MethodCall)ins);
         else if (ins instanceof Move) calculateDefineAndUse((Move)ins);
+        else if (ins instanceof Nop) return;
         else if (ins instanceof Pop) calculateDefineAndUse((Pop)ins);
         else if (ins instanceof Push) calculateDefineAndUse((Push)ins);
         else if (ins instanceof Return) calculateDefineAndUse((Return)ins);
         else if (ins instanceof Set) calculateDefineAndUse((Set)ins);
         else if (ins instanceof Unary) calculateDefineAndUse((Unary)ins);
-        assert false;
+        else throw new Exception();
     }
 
     public void calculateDefineAndUse(Allocate ins) {

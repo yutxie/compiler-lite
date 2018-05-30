@@ -124,7 +124,7 @@ public class ScopeTreeBuilder extends AstVisitor {
         node.definitionNode = definitionNode;
     }
 
-    @Override void visit(ConstantNode node) {
+    @Override void visit(ConstantNode node) throws Exception {
         node.scope = node.parent.scope;
         super.visit(node);
     }

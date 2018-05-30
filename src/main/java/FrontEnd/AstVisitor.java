@@ -30,7 +30,7 @@ public abstract class AstVisitor {
         for (MethodDefinitionNode item : node.memberConstructionMethodList) visit(item);
     }
 
-    void visit(ConstantNode node) {}
+    void visit(ConstantNode node) throws Exception {}
 
     void visit(ContinueStatementNode node) throws SemanticException {}
 

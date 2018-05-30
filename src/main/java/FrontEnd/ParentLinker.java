@@ -55,7 +55,7 @@ public class ParentLinker extends AstVisitor {
         stack.removeLast();
     }
 
-    @Override void visit(ConstantNode node) {
+    @Override void visit(ConstantNode node) throws Exception {
         node.parent = stack.getLast();
         stack.addLast(node);
         super.visit(node);

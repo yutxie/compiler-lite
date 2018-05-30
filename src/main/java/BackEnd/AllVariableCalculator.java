@@ -6,24 +6,26 @@ import IRCode.Operand.*;
 
 public class AllVariableCalculator {
 
-    public void calculateAllVariable(IR ir) {
+    public void calculateAllVariable(IR ir) throws Exception {
         for (MethodEntity method : ir.methodList)
-            for (IRCode ins : method.codeList)
-                calculateAllVariable(ins);
+            for (BasicBlock bb : method.basicBlockList)
+                for (IRCode ins : bb.codeList)
+                    calculateAllVariable(ins);
     }
 
-    public void calculateAllVariable(IRCode ins) {
+    public void calculateAllVariable(IRCode ins) throws Exception {
         if (ins instanceof Allocate) calculateAllVariable((Allocate)ins);
         else if (ins instanceof Binary) calculateAllVariable((Binary)ins);
         else if (ins instanceof Compare) calculateAllVariable((Compare)ins);
         else if (ins instanceof Jump) calculateAllVariable((Jump)ins);
         else if (ins instanceof MethodCall) calculateAllVariable((MethodCall)ins);
         else if (ins instanceof Move) calculateAllVariable((Move)ins);
+        else if (ins instanceof Nop) return;
         else if (ins instanceof Push) calculateAllVariable((Push)ins);
         else if (ins instanceof Return) calculateAllVariable((Return)ins);
         else if (ins instanceof Set) calculateAllVariable((Set)ins);
         else if (ins instanceof Unary) calculateAllVariable((Unary)ins);
-        assert false;
+        else throw new Exception();
     }
 
     public void calculateAllVariable(Allocate ins) {
