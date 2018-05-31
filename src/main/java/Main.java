@@ -1,9 +1,6 @@
 import AstNode.*;
 import AstBuilder.*;
 import BackEnd.*;
-import BackEnd.DefineAndUseCalculator;
-import BackEnd.RegisterAllocator;
-import BackEnd.RegisterConfig;
 import FrontEnd.*;
 import IR.*;
 
@@ -47,6 +44,7 @@ public class Main {
 //        ir.printInformation();
         defineAndUseCalculator.calculateDefineAndUse(ir);
         allVariableCalculator.calculateAllVariable(ir);
+//        ir.printInformation();
         regisgerAllocator.allocateRegister(ir, registerConfig);
 //        ir.printInformation();
         codeGenerator.generateCode(ir);

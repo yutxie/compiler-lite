@@ -19,9 +19,13 @@ public class IRRewriter {
                    RegisterConfig registerConfig) throws Exception {
         this.assignedMap = assignedMap;
         this.registerConfig = registerConfig;
+//        method.printInformation();
         rewriteIndexAndMember(method);
+//        method.printInformation();
         assignRegister(method);
+//        method.printInformation();
         assignAddress(method);
+//        method.printInformation();
         spillCode(method);
     }
 
@@ -59,8 +63,8 @@ public class IRRewriter {
     Operand rewriteIndexAndMember(Operand oprand, LinkedList<IRCode> codeList) {
         if (oprand instanceof IndexVariable) {
             IndexVariable indexAccess = (IndexVariable) oprand;
-            Register base = registerConfig.get("r8"); // ATTENTION
-            Register index = registerConfig.get("r9");
+            Register base = registerConfig.get("rbx"); // ATTENTION
+            Register index = registerConfig.get("rcx");
             Move move = new Move();
             move.dst = base;
             move.src = indexAccess.array;
@@ -75,7 +79,7 @@ public class IRRewriter {
             return addr;
         } else if (oprand instanceof MemberVariable) {
             MemberVariable memberAccess = (MemberVariable) oprand;
-            Register base = registerConfig.get("r8"); // ATTENTION
+            Register base = registerConfig.get("rbx"); // ATTENTION
             Move move = new Move();
             move.dst = base;
             move.src = memberAccess.object;
@@ -281,6 +285,7 @@ public class IRRewriter {
         addr.offsetNumber = rbpOffset;
         varToAddrMap.put(var, addr);
         rbpOffset -= 8;
+//        System.out.println(var.getName() + " --> " + addr.getName());
         return addr;
     }
 
@@ -531,10 +536,11 @@ public class IRRewriter {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Operand src1;
         if (ins.src1 instanceof Address) {
-            Register reg = registerConfig.get("rdx");
+            Register reg = registerConfig.get("r8");
             Move move = new Move();
             move.dst = reg;
             move.src = ins.src1;
+            res.addLast(move);
             src1 = reg;
         } else src1 = ins.src1;
         Compare cmp = new Compare();
