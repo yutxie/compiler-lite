@@ -4,7 +4,6 @@ import AstNode.*;
 import IR.*;
 import IRCode.*;
 import IRCode.Operand.*;
-import IRCode.Set;
 
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
 import static AstNode.UnaryExpressionNode.UnaryOp.*;
@@ -263,55 +262,76 @@ public class IRGenerator extends AstVisitor {
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
         super.visit(node);
-        if (node.op == ASSIGN) {
-            Move ins = new Move();
-            ins.dst = node.value = node.lhs.value;
-            ins.src = node.rhs.value;
-            codeList.add(ins);
-            return;
-        }
+        Move move;
+
         switch (node.op) {
+            case ASSIGN:
+                move = new Move();
+                move.dst = node.value = node.lhs.value;
+                move.src = node.rhs.value;
+                codeList.add(move);
+                return;
             case LT: case GT: case LE: case GE: case EQUAL: case NOTEQUAL:
-                throw new Exception();
-//                Compare cmp = new Compare();
-//                cmp.src0 = node.lhs.value;
-//                cmp.src1 = node.rhs.value;
-//                codeList.addLast(cmp);
-//                Set set = new Set();
-//                set.dst = node.value = new Variable();
-//                switch (node.op) {
-//                    case LT: set.type = Set.Type.SETL; break;
-//                    case GT: set.type = Set.Type.SETG; break;
-//                    case LE: set.type = Set.Type.SETLE; break;
-//                    case GE: set.type = Set.Type.SETGE; break;
-//                    case EQUAL: set.type = Set.Type.SETE; break;
-//                    case NOTEQUAL: set.type = Set.Type.SETNE; break;
-//                }
-//                codeList.addLast(set);
-//                return;
+//                throw new Exception();
+                Compare cmp = new Compare();
+                cmp.src0 = node.lhs.value;
+                cmp.src1 = node.rhs.value;
+                codeList.addLast(cmp);
+                node.value = new Variable();
+                move = new Move();
+                move.dst = node.value;
+                move.src = new Immediate(0);
+                codeList.addLast(move);
+                Variable tmp = new Variable();
+                move.dst = tmp;
+                move.src = new Immediate(1);
+                codeList.addLast(move);
+                Cmove cmove = new Cmove();
+                cmove.dst = node.value;
+                cmove.src = tmp;
+                switch (node.op) {
+                    case LT: cmove.type = Cmove.Type.CMOVL; break;
+                    case GT: cmove.type = Cmove.Type.CMOVG; break;
+                    case LE: cmove.type = Cmove.Type.CMOVLE; break;
+                    case GE: cmove.type = Cmove.Type.CMOVGE; break;
+                    case EQUAL: cmove.type = Cmove.Type.CMOVE; break;
+                    case NOTEQUAL: cmove.type = Cmove.Type.CMOVNE; break;
+                }
+                codeList.addLast(cmove);
+                return;
+            case DIV: case MOD:
+                Idiv idiv = new Idiv();
+                idiv.dst = node.value = new Variable();
+                idiv.src0 = node.lhs.value;
+                idiv.src1 = node.rhs.value;
+                if (node.op == DIV) idiv.type = Idiv.Type.IDIV;
+                else idiv.type = Idiv.Type.IMOD;
+                codeList.addLast(idiv);
+                return;
+            default:
+                move = new Move();
+                move.dst = node.value = new Variable();
+                move.src = node.lhs.value;
+                codeList.add(move);
+                Binary bin = new Binary();
+                bin.dst = node.value;
+                bin.src = node.rhs.value;
+                switch (node.op) {
+//            case LSHIFT: bin.type = Binary.Type.LSHIFT; break;
+//            case RSHIFT: bin.type = Binary.Type.RSHIFT; break;
+                    case ADD: bin.type = Binary.Type.ADD; break;
+                    case SUB: bin.type = Binary.Type.SUB; break;
+                    case MUL: bin.type = Binary.Type.IMUL; break;
+                    case XOR: bin.type = Binary.Type.XOR; break;
+                    case AND: bin.type = Binary.Type.AND; break;
+                    case OR: bin.type = Binary.Type.OR; break;
+                    case LOR: bin.type = Binary.Type.OR; break;
+                    case LAND: bin.type = Binary.Type.AND; break;
+                    default: throw new Exception();
+                }
+                codeList.add(bin);
+                return;
         }
-        Move mv = new Move();
-        mv.dst = node.value = new Variable();
-        mv.src = node.lhs.value;
-        codeList.add(mv);
-        Binary ins = new Binary();
-        ins.dst = node.value;
-        ins.src = node.rhs.value;
-        switch (node.op) {
-//            case LSHIFT: ins.type = Binary.Type.LSHIFT; break;
-//            case RSHIFT: ins.type = Binary.Type.RSHIFT; break;
-//            case DIV: ins.type = Binary.Type.DIV; break;
-//            case MOD: ins.type = Binary.Type.MOD; break;
-            case ADD: ins.type = Binary.Type.ADD; break;
-            case SUB: ins.type = Binary.Type.SUB; break;
-            case MUL: ins.type = Binary.Type.IMUL; break;
-            case XOR: ins.type = Binary.Type.XOR; break;
-            case AND: ins.type = Binary.Type.AND; break;
-            case OR: ins.type = Binary.Type.OR; break;
-            case LOR: ins.type = Binary.Type.OR; break;
-            case LAND: ins.type = Binary.Type.AND; break;
-        }
-        codeList.add(ins);
     }
 
     ////////////////////////////// control flow /////////////////////////////

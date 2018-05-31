@@ -17,6 +17,7 @@ public class DefineAndUseCalculator {
         if (ins instanceof Allocate) calculateDefineAndUse((Allocate)ins);
         else if (ins instanceof Binary) calculateDefineAndUse((Binary)ins);
         else if (ins instanceof Compare) calculateDefineAndUse((Compare)ins);
+        else if (ins instanceof Idiv) calculateDefineAndUse((Idiv)ins);
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) calculateDefineAndUse((MethodCall)ins);
         else if (ins instanceof Move) calculateDefineAndUse((Move)ins);
@@ -24,7 +25,7 @@ public class DefineAndUseCalculator {
         else if (ins instanceof Pop) calculateDefineAndUse((Pop)ins);
         else if (ins instanceof Push) calculateDefineAndUse((Push)ins);
         else if (ins instanceof Return) calculateDefineAndUse((Return)ins);
-        else if (ins instanceof Set) calculateDefineAndUse((Set)ins);
+        else if (ins instanceof Cmove) calculateDefineAndUse((Cmove) ins);
         else if (ins instanceof Unary) calculateDefineAndUse((Unary)ins);
         else throw new Exception();
     }
@@ -44,6 +45,15 @@ public class DefineAndUseCalculator {
     public void calculateDefineAndUse(Compare ins) {
         ins.use.addAll(ins.src0.colorable());
         ins.use.addAll(ins.src1.colorable());
+        ins.use.addAll(ins.src0.colorableInIndexOrMember());
+        ins.use.addAll(ins.src1.colorableInIndexOrMember());
+    }
+
+    public void calculateDefineAndUse(Idiv ins) {
+        ins.def.addAll(ins.dst.colorable());
+        ins.use.addAll(ins.src0.colorable());
+        ins.use.addAll(ins.src1.colorable());
+        ins.use.addAll(ins.dst.colorableInIndexOrMember());
         ins.use.addAll(ins.src0.colorableInIndexOrMember());
         ins.use.addAll(ins.src1.colorableInIndexOrMember());
     }
@@ -80,9 +90,11 @@ public class DefineAndUseCalculator {
         ins.use.addAll(ins.src.colorableInIndexOrMember());
     }
 
-    public void calculateDefineAndUse(Set ins) {
+    public void calculateDefineAndUse(Cmove ins) {
         ins.def.addAll(ins.dst.colorable());
+        ins.use.addAll(ins.src.colorable());
         ins.use.addAll(ins.dst.colorableInIndexOrMember());
+        ins.use.addAll(ins.src.colorableInIndexOrMember());
     }
 
     public void calculateDefineAndUse(Unary ins) {

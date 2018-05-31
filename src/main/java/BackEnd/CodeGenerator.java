@@ -36,6 +36,7 @@ public class CodeGenerator {
     void generateCode(IRCode ins) throws Exception {
         if (ins instanceof Binary) generateCode((Binary)ins);
         else if (ins instanceof Compare) generateCode((Compare)ins);
+        else if (ins instanceof Idiv) generateCode((Idiv)ins);
         else if (ins instanceof Jump) generateCode((Jump)ins);
         else if (ins instanceof MethodCall) generateCode((MethodCall)ins);
         else if (ins instanceof Move) generateCode((Move)ins);
@@ -43,7 +44,7 @@ public class CodeGenerator {
         else if (ins instanceof Pop) generateCode((Pop)ins);
         else if (ins instanceof Push) generateCode((Push)ins);
         else if (ins instanceof Return) generateCode((Return)ins);
-        else if (ins instanceof Set) generateCode((Set)ins);
+        else if (ins instanceof Cmove) generateCode((Cmove) ins);
         else if (ins instanceof Unary) generateCode((Unary)ins);
         else throw new Exception();
     }
@@ -65,6 +66,10 @@ public class CodeGenerator {
         write("cmp", ins.src0, ins.src1);
     }
 
+    void generateCode(Idiv ins) throws IOException {
+        write("idiv", ins.src1, null);
+    }
+
     void generateCode(Jump ins) {
         System.out.print("\t\t" +
             ins.type.toString().toLowerCase() + "\t\t" + ins.targetLabel + "\n");
@@ -79,7 +84,8 @@ public class CodeGenerator {
     }
 
     void generateCode(Nop ins) throws IOException {
-        write("nop", null, null);
+        if (ins.realName == null) write("nop", null, null);
+        else write(ins.realName, null, null);
     }
 
     void generateCode(Pop ins) throws IOException {
@@ -94,8 +100,8 @@ public class CodeGenerator {
         write("ret", null, null);
     }
 
-    void generateCode(Set ins) throws IOException {
-        write(ins.type.toString().toLowerCase(), ins.dst, null);
+    void generateCode(Cmove ins) throws IOException {
+        write(ins.type.toString().toLowerCase(), ins.dst, ins.src);
     }
 
     void generateCode(Unary ins) throws IOException {

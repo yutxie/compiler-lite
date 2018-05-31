@@ -69,8 +69,9 @@ public class AllVariableCalculator {
             ins.allVariable.addAll(ins.src.colorable());
     }
 
-    public void calculateAllVariable(Set ins) {
+    public void calculateAllVariable(Cmove ins) {
         ins.allVariable.addAll(ins.dst.colorable());
+        ins.allVariable.addAll(ins.src.colorable());
     }
 
     public void calculateAllVariable(Unary ins) {

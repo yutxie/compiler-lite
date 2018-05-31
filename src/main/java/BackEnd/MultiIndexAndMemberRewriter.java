@@ -3,7 +3,6 @@ package BackEnd;
 import AstNode.DefinitionExpressionNode;
 import IR.*;
 import IRCode.*;
-import IRCode.Set;
 import IRCode.Operand.*;
 
 import java.util.*;
@@ -34,12 +33,13 @@ public class MultiIndexAndMemberRewriter {
         if (ins instanceof Allocate) return rewriteMultiIndexandMember((Allocate)ins);
         else if (ins instanceof Binary) return rewriteMultiIndexandMember((Binary)ins);
         else if (ins instanceof Compare) return rewriteMultiIndexandMember((Compare)ins);
+        else if (ins instanceof Idiv) return rewriteMultiIndexandMember((Idiv)ins);
         else if (ins instanceof Jump) return dontRewrite(ins);
         else if (ins instanceof MethodCall) return rewriteMultiIndexandMember((MethodCall)ins);
         else if (ins instanceof Move) return rewriteMultiIndexandMember((Move)ins);
         else if (ins instanceof Nop) return dontRewrite(ins);
         else if (ins instanceof Return) return rewriteMultiIndexandMember((Return)ins);
-        else if (ins instanceof Set) return rewriteMultiIndexandMember((Return)ins);
+        else if (ins instanceof Cmove) return rewriteMultiIndexandMember((Cmove) ins);
         else if (ins instanceof Unary) return rewriteMultiIndexandMember((Unary)ins);
         throw new Exception();
     }
@@ -110,6 +110,15 @@ public class MultiIndexAndMemberRewriter {
         return res;
     }
 
+    LinkedList<IRCode> rewriteMultiIndexandMember(Idiv ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+        ins.src0 = rewriteMultiIndexandMember(ins.src0, res, true);
+        ins.src1 = rewriteMultiIndexandMember(ins.src1, res, true);
+        res.addLast(ins);
+        return res;
+    }
+
     LinkedList<IRCode> rewriteMultiIndexandMember(MethodCall ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
@@ -136,9 +145,10 @@ public class MultiIndexAndMemberRewriter {
         return res;
     }
 
-    LinkedList<IRCode> rewriteMultiIndexandMember(Set ins) {
+    LinkedList<IRCode> rewriteMultiIndexandMember(Cmove ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+        ins.src = rewriteMultiIndexandMember(ins.src, res, true);
         res.addLast(ins);
         return res;
     }

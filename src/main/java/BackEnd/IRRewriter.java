@@ -6,7 +6,6 @@ import AstNode.MethodDefinitionNode;
 import IR.*;
 import IRCode.*;
 import IRCode.Operand.*;
-import IRCode.Set;
 
 import java.util.*;
 
@@ -46,12 +45,13 @@ public class IRRewriter {
         if (ins instanceof Allocate) return rewriteIndexAndMember((Allocate)ins);
         else if (ins instanceof Binary) return rewriteIndexAndMember((Binary)ins);
         else if (ins instanceof Compare) return rewriteIndexAndMember((Compare)ins);
+        else if (ins instanceof Idiv) return rewriteIndexAndMember((Idiv)ins);
         else if (ins instanceof Jump) return dontSpillCode(ins); // the same as spill code
         else if (ins instanceof MethodCall) return rewriteIndexAndMember((MethodCall)ins);
         else if (ins instanceof Move) return rewriteIndexAndMember((Move)ins);
         else if (ins instanceof Nop) return dontSpillCode(ins);
         else if (ins instanceof Return) return rewriteIndexAndMember((Return)ins);
-        else if (ins instanceof Set) return rewriteIndexAndMember((Set)ins);
+        else if (ins instanceof Cmove) return rewriteIndexAndMember((Cmove) ins);
         else if (ins instanceof Unary) return rewriteIndexAndMember((Unary)ins);
         throw new Exception();
     }
@@ -116,6 +116,15 @@ public class IRRewriter {
         return res;
     }
 
+    LinkedList<IRCode> rewriteIndexAndMember(Idiv ins) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.src0 = rewriteIndexAndMember(ins.src0, res);
+        ins.src1 = rewriteIndexAndMember(ins.src1, res);
+        res.addLast(ins);
+        return res;
+    }
+
     LinkedList<IRCode> rewriteIndexAndMember(MethodCall ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         ins.dst = rewriteIndexAndMember(ins.dst, res);
@@ -142,9 +151,10 @@ public class IRRewriter {
         return res;
     }
 
-    LinkedList<IRCode> rewriteIndexAndMember(Set ins) {
+    LinkedList<IRCode> rewriteIndexAndMember(Cmove ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.src = rewriteIndexAndMember(ins.src, res);
         res.addLast(ins);
         return res;
     }
@@ -175,12 +185,13 @@ public class IRRewriter {
         if (ins instanceof Allocate) assignRegister((Allocate)ins);
         else if (ins instanceof Binary) assignRegister((Binary)ins);
         else if (ins instanceof Compare) assignRegister((Compare)ins);
+        else if (ins instanceof Idiv) assignRegister((Idiv)ins);
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignRegister((MethodCall)ins);
         else if (ins instanceof Move) assignRegister((Move)ins);
         else if (ins instanceof Nop) return;
         else if (ins instanceof Return) assignRegister((Return)ins);
-        else if (ins instanceof Set) assignRegister((Set)ins);
+        else if (ins instanceof Cmove) assignRegister((Cmove) ins);
         else if (ins instanceof Unary) assignRegister((Unary)ins);
         else throw new Exception();
     }
@@ -196,6 +207,12 @@ public class IRRewriter {
     }
 
     void assignRegister(Compare ins) {
+        ins.src0 = assignRegister(ins.src0);
+        ins.src1 = assignRegister(ins.src1);
+    }
+
+    void assignRegister(Idiv ins) {
+        ins.dst = assignRegister(ins.dst);
         ins.src0 = assignRegister(ins.src0);
         ins.src1 = assignRegister(ins.src1);
     }
@@ -217,8 +234,9 @@ public class IRRewriter {
         ins.src = assignRegister(ins.src);
     }
 
-    void assignRegister(Set ins) {
+    void assignRegister(Cmove ins) {
         ins.dst = assignRegister(ins.dst);
+        ins.src = assignRegister(ins.src);
     }
 
     void assignRegister(Unary ins) {
@@ -278,12 +296,13 @@ public class IRRewriter {
         if (ins instanceof Allocate) assignAddress((Allocate)ins);
         else if (ins instanceof Binary) assignAddress((Binary)ins);
         else if (ins instanceof Compare) assignAddress((Compare)ins);
+        else if (ins instanceof Idiv) assignAddress((Idiv)ins);
         else if (ins instanceof Jump) return;
         else if (ins instanceof MethodCall) assignAddress((MethodCall)ins);
         else if (ins instanceof Move) assignAddress((Move)ins);
         else if (ins instanceof Nop) return;
         else if (ins instanceof Return) assignAddress((Return)ins);
-        else if (ins instanceof Set) assignAddress((Set)ins);
+        else if (ins instanceof Cmove) assignAddress((Cmove) ins);
         else if (ins instanceof Unary) assignAddress((Unary)ins);
         else throw new Exception();
     }
@@ -299,6 +318,12 @@ public class IRRewriter {
     }
 
     void assignAddress(Compare ins) throws Exception {
+        ins.src0 = assignAddress(ins.src0);
+        ins.src1 = assignAddress(ins.src1);
+    }
+
+    void assignAddress(Idiv ins) throws Exception {
+        ins.dst = assignAddress(ins.dst);
         ins.src0 = assignAddress(ins.src0);
         ins.src1 = assignAddress(ins.src1);
     }
@@ -320,8 +345,9 @@ public class IRRewriter {
         ins.src = assignAddress(ins.src);
     }
 
-    void assignAddress(Set ins) throws Exception {
+    void assignAddress(Cmove ins) throws Exception {
         ins.dst = assignAddress(ins.dst);
+        ins.src = assignAddress(ins.src);
     }
 
     void assignAddress(Unary ins) throws Exception {
@@ -369,16 +395,16 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(IRCode ins) throws Exception {
         if (ins instanceof Allocate) return spillCode((Allocate)ins);
         else if (ins instanceof Binary) return spillCode((Binary)ins);
+        else if (ins instanceof Cmove) return spillCode((Cmove)ins);
         else if (ins instanceof Compare) return spillCode((Compare)ins);
+        else if (ins instanceof Idiv) return spillCode((Idiv)ins);
         else if (ins instanceof Jump) return dontSpillCode(ins);
         else if (ins instanceof MethodCall) return spillCode((MethodCall)ins);
         else if (ins instanceof Move) return spillCode((Move)ins);
         else if (ins instanceof Nop) return dontSpillCode(ins);
         else if (ins instanceof Return) return spillCode((Return)ins);
-        else if (ins instanceof Set) return dontSpillCode(ins); // support mem
         else if (ins instanceof Unary) return dontSpillCode(ins); // support mem
         throw new Exception();
-
     }
 
     LinkedList<IRCode> dontSpillCode(IRCode ins) {
@@ -475,6 +501,29 @@ public class IRRewriter {
         return res;
     }
 
+    LinkedList<IRCode> spillCode(Cmove ins) {
+        /*  cmov    dst src -->
+            mov     r8 dst
+            cmov    r8 src
+            mov     dst r8  */
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if (ins.dst instanceof Address) {
+            Operand dst = ins.dst;
+            Register reg = registerConfig.get("r8");
+            Move move = new Move();
+            move.dst = reg;
+            move.src = ins.dst;
+            res.addLast(move);
+            ins.dst = reg;
+            res.addLast(ins);
+            move = new Move();
+            move.dst = dst;
+            move.src = reg;
+            res.addLast(move);
+        } else res.addLast(ins);
+        return res;
+    }
+
     LinkedList<IRCode> spillCode(Compare ins) {
         /*  cmp a, b -->
             mov r8, b
@@ -492,6 +541,40 @@ public class IRRewriter {
         cmp.src0 = ins.src0;
         cmp.src1 = src1;
         res.addLast(cmp);
+        return res;
+    }
+
+    LinkedList<IRCode> spillCode(Idiv ins) {
+        /*  idiv    dst src0 src1 -->
+            mov     rax src0
+            mov     r9 src1
+            cqo
+            idiv    r9
+            mov     dst rax/rdx     */
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        Move move = new Move();
+        move.dst = registerConfig.get("rax");
+        move.src = ins.src0;
+        res.addLast(move);
+        Operand src1 = ins.src1;
+        if (!(src1 instanceof Register) && !(src1 instanceof Address)) {
+            Register reg = registerConfig.get("r9");
+            move = new Move();
+            move.dst = reg;
+            move.src = src1;
+            res.addLast(move);
+            src1 = reg;
+        }
+        Nop cqo = new Nop();
+        cqo.realName = "cqo";
+        res.addLast(cqo);
+        ins.src1 = src1;
+        res.addLast(ins);
+        move = new Move();
+        move.dst = ins.dst;
+        if (ins.type == Idiv.Type.IDIV) move.src = registerConfig.get("rax");
+        else move.src = registerConfig.get("rdx");
+        res.addLast(move);
         return res;
     }
 
