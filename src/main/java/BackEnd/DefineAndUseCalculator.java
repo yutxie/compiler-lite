@@ -7,10 +7,15 @@ import IRCode.Operand.*;
 public class DefineAndUseCalculator {
 
     public void calculateDefineAndUse(IR ir) throws Exception {
-        for (MethodEntity methodEntity : ir.methodList)
+        for (MethodEntity methodEntity : ir.methodList) {
             for (BasicBlock bb : methodEntity.basicBlockList)
                 for (IRCode ins : bb.codeList)
                     calculateDefineAndUse(ins);
+            for (Variable para : methodEntity.formalParaVarList) {
+                methodEntity.basicBlockList.getFirst().codeList.getFirst().
+                    def.addAll(para.colorable());
+            }
+        }
     }
 
     public void calculateDefineAndUse(IRCode ins) throws Exception {

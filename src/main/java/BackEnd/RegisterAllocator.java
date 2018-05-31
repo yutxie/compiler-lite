@@ -151,7 +151,7 @@ public class RegisterAllocator {
             if (idx < n) {
                 u.color = idx;
 //                System.out.println("assign color: " + u.var.getName() + " --> " + u.color);
-                assignedMap.put(u.var, registerConfig.get(registerConfig.numOfAll - idx - 1));
+//                assignedMap.put(u.var, registerConfig.get(registerConfig.numOfAll - idx - 1));
             }
         }
     }

@@ -254,18 +254,20 @@ public class IRRewriter {
     int rbpOffset;
     void assignAddress(MethodEntity method) throws Exception {
         varToAddrMap = new HashMap<Variable, Address>();
-        rbpOffset = -8; // reserve space for old rbp
+        rbpOffset = -8 - method.formalParaVarList.size() * 8;
+        int paraRbpOffset = -8;
         for (Variable var : method.formalParaVarList) {
             Address addr = new Address();
             addr.base = registerConfig.get("rbp");
-            addr.offsetNumber = rbpOffset;
-            rbpOffset -= 8;
+            addr.offsetNumber = paraRbpOffset;
+            paraRbpOffset -= 8;
             Operand para = assignedMap.get(var);
             if (para == null) para = getAddress(var);
             Move move = new Move();
             move.dst = para;
             move.src = addr;
             method.basicBlockList.getFirst().codeList.addFirst(move);
+//            move.printInformation();
         }
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList) {
@@ -633,6 +635,7 @@ public class IRRewriter {
             Address addr = new Address();
             addr.base = registerConfig.get("rsp");
             addr.offsetNumber = offset;
+            offset -= 8;
             Move move = new Move();
             move.dst = addr;
             move.src = src;
