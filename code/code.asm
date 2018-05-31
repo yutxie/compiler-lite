@@ -1,6 +1,5 @@
 default rel
 
-global foo
 global main
 
 
@@ -9,31 +8,12 @@ extern malloc
 
 SECTION .text
 
-foo:
-foo_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 8
-		mov		r15, qword [rbp+16]
-		mov		r13, r9
-		mov		r12, r8
-		mov		r11, rcx
-		mov		qword [rbp-8], rdx
-		mov		r14, rsi
-		mov		r10, rdi
-		mov		rax, r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
 main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 0
+		mov		rdi, 1
 		push		r8
 		push		r9
 		push		r10
@@ -42,15 +22,7 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, 5
-		mov		rsi, 6
-		mov		rdx, 7
-		mov		rcx, 8
-		mov		r8, 9
-		mov		r9, 10
-		push	0
-		call	foo
-		pop		r8
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -59,7 +31,23 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
-		mov		r15, rax
+		mov		r14, rax
+		mov		r13, 0
+		jmp		loop_cond_0
+loop_body_0:
+		inc		r13
+loop_cond_0:
+		cmp		r13, 1
+		jl		loop_body_0
+loop_end_0:
+		mov		r15, r14
+		mov		rbx, r15
+		mov		rcx, 0
+		mov		qword [rbx+rcx*8+0], 10
+		mov		rbx, r15
+		mov		rcx, 0
+		mov		r15, qword [rbx+rcx*8+0]
+		add		r15, 20
 		mov		rax, r15
 		mov		rsp, rbp
 		pop		rbp
@@ -72,3 +60,4 @@ SECTION .data	align=8
 
 
 SECTION .bbs
+

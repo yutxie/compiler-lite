@@ -444,46 +444,35 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Allocate ins) {
         /*  allocate dst size -->
-            ... store regs ...
             mov     rdi, size
+            push regs
             call    malloc
-            ... load regs ...
+            pop regs
             mov     dst, rax */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-
-        int offset = 0;
-        for (int i = 8; i < registerConfig.numOfAll; ++i) {
-            Register reg = registerConfig.get(i);
-            Address addr = new Address();
-            addr.base = registerConfig.get("rsp");
-            addr.offsetNumber = offset;
-            offset += 8;
-            Move move = new Move();
-            move.dst = addr;
-            move.src = reg;
-            res.addLast(move);
-        }
 
         Move move = new Move();
         move.dst = registerConfig.get("rdi");
         move.src = ins.size;
         res.addLast(move);
+
+        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+            Register reg = registerConfig.get(i);
+            Push push = new Push();
+            push.src = reg;
+            res.addLast(push);
+        }
+
         MethodCall call = new MethodCall();
         call.method = new MethodDefinitionNode();
         call.method.methodName = "malloc";
         res.addLast(call);
 
-        offset = 0;
-        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) {
             Register reg = registerConfig.get(i);
-            Address addr = new Address();
-            addr.base = registerConfig.get("rsp");
-            addr.offsetNumber = offset;
-            offset += 8;
-            move = new Move();
-            move.dst = reg;
-            move.src = addr;
-            res.addLast(move);
+            Pop pop = new Pop();
+            pop.dst = reg;
+            res.addLast(pop);
         }
 
         move = new Move();
