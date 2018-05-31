@@ -1,5 +1,36 @@
 int main() {
     int[] a = new int[1];
-    a[0] = 10;
-    return a[0] + 20;
+    a[0] = 20;
+    return a[0] + 10;
+}/*
+
+class string {
+    
+    int length() {}
+    string substring(int left, int right) {}
+    int parseInt() {}
+    int ord(int pos) {}
+    // operator +
 }
+
+void print(string str) {
+
+}
+
+void println(string str) {
+    print(str + "\n");
+}
+
+string getString() {
+
+}
+
+int getInt() {
+
+}
+
+string toString(int i) {
+
+}
+
+*/

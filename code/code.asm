@@ -14,6 +14,8 @@ main_entry:
 		mov		rbp, rsp
 		sub		rsp, 0
 		mov		rdi, 1
+		inc		rdi
+		push		1
 		push		r8
 		push		r9
 		push		r10
@@ -31,6 +33,8 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
+		pop		rdi
+		mov		qword [rax+0], rdi
 		mov		r14, rax
 		mov		r13, 0
 		jmp		loop_cond_0
@@ -43,11 +47,11 @@ loop_end_0:
 		mov		r15, r14
 		mov		rbx, r15
 		mov		rcx, 0
-		mov		qword [rbx+rcx*8+0], 10
+		mov		qword [rbx+rcx*8+8], 20
 		mov		rbx, r15
 		mov		rcx, 0
-		mov		r15, qword [rbx+rcx*8+0]
-		add		r15, 20
+		mov		r15, qword [rbx+rcx*8+8]
+		add		r15, 10
 		mov		rax, r15
 		mov		rsp, rbp
 		pop		rbp
@@ -60,4 +64,3 @@ SECTION .data	align=8
 
 
 SECTION .bbs
-

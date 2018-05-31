@@ -78,6 +78,7 @@ public class IRRewriter {
             Address addr = new Address();
             addr.base = base;
             addr.offsetReg = index;
+            addr.offsetNumber = +8;
             return addr;
         } else if (oprand instanceof MemberVariable) {
             MemberVariable memberAccess = (MemberVariable) oprand;
@@ -445,37 +446,53 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(Allocate ins) {
         /*  allocate dst size -->
             mov     rdi, size
-            push regs
+            inc     rdi
+            push    size
+            push    regs
             call    malloc
             pop regs
+            pop     rdi
+            mov     [rax], rdi
             mov     dst, rax */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
 
-        Move move = new Move();
+        Move move = new Move(); // mov  rdi, size
         move.dst = registerConfig.get("rdi");
         move.src = ins.size;
         res.addLast(move);
-
-        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+        Unary inc = new Unary(); // inc rdi
+        inc.dst = registerConfig.get("rdi");
+        inc.type = Unary.Type.INC;
+        res.addLast(inc);
+        Push push = new Push(); // push size
+        push.src = ins.size;
+        res.addLast(push);
+        for (int i = 8; i < registerConfig.numOfAll; ++i) { // push regs
             Register reg = registerConfig.get(i);
-            Push push = new Push();
+            push = new Push();
             push.src = reg;
             res.addLast(push);
         }
-
-        MethodCall call = new MethodCall();
+        MethodCall call = new MethodCall(); // call malloc
         call.method = new MethodDefinitionNode();
         call.method.methodName = "malloc";
         res.addLast(call);
-
-        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) {
+        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) { // pop regs
             Register reg = registerConfig.get(i);
             Pop pop = new Pop();
             pop.dst = reg;
             res.addLast(pop);
         }
-
-        move = new Move();
+        Pop pop = new Pop(); // pop rdi
+        pop.dst = registerConfig.get("rdi");
+        res.addLast(pop);
+        move = new Move();// move [rax] rdi
+        Address addr = new Address();
+        addr.base = registerConfig.get("rax");
+        move.dst = addr;
+        move.src = registerConfig.get("rdi");
+        res.addLast(move);
+        move = new Move(); // mov dst, rax
         move.dst = ins.dst;
         move.src = registerConfig.get("rax");
         res.addLast(move);

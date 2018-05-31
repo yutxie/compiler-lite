@@ -53,10 +53,16 @@ public class StaticTypeChecker extends AstVisitor {
             node.exprType = memberVariableDefinition.variableType;
             node.leftValue = true;
         } else if (node.member instanceof MethodCallExpressionNode) {
-            ReferenceNode member = (ReferenceNode)((MethodCallExpressionNode)node.member).caller;
+            ReferenceNode member = ((MethodCallExpressionNode)node.member).caller;
             member.referenceType = ReferenceNode.ReferenceType.METHOD;
-//            if (member.referenceType != ReferenceNode.ReferenceType.METHOD)
-//                throw new SemanticException(node.line, "member must be a variable reference or method call");
+            if (node.caller.exprType instanceof ArrayTypeNode) {
+                if (member.referenceName.equals("size")) {
+                    node.exprType = new PrimitiveTypeNode("int");
+                    member.definitionNode = new MethodDefinitionNode();
+                    member.referenceName = "_size";
+                    return;
+                }
+            }
             MethodDefinitionNode memberMethodDefinition =
                 classDefinition.scope.methodDefinitionMap.get(member.referenceName);
             if (memberMethodDefinition == null)

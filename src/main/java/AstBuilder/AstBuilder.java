@@ -342,11 +342,11 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
             os.write(b);
         }
         is.close();
-//        is = new FileInputStream(dir + "code/builtin.txt");
-//        while((b = is.read()) != -1) {
-//            os.write(b);
-//        }
-//        is.close();
+        is = new FileInputStream(dir + "code/builtin.txt");
+        while((b = is.read()) != -1) {
+            os.write(b);
+        }
+        is.close();
         os.close();
         return new FileInputStream(dir + "code/tmp.txt");
     }
