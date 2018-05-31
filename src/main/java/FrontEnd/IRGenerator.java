@@ -50,6 +50,9 @@ public class IRGenerator extends AstVisitor {
         } else methodEntity.methodName = node.methodName;
         ir.methodList.addLast(methodEntity);
         codeList = methodEntity.codeList;
+        if (node.methodName.equals("main"))
+            for (IRCode ins : ir.global.codeList)
+                codeList.addLast(ins);
         labelMap.clear();
 //        labelMap.put("%" + methodEntity.methodName + "_entry", 0);
 
@@ -100,7 +103,10 @@ public class IRGenerator extends AstVisitor {
     void visit(DefinitionExpressionNode node) throws Exception {
         Variable var = new Variable(node.variableName);
         node.scope.define(node.variableName, var);
-        if (node.parent instanceof ProgramNode) var.global = true;
+        if (node.parent instanceof ProgramNode) {
+            var.global = true;
+            ir.globalVarList.addLast(var);
+        }
         if (node.initValue != null) {
             visit(node.initValue);
             Move ins = new Move();

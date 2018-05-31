@@ -32,7 +32,7 @@ public class RegisterAllocator {
         assignColors();
 
         IRRewriter irRewriter = new IRRewriter();
-        irRewriter.rewriteIR(method, assignedMap, registerConfig);
+        irRewriter.rewriteIR(ir, method, assignedMap, registerConfig);
     }
     void init(MethodEntity method) {
         initLivenessAnalysis(method);

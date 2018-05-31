@@ -8,6 +8,7 @@ public class Address extends Operand {
 //    public int scale = 1;
     public Register base;
     public Register offsetReg;
+    public String globalName;
 
     @Override
     public HashSet<Variable> colorable() {
@@ -21,11 +22,13 @@ public class Address extends Operand {
 
     @Override
     public String getName() {
-        String offsetRegStr = "";
-        if (offsetReg != null) offsetRegStr = "+" + offsetReg.getName() + "*8";
-        String offsetStr = "";
-        if (offsetNumber >= 0) offsetStr = "+" + offsetNumber;
-        else offsetStr = String.valueOf(offsetNumber);
-        return "qword [" + base.getName() + offsetRegStr + offsetStr + "]";
+        if (globalName == null) {
+            String offsetRegStr = "";
+            if (offsetReg != null) offsetRegStr = "+" + offsetReg.getName() + "*8";
+            String offsetStr = "";
+            if (offsetNumber >= 0) offsetStr = "+" + offsetNumber;
+            else offsetStr = String.valueOf(offsetNumber);
+            return "qword [" + base.getName() + offsetRegStr + offsetStr + "]";
+        } else return "qword [rel " + globalName + "]";
     }
 }

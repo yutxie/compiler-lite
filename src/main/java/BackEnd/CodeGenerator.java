@@ -3,6 +3,7 @@ package BackEnd;
 import IR.*;
 import IRCode.*;
 import IRCode.Operand.Operand;
+import IRCode.Operand.Variable;
 
 import java.io.*;
 
@@ -13,6 +14,10 @@ public class CodeGenerator {
         for (MethodEntity method : ir.methodList)
             System.out.print("global " + method.methodName + "\n");
         System.out.print("\n");
+
+        for (Variable var : ir.globalVarList)
+            System.out.print("global " + var.name);
+        System.out.print("\n\n");
 
         System.out.print("extern malloc\n");
         System.out.print("\n");
@@ -25,10 +30,15 @@ public class CodeGenerator {
                 for (IRCode ins : bb.codeList)
                     generateCode(ins);
             }
-            System.out.print("\n");
+            System.out.println();
         }
 
-        System.out.print("SECTION .data\n\n");
+        System.out.print("SECTION .data\talign=8\n\n");
+        for (Variable var : ir.globalVarList) {
+            System.out.println(var.name + ":");
+            System.out.println("\t\tdq 000000000000000AH");
+        }
+        System.out.println();
 
         System.out.print("SECTION .bbs\n\n");
     }

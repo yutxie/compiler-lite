@@ -11,12 +11,14 @@ import java.util.*;
 
 public class IRRewriter {
 
+    IR ir;
     HashMap<Variable, Register> assignedMap;
     RegisterConfig registerConfig;
 
-    void rewriteIR(MethodEntity method,
+    void rewriteIR(IR ir, MethodEntity method,
                    HashMap<Variable, Register> assignedMap,
                    RegisterConfig registerConfig) throws Exception {
+        this.ir = ir;
         this.assignedMap = assignedMap;
         this.registerConfig = registerConfig;
 //        method.printInformation();
@@ -272,9 +274,18 @@ public class IRRewriter {
                     if (assignedMap.get(var) == null)
                         getAddress(var);
             }
+        for (Variable var : ir.globalVarList)
+            getGlobalAddress(var);
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList)
                 assignAddress(ins);
+    }
+
+    Address getGlobalAddress(Variable var) {
+        Address addr = new Address();
+        addr.globalName = var.name;
+        varToAddrMap.put(var, addr);
+        return addr;
     }
 
     Address getAddress(Variable var) {
