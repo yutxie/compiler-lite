@@ -6,7 +6,7 @@ import IRCode.*;
 import IRCode.Operand.*;
 
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
-import static AstNode.UnaryExpressionNode.UnaryOp.*;
+import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
 import java.util.*;
 
@@ -18,6 +18,7 @@ public class IRGenerator extends AstVisitor {
 
     int ifCnt = 0;
     int loopCnt = 0;
+    int shortCutCnt = 0;
 
     public IR generateIR(ProgramNode prog) throws Exception {
         ir = new IR();
@@ -219,8 +220,36 @@ public class IRGenerator extends AstVisitor {
         rewriteNew(node.value, node.variableType);
     }
 
+    void logicCalculate(ExpressionStatementNode node) throws Exception {
+        int shortCutIndex = shortCutCnt++;
+        conditionJump(node, "short_true_" + shortCutIndex,
+                "short_false_" + shortCutIndex);
+        node.value = new Variable();
+        labelMap.put("short_true_" + shortCutIndex, codeList.size());
+        Move move = new Move();
+        move.dst = node.value;
+        move.src = new Immediate(1);
+        codeList.addLast(move);
+        Jump jump = new Jump();
+        jump.targetLabel = "short_end_" + shortCutIndex;
+        jump.type = Jump.Type.JMP;
+        codeList.addLast(jump);
+        labelMap.put("short_false_" + shortCutIndex, codeList.size());
+        move = new Move();
+        move.dst = node.value;
+        move.src = new Immediate(0);
+        codeList.addLast(move);
+        labelMap.put("short_end_" + shortCutIndex, codeList.size());
+        codeList.addLast(new Nop());
+        return;
+    }
+
     @Override
     void visit(UnaryExpressionNode node) throws Exception {
+        if (node.exprType.isPrimitiveType(BOOL)) {
+            logicCalculate(node);
+            return;
+        }
         super.visit(node);
         Unary cl = new Unary();
         Move mv = new Move();
@@ -261,9 +290,12 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
+        if (node.exprType.isPrimitiveType(BOOL) && node.op != ASSIGN) {
+            logicCalculate(node);
+            return;
+        }
         super.visit(node);
         Move move;
-
         switch (node.op) {
             case ASSIGN:
                 move = new Move();
@@ -337,38 +369,46 @@ public class IRGenerator extends AstVisitor {
     ////////////////////////////// control flow /////////////////////////////
 
     void conditionJump(ExpressionStatementNode node,
-                       boolean when, String label) throws Exception {
+                       String trueLabel, String falseLabel) throws Exception {
         if (node instanceof BinaryExpressionNode) 
-            conditionJump((BinaryExpressionNode)node, when, label);
+            conditionJump((BinaryExpressionNode)node, trueLabel, falseLabel);
         else if (node instanceof UnaryExpressionNode) 
-            conditionJump((UnaryExpressionNode) node, when, label);
-        else trivialConditionJump(node, when, label);
+            conditionJump((UnaryExpressionNode) node, trueLabel, falseLabel);
+        else trivialConditionJump(node, trueLabel, falseLabel);
     }
 
     void trivialConditionJump(ExpressionStatementNode node,
-                              boolean when, String label) throws Exception {
+                              String trueLabel, String falseLabel) throws Exception {
         visit(node);
         Compare cmp = new Compare();
         cmp.src0 = node.value;
         cmp.src1 = new Immediate(0);
         codeList.addLast(cmp);
-        Jump jump = new Jump();
-        jump.targetLabel = label;
-        if (when) jump.type = Jump.Type.JNZ;
-        else jump.type = Jump.Type.JZ;
-        codeList.addLast(jump);
+        Jump jump;
+        if (trueLabel != null) {
+            jump = new Jump();
+            jump.targetLabel = trueLabel;
+            jump.type = Jump.Type.JNZ;
+            codeList.addLast(jump);
+        }
+        if (falseLabel != null) {
+            jump = new Jump();
+            jump.targetLabel = falseLabel;
+            jump.type = Jump.Type.JZ;
+            codeList.addLast(jump);
+        }
     }
 
     void conditionJump(BinaryExpressionNode node,
-                       boolean when, String label) throws Exception {
-        if (node.op == LAND && when == false) {
-            conditionJump(node.lhs, when, label);
-            conditionJump(node.rhs, when, label);
+                       String trueLabel, String falseLabel) throws Exception {
+        if (node.op == LAND) {
+            conditionJump(node.lhs, null, falseLabel);
+            conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
-        if (node.op == LOR && when == true) {
-            conditionJump(node.lhs, when, label);
-            conditionJump(node.rhs, when, label);
+        if (node.op == LOR) {
+            conditionJump(node.lhs, trueLabel, null);
+            conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
         switch (node.op) {
@@ -380,59 +420,44 @@ public class IRGenerator extends AstVisitor {
                 cmp.src0 = node.lhs.value;
                 cmp.src1 = node.rhs.value;
                 codeList.addLast(cmp);
-                Jump jump = new Jump();
-                jump.targetLabel = label;
-                switch (node.op) {
-                    case LT:
-                        if (when) jump.type = Jump.Type.JL;
-                        else jump.type = Jump.Type.JGE;
-                        break;
-                    case GT:
-                        if (when) jump.type = Jump.Type.JG;
-                        else jump.type = Jump.Type.JLE;
-                        break;
-                    case LE:
-                        if (when) jump.type = Jump.Type.JLE;
-                        else jump.type = Jump.Type.JG;
-                        break;
-                    case GE:
-                        if (when) jump.type = Jump.Type.JGE;
-                        else jump.type = Jump.Type.JL;
-                        break;
-                    case EQUAL:
-                        if (when) jump.type = Jump.Type.JE;
-                        else jump.type = Jump.Type.JNE;
-                        break;
-                    case NOTEQUAL:
-                        if (when) jump.type = Jump.Type.JNE;
-                        else jump.type = Jump.Type.JE;
-                        break;
+                Jump jump;
+                if (trueLabel != null) {
+                    jump = new Jump();
+                    jump.targetLabel = trueLabel;
+                    switch (node.op) {
+                        case LT: jump.type = Jump.Type.JL; break;
+                        case GT: jump.type = Jump.Type.JG; break;
+                        case LE: jump.type = Jump.Type.JLE; break;
+                        case GE: jump.type = Jump.Type.JGE; break;
+                        case EQUAL: jump.type = Jump.Type.JE; break;
+                        case NOTEQUAL: jump.type = Jump.Type.JNE; break;
+                    }
+                    codeList.addLast(jump);
                 }
-                codeList.addLast(jump);
+                if (falseLabel != null) {
+                    jump = new Jump();
+                    jump.targetLabel = falseLabel;
+                    switch (node.op) {
+                        case LT: jump.type = Jump.Type.JGE; break;
+                        case GT: jump.type = Jump.Type.JLE; break;
+                        case LE: jump.type = Jump.Type.JG; break;
+                        case GE: jump.type = Jump.Type.JL; break;
+                        case EQUAL: jump.type = Jump.Type.JNE; break;
+                        case NOTEQUAL: jump.type = Jump.Type.JE; break;
+                    }
+                    codeList.addLast(jump);
+                }
                 break;
-            default: trivialConditionJump(node, when, label); break;
+            default: trivialConditionJump(node, trueLabel, falseLabel); break;
         }
     }
 
     void conditionJump(UnaryExpressionNode node,
-                       boolean when, String label) throws Exception {
+                       String trueLabel, String falseLabel) throws Exception {
         switch (node.op) {
-            case NEGATE: case LNOT: case NOT:
-                visit(node.inner);
-                Compare cmp = new Compare();
-                cmp.src0 = node.inner.value;
-                cmp.src1 = new Immediate(0);
-                codeList.addLast(cmp);
-                Jump jump = new Jump();
-                jump.targetLabel = label;
-                if (node.op == NEGATE) {
-                    if (when) jump.type = Jump.Type.JNZ;
-                    else jump.type = Jump.Type.JZ;
-                } else {
-                    if (when) jump.type = Jump.Type.JZ;
-                    else jump.type = Jump.Type.JNZ;
-                }
-            default: trivialConditionJump(node, when, label); break;
+            case LNOT: case NOT:
+                conditionJump(node.inner, falseLabel, trueLabel); break;
+            default: trivialConditionJump(node, trueLabel, falseLabel); break;
         }
     }
 
@@ -448,8 +473,9 @@ public class IRGenerator extends AstVisitor {
         */
         int ifIndex = ifCnt++;
 
-        conditionJump(node.condition, false, "if_false_" + ifIndex);
+        conditionJump(node.condition, "if_true_" + ifIndex, "if_false_" + ifIndex);
 
+        labelMap.put("if_true_" + ifIndex, codeList.size());
         visit(node.ifBlock);
         Jump jump = new Jump();
         jump.targetLabel = "if_end_" + ifIndex;
@@ -489,7 +515,7 @@ public class IRGenerator extends AstVisitor {
         visit(node.afterBlock);
 
         labelMap.put("loop_cond_" + loopIndex, codeList.size());
-        conditionJump(node.condition, true, "loop_body_" + loopIndex);
+        conditionJump(node.condition, "loop_body_" + loopIndex, "loop_end_" + loopIndex);
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
@@ -516,7 +542,7 @@ public class IRGenerator extends AstVisitor {
         visit(node.block);
 
         labelMap.put("loop_cond_" + loopIndex, codeList.size());
-        conditionJump(node.condition, true, "loop_body_" + loopIndex);
+        conditionJump(node.condition, "loop_body_" + loopIndex, "loop_end_" + loopIndex);
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
