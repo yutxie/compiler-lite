@@ -254,20 +254,32 @@ public class IRRewriter {
     int rbpOffset;
     void assignAddress(MethodEntity method) throws Exception {
         varToAddrMap = new HashMap<Variable, Address>();
-        rbpOffset = -8 - method.formalParaVarList.size() * 8;
-        int paraRbpOffset = -8;
-        for (Variable var : method.formalParaVarList) {
-            Address addr = new Address();
-            addr.base = registerConfig.get("rbp");
-            addr.offsetNumber = paraRbpOffset;
-            paraRbpOffset -= 8;
-            Operand para = assignedMap.get(var);
-            if (para == null) para = getAddress(var);
+        int paraIter = 0;
+        rbpOffset = -8;
+        for (Variable para : method.formalParaVarList) {
             Move move = new Move();
-            move.dst = para;
-            move.src = addr;
+            move.dst = assignedMap.get(para);
+            if (move.dst == null) move.dst = getAddress(para);
+            if (paraIter < 6) {
+                Register reg;
+                switch (paraIter) {
+                    case 0: reg = registerConfig.get("rdi"); break;
+                    case 1: reg = registerConfig.get("rsi"); break;
+                    case 2: reg = registerConfig.get("rdx"); break;
+                    case 3: reg = registerConfig.get("rcx"); break;
+                    case 4: reg = registerConfig.get("r8"); break;
+                    case 5: reg = registerConfig.get("r9"); break;
+                    default: throw new Exception();
+                }
+                move.src = reg;
+            } else {
+                Address addr = new Address();
+                addr.base = registerConfig.get("rbp");
+                addr.offsetNumber = (paraIter - 6) * 8 + 16;
+                move.src = addr;
+            }
             method.basicBlockList.getFirst().codeList.addFirst(move);
-//            move.printInformation();
+            ++paraIter;
         }
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList) {
@@ -391,8 +403,7 @@ public class IRRewriter {
         codeList.add(1, move);
         Binary sub = new Binary();
         sub.dst = registerConfig.get("rsp");
-        sub.src = new Immediate((varToAddrMap.size() + method.formalParaVarList.size()) * 8 +
-            registerConfig.numOfAll * 8);
+        sub.src = new Immediate(varToAddrMap.size() * 8);
         sub.type = Binary.Type.SUB;
         codeList.add(2, sub);
     }
@@ -597,65 +608,63 @@ public class IRRewriter {
         return res;
     }
 
-    LinkedList<IRCode> spillCode(MethodCall ins) {
+    LinkedList<IRCode> spillCode(MethodCall ins) throws Exception {
         // ATTENTION: assume no caller
         /*  call t = method(paraList) -->
-            store regs
-            mov r8 para_i
-            mov [rsp -8 -8*i] r8
+            push regs
+            pass paras
             call method
-            load regs
+            pop paras in stack
+            pop regs
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        int offset;
 
-        offset = 0;
         for (int i = 8; i < registerConfig.numOfAll; ++i) {
             Register reg = registerConfig.get(i);
-            Address addr = new Address();
-            addr.base = registerConfig.get("rsp");
-            addr.offsetNumber = offset;
-            offset += 8;
-            Move move = new Move();
-            move.dst = addr;
-            move.src = reg;
-            res.addLast(move);
+            Push push = new Push();
+            push.src = reg;
+            res.addLast(push);
         }
 
-        offset = -24;
-        for (Operand para : ins.actualParaVarList) {
-            Operand src;
-            if (para instanceof Address) {
-                src = registerConfig.get("r8");
-                Move move = new Move();
-                move.dst = src;
-                move.src = para;
-                res.addLast(move);
-            } else src = para;
-            Address addr = new Address();
-            addr.base = registerConfig.get("rsp");
-            addr.offsetNumber = offset;
-            offset -= 8;
+        for (int i = 0; i < 6; ++i) {
+            if (i >= ins.actualParaVarList.size()) break;
+            Operand para = ins.actualParaVarList.get(i);
+            Register reg;
+            switch (i) {
+                case 0: reg = registerConfig.get("rdi"); break;
+                case 1: reg = registerConfig.get("rsi"); break;
+                case 2: reg = registerConfig.get("rdx"); break;
+                case 3: reg = registerConfig.get("rcx"); break;
+                case 4: reg = registerConfig.get("r8"); break;
+                case 5: reg = registerConfig.get("r9"); break;
+                default: throw new Exception();
+            }
             Move move = new Move();
-            move.dst = addr;
-            move.src = src;
+            move.dst = reg;
+            move.src = para;
             res.addLast(move);
         }
+        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) {
+            Push push = new Push();
+            push.src = ins.actualParaVarList.get(i);
+            res.addLast(push);
+        }
+
         MethodCall call = new MethodCall();
         call.method = ins.method;
         res.addLast(call);
 
-        offset = 0;
-        for (int i = 8; i < registerConfig.numOfAll; ++i) {
+        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) {
+            Pop pop = new Pop();
+            pop.dst = registerConfig.get("r8");
+            res.addLast(pop);
+        }
+
+        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) {
             Register reg = registerConfig.get(i);
-            Address addr = new Address();
-            addr.base = registerConfig.get("rsp");
-            addr.offsetNumber = offset;
-            offset += 8;
-            Move move = new Move();
-            move.dst = reg;
-            move.src = addr;
-            res.addLast(move);
+            Pop pop = new Pop();
+            pop.dst = reg;
+            res.addLast(pop);
         }
 
         Move move = new Move();

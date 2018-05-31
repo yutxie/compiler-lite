@@ -17,7 +17,7 @@ public class RegisterConfig {
     // R8-15
 
     ArrayList<Register> regList;
-    public int numOfAssignable = 6;
+    public int numOfAssignable = 6; // ATTENTION
     public int numOfAll = 16;
 
     public RegisterConfig() {
