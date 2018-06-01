@@ -477,8 +477,7 @@ public class IRRewriter {
             res.addLast(push);
         }
         MethodCall call = new MethodCall(); // call malloc
-        call.method = new MethodDefinitionNode();
-        call.method.methodName = "malloc";
+        call.methodName = "malloc";
         res.addLast(call);
         for (int i = registerConfig.numOfAll - 1; i >= 8; --i) { // pop regs
             Register reg = registerConfig.get(i);
@@ -660,7 +659,7 @@ public class IRRewriter {
         }
 
         MethodCall call = new MethodCall();
-        call.method = ins.method;
+        call.methodName = ins.methodName;
         res.addLast(call);
 
         for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) {

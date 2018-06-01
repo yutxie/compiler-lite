@@ -23,24 +23,19 @@ public class CodeGenerator {
             System.out.println("global " + var.name);
         System.out.println();
 
-        System.out.println("extern malloc");
-        System.out.println("extern printf");
-        System.out.println("extern __stack_chk_fail");
-        System.out.println("extern __isoc99_scanf");
+        builtinPrinter.printBuiltin("extern");
         System.out.println();
 
         System.out.println("SECTION .text\n");
+        builtinPrinter.printBuiltin("method");
         for (MethodEntity method : ir.methodList) {
             String methodName = method.methodName;
             if (methodName.equals("string_length") ||
+                methodName.equals("string_ord") ||
                 methodName.equals("print") ||
                 methodName.equals("println") ||
                 methodName.equals("toString") ||
-                methodName.equals("addString__")) {
-                builtinPrinter.printBuiltin(methodName);
-                System.out.println("\n");
-                continue;
-            }
+                methodName.equals("addString__")) continue;
             System.out.println(methodName + ":");
             for (BasicBlock bb : method.basicBlockList) {
                 System.out.println(bb.leadLabel + ":");
@@ -65,10 +60,7 @@ public class CodeGenerator {
             System.out.println("str_const_" + strConstCnt++ + ":");
             System.out.println("\t\tdb " + strConst + ", 00H");
         }
-        System.out.println("L_257300:");
-        System.out.println("\t\tdb 25H, 73H, 00H");
-        System.out.println("L_newline:");
-        System.out.println("\t\tdb 10, 00H");
+        builtinPrinter.printBuiltin("const_str");
     }
 
     void generateCode(IRCode ins) throws Exception {
@@ -114,7 +106,7 @@ public class CodeGenerator {
     }
 
     void generateCode(MethodCall ins) throws IOException {
-        System.out.println("\t\tcall\t" + ins.method.methodName);
+        System.out.println("\t\tcall\t" + ins.methodName);
     }
 
     void generateCode(Move ins) throws IOException {

@@ -47,16 +47,12 @@ public class IRGenerator extends AstVisitor {
     void visit(MethodDefinitionNode node) throws Exception {
         MethodEntity methodEntity = new MethodEntity();
         if (node.parent instanceof ClassDefinitionNode) {
-//            node.scope.define("this", new Variable("this"));
             String className = ((ClassDefinitionNode) node.parent).className;
             methodEntity.methodName = className + "_" + node.methodName;
         } else methodEntity.methodName = node.methodName;
         ir.methodList.addLast(methodEntity);
         codeList = methodEntity.codeList;
         labelMap.clear();
-        if (node.methodName.equals("main"))
-            for (IRCode ins : ir.global.codeList)
-                codeList.addLast(ins);
 
         super.visit(node);
         for (DefinitionExpressionNode para : node.formalArgumentList)
@@ -113,9 +109,7 @@ public class IRGenerator extends AstVisitor {
             Move ins = new Move();
             ins.dst = var;
             ins.src = node.initValue.value;
-            if (node.parent instanceof ProgramNode)
-                ir.global.codeList.addLast(ins);
-            else codeList.add(ins);
+            codeList.addLast(ins);
         }
         node.value = var;
     }
@@ -124,7 +118,6 @@ public class IRGenerator extends AstVisitor {
     void visit(MemberAccessExpressionNode node) throws Exception {
         visit(node.caller);
         if (node.member instanceof MethodCallExpressionNode) {
-//            visit(node.member);
             ReferenceNode memberCaller =
                 ((MethodCallExpressionNode) node.member).caller;
             if (memberCaller.referenceName.equals("_size")) {
@@ -137,11 +130,13 @@ public class IRGenerator extends AstVisitor {
                 codeList.addLast(move);
                 return;
             }
+            visit(node.member);
             MethodCall ins = (MethodCall) codeList.get(codeList.size() - 1);
             node.value = new Variable();
             ins.dst = node.value;
             ins.caller = node.caller.value;
-            ins.method = (MethodDefinitionNode) memberCaller.definitionNode;
+            ins.methodName = node.caller.exprType.getTypeName() + "_" + memberCaller.referenceName;
+            ins.actualParaVarList.addFirst(node.caller.value);
         } else if (node.member instanceof ReferenceNode) {
             MemberVariable value = new MemberVariable();
             value.object = node.caller.value;
@@ -166,7 +161,7 @@ public class IRGenerator extends AstVisitor {
         node.value = new Variable();
         MethodCall ins = new MethodCall();
         ins.dst = node.value;
-        ins.method = node.scope.getMethod(node.caller.referenceName);
+        ins.methodName = node.caller.referenceName;
         for (ExpressionStatementNode item : node.actualParameterList)
             ins.actualParaVarList.addLast(item.value);
         codeList.add(ins);
@@ -315,7 +310,7 @@ public class IRGenerator extends AstVisitor {
         if (node.lhs.exprType.getTypeName().equals("string")) { // addString__
             MethodCall call = new MethodCall();
             call.dst = node.value = new Variable();
-            call.method = node.scope.getMethod("addString__");
+            call.methodName = "addString__";
             call.actualParaVarList.addLast(node.lhs.value);
             call.actualParaVarList.addLast(node.rhs.value);
             codeList.addLast(call);

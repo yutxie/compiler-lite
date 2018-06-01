@@ -1,10 +1,9 @@
 class string {
     
     int length() {}
+    int ord(int pos) {}
     // string substring(int left, int right) {}
     // int parseInt() {}
-    // int ord(int pos) {}
-    // operator +
 }
 
 void print(string str) {}

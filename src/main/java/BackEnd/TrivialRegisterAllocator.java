@@ -12,23 +12,23 @@ public class TrivialRegisterAllocator {
 
     public void allocateRegister(IR ir, RegisterConfig registerConfig) {
         this.registerConfig = registerConfig;
-        for (MethodEntity method : ir.methodList)
-            allocateRegister(method);
+        for (MethodEntity methodName : ir.methodList)
+            allocateRegister(methodName);
     }
 
     HashMap<Variable, Address> varToAddrMap;
     int rbpOffset;
-    void allocateRegister(MethodEntity method) {
+    void allocateRegister(MethodEntity methodName) {
         varToAddrMap = new HashMap<Variable, Address>();
         rbpOffset = -8; // reserve space for old rbp
-        assignAddressToVariable(method);
-        rewriteCodeList(method);
+        assignAddressToVariable(methodName);
+        rewriteCodeList(methodName);
     }
 
-    void assignAddressToVariable(MethodEntity method) {
-        for (Variable var : method.formalParaVarList)
+    void assignAddressToVariable(MethodEntity methodName) {
+        for (Variable var : methodName.formalParaVarList)
             assignAddressToVariable(var);
-        for (IRCode ins : method.codeList) {
+        for (IRCode ins : methodName.codeList) {
             HashSet<Variable> varSet = ins.allVariable;
             for (Variable var : varSet)
                 assignAddressToVariable(var);
@@ -44,10 +44,10 @@ public class TrivialRegisterAllocator {
         rbpOffset -= 8;
     }
 
-    void rewriteCodeList(MethodEntity method) {
-//        System.out.println("######################### " + method.methodName);
+    void rewriteCodeList(MethodEntity methodName) {
+//        System.out.println("######################### " + methodName.methodNameName);
         LinkedList<LinkedList<IRCode>> codeListList = new LinkedList<LinkedList<IRCode>>();
-        LinkedList<IRCode> codeList = method.codeList;
+        LinkedList<IRCode> codeList = methodName.codeList;
         for (ListIterator<IRCode> it = codeList.listIterator(); it.hasNext();) {
             IRCode ins = it.next();
 //            System.out.print("=========== ");
@@ -130,10 +130,10 @@ public class TrivialRegisterAllocator {
 
     LinkedList<IRCode> rewrite(MethodCall ins) {
         // ATTENTION: assume no caller
-        /*  call t = method(paraList) -->
+        /*  call t = methodName(paraList) -->
             mov r0 para_i
             mov [rsp -8 -8*i] r0
-            call method
+            call methodName
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         int offset = -8;
@@ -156,7 +156,7 @@ public class TrivialRegisterAllocator {
             res.addLast(move);
         }
         MethodCall call = new MethodCall();
-        call.method = ins.method;
+        call.methodName = ins.methodName;
         res.addLast(call);
         Move move = new Move();
         move.dst = ins.dst;

@@ -17,6 +17,7 @@ public class Main {
         TypeDefinitionChecker typeDefinitionChecker = new TypeDefinitionChecker();
         StaticTypeChecker staticTypeChecker = new StaticTypeChecker();
         ClassTypeResolver classTypeResolver = new ClassTypeResolver();
+        ThisAppender thisAppender = new ThisAppender();
         IRGenerator irGenerator = new IRGenerator();
         CFGGenerator cfgGenerator = new CFGGenerator();
         MultiIndexAndMemberRewriter multiIndexAndMemberRewriter = new MultiIndexAndMemberRewriter();
@@ -34,6 +35,7 @@ public class Main {
         typeDefinitionChecker.checkTypeDefinition(ast);
         staticTypeChecker.checkStaticType(ast);
         classTypeResolver.resolveClassType(ast);
+        thisAppender.appendThis(ast);
         IR ir = irGenerator.generateIR(ast);
 //        ir.printInformation();
 
