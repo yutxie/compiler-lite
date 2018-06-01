@@ -14,8 +14,6 @@ string addString__(string a, string b) {}
 
 void println(string str) {}
 
-/*
-string getString() {}
-
 int getInt() {}
-*/
+
+string getString() {}

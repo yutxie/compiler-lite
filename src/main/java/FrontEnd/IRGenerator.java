@@ -120,7 +120,7 @@ public class IRGenerator extends AstVisitor {
         if (node.member instanceof MethodCallExpressionNode) {
             ReferenceNode memberCaller =
                 ((MethodCallExpressionNode) node.member).caller;
-            if (memberCaller.referenceName.equals("_size")) {
+            if (memberCaller.referenceName.equals("_array_size")) {
                 IndexVariable indexAcces = new IndexVariable();
                 indexAcces.array = node.caller.value;
                 indexAcces.index = new Immediate(-1);

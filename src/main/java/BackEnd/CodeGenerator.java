@@ -32,6 +32,8 @@ public class CodeGenerator {
             String methodName = method.methodName;
             if (methodName.equals("string_length") ||
                 methodName.equals("string_ord") ||
+                methodName.equals("getInt") ||
+                methodName.equals("getString") ||
                 methodName.equals("print") ||
                 methodName.equals("println") ||
                 methodName.equals("toString") ||

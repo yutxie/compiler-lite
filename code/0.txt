@@ -1,6 +1,23 @@
-int main() {
-    string s1 = "aaa";
-    string s2 = "bbbbb";
-    string s3 = s1 + s2;
-    return s3.length() + s3.ord(5);
+int[] a = new int[4];
+int main()
+{
+    int[] b = new int[a.size()];
+	int i;
+    for (i = 0; i < a.size(); i++)
+	{
+		a[i] = 0;
+		b[i] = getInt();
+        // println(toString(b[i]));
+	}
+	for (i = 0; i < a.size(); i++)
+	{
+		print(toString(b[i]));
+	}
+	println("");
+	a=b;
+	for (i = 0; i < b.size(); i++)
+	{
+		print(toString(a[i]));
+	}
+    return 0;
 }

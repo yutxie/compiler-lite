@@ -59,7 +59,7 @@ public class StaticTypeChecker extends AstVisitor {
                 if (member.referenceName.equals("size")) {
                     node.exprType = new PrimitiveTypeNode("int");
                     member.definitionNode = new MethodDefinitionNode();
-                    member.referenceName = "_size";
+                    member.referenceName = "_array_size";
                     return;
                 }
             }

@@ -51,7 +51,7 @@ public abstract class AstVisitor {
         else if (node instanceof UnaryExpressionNode) visit((UnaryExpressionNode)node);
         else if (node instanceof BinaryExpressionNode) visit((BinaryExpressionNode)node);
         else if (node instanceof TypeNode) visit((TypeNode)node);
-        if (node.exprType != null) visit((TypeNode) node.exprType);
+//        if (node.exprType != null) visit((TypeNode) node.exprType); ATTENTION
     }
 
     void visit(ForStatementNode node) throws Exception {
