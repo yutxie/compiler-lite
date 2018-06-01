@@ -94,7 +94,7 @@ public class IRRewriter {
                 else break;
             Address addr = new Address();
             addr.base = base;
-            addr.offsetNumber = index * 8;
+            addr.offsetNumber = index * 8 + 8;
             return addr;
         } else return oprand;
     }
@@ -257,6 +257,7 @@ public class IRRewriter {
         varToAddrMap = new HashMap<Variable, Address>();
         int paraIter = 0;
         rbpOffset = -8;
+        LinkedList<IRCode> readParas = new LinkedList<IRCode>();
         for (Variable para : method.formalParaVarList) {
             Move move = new Move();
             move.dst = assignedMap.get(para);
@@ -279,9 +280,11 @@ public class IRRewriter {
                 addr.offsetNumber = (paraIter - 6) * 8 + 16;
                 move.src = addr;
             }
-            method.basicBlockList.getFirst().codeList.addFirst(move);
+            readParas.addLast(move);
+//            method.basicBlockList.getFirst().codeList.addFirst(move);
             ++paraIter;
         }
+        method.basicBlockList.getFirst().codeList.addAll(0, readParas);
         for (BasicBlock bb : method.basicBlockList)
             for (IRCode ins : bb.codeList) {
                 HashSet<Variable> varSet = ins.allVariable;

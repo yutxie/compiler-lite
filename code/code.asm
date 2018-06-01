@@ -1,13 +1,15 @@
 default rel
 
 global string_length
-global gcd
 global main
 global print
 global toString
 global addString__
 global println
 
+global N
+global b
+global resultCount
 
 extern malloc
 extern printf
@@ -31,65 +33,14 @@ string_length_1:
         ret
 
 
-gcd:
-gcd_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r12, rsi
-		mov		r14, rdi
-		mov		rax, r14
-		cqo
-		idiv		r12
-		mov		r13, rdx
-		cmp		r13, 0
-		je		if_true_0
-		jne		if_false_0
-if_true_0:
-		mov		rax, r12
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		jmp		if_end_0
-if_false_0:
-		mov		rax, r14
-		cqo
-		idiv		r12
-		mov		r15, rdx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	gcd
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r15, rax
-		mov		rax, r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-if_end_0:
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
 main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 0
+		sub		rsp, 80
+		mov		rdi, 15001
+		inc		rdi
+		push		15001
 		push		r8
 		push		r9
 		push		r10
@@ -98,9 +49,7 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, 10
-		mov		rsi, 1
-		call	gcd
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -109,7 +58,61 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
-		mov		r15, rax
+		pop		rdi
+		mov		qword [rax+0], rdi
+		mov		r10, rax
+		mov		r10, 0
+		jmp		loop_cond_0
+loop_body_0:
+		inc		r10
+loop_cond_0:
+		cmp		r10, 15001
+		jl		loop_body_0
+loop_end_0:
+		mov		qword [rbp-8], 1
+		jmp		loop_cond_1
+loop_body_1:
+		mov		rbx, qword [rel b]
+		mov		rcx, qword [rbp-8]
+		mov		qword [rbx+rcx*8+8], 1
+		mov		r10, qword [rbp-8]
+		inc		qword [rbp-8]
+loop_cond_1:
+		mov		r8, qword [rel N]
+		cmp		qword [rbp-8], r8
+		jle		loop_body_1
+		jg		loop_end_1
+loop_end_1:
+		mov		qword [rbp-8], 2
+		jmp		loop_cond_2
+loop_body_2:
+		mov		rbx, qword [rel b]
+		mov		rcx, qword [rbp-8]
+		cmp		qword [rbx+rcx*8+8], 0
+		jnz		if_true_0
+		jz		if_false_0
+if_true_0:
+		mov		r10, 2
+		cmp		qword [rbp-8], 3
+		jle		if_false_1
+		mov		r9, qword [rbp-8]
+		mov		qword [rbp-16], r9
+		mov		r8, qword [rbp-16]
+		sub		r8, 2
+		mov		qword [rbp-16], r8
+		mov		rbx, qword [rel b]
+		mov		rcx, qword [rbp-16]
+		cmp		qword [rbx+rcx*8+8], 0
+		jnz		if_true_1
+		jz		if_false_1
+if_true_1:
+		mov		r13, qword [rel resultCount]
+		inc		qword [rel resultCount]
+		mov		r9, qword [rbp-8]
+		mov		qword [rbp-24], r9
+		mov		r8, qword [rbp-24]
+		sub		r8, 2
+		mov		qword [rbp-24], r8
 		push		r8
 		push		r9
 		push		r10
@@ -118,7 +121,7 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
+		mov		rdi, qword [rbp-24]
 		call	toString
 		pop		r15
 		pop		r14
@@ -128,7 +131,7 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
-		mov		r15, rax
+		mov		r13, rax
 		push		r8
 		push		r9
 		push		r10
@@ -137,7 +140,66 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
+		mov		rdi, r13
+		mov		rsi, str_const_0
+		call	addString__
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		mov		r11, rax
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-8]
+		call	toString
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		mov		r12, rax
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r11
+		mov		rsi, r12
+		call	addString__
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		mov		qword [rbp-32], rax
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-32]
 		call	println
 		pop		r15
 		pop		r14
@@ -147,7 +209,43 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
-		mov		r15, rax
+		mov		qword [rbp-40], rax
+		jmp		if_end_1
+if_false_1:
+		nop
+if_end_1:
+		jmp		loop_cond_3
+loop_body_3:
+		mov		r9, qword [rbp-8]
+		mov		qword [rbp-48], r9
+		mov		r8, qword [rbp-48]
+		imul		r8, r10
+		mov		qword [rbp-48], r8
+		mov		rbx, qword [rel b]
+		mov		rcx, qword [rbp-48]
+		mov		qword [rbx+rcx*8+8], 0
+		mov		qword [rbp-56], r10
+		inc		r10
+loop_cond_3:
+		mov		r14, qword [rbp-8]
+		imul		r14, r10
+		mov		r8, qword [rel N]
+		cmp		r14, r8
+		jle		loop_body_3
+		jg		loop_end_3
+loop_end_3:
+		jmp		if_end_0
+if_false_0:
+		nop
+if_end_0:
+		mov		r10, qword [rbp-8]
+		inc		qword [rbp-8]
+loop_cond_2:
+		mov		r8, qword [rel N]
+		cmp		qword [rbp-8], r8
+		jle		loop_body_2
+		jg		loop_end_2
+loop_end_2:
 		push		r8
 		push		r9
 		push		r10
@@ -156,27 +254,7 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, 34986
-		mov		rsi, 3087
-		call	gcd
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r15, rax
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
+		mov		rdi, qword [rel resultCount]
 		call	toString
 		pop		r15
 		pop		r14
@@ -195,47 +273,9 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r15, rax
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, 2907
-		mov		rsi, 1539
-		call	gcd
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r15, rax
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		call	toString
+		mov		rdi, str_const_1
+		mov		rsi, r15
+		call	addString__
 		pop		r15
 		pop		r14
 		pop		r13
@@ -430,11 +470,21 @@ println:
 
 SECTION .data	align=8
 
+N:
+		dq 000000000000000AH
+b:
+		dq 000000000000000AH
+resultCount:
+		dq 000000000000000AH
 
 SECTION .bbs
 
 SECTION .rodata
 
+str_const_0:
+		db " ", 00H
+str_const_1:
+		db "Total: ", 00H
 L_257300:
 		db 25H, 73H, 00H
 L_newline:

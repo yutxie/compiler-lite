@@ -28,8 +28,11 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(ProgramNode node) throws Exception {
-        codeList = ir.global.codeList;
-        for (DefinitionExpressionNode item : node.variableDefinitionList) visit(item);
+        int iter = 0;
+        for (DefinitionExpressionNode item : node.variableDefinitionList) {
+            MethodDefinitionNode main = node.scope.getMethod("main");
+            main.block.childList.add(iter++, item);
+        }
         for (ClassDefinitionNode item : node.classDefinitionList) visit(item);
         for (MethodDefinitionNode item : node.methodDefinitionList) visit(item);
     }
@@ -50,11 +53,10 @@ public class IRGenerator extends AstVisitor {
         } else methodEntity.methodName = node.methodName;
         ir.methodList.addLast(methodEntity);
         codeList = methodEntity.codeList;
+        labelMap.clear();
         if (node.methodName.equals("main"))
             for (IRCode ins : ir.global.codeList)
                 codeList.addLast(ins);
-        labelMap.clear();
-//        labelMap.put("%" + methodEntity.methodName + "_entry", 0);
 
         super.visit(node);
         for (DefinitionExpressionNode para : node.formalArgumentList)
