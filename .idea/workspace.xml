@@ -21,9 +21,30 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
-              <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+              <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+              <folding>
+                <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
+                <element signature="method#init#0;class#RegisterAllocator#0" />
+                <element signature="method#dfs#0;class#RegisterAllocator#0" />
+                <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+                <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
+                <element signature="method#simplify#0;class#RegisterAllocator#0" />
+                <element signature="method#spill#0;class#RegisterAllocator#0" />
+                <element signature="e#3722#3785#0" />
+                <element signature="method#assignColors#0;class#RegisterAllocator#0" />
+                <element signature="method#buildInterGraph#0;class#RegisterAllocator#0" />
               </folding>
             </state>
           </provider>
@@ -243,7 +264,6 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Nop.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/AstBuilder/AstBuilder.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/BuiltinPrinter.java" />
@@ -256,6 +276,7 @@
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/StaticTypeChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -860,13 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="22" column="65" selection-start-line="22" selection-start-column="65" selection-end-line="22" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Operand/Address.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="174">
@@ -1098,10 +1112,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding>
+            <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
+            <element signature="method#init#0;class#RegisterAllocator#0" />
+            <element signature="method#dfs#0;class#RegisterAllocator#0" />
+            <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+            <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
+            <element signature="method#simplify#0;class#RegisterAllocator#0" />
+            <element signature="method#spill#0;class#RegisterAllocator#0" />
+            <element signature="e#3722#3785#0" />
+            <element signature="method#assignColors#0;class#RegisterAllocator#0" />
+            <element signature="method#buildInterGraph#0;class#RegisterAllocator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="30" lean-forward="true" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
