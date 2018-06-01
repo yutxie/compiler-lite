@@ -9,38 +9,66 @@ import java.io.*;
 
 public class CodeGenerator {
 
+    BuiltinPrinter builtinPrinter = new BuiltinPrinter();
+
     public void generateCode(IR ir) throws Exception {
-        System.out.print("default rel\n\n");
+        System.out.println("default rel");
+        System.out.println();
+
         for (MethodEntity method : ir.methodList)
-            System.out.print("global " + method.methodName + "\n");
-        System.out.print("\n");
+            System.out.println("global " + method.methodName);
+        System.out.println();
 
         for (Variable var : ir.globalVarList)
-            System.out.print("global " + var.name);
-        System.out.print("\n\n");
+            System.out.println("global " + var.name);
+        System.out.println();
 
-        System.out.print("extern malloc\n");
-        System.out.print("\n");
+        System.out.println("extern malloc");
+        System.out.println("extern printf");
+        System.out.println("extern __stack_chk_fail");
+        System.out.println("extern __isoc99_scanf");
+        System.out.println();
 
-        System.out.print("SECTION .text\n\n");
+        System.out.println("SECTION .text\n");
         for (MethodEntity method : ir.methodList) {
-            System.out.print(method.methodName + ":\n");
+            String methodName = method.methodName;
+            if (methodName.equals("string_length") ||
+                methodName.equals("print") ||
+                methodName.equals("println") ||
+                methodName.equals("toString") ||
+                methodName.equals("addString__")) {
+                builtinPrinter.printBuiltin(methodName);
+                System.out.println("\n");
+                continue;
+            }
+            System.out.println(methodName + ":");
             for (BasicBlock bb : method.basicBlockList) {
-                System.out.print(bb.leadLabel + ":\n");
+                System.out.println(bb.leadLabel + ":");
                 for (IRCode ins : bb.codeList)
                     generateCode(ins);
             }
             System.out.println();
         }
 
-        System.out.print("SECTION .data\talign=8\n\n");
+        System.out.println("SECTION .data\talign=8\n");
         for (Variable var : ir.globalVarList) {
             System.out.println(var.name + ":");
             System.out.println("\t\tdq 000000000000000AH");
         }
         System.out.println();
 
-        System.out.print("SECTION .bbs\n\n");
+        System.out.println("SECTION .bbs\n");
+
+        System.out.println("SECTION .rodata\n");
+        int strConstCnt = 0;
+        for (String strConst : ir.stringConstList) {
+            System.out.println("str_const_" + strConstCnt++ + ":");
+            System.out.println("\t\tdb " + strConst + ", 00H");
+        }
+        System.out.println("L_257300:");
+        System.out.println("\t\tdb 25H, 73H, 00H");
+        System.out.println("L_newline:");
+        System.out.println("\t\tdb 10, 00H");
     }
 
     void generateCode(IRCode ins) throws Exception {
@@ -81,12 +109,12 @@ public class CodeGenerator {
     }
 
     void generateCode(Jump ins) {
-        System.out.print("\t\t" +
-            ins.type.toString().toLowerCase() + "\t\t" + ins.targetLabel + "\n");
+        System.out.println("\t\t" +
+            ins.type.toString().toLowerCase() + "\t\t" + ins.targetLabel);
     }
 
     void generateCode(MethodCall ins) throws IOException {
-        System.out.print("\t\tcall\t" + ins.method.methodName + "\n");
+        System.out.println("\t\tcall\t" + ins.method.methodName);
     }
 
     void generateCode(Move ins) throws IOException {

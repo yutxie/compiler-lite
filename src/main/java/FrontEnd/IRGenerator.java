@@ -85,12 +85,11 @@ public class IRGenerator extends AstVisitor {
     @Override
     void visit(ConstantNode node) throws Exception {
         if (node.exprType.getTypeName().equals("string")) {
-//            node.value = new Variable();
-//            Allocate ins = new Allocate();
-//            ins.dst = node.value;
-//            ins.variableType = node.exprType;
-//            codeList.addLast(ins);
-            throw new Exception();
+            int id = ir.stringConstList.size();
+            ir.stringConstList.addLast(node.constantStr);
+            Address addr = new Address();
+            addr.label = "str_const_" + id;
+            node.value = addr;
         } else node.value = new Immediate(node);
     }
 
@@ -311,6 +310,15 @@ public class IRGenerator extends AstVisitor {
             return;
         }
         super.visit(node);
+        if (node.lhs.exprType.getTypeName().equals("string")) { // addString__
+            MethodCall call = new MethodCall();
+            call.dst = node.value = new Variable();
+            call.method = node.scope.getMethod("addString__");
+            call.actualParaVarList.addLast(node.lhs.value);
+            call.actualParaVarList.addLast(node.rhs.value);
+            codeList.addLast(call);
+            return;
+        }
         Move move;
         switch (node.op) {
             case ASSIGN:

@@ -1,0 +1,11 @@
+println:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 0
+		mov		rsi, L_newline
+		call	addString__
+		mov		rdi, rax
+		call	print
+		mov		rsp, rbp
+		pop		rbp
+		ret

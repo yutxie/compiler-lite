@@ -1,0 +1,10 @@
+print:
+        push    rbp
+        mov     rbp, rsp
+        sub     rsp, 16
+        mov     rsi, rdi
+        mov     rdi, L_257300
+        mov     eax, 0
+        call    printf
+        leave
+        ret

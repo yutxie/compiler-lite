@@ -9,6 +9,7 @@ public class Address extends Operand {
     public Register base;
     public Register offsetReg;
     public String globalName;
+    public String label;
 
     @Override
     public HashSet<Variable> colorable() {
@@ -22,7 +23,9 @@ public class Address extends Operand {
 
     @Override
     public String getName() {
-        if (globalName == null) {
+        if (label != null) {
+            return label;
+        } else if (globalName == null) {
             String offsetRegStr = "";
             if (offsetReg != null) offsetRegStr = "+" + offsetReg.getName() + "*8";
             String offsetStr = "";

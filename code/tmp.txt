@@ -1,36 +1,33 @@
-int main() {
-    int[] a = new int[1];
-    a[0] = 20;
-    return a[0] + 10;
-}/*
+int gcd(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd(y, x%y);
+}
 
-class string {
+int main() {
+    println(toString(gcd(10,1)));
+    println(toString(gcd(34986,3087)));
+    println(toString(gcd(2907,1539)));
+
+    return 0;
+}class string {
     
     int length() {}
-    string substring(int left, int right) {}
-    int parseInt() {}
-    int ord(int pos) {}
+    // string substring(int left, int right) {}
+    // int parseInt() {}
+    // int ord(int pos) {}
     // operator +
 }
 
-void print(string str) {
+void print(string str) {}
 
-}
+string toString(int i) {}
 
-void println(string str) {
-    print(str + "\n");
-}
+string addString__(string a, string b) {}
 
-string getString() {
+void println(string str) {}
 
-}
+/*
+string getString() {}
 
-int getInt() {
-
-}
-
-string toString(int i) {
-
-}
-
+int getInt() {}
 */

@@ -1,0 +1,83 @@
+toString:
+        push    rbx
+        mov     ebx, edi
+        mov     edi, 20
+        call    malloc
+        mov     rsi, rax
+        test    ebx, ebx
+        jns     toString_010
+        neg     ebx
+        je      toString_008
+        mov     r9d, 1
+toString_001:  mov     eax, 0
+        mov     r8d, 1717986919
+toString_002:  lea     edi, [rax+1H]
+        movsxd  rcx, eax
+        mov     eax, ebx
+        imul    r8d
+        sar     edx, 2
+        mov     eax, ebx
+        sar     eax, 31
+        sub     edx, eax
+        lea     eax, [rdx+rdx*4]
+        add     eax, eax
+        sub     ebx, eax
+        add     ebx, 48
+        mov     byte [rsi+rcx], bl
+        mov     ebx, edx
+        mov     eax, edi
+        test    edx, edx
+        jnz     toString_002
+        test    edi, edi
+        jnz     toString_003
+        mov     byte [rsi], 48
+        test    r9d, r9d
+        jnz     toString_004
+        mov     edi, 1
+        jmp     toString_011
+
+toString_003:  mov     eax, edi
+        test    r9d, r9d
+        jnz     toString_005
+        jmp     toString_006
+
+toString_004:  mov     eax, 1
+toString_005:  lea     edi, [rax+1H]
+        cdqe
+        mov     byte [rsi+rax], 45
+toString_006:  lea     ecx, [rdi-1H]
+        test    ecx, ecx
+        jle     toString_011
+        mov     r8d, 0
+toString_007:  movsxd  rdx, r8d
+        add     rdx, rsi
+        movzx   r9d, byte [rdx]
+        movsxd  rax, ecx
+        add     rax, rsi
+        movzx   r10d, byte [rax]
+        mov     byte [rdx], r10b
+        mov     byte [rax], r9b
+        add     r8d, 1
+        sub     ecx, 1
+        cmp     r8d, ecx
+        jl      toString_007
+        jmp     toString_011
+
+toString_008:  mov     byte [rax], 48
+        mov     eax, 1
+        jmp     toString_005
+
+toString_009:  mov     byte [rsi], 48
+        mov     edi, 1
+        jmp     toString_011
+
+toString_010:  mov     r9d, 0
+        test    ebx, ebx
+        jne     toString_001
+        jmp     toString_009
+
+toString_011:  movsxd  rdi, edi
+        mov     byte [rsi+rdi], 0
+        mov     rax, rsi
+        pop     rbx
+        ret
