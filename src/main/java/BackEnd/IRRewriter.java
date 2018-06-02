@@ -464,6 +464,11 @@ public class IRRewriter {
         inc.dst = r8;
         inc.type = Unary.Type.INC;
         res.addLast(inc);
+        Binary mul = new Binary();
+        mul.dst = r8;
+        mul.src = new Immediate(8);
+        mul.type = Binary.Type.IMUL;
+        res.addLast(mul);
         MethodCall call = new MethodCall();
         call.methodName = "malloc";
         call.actualParaVarList.addLast(r8);

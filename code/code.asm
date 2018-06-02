@@ -814,7 +814,7 @@ main_entry:
 SECTION .data	align=8
 
 
-SECTION .bbs
+SECTION .bss
 
 stringbuffer:
 		resb	256

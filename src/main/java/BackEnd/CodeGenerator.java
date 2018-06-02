@@ -32,6 +32,8 @@ public class CodeGenerator {
             String methodName = method.methodName;
             if (methodName.equals("string_length") ||
                 methodName.equals("string_ord") ||
+                methodName.equals("string_parseInt") ||
+                methodName.equals("string_substring") ||
                 methodName.equals("getInt") ||
                 methodName.equals("getString") ||
                 methodName.equals("print") ||
@@ -54,7 +56,7 @@ public class CodeGenerator {
         }
         System.out.println();
 
-        System.out.println("SECTION .bbs\n");
+        System.out.println("SECTION .bss\n");
         System.out.println("stringbuffer:\n\t\tresb\t256\n");
 
         System.out.println("SECTION .rodata\n");
