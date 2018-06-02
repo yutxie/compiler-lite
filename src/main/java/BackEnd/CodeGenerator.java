@@ -49,21 +49,22 @@ public class CodeGenerator {
             System.out.println();
         }
 
-        System.out.println("SECTION .data\talign=8\n");
+        System.out.println("SECTION .bss\n");
+        System.out.println("stringbuffer:\n\t\tresb\t256\n");
+
+        System.out.println("SECTION .data\n");
         for (Variable var : ir.globalVarList) {
             System.out.println(var.name + ":");
             System.out.println("\t\tdq 000000000000000AH");
         }
-        System.out.println();
-
-        System.out.println("SECTION .bss\n");
-        System.out.println("stringbuffer:\n\t\tresb\t256\n");
-
-        System.out.println("SECTION .rodata\n");
         int strConstCnt = 0;
-        for (String strConst : ir.stringConstList) {
+        for (String u : ir.stringConstList) {
+            System.out.println("\tdq\t" + (u.length() - 2));
             System.out.println("str_const_" + strConstCnt++ + ":");
-            System.out.println("\t\tdb " + strConst + ", 00H");
+            System.out.print("\tdb\t");
+            for (int i = 1; i < u.length() - 1; ++i)
+                System.out.print(Integer.toString((int)u.charAt(i)) + ", ");
+            System.out.println("0\n");
         }
         builtinPrinter.printBuiltin("const_str");
         System.out.println();

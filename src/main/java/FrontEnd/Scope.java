@@ -30,7 +30,8 @@ public class Scope {
 
     public void define(String varName, Variable var) throws Exception {
         if (varMap.get(varName) != null)
-            throw new Exception("var " + varName + " dupllicated");
+            return;
+//            throw new Exception("var " + varName + " dupllicated");
         else varMap.put(varName, var);
     }
 

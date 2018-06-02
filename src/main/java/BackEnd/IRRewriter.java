@@ -480,6 +480,7 @@ public class IRRewriter {
         res.addLast(move);
         Address addr = new Address();
         addr.base = registerConfig.get("rax");
+        move = new Move();
         move.dst = addr;
         move.src = r8;
         res.addLast(move);

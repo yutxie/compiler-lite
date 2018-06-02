@@ -30,6 +30,7 @@ public class IRGenerator extends AstVisitor {
     void visit(ProgramNode node) throws Exception {
         int iter = 0;
         for (DefinitionExpressionNode item : node.variableDefinitionList) {
+            visit(item);
             MethodDefinitionNode main = node.scope.getMethod("main");
             main.block.childList.add(iter++, item);
         }
@@ -98,11 +99,14 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(DefinitionExpressionNode node) throws Exception {
-        Variable var = new Variable(node.variableName);
+        Variable var = node.scope.varMap.get(node.variableName);
+        if (var != null) return;
+        else var = new Variable(node.variableName);
         node.scope.define(node.variableName, var);
         if (node.parent instanceof ProgramNode) {
             var.global = true;
             ir.globalVarList.addLast(var);
+            return;
         }
         if (node.initValue != null) {
             visit(node.initValue);
