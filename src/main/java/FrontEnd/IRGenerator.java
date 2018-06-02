@@ -30,12 +30,18 @@ public class IRGenerator extends AstVisitor {
     void visit(ProgramNode node) throws Exception {
         int iter = 0;
         for (DefinitionExpressionNode item : node.variableDefinitionList) {
-            visit(item);
             MethodDefinitionNode main = node.scope.getMethod("main");
             main.block.childList.add(iter++, item);
         }
         for (ClassDefinitionNode item : node.classDefinitionList) visit(item);
-        for (MethodDefinitionNode item : node.methodDefinitionList) visit(item);
+        for (MethodDefinitionNode item : node.methodDefinitionList) {
+            if (!item.methodName.equals("main")) continue;
+            visit(item);
+        }
+        for (MethodDefinitionNode item : node.methodDefinitionList) {
+            if (item.methodName.equals("main")) continue;
+            visit(item);
+        }
     }
 
     @Override
@@ -99,14 +105,11 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(DefinitionExpressionNode node) throws Exception {
-        Variable var = node.scope.varMap.get(node.variableName);
-        if (var != null) return;
-        else var = new Variable(node.variableName);
+        Variable var = new Variable(node.variableName);
         node.scope.define(node.variableName, var);
         if (node.parent instanceof ProgramNode) {
             var.global = true;
             ir.globalVarList.addLast(var);
-            return;
         }
         if (node.initValue != null) {
             visit(node.initValue);
@@ -311,7 +314,8 @@ public class IRGenerator extends AstVisitor {
             return;
         }
         super.visit(node);
-        if (node.lhs.exprType.getTypeName().equals("string")) { // addString__
+        if (node.lhs.exprType.getTypeName().equals("string")
+            && node.op == ADD) { // addString__
             MethodCall call = new MethodCall();
             call.dst = node.value = new Variable();
             call.methodName = "addString__";

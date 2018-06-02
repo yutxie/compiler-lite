@@ -4,10 +4,6 @@ global string_length
 global string_ord
 global string_substring
 global string_parseInt
-global origin
-global getPrime
-global getResult
-global printF
 global main
 global print
 global toString
@@ -16,17 +12,7 @@ global println
 global getInt
 global getString
 
-global N
-global M
-global i
-global j
-global primeCount
-global resultCount
-global b
-global prime
-global gps
-global tmp
-global result
+global a
 
 extern malloc
 extern printf
@@ -761,13 +747,12 @@ Llege_021:  mov     eax, 1
 Llege_022:  pop     rbp
 	ret
 
-origin:
-origin_entry:
+main:
+main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 88
-		mov		r15, rdi
-		mov		r8, r15
+		sub		rsp, 40
+		mov		r8, 4
 		inc		r8
 		imul		r8, 8
 		push		rdi
@@ -798,22 +783,22 @@ origin_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r14, rax
-		mov		r8, r15
+		mov		r11, rax
+		mov		r8, 4
 		mov		qword [rax+0], r8
-		mov		r12, 0
+		mov		r10, 0
 		jmp		loop_cond_0
 loop_body_0:
-		inc		r12
+		inc		r10
 loop_cond_0:
-		cmp		r12, r15
+		cmp		r10, 4
 		jl		loop_body_0
 loop_end_0:
-		mov		qword [rel result], r14
-		mov		qword [rel i], 0
-		jmp		loop_cond_1
-loop_body_1:
-		mov		r8, r15
+		mov		qword [rel a], r11
+		mov		rbx, qword [rel a]
+		mov		rcx, -1
+		mov		r11, qword [rbx+rcx*8+8]
+		mov		r8, r11
 		inc		r8
 		imul		r8, 8
 		push		rdi
@@ -844,179 +829,71 @@ loop_body_1:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
-		mov		r8, r15
+		mov		r10, rax
+		mov		r8, r11
 		mov		qword [rax+0], r8
-		mov		r14, 0
+		mov		qword [rbp-8], 0
+		jmp		loop_cond_1
+loop_body_1:
+		inc		qword [rbp-8]
+loop_cond_1:
+		cmp		qword [rbp-8], r11
+		jl		loop_body_1
+loop_end_1:
+		mov		qword [rbp-16], r10
+		mov		r10, 0
 		jmp		loop_cond_2
 loop_body_2:
-		inc		r14
+		mov		rbx, qword [rel a]
+		mov		rcx, r10
+		mov		qword [rbx+rcx*8+8], 0
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		call	getInt
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-24], rax
+		mov		rbx, qword [rbp-16]
+		mov		rcx, r10
+		mov		r9, qword [rbp-24]
+		mov		qword [rbx+rcx*8+8], r9
+		mov		r11, r10
+		inc		r10
 loop_cond_2:
-		cmp		r14, r15
+		mov		rbx, qword [rel a]
+		mov		rcx, -1
+		mov		r13, qword [rbx+rcx*8+8]
+		cmp		r10, r13
 		jl		loop_body_2
+		jge		loop_end_2
 loop_end_2:
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		qword [rbx+rcx*8+8], r12
-		mov		qword [rel j], 0
+		mov		r10, 0
 		jmp		loop_cond_3
 loop_body_3:
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r13, qword [rbx+rcx*8+8]
-		mov		rbx, r13
-		mov		rcx, qword [rel j]
-		mov		qword [rbx+rcx*8+8], 0
-		mov		r14, qword [rel j]
-		inc		qword [rel j]
-loop_cond_3:
-		cmp		qword [rel j], r15
-		jl		loop_body_3
-		jge		loop_end_3
-loop_end_3:
-		mov		r14, qword [rel i]
-		inc		qword [rel i]
-loop_cond_1:
-		cmp		qword [rel i], r15
-		jl		loop_body_1
-		jge		loop_end_1
-loop_end_1:
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-getPrime:
-getPrime_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 112
-		mov		qword [rbp-8], rdi
-		mov		r14, 2
-		mov		qword [rbp-16], 2
-		jmp		loop_cond_4
-loop_body_4:
-		mov		rbx, qword [rel b]
-		mov		rcx, qword [rbp-16]
-		cmp		qword [rbx+rcx*8+8], 1
-		je		if_true_0
-		jne		if_false_0
-if_true_0:
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		r12, qword [rbx+rcx*8+8]
-		add		r12, 1
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		qword [rbx+rcx*8+8], r12
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		r15, qword [rbx+rcx*8+8]
-		mov		rbx, qword [rel prime]
-		mov		rcx, r15
-		mov		r9, qword [rbp-16]
-		mov		qword [rbx+rcx*8+8], r9
-		mov		rbx, qword [rel gps]
-		mov		rcx, qword [rbp-16]
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbx+rcx*8+8], r9
-		jmp		if_end_0
-if_false_0:
-		nop
-if_end_0:
-		jmp		loop_cond_5
-loop_body_5:
-		mov		r11, qword [rbp-16]
-		imul		r11, r14
-		mov		rbx, qword [rel b]
-		mov		rcx, r11
-		mov		qword [rbx+rcx*8+8], 0
-		mov		qword [rbp-24], r14
-		mov		r8, qword [rbp-24]
-		add		r8, 1
-		mov		qword [rbp-24], r8
-		mov		r14, qword [rbp-24]
-loop_cond_5:
-		mov		r13, qword [rbp-16]
-		imul		r13, r14
-		mov		r8, qword [rbp-8]
-		cmp		r13, r8
-		jle		loop_body_5
-		jg		loop_end_5
-loop_end_5:
-		mov		r14, 2
-		mov		r10, qword [rbp-16]
-		add		r10, 1
-		mov		qword [rbp-16], r10
-loop_cond_4:
-		mov		r8, qword [rbp-8]
-		cmp		qword [rbp-16], r8
-		jle		loop_body_4
-		jg		loop_end_4
-loop_end_4:
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-getResult:
-getResult_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 144
-		mov		qword [rbp-8], rdi
-		mov		qword [rbp-16], rsi
-		mov		r15, rdx
-		mov		qword [rbp-24], 1
-		neg		qword [rbp-24]
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-32], r9
-		mov		rbx, qword [rbp-32]
-		mov		rcx, r15
-		mov		r8, qword [rbp-24]
-		cmp		qword [rbx+rcx*8+8], r8
-		je		if_true_1
-		jne		if_false_1
-if_true_1:
-		mov		rbx, qword [rel prime]
-		mov		rcx, r15
-		mov		r12, qword [rbx+rcx*8+8]
-		imul		r12, 2
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		sub		r12, r9
-		mov		r8, qword [rbp-8]
-		cmp		r12, r8
-		jle		if_true_2
-		jg		if_false_2
-if_true_2:
-		mov		rbx, qword [rel prime]
-		mov		rcx, r15
-		mov		r10, qword [rbx+rcx*8+8]
-		imul		r10, 2
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		sub		r10, r9
-		mov		rbx, qword [rel b]
+		mov		rbx, qword [rel a]
 		mov		rcx, r10
-		cmp		qword [rbx+rcx*8+8], 0
-		jne		if_true_3
-		je		if_false_3
-if_true_3:
-		mov		rbx, qword [rel prime]
-		mov		rcx, r15
-		mov		r13, qword [rbx+rcx*8+8]
-		imul		r13, 2
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		sub		r13, r9
-		mov		rbx, qword [rel gps]
-		mov		rcx, r13
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1030,191 +907,7 @@ if_true_3:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-8]
-		mov		rsi, r15
-		mov		rdx, qword [rbx+rcx*8+8]
-		call	getResult
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		add		r13, 1
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-40], r9
-		mov		rbx, qword [rbp-40]
-		mov		rcx, r15
-		mov		qword [rbx+rcx*8+8], r13
-		jmp		if_end_3
-if_false_3:
-		nop
-if_end_3:
-		jmp		if_end_2
-if_false_2:
-		nop
-if_end_2:
-		jmp		if_end_1
-if_false_1:
-		nop
-if_end_1:
-		mov		r14, 1
-		neg		r14
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rbp-16]
-		mov		r11, qword [rbx+rcx*8+8]
-		mov		rbx, r11
-		mov		rcx, r15
-		cmp		qword [rbx+rcx*8+8], r14
-		je		if_true_4
-		jne		if_false_4
-if_true_4:
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-48], r9
-		mov		rbx, qword [rbp-48]
-		mov		rcx, r15
-		mov		qword [rbx+rcx*8+8], 1
-		jmp		if_end_4
-if_false_4:
-		nop
-if_end_4:
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rbp-16]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-56], r9
-		mov		rbx, qword [rbp-56]
-		mov		rcx, r15
-		mov		rax, qword [rbx+rcx*8+8]
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-printF:
-printF_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 120
-		mov		r14, rdi
-		mov		r15, rsi
-		mov		qword [rbp-8], rdx
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r10, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r10
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r10, rax
-		jmp		loop_cond_6
-loop_body_6:
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, str_const_0
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
+		mov		rdi, qword [rbx+rcx*8+8]
 		call	toString
 		pop		r15
 		pop		r14
@@ -1259,216 +952,18 @@ loop_body_6:
 		pop		rsi
 		pop		rdi
 		mov		r13, rax
-		mov		r13, r15
-		imul		r13, 2
-		mov		qword [rbp-16], r13
-		mov		r8, qword [rbp-16]
-		sub		r8, r14
-		mov		qword [rbp-16], r8
-		mov		r15, qword [rbp-16]
-		mov		qword [rbp-24], r14
-		mov		r8, qword [rbp-24]
-		add		r8, r15
-		mov		qword [rbp-24], r8
-		mov		rax, qword [rbp-24]
-		mov		r9, 2
-		cqo
-		idiv		r9
-		mov		qword [rbp-32], rax
-		mov		r14, qword [rbp-32]
-		mov		r11, qword [rbp-8]
-		sub		r11, 1
-		mov		qword [rbp-8], r11
-loop_cond_6:
-		cmp		qword [rbp-8], 0
-		jg		loop_body_6
-		jle		loop_end_6
-loop_end_6:
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, str_const_1
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-main:
-main_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 200
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, 170
-		call	origin
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		qword [rel N], 1000
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		call	getInt
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		qword [rel M], r15
-		mov		qword [rel primeCount], 0
-		mov		qword [rel resultCount], 0
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		qword [rbx+rcx*8+8], 0
-		mov		qword [rel i], 0
-		jmp		loop_cond_7
-loop_body_7:
-		mov		rbx, qword [rel b]
-		mov		rcx, qword [rel i]
-		mov		qword [rbx+rcx*8+8], 1
-		mov		rbx, qword [rel gps]
-		mov		rcx, qword [rel i]
-		mov		qword [rbx+rcx*8+8], 0
-		mov		r9, qword [rel i]
-		mov		qword [rbp-8], r9
-		mov		r8, qword [rbp-8]
-		add		r8, 1
-		mov		qword [rbp-8], r8
-		mov		r9, qword [rbp-8]
-		mov		qword [rel i], r9
-loop_cond_7:
-		mov		r10, qword [rel N]
-		add		r10, 1
-		cmp		qword [rel i], r10
-		jl		loop_body_7
-		jge		loop_end_7
-loop_end_7:
-		mov		qword [rel i], 0
-		jmp		loop_cond_8
-loop_body_8:
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rel i]
-		mov		qword [rbx+rcx*8+8], 0
-		mov		r9, qword [rel i]
-		mov		qword [rbp-16], r9
-		mov		r8, qword [rbp-16]
-		add		r8, 1
-		mov		qword [rbp-16], r8
-		mov		r9, qword [rbp-16]
-		mov		qword [rel i], r9
-loop_cond_8:
-		mov		r11, qword [rel M]
-		add		r11, 1
-		cmp		qword [rel i], r11
-		jl		loop_body_8
-		jge		loop_end_8
-loop_end_8:
-		mov		qword [rel i], 0
-		jmp		loop_cond_9
-loop_body_9:
-		mov		qword [rel j], 0
-		jmp		loop_cond_10
-loop_body_10:
-		mov		r14, 1
-		neg		r14
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r13, qword [rbx+rcx*8+8]
-		mov		rbx, r13
-		mov		rcx, qword [rel j]
-		mov		qword [rbx+rcx*8+8], r14
-		mov		r9, qword [rel j]
-		mov		qword [rbp-24], r9
-		mov		r8, qword [rbp-24]
-		add		r8, 1
-		mov		qword [rbp-24], r8
-		mov		r9, qword [rbp-24]
-		mov		qword [rel j], r9
-loop_cond_10:
-		mov		r8, qword [rel M]
-		cmp		qword [rel j], r8
-		jle		loop_body_10
-		jg		loop_end_10
-loop_end_10:
-		mov		r9, qword [rel i]
+		mov		r13, r10
+		inc		r10
+loop_cond_3:
+		mov		rbx, qword [rel a]
+		mov		rcx, -1
+		mov		r9, qword [rbx+rcx*8+8]
 		mov		qword [rbp-32], r9
 		mov		r8, qword [rbp-32]
-		add		r8, 1
-		mov		qword [rbp-32], r8
-		mov		r9, qword [rbp-32]
-		mov		qword [rel i], r9
-loop_cond_9:
-		mov		r8, qword [rel M]
-		cmp		qword [rel i], r8
-		jle		loop_body_9
-		jg		loop_end_9
-loop_end_9:
+		cmp		r10, r8
+		jl		loop_body_3
+		jge		loop_end_3
+loop_end_3:
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1482,253 +977,7 @@ loop_end_9:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rel N]
-		call	getPrime
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		rbx, qword [rel tmp]
-		mov		rcx, 0
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rel primeCount], r9
-		mov		qword [rel i], 1
-		jmp		loop_cond_11
-loop_body_11:
-		mov		r9, qword [rel i]
-		mov		qword [rbp-40], r9
-		mov		r8, qword [rbp-40]
-		add		r8, 1
-		mov		qword [rbp-40], r8
-		mov		r9, qword [rbp-40]
-		mov		qword [rel j], r9
-		jmp		loop_cond_12
-loop_body_12:
-		mov		qword [rbp-48], 1
-		neg		qword [rbp-48]
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-56], r9
-		mov		rbx, qword [rbp-56]
-		mov		rcx, qword [rel j]
-		mov		r8, qword [rbp-48]
-		cmp		qword [rbx+rcx*8+8], r8
-		je		if_true_5
-		jne		if_false_5
-if_true_5:
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rel N]
-		mov		rsi, qword [rel i]
-		mov		rdx, qword [rel j]
-		call	getResult
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		qword [rbp-64], rax
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-72], r9
-		mov		rbx, qword [rbp-72]
-		mov		rcx, qword [rel j]
-		mov		r9, qword [rbp-64]
-		mov		qword [rbx+rcx*8+8], r9
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-80], r9
-		mov		rbx, qword [rbp-80]
-		mov		rcx, qword [rel j]
-		cmp		qword [rbx+rcx*8+8], 1
-		jg		if_true_6
-		jle		if_false_6
-if_true_6:
-		mov		rbx, qword [rel result]
-		mov		rcx, qword [rel i]
-		mov		r12, qword [rbx+rcx*8+8]
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rel i]
-		mov		rbx, qword [rel prime]
-		mov		rcx, qword [rel j]
-		mov		rbx, r12
-		mov		rcx, qword [rel j]
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbx+rcx*8+8]
-		mov		rsi, qword [rbx+rcx*8+8]
-		mov		rdx, qword [rbx+rcx*8+8]
-		call	printF
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		r9, qword [rel resultCount]
-		mov		qword [rbp-88], r9
-		mov		r8, qword [rbp-88]
-		add		r8, 1
-		mov		qword [rbp-88], r8
-		mov		r9, qword [rbp-88]
-		mov		qword [rel resultCount], r9
-		jmp		if_end_6
-if_false_6:
-		nop
-if_end_6:
-		jmp		if_end_5
-if_false_5:
-		nop
-if_end_5:
-		mov		r9, qword [rel j]
-		mov		qword [rbp-96], r9
-		mov		r8, qword [rbp-96]
-		add		r8, 1
-		mov		qword [rbp-96], r8
-		mov		r9, qword [rbp-96]
-		mov		qword [rel j], r9
-loop_cond_12:
-		mov		r8, qword [rel primeCount]
-		cmp		qword [rel j], r8
-		jle		loop_body_12
-		jg		loop_end_12
-loop_end_12:
-		mov		r9, qword [rel i]
-		mov		qword [rbp-104], r9
-		mov		r8, qword [rbp-104]
-		add		r8, 1
-		mov		qword [rbp-104], r8
-		mov		r9, qword [rbp-104]
-		mov		qword [rel i], r9
-loop_cond_11:
-		mov		r8, qword [rel primeCount]
-		cmp		qword [rel i], r8
-		jl		loop_body_11
-		jge		loop_end_11
-loop_end_11:
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, str_const_2
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rel resultCount]
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		qword [rbp-112], rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbp-112]
+		mov		rdi, str_const_0
 		call	println
 		pop		r15
 		pop		r14
@@ -1743,7 +992,82 @@ loop_end_11:
 		pop		rdx
 		pop		rsi
 		pop		rdi
+		mov		r13, rax
+		mov		r9, qword [rbp-16]
+		mov		qword [rel a], r9
+		mov		r10, 0
+		jmp		loop_cond_4
+loop_body_4:
+		mov		rbx, qword [rel a]
+		mov		rcx, r10
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbx+rcx*8+8]
+		call	toString
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
 		mov		r15, rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r15
+		call	print
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r13, rax
+		mov		r13, r10
+		inc		r10
+loop_cond_4:
+		mov		rbx, qword [rel a]
+		mov		rcx, -1
+		mov		r14, qword [rbx+rcx*8+8]
+		cmp		r10, r14
+		jl		loop_body_4
+		jge		loop_end_4
+loop_end_4:
 		mov		rax, 0
 		mov		rsp, rbp
 		pop		rbp
@@ -1759,39 +1083,11 @@ stringbuffer:
 
 SECTION .data
 
-N:
+a:
 		dq 000000000000000AH
-M:
-		dq 000000000000000AH
-i:
-		dq 000000000000000AH
-j:
-		dq 000000000000000AH
-primeCount:
-		dq 000000000000000AH
-resultCount:
-		dq 000000000000000AH
-b:
-		dq 000000000000000AH
-prime:
-		dq 000000000000000AH
-gps:
-		dq 000000000000000AH
-tmp:
-		dq 000000000000000AH
-result:
-		dq 000000000000000AH
-	dq	1
+	dq	0
 str_const_0:
-	db	32, 0
-
-	dq	2
-str_const_1:
-	db	92, 110, 0
-
-	dq	7
-str_const_2:
-	db	84, 111, 116, 97, 108, 58, 32, 0
+	db	0
 
 intbuffer:
         dq 0
