@@ -1,180 +1,718 @@
-
-
-
-getInt:
-        sub     rsp, 24
-
-
-        mov     rax, qword [fs:abs 28H]
-        mov     qword [rsp+8H], rax
-        xor     eax, eax
-        mov     rsi, rsp
-        mov     edi, L_017
-        call    __isoc99_scanf
-        mov     rax, qword [rsp]
-        mov     rdx, qword [rsp+8H]
-
-
-        xor     rdx, qword [fs:abs 28H]
-        jz      L_001
-        call    __stack_chk_fail
-L_001:  add     rsp, 24
-        ret
-
-
-getString:
-        push    rbx
-        mov     edi, 1000
-        call    malloc
-        mov     rbx, rax
-        mov     rsi, rax
-        mov     edi, L_018
-        mov     eax, 0
-        call    __isoc99_scanf
-        mov     rax, rbx
-        pop     rbx
-        ret
-
-
-string_length:
-        cmp     byte [rdi], 0
-        jz      L_003
-        mov     eax, 0
-L_002:  add     rax, 1
-        cmp     byte [rdi+rax], 0
-        jnz     L_002
-
-        ret
-
-L_003:  mov     eax, 0
-        ret
-
-
-string_ord:
-        movzx   eax, byte [rdi+rsi]
-        ret
-
-
-print:
-        sub     rsp, 8
-        mov     rdx, rdi
-        mov     esi, L_018
-        mov     edi, 1
-        mov     eax, 0
-        call    __printf_chk
-        add     rsp, 8
-        ret
-
+toString:
+	push rbp
+	mov rbp,rsp
+	mov rdx,rdi
+	mov rax,0
+	mov rdi,stringbuffer
+	mov rsi,format1
+	call sprintf
+	mov rdi,stringbuffer
+	call transtring
+	mov rsp,rbp
+	pop rbp
+	ret
 
 println:
-        sub     rsp, 8
-        call    puts
-        add     rsp, 8
-        ret
+	call puts
+	ret
 
+addString:
+	push rbp
+	mov rbp,rsp
+	push rsi
+	mov rsi,rdi
+	mov rdi,stringbuffer
+	mov rdx,[rsi-8]
+	push rdx
+	call memcpy
+	pop rdi
+	pop rsi
+	add rdi,stringbuffer
+	mov rdx,[rsi-8]
+	add rdx,1
+	call memcpy
+	mov rdi,stringbuffer
+	call transtring
+	mov rsp,rbp
+	pop rbp
+	ret
 
-addString__:
-        push    r14
-        push    r13
-        push    r12
-        push    rbp
-        push    rbx
-        mov     r14, rdi
-        mov     r12, rsi
-        call    string_length
-        mov     rbx, rax
-        mov     rdi, r12
-        call    string_length
-        mov     rbp, rax
-        lea     r13, [rbx+rax]
-        lea     rdi, [r13+1H]
-        call    malloc
-        test    rbx, rbx
-        jle     L_005
-        mov     edx, 0
-L_004:  movzx   ecx, byte [r14+rdx]
-        mov     byte [rax+rdx], cl
-        add     rdx, 1
-        cmp     rbx, rdx
-        jnz     L_004
-L_005:  test    rbp, rbp
-        jle     L_007
-        mov     edx, 0
-        add     rbx, rax
-L_006:  movzx   ecx, byte [r12+rdx]
-        mov     byte [rbx+rdx], cl
-        add     rdx, 1
-        cmp     rbp, rdx
-        jnz     L_006
-L_007:  mov     byte [rax+r13], 0
-        pop     rbx
-        pop     rbp
-        pop     r12
-        pop     r13
-        pop     r14
-        ret
+getInt:
+	push rbp
+	mov rbp,rsp
+	mov rax,0
+	mov rdi,format1
+	mov rsi,intbuffer
+	call scanf
+	mov rax,[intbuffer]
+	mov rsp,rbp
+	pop rbp
+	ret
 
+string_length:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     dword [rbp-4H], 0
+	jmp     Llen_002
+Llen_001:  add     dword [rbp-4H], 1
+Llen_002:  mov     eax, dword [rbp-4H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jnz     Llen_001
+	mov     eax, dword [rbp-4H]
+	pop     rbp
+	ret
 
-toString:
-        push    rbx
-        mov     rbx, rdi
-        mov     edi, 20
-        call    malloc
-        mov     rcx, rax
-        mov     r8d, 0
-        test    rbx, rbx
-        jns     L_008
-        neg     rbx
-        mov     r8d, 1
-L_008:  test    rbx, rbx
-        jnz     L_009
-        mov     byte [rcx], 48
-        mov     eax, 1
-        jmp     L_015
+string_ord:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     dword [rbp-1CH], esi
+	mov     eax, dword [rbp-1CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	movsx   eax, al
+	mov     dword [rbp-4H], eax
+	mov     eax, dword [rbp-4H]
+	pop     rbp
+	ret
 
-L_009:  test    rbx, rbx
-        jle     L_014
-        mov     esi, 0
-        mov     rdi, qword 6666666666666667H
-L_010:  add     rsi, 1
-        mov     rax, rbx
-        imul    rdi
-        sar     rdx, 2
-        mov     rax, rbx
-        sar     rax, 63
-        sub     rdx, rax
-        lea     rax, [rdx+rdx*4]
-        add     rax, rax
-        sub     rbx, rax
-        add     ebx, 48
-        mov     byte [rcx+rsi-1H], bl
-        mov     rbx, rdx
-        test    rdx, rdx
-        jg      L_010
-        test    r8, r8
-        jz      L_012
-        mov     rax, rsi
-L_011:  lea     rsi, [rax+1H]
-        mov     byte [rcx+rax], 45
-L_012:  lea     rax, [rsi-1H]
-        test    rax, rax
-        jle     L_016
-        mov     edx, 0
-L_013:  movzx   edi, byte [rcx+rdx]
-        movzx   r8d, byte [rcx+rax]
-        mov     byte [rcx+rdx], r8b
-        mov     byte [rcx+rax], dil
-        add     rdx, 1
-        sub     rax, 1
-        cmp     rdx, rax
-        jl      L_013
-        jmp     L_016
+print:
+	push rbp
+	mov rbp,rsp
+	mov rax,0
+	mov rsi,rdi
+	mov rdi,format2
+	call printf
+	mov rsp,rbp
+	pop rbp
+	ret
 
-L_014:  mov     eax, 0
-L_015:  test    r8, r8
-        jnz     L_011
-        mov     rsi, rax
-L_016:  mov     byte [rcx+rsi], 0
-        mov     rax, rcx
-        pop     rbx
-        ret
+transtring:
+
+	push rbp
+	mov rbp,rsp
+	call strlen
+	push rdi
+	mov rdi,rax
+	push rdi
+	add rdi,9
+	call malloc
+	pop rdi
+	mov [rax],rdi
+	add rax,8
+	mov rdx,rdi
+	add rdx,1
+	mov rdi,rax
+	pop rsi
+	sub rsp,8
+	push rax
+	call memcpy
+	pop rax
+	mov rsp,rbp
+	pop rbp
+	ret
+
+getString:
+
+	push rbp
+	mov rbp,rsp
+	mov rax,0
+	mov rdi,format2
+	mov rsi,stringbuffer
+	call scanf
+	mov rdi,stringbuffer
+	call transtring
+	mov rsp,rbp
+	pop rbp
+	ret
+
+string_substring:
+	push rbp
+	mov rbp,rsp
+	push rdi
+	push rsi
+	mov rdi,rdx
+	sub rdi,rsi
+	add rdi,1
+	push rdi
+	add rdi,9
+	call malloc
+	pop rdx
+	mov [rax],rdx
+	add rax,8
+	pop rsi
+	pop rdi
+	add rsi,rdi
+	mov rdi,rax
+	push rdx
+	push rax
+	call memcpy
+	pop rax
+	pop rdx
+	mov qword[rax+rdx],0
+	mov rsp,rbp
+	pop rbp
+	ret
+
+string_parseInt:
+	push    rbp
+	mov     rbp, rsp
+	sub     rsp, 32
+	mov     qword [rbp-18H], rdi
+	mov     edi, 256
+	call    malloc
+	mov     qword [rbp-8H], rax
+	mov     dword [rbp-10H], 0
+	mov     dword [rbp-0CH], 0
+	jmp     Lpar_002
+Lpar_001:  add     dword [rbp-10H], 1
+Lpar_002:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Lpar_004
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Lpar_001
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Lpar_001
+	jmp     Lpar_004
+Lpar_003:  mov     edx, dword [rbp-0CH]
+	mov     eax, edx
+	shl     eax, 2
+	add     eax, edx
+	add     eax, eax
+	mov     ecx, eax
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	movsx   eax, al
+	add     eax, ecx
+	sub     eax, 48
+	mov     dword [rbp-0CH], eax
+	add     dword [rbp-10H], 1
+Lpar_004:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 47
+	jle     Lpar_005
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jle     Lpar_003
+Lpar_005:  mov     eax, dword [rbp-0CH]
+	leave
+	ret
+
+string_eq:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     qword [rbp-20H], rsi
+	mov     dword [rbp-0CH], 0
+	mov     dword [rbp-8H], 0
+	jmp     Leq_002
+Leq_001:  add     dword [rbp-0CH], 1
+Leq_002:  mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Leq_004
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Leq_001
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Leq_001
+	jmp     Leq_004
+Leq_003:  add     dword [rbp-8H], 1
+Leq_004:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Leq_005
+	mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Leq_003
+	mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Leq_003
+Leq_005:  mov     eax, dword [rbp-0CH]
+	cmp     eax, dword [rbp-8H]
+	jz      Leq_006
+	mov     eax, 0
+	jmp     Leq_010
+Leq_006:  mov     dword [rbp-4H], 0
+	mov     dword [rbp-4H], 0
+	jmp     Leq_009
+Leq_007:  mov     eax, dword [rbp-4H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-4H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jz      Leq_008
+	mov     eax, 0
+	jmp     Leq_010
+Leq_008:  add     dword [rbp-4H], 1
+Leq_009:  mov     eax, dword [rbp-4H]
+	cmp     eax, dword [rbp-0CH]
+	jl      Leq_007
+	mov     eax, 1
+Leq_010:  pop     rbp
+	ret
+
+string_s:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     qword [rbp-20H], rsi
+	mov     dword [rbp-10H], 0
+	mov     dword [rbp-0CH], 0
+	jmp     Ll_012
+Ll_011:  add     dword [rbp-10H], 1
+Ll_012:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Ll_014
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Ll_011
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Ll_011
+	jmp     Ll_014
+Ll_013:  add     dword [rbp-0CH], 1
+Ll_014:  mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Ll_015
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Ll_013
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Ll_013
+Ll_015:  mov     eax, dword [rbp-0CH]
+	cmp     dword [rbp-10H], eax
+	cmovle  eax, dword [rbp-10H]
+	mov     dword [rbp-4H], eax
+	mov     dword [rbp-8H], 0
+	mov     dword [rbp-8H], 0
+	jmp     Ll_019
+Ll_016:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jge     Ll_017
+	mov     eax, 1
+	jmp     Ll_021
+Ll_017:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jle     Ll_018
+	mov     eax, 0
+	jmp     Ll_021
+Ll_018:  add     dword [rbp-8H], 1
+Ll_019:  mov     eax, dword [rbp-8H]
+	cmp     eax, dword [rbp-4H]
+	jl      Ll_016
+	mov     eax, dword [rbp-10H]
+	cmp     eax, dword [rbp-0CH]
+	jl      Ll_020
+	mov     eax, 0
+	jmp     Ll_021
+Ll_020:  mov     eax, 1
+Ll_021:  pop     rbp
+	ret
+
+string_g:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     qword [rbp-20H], rsi
+	mov     dword [rbp-10H], 0
+	mov     dword [rbp-0CH], 0
+	jmp     Lg_023
+Lg_022:  add     dword [rbp-10H], 1
+Lg_023:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Lg_025
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Lg_022
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Lg_022
+	jmp     Lg_025
+Lg_024:  add     dword [rbp-0CH], 1
+Lg_025:  mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Lg_026
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Lg_024
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Lg_024
+Lg_026:  mov     eax, dword [rbp-0CH]
+	cmp     dword [rbp-10H], eax
+	cmovle  eax, dword [rbp-10H]
+	mov     dword [rbp-4H], eax
+	mov     dword [rbp-8H], 0
+	mov     dword [rbp-8H], 0
+	jmp     Lg_030
+Lg_027:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jle     Lg_028
+	mov     eax, 1
+	jmp     Lg_032
+Lg_028:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jge     Lg_029
+	mov     eax, 0
+	jmp     Lg_032
+Lg_029:  add     dword [rbp-8H], 1
+Lg_030:  mov     eax, dword [rbp-8H]
+	cmp     eax, dword [rbp-4H]
+	jl      Lg_027
+	mov     eax, dword [rbp-10H]
+	cmp     eax, dword [rbp-0CH]
+	jg      Lg_031
+	mov     eax, 0
+	jmp     Lg_032
+Lg_031:  mov     eax, 1
+Lg_032:  pop     rbp
+	ret
+
+string_le:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     qword [rbp-20H], rsi
+	mov     dword [rbp-10H], 0
+	mov     dword [rbp-0CH], 0
+	jmp     Llege_002
+Llege_001:  add     dword [rbp-10H], 1
+Llege_002:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Llege_004
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Llege_001
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Llege_001
+	jmp     Llege_004
+Llege_003:  add     dword [rbp-0CH], 1
+Llege_004:  mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Llege_005
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Llege_003
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Llege_003
+Llege_005:  mov     eax, dword [rbp-0CH]
+	cmp     dword [rbp-10H], eax
+	cmovle  eax, dword [rbp-10H]
+	mov     dword [rbp-4H], eax
+	mov     dword [rbp-8H], 0
+	mov     dword [rbp-8H], 0
+	jmp     Llege_009
+Llege_006:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jge     Llege_007
+	mov     eax, 1
+	jmp     Llege_011
+Llege_007:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jle     Llege_008
+	mov     eax, 0
+	jmp     Llege_011
+Llege_008:  add     dword [rbp-8H], 1
+Llege_009:  mov     eax, dword [rbp-8H]
+	cmp     eax, dword [rbp-4H]
+	jl      Llege_006
+	mov     eax, dword [rbp-10H]
+	cmp     eax, dword [rbp-0CH]
+	jle     Llege_010
+	mov     eax, 0
+	jmp     Llege_011
+	Llege_010:  mov     eax, 1
+	Llege_011:  pop     rbp
+	ret
+
+string_ge:
+	push    rbp
+	mov     rbp, rsp
+	mov     qword [rbp-18H], rdi
+	mov     qword [rbp-20H], rsi
+	mov     dword [rbp-10H], 0
+	mov     dword [rbp-0CH], 0
+	jmp     Llege_013
+Llege_012:  add     dword [rbp-10H], 1
+Llege_013:  mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Llege_015
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Llege_012
+	mov     eax, dword [rbp-10H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Llege_012
+	jmp     Llege_015
+Llege_014:  add     dword [rbp-0CH], 1
+Llege_015:  mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	jz      Llege_016
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	test    al, al
+	js      Llege_014
+	mov     eax, dword [rbp-0CH]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rdx
+	movzx   eax, byte [rax]
+	cmp     al, 57
+	jg      Llege_014
+Llege_016:  mov     eax, dword [rbp-0CH]
+	cmp     dword [rbp-10H], eax
+	cmovle  eax, dword [rbp-10H]
+	mov     dword [rbp-4H], eax
+	mov     dword [rbp-8H], 0
+	mov     dword [rbp-8H], 0
+	jmp     Llege_020
+Llege_017:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jle     Llege_018
+	mov     eax, 1
+	jmp     Llege_022
+Llege_018:  mov     eax, dword [rbp-8H]
+	movsxd  rdx, eax
+	mov     rax, qword [rbp-18H]
+	add     rax, rdx
+	movzx   edx, byte [rax]
+	mov     eax, dword [rbp-8H]
+	movsxd  rcx, eax
+	mov     rax, qword [rbp-20H]
+	add     rax, rcx
+	movzx   eax, byte [rax]
+	cmp     dl, al
+	jge     Llege_019
+	mov     eax, 0
+	jmp     Llege_022
+Llege_019:  add     dword [rbp-8H], 1
+Llege_020:  mov     eax, dword [rbp-8H]
+	cmp     eax, dword [rbp-4H]
+	jl      Llege_017
+	mov     eax, dword [rbp-10H]
+	cmp     eax, dword [rbp-0CH]
+	jge     Llege_021
+	mov     eax, 0
+	jmp     Llege_022
+Llege_021:  mov     eax, 1
+Llege_022:  pop     rbp
+	ret
+

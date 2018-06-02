@@ -20,7 +20,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="38">
               <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -32,8 +32,8 @@
       <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+            <state relative-caret-position="133">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
                 <element signature="method#init#0;class#RegisterAllocator#0" />
@@ -42,7 +42,6 @@
                 <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
                 <element signature="method#simplify#0;class#RegisterAllocator#0" />
                 <element signature="method#spill#0;class#RegisterAllocator#0" />
-                <element signature="e#3722#3785#0" />
                 <element signature="method#assignColors#0;class#RegisterAllocator#0" />
                 <element signature="method#buildInterGraph#0;class#RegisterAllocator#0" />
               </folding>
@@ -53,12 +52,69 @@
       <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="661" column="40" selection-start-line="661" selection-start-column="40" selection-end-line="661" selection-end-column="40" />
+            <state relative-caret-position="70">
+              <caret line="673" column="45" selection-start-line="673" selection-start-column="45" selection-end-line="673" selection-end-column="45" />
               <folding>
                 <element signature="e#332#894#0" />
                 <element signature="e#900#1662#0" />
+                <element signature="e#1157#1177#0" expanded="true" />
                 <element signature="e#1668#2676#0" />
+                <element signature="e#2682#4265#0" />
+                <element signature="e#4271#4550#0" />
+                <element signature="e#4375#4383#0" expanded="true" />
+                <element signature="e#4556#4831#0" />
+                <element signature="e#4658#4666#0" expanded="true" />
+                <element signature="e#4837#5117#0" />
+                <element signature="e#4940#4948#0" expanded="true" />
+                <element signature="e#5123#5455#0" />
+                <element signature="e#5223#5231#0" expanded="true" />
+                <element signature="e#5461#5944#0" />
+                <element signature="e#5567#5575#0" expanded="true" />
+                <element signature="e#5699#5708#0" expanded="true" />
+                <element signature="e#5950#6223#0" />
+                <element signature="e#6050#6058#0" expanded="true" />
+                <element signature="e#6229#6449#0" />
+                <element signature="e#6331#6339#0" expanded="true" />
+                <element signature="e#6455#6729#0" />
+                <element signature="e#6556#6564#0" expanded="true" />
+                <element signature="e#6735#6954#0" />
+                <element signature="e#6836#6844#0" expanded="true" />
+                <element signature="e#6960#7221#0" />
+                <element signature="e#7227#7455#0" />
+                <element signature="e#7461#8263#0" />
+                <element signature="e#8269#8398#0" />
+                <element signature="e#8404#8529#0" />
+                <element signature="e#8535#8665#0" />
+                <element signature="e#8671#8841#0" />
+                <element signature="e#8847#9180#0" />
+                <element signature="e#8993#9002#0" expanded="true" />
+                <element signature="e#9186#9309#0" />
+                <element signature="e#9403#9527#0" />
+                <element signature="e#9748#11759#0" />
+                <element signature="e#9967#9975#0" expanded="true" />
+                <element signature="e#11765#11943#0" />
+                <element signature="e#11949#12344#0" />
+                <element signature="e#12350#12649#0" />
+                <element signature="e#12655#13447#0" />
+                <element signature="e#13453#13596#0" />
+                <element signature="e#13602#13741#0" />
+                <element signature="e#13747#13891#0" />
+                <element signature="e#13897#14080#0" />
+                <element signature="e#14086#14433#0" />
+                <element signature="e#14247#14256#0" expanded="true" />
+                <element signature="e#14439#14576#0" />
+                <element signature="e#14582#14679#0" />
+                <element signature="e#14685#14823#0" />
+                <element signature="e#14829#14925#0" />
+                <element signature="e#16025#16045#0" expanded="true" />
+                <element signature="e#17776#17784#0" expanded="true" />
+                <element signature="e#18768#18776#0" expanded="true" />
+                <element signature="e#19860#19868#0" expanded="true" />
+                <element signature="e#20533#20541#0" expanded="true" />
+                <element signature="e#21256#21264#0" expanded="true" />
+                <element signature="e#22442#22450#0" expanded="true" />
+                <element signature="e#25192#25200#0" expanded="true" />
+                <element signature="e#25912#25920#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,15 +123,17 @@
       <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+            <state relative-caret-position="152">
+              <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
               <folding>
+                <element signature="method#generateCode#0;class#CodeGenerator#0" />
                 <element signature="method#generateCode#1;class#CodeGenerator#0" />
                 <element signature="method#write#0;class#CodeGenerator#0" />
                 <element signature="method#generateCode#2;class#CodeGenerator#0" />
                 <element signature="method#generateCode#3;class#CodeGenerator#0" />
                 <element signature="method#generateCode#4;class#CodeGenerator#0" />
                 <element signature="method#generateCode#5;class#CodeGenerator#0" />
+                <element signature="method#generateCode#6;class#CodeGenerator#0" />
                 <element signature="method#generateCode#7;class#CodeGenerator#0" />
                 <element signature="method#generateCode#8;class#CodeGenerator#0" />
                 <element signature="method#generateCode#9;class#CodeGenerator#0" />
@@ -91,7 +149,7 @@
       <file leaf-file-name="StaticTypeChecker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/StaticTypeChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
+            <state relative-caret-position="1121">
               <caret line="62" selection-start-line="62" selection-end-line="62" />
             </state>
           </provider>
@@ -100,7 +158,7 @@
       <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
+            <state relative-caret-position="988">
               <caret line="53" column="79" selection-start-line="53" selection-start-column="79" selection-end-line="53" selection-end-column="79" />
             </state>
           </provider>
@@ -269,13 +327,13 @@
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/BuiltinPrinter.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/IR.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/TrivialRegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/ThisAppender.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/StaticTypeChecker.java" />
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
@@ -300,7 +358,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -347,6 +404,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -980,41 +1038,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="185" column="36" lean-forward="true" selection-start-line="185" selection-start-column="36" selection-end-line="185" selection-end-column="36" />
-          <folding>
-            <element signature="method#visitProgram#0;class#AstBuilder#0" />
-            <element signature="method#visitClassDefinition#0;class#AstBuilder#0" />
-            <element signature="method#visitMemberVariable#0;class#AstBuilder#0" />
-            <element signature="method#visitConstructionMethodDefinition#0;class#AstBuilder#0" />
-            <element signature="method#visitMethodDefinition#0;class#AstBuilder#0" />
-            <element signature="method#visitFormalParameter#0;class#AstBuilder#0" />
-            <element signature="method#visitBlock#0;class#AstBuilder#0" />
-            <element signature="method#visitBlockOrStatement#0;class#AstBuilder#0" />
-            <element signature="method#visitDefinitionStat#0;class#AstBuilder#0" />
-            <element signature="method#visitExpressionStat#0;class#AstBuilder#0" />
-            <element signature="method#visitIfStat#0;class#AstBuilder#0" />
-            <element signature="method#visitForStat#0;class#AstBuilder#0" />
-            <element signature="method#visitWhileStat#0;class#AstBuilder#0" />
-            <element signature="method#visitReturnStat#0;class#AstBuilder#0" />
-            <element signature="method#visitBreakStat#0;class#AstBuilder#0" />
-            <element signature="method#visitContinueStat#0;class#AstBuilder#0" />
-            <element signature="method#visitEmptyStat#0;class#AstBuilder#0" />
-            <element signature="method#visitDefinitionStatement#0;class#AstBuilder#0" />
-            <element signature="method#visitConstantExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitThisExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitMemberAccessExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitIndexAccessExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitMethodCallExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitParensExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitNewExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitUnaryExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitBinaryExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitDefinitionExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitDefinitionExpression#0;class#AstBuilder#0" />
-            <element signature="method#visitIdentifierExpr#0;class#AstBuilder#0" />
-            <element signature="method#visitArrayVariableType#0;class#AstBuilder#0" />
-            <element signature="method#visitNonArrayVariableType#0;class#AstBuilder#0" />
-            <element signature="method#buildAst#0;class#AstBuilder#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,18 +1052,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="661" column="40" selection-start-line="661" selection-start-column="40" selection-end-line="661" selection-end-column="40" />
-          <folding>
-            <element signature="e#332#894#0" />
-            <element signature="e#900#1662#0" />
-            <element signature="e#1668#2676#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,29 +1089,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/StaticTypeChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
+        <state relative-caret-position="1121">
           <caret line="62" selection-start-line="62" selection-end-line="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
+        <state relative-caret-position="988">
           <caret line="53" column="79" selection-start-line="53" selection-start-column="79" selection-end-line="53" selection-end-column="79" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        <state relative-caret-position="152">
+          <caret line="13" column="53" selection-start-line="13" selection-start-column="53" selection-end-line="13" selection-end-column="53" />
           <folding>
+            <element signature="method#generateCode#0;class#CodeGenerator#0" />
             <element signature="method#generateCode#1;class#CodeGenerator#0" />
             <element signature="method#write#0;class#CodeGenerator#0" />
             <element signature="method#generateCode#2;class#CodeGenerator#0" />
             <element signature="method#generateCode#3;class#CodeGenerator#0" />
             <element signature="method#generateCode#4;class#CodeGenerator#0" />
             <element signature="method#generateCode#5;class#CodeGenerator#0" />
+            <element signature="method#generateCode#6;class#CodeGenerator#0" />
             <element signature="method#generateCode#7;class#CodeGenerator#0" />
             <element signature="method#generateCode#8;class#CodeGenerator#0" />
             <element signature="method#generateCode#9;class#CodeGenerator#0" />
@@ -1112,10 +1125,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="673" column="45" selection-start-line="673" selection-start-column="45" selection-end-line="673" selection-end-column="45" />
+          <folding>
+            <element signature="e#332#894#0" />
+            <element signature="e#900#1662#0" />
+            <element signature="e#1157#1177#0" expanded="true" />
+            <element signature="e#1668#2676#0" />
+            <element signature="e#2682#4265#0" />
+            <element signature="e#4271#4550#0" />
+            <element signature="e#4375#4383#0" expanded="true" />
+            <element signature="e#4556#4831#0" />
+            <element signature="e#4658#4666#0" expanded="true" />
+            <element signature="e#4837#5117#0" />
+            <element signature="e#4940#4948#0" expanded="true" />
+            <element signature="e#5123#5455#0" />
+            <element signature="e#5223#5231#0" expanded="true" />
+            <element signature="e#5461#5944#0" />
+            <element signature="e#5567#5575#0" expanded="true" />
+            <element signature="e#5699#5708#0" expanded="true" />
+            <element signature="e#5950#6223#0" />
+            <element signature="e#6050#6058#0" expanded="true" />
+            <element signature="e#6229#6449#0" />
+            <element signature="e#6331#6339#0" expanded="true" />
+            <element signature="e#6455#6729#0" />
+            <element signature="e#6556#6564#0" expanded="true" />
+            <element signature="e#6735#6954#0" />
+            <element signature="e#6836#6844#0" expanded="true" />
+            <element signature="e#6960#7221#0" />
+            <element signature="e#7227#7455#0" />
+            <element signature="e#7461#8263#0" />
+            <element signature="e#8269#8398#0" />
+            <element signature="e#8404#8529#0" />
+            <element signature="e#8535#8665#0" />
+            <element signature="e#8671#8841#0" />
+            <element signature="e#8847#9180#0" />
+            <element signature="e#8993#9002#0" expanded="true" />
+            <element signature="e#9186#9309#0" />
+            <element signature="e#9403#9527#0" />
+            <element signature="e#9748#11759#0" />
+            <element signature="e#9967#9975#0" expanded="true" />
+            <element signature="e#11765#11943#0" />
+            <element signature="e#11949#12344#0" />
+            <element signature="e#12350#12649#0" />
+            <element signature="e#12655#13447#0" />
+            <element signature="e#13453#13596#0" />
+            <element signature="e#13602#13741#0" />
+            <element signature="e#13747#13891#0" />
+            <element signature="e#13897#14080#0" />
+            <element signature="e#14086#14433#0" />
+            <element signature="e#14247#14256#0" expanded="true" />
+            <element signature="e#14439#14576#0" />
+            <element signature="e#14582#14679#0" />
+            <element signature="e#14685#14823#0" />
+            <element signature="e#14829#14925#0" />
+            <element signature="e#16025#16045#0" expanded="true" />
+            <element signature="e#17776#17784#0" expanded="true" />
+            <element signature="e#18768#18776#0" expanded="true" />
+            <element signature="e#19860#19868#0" expanded="true" />
+            <element signature="e#20533#20541#0" expanded="true" />
+            <element signature="e#21256#21264#0" expanded="true" />
+            <element signature="e#22442#22450#0" expanded="true" />
+            <element signature="e#25192#25200#0" expanded="true" />
+            <element signature="e#25912#25920#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="26" column="21" lean-forward="true" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="133">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
             <element signature="method#init#0;class#RegisterAllocator#0" />
@@ -1124,7 +1206,6 @@
             <element signature="method#livenessAnalysis#0;class#RegisterAllocator#0" />
             <element signature="method#simplify#0;class#RegisterAllocator#0" />
             <element signature="method#spill#0;class#RegisterAllocator#0" />
-            <element signature="e#3722#3785#0" />
             <element signature="method#assignColors#0;class#RegisterAllocator#0" />
             <element signature="method#buildInterGraph#0;class#RegisterAllocator#0" />
           </folding>
@@ -1133,7 +1214,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="38">
           <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />

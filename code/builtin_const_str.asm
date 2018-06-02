@@ -1,6 +1,6 @@
-L_017:
-        db 25H, 6CH, 64H, 00H
-
-L_018:
-        db 25H, 73H, 00H
-
+intbuffer:
+        dq 0
+format1:
+        db "%lld", 0
+format2:
+        db "%s", 0

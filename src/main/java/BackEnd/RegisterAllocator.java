@@ -29,7 +29,7 @@ public class RegisterAllocator {
             if (spill()) continue;
             break;
         }
-//        assignColors();
+        assignColors();
 
         IRRewriter irRewriter = new IRRewriter();
         irRewriter.rewriteIR(ir, method, assignedMap, registerConfig);

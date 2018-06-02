@@ -390,29 +390,14 @@ public class IRRewriter {
 
     //////////////////// spill code //////////////////////////
     void spillCode(MethodEntity method) throws Exception {
-        for (BasicBlock bb : method.basicBlockList)
-            spillCode(bb);
-        /*  push rbp     | == enter
-            mov rbp, rsp |
-            sub rsp, #var * 8
-            ...
-         */
-        LinkedList<IRCode> codeList = method.basicBlockList.getFirst().codeList;
-        Push push = new Push();
-        push.src = registerConfig.get("rbp");
-        codeList.add(0, push);
-        Move move = new Move();
-        move.dst = registerConfig.get("rbp");
-        move.src = registerConfig.get("rsp");
-        codeList.add(1, move);
-        Binary sub = new Binary();
-        sub.dst = registerConfig.get("rsp");
-        sub.src = new Immediate(varToAddrMap.size() * 8);
-        sub.type = Binary.Type.SUB;
-        codeList.add(2, sub);
+        boolean first = true;
+        for (BasicBlock bb : method.basicBlockList) {
+            spillCode(bb, first);
+            first = false;
+        }
     }
 
-    void spillCode(BasicBlock basicBlock) throws Exception {
+    void spillCode(BasicBlock basicBlock, boolean first) throws Exception {
         LinkedList<LinkedList<IRCode>> codeListList = new LinkedList<LinkedList<IRCode>>();
         LinkedList<IRCode> codeList = basicBlock.codeList;
         for (ListIterator<IRCode> it = codeList.listIterator(); it.hasNext();) {
@@ -420,6 +405,24 @@ public class IRRewriter {
             codeListList.addLast(spillCode(ins));
         }
         codeList.clear();
+        if (first) {
+            /*  push rbp     | == enter
+                mov rbp, rsp |
+                sub rsp, #var * 8
+                ...                     */
+            Push push = new Push();
+            push.src = registerConfig.get("rbp");
+            codeList.addLast(push);
+            Move move = new Move();
+            move.dst = registerConfig.get("rbp");
+            move.src = registerConfig.get("rsp");
+            codeList.addLast(move);
+            Binary sub = new Binary();
+            sub.dst = registerConfig.get("rsp");
+            sub.src = new Immediate(varToAddrMap.size() * 8);
+            sub.type = Binary.Type.SUB;
+            codeList.addLast(sub);
+        }
         for (ListIterator<LinkedList<IRCode>> it = codeListList.listIterator(); it.hasNext();) {
             codeList.addAll(codeList.size(), it.next());
         }
@@ -446,57 +449,34 @@ public class IRRewriter {
         return res;
     }
 
-    LinkedList<IRCode> spillCode(Allocate ins) {
+    LinkedList<IRCode> spillCode(Allocate ins) throws Exception {
         /*  allocate dst size -->
-            mov     rdi, size
-            inc     rdi
-            push    size
-            push    regs
-            call    malloc
-            pop regs
-            pop     rdi
-            mov     [rax], rdi
-            mov     dst, rax */
+            ... dst = call malloc, size + 1 ...
+            mov     r8, size
+            mov     [rax], r8   */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-
-        Move move = new Move(); // mov  rdi, size
-        move.dst = registerConfig.get("rdi");
+        Register r8 = registerConfig.get("r8");
+        Move move = new Move();
+        move.dst = r8;
         move.src = ins.size;
         res.addLast(move);
-        Unary inc = new Unary(); // inc rdi
-        inc.dst = registerConfig.get("rdi");
+        Unary inc = new Unary();
+        inc.dst = r8;
         inc.type = Unary.Type.INC;
         res.addLast(inc);
-        Push push = new Push(); // push size
-        push.src = ins.size;
-        res.addLast(push);
-        for (int i = 8; i < registerConfig.numOfAll; ++i) { // push regs
-            Register reg = registerConfig.get(i);
-            push = new Push();
-            push.src = reg;
-            res.addLast(push);
-        }
-        MethodCall call = new MethodCall(); // call malloc
+        MethodCall call = new MethodCall();
         call.methodName = "malloc";
-        res.addLast(call);
-        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) { // pop regs
-            Register reg = registerConfig.get(i);
-            Pop pop = new Pop();
-            pop.dst = reg;
-            res.addLast(pop);
-        }
-        Pop pop = new Pop(); // pop rdi
-        pop.dst = registerConfig.get("rdi");
-        res.addLast(pop);
-        move = new Move();// move [rax] rdi
+        call.actualParaVarList.addLast(r8);
+        call.dst = ins.dst;
+        res.addAll(res.size(), spillCode(call));
+        move = new Move();
+        move.dst = r8;
+        move.src = ins.size;
+        res.addLast(move);
         Address addr = new Address();
         addr.base = registerConfig.get("rax");
         move.dst = addr;
-        move.src = registerConfig.get("rdi");
-        res.addLast(move);
-        move = new Move(); // mov dst, rax
-        move.dst = ins.dst;
-        move.src = registerConfig.get("rax");
+        move.src = r8;
         res.addLast(move);
         return res;
     }
@@ -626,15 +606,29 @@ public class IRRewriter {
             pop regs
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-
-        for (int i = 8; i < registerConfig.numOfAll; ++i) {
-            Register reg = registerConfig.get(i);
+        for (int i = 0; i <= 12; ++i) { // push regs
+            Register reg;
+            switch (i) {
+                case 0: reg = registerConfig.get("rdi"); break;
+                case 1: reg = registerConfig.get("rsi"); break;
+                case 2: reg = registerConfig.get("rdx"); break;
+                case 3: reg = registerConfig.get("rcx"); break;
+                case 4: reg = registerConfig.get("rbx"); break;
+                case 5: reg = registerConfig.get("r8"); break;
+                case 6: reg = registerConfig.get("r9"); break;
+                case 7: reg = registerConfig.get("r10"); break;
+                case 8: reg = registerConfig.get("r11"); break;
+                case 9: reg = registerConfig.get("r12"); break;
+                case 10: reg = registerConfig.get("r13"); break;
+                case 11: reg = registerConfig.get("r14"); break;
+                case 12: reg = registerConfig.get("r15"); break;
+                default: throw new Exception();
+            }
             Push push = new Push();
             push.src = reg;
             res.addLast(push);
         }
-
-        for (int i = 0; i < 6; ++i) {
+        for (int i = 0; i < 6; ++i) { // move paras
             if (i >= ins.actualParaVarList.size()) break;
             Operand para = ins.actualParaVarList.get(i);
             Register reg;
@@ -652,29 +646,41 @@ public class IRRewriter {
             move.src = para;
             res.addLast(move);
         }
-        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) {
+        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) { // push paras
             Push push = new Push();
             push.src = ins.actualParaVarList.get(i);
             res.addLast(push);
         }
-
         MethodCall call = new MethodCall();
         call.methodName = ins.methodName;
         res.addLast(call);
-
-        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) {
+        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) { // pop paras
             Pop pop = new Pop();
             pop.dst = registerConfig.get("r8");
             res.addLast(pop);
         }
-
-        for (int i = registerConfig.numOfAll - 1; i >= 8; --i) {
-            Register reg = registerConfig.get(i);
+        for (int i = 12; i >= 0; --i) { // pop regs
+            Register reg;
+            switch (i) {
+                case 0: reg = registerConfig.get("rdi"); break;
+                case 1: reg = registerConfig.get("rsi"); break;
+                case 2: reg = registerConfig.get("rdx"); break;
+                case 3: reg = registerConfig.get("rcx"); break;
+                case 4: reg = registerConfig.get("rbx"); break;
+                case 5: reg = registerConfig.get("r8"); break;
+                case 6: reg = registerConfig.get("r9"); break;
+                case 7: reg = registerConfig.get("r10"); break;
+                case 8: reg = registerConfig.get("r11"); break;
+                case 9: reg = registerConfig.get("r12"); break;
+                case 10: reg = registerConfig.get("r13"); break;
+                case 11: reg = registerConfig.get("r14"); break;
+                case 12: reg = registerConfig.get("r15"); break;
+                default: throw new Exception();
+            }
             Pop pop = new Pop();
             pop.dst = reg;
             res.addLast(pop);
         }
-
         Move move = new Move();
         move.dst = ins.dst;
         move.src = registerConfig.get("rax");

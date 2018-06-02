@@ -55,6 +55,7 @@ public class CodeGenerator {
         System.out.println();
 
         System.out.println("SECTION .bbs\n");
+        System.out.println("stringbuffer:\n\t\tresb\t256\n");
 
         System.out.println("SECTION .rodata\n");
         int strConstCnt = 0;
@@ -63,6 +64,7 @@ public class CodeGenerator {
             System.out.println("\t\tdb " + strConst + ", 00H");
         }
         builtinPrinter.printBuiltin("const_str");
+        System.out.println();
     }
 
     void generateCode(IRCode ins) throws Exception {

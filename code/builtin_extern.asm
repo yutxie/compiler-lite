@@ -1,6 +1,13 @@
-
-extern puts
-extern __printf_chk
 extern malloc
+extern printf
+extern puts
+extern puts
+extern getchar
+extern putchar
+extern sprintf
 extern __stack_chk_fail
-extern __isoc99_scanf
+extern malloc
+extern printf
+extern strlen
+extern memcpy
+extern scanf
