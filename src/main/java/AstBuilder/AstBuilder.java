@@ -168,6 +168,24 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
         return (DefinitionExpressionNode)visit(context.definitionExpression());
     }
 
+    String escape(String str) {
+        String res = "";
+        for (int i = 1; i < str.length() - 1; ++i) {
+            char ch = str.charAt(i);
+            if (ch == '\\') {
+                ch = str.charAt(++i);
+                switch (ch) {
+                    case '\\': ch = '\\'; break;
+                    case '\"': ch = '\"'; break;
+                    case 'n': ch = '\n'; break;
+                    case 't': ch = '\t'; break;
+                }
+            }
+            res = res + ch;
+        }
+        return res;
+    }
+
     @Override public AstNode visitConstantExpr(MxParser.ConstantExprContext context) {
         ConstantNode res = new ConstantNode();
         res.line = context.start.getLine();
@@ -176,8 +194,10 @@ public class AstBuilder extends MxBaseVisitor<AstNode> {
             res.exprType = new PrimitiveTypeNode("bool");
         if (context.constant().IntegerConstant() != null)
             res.exprType = new PrimitiveTypeNode("int");
-        if (context.constant().StringConstant() != null)
+        if (context.constant().StringConstant() != null) {
             res.exprType = new ClassTypeNode("string");
+            res.constantStr = escape(res.constantStr);
+        }
         if (context.constant().NullConstant() != null)
             res.exprType = new PrimitiveTypeNode("null");
         return res;

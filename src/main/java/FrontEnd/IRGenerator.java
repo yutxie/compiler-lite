@@ -108,6 +108,7 @@ public class IRGenerator extends AstVisitor {
         Variable var = new Variable(node.variableName);
         node.scope.define(node.variableName, var);
         if (node.parent instanceof ProgramNode) {
+            var.name = "_global_" + var.name;
             var.global = true;
             ir.globalVarList.addLast(var);
         }
@@ -409,6 +410,13 @@ public class IRGenerator extends AstVisitor {
 
     void conditionJump(ExpressionStatementNode node,
                        String trueLabel, String falseLabel) throws Exception {
+        if (node == null) {
+            Jump jump = new Jump();
+            jump.targetLabel = trueLabel;
+            jump.type = Jump.Type.JMP;
+            codeList.addLast(jump);
+            return;
+        }
         if (node instanceof BinaryExpressionNode) 
             conditionJump((BinaryExpressionNode)node, trueLabel, falseLabel);
         else if (node instanceof UnaryExpressionNode) 
@@ -554,8 +562,8 @@ public class IRGenerator extends AstVisitor {
 
         labelMap.put("loop_body_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
-        visit(node.block);
-        visit(node.afterBlock);
+        if (node.block != null) visit(node.block);
+        if (node.afterBlock != null) visit(node.afterBlock);
 
         labelMap.put("loop_cond_" + loopIndex, codeList.size());
         conditionJump(node.condition, "loop_body_" + loopIndex, "loop_end_" + loopIndex);
