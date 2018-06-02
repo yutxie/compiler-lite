@@ -309,16 +309,26 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(BinaryExpressionNode node) throws Exception {
-        if (node.exprType.isPrimitiveType(BOOL) && node.op != ASSIGN) {
+        if (node.exprType.isPrimitiveType(BOOL) &&
+            node.op != ASSIGN &&
+            !node.lhs.exprType.getTypeName().equals("string")) {
             logicCalculate(node);
             return;
         }
         super.visit(node);
         if (node.lhs.exprType.getTypeName().equals("string")
-            && node.op == ADD) { // addString__
+            && node.op != ASSIGN) { // addString__
             MethodCall call = new MethodCall();
             call.dst = node.value = new Variable();
-            call.methodName = "addString__";
+            switch (node.op) {
+                case ADD: call.methodName = "addString__"; break;
+                case EQUAL: call.methodName = "string_eq"; break;
+                case LT: call.methodName = "string_s"; break;
+                case GT: call.methodName = "string_g"; break;
+                case LE: call.methodName = "string_le"; break;
+                case GE: call.methodName = "string_ge"; break;
+                default: throw new Exception();
+            }
             call.actualParaVarList.addLast(node.lhs.value);
             call.actualParaVarList.addLast(node.rhs.value);
             codeList.addLast(call);
@@ -430,6 +440,10 @@ public class IRGenerator extends AstVisitor {
 
     void conditionJump(BinaryExpressionNode node,
                        String trueLabel, String falseLabel) throws Exception {
+        if (node.lhs.exprType.getTypeName().equals("string")) {
+            trivialConditionJump(node, trueLabel, falseLabel);
+            return;
+        }
         if (node.op == LAND) {
             conditionJump(node.lhs, null, falseLabel);
             conditionJump(node.rhs, trueLabel, falseLabel);

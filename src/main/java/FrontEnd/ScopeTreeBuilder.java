@@ -92,6 +92,24 @@ public class ScopeTreeBuilder extends AstVisitor {
         popScope();
     }
 
+    @Override void visit(WhileStatementNode node) throws Exception {
+        Scope scope = new Scope();
+        pushScope(scope);
+        scope.astNode = node;
+        node.scope = currentScope();
+        super.visit(node);
+        popScope();
+    }
+
+    @Override void visit(IfStatementNode node) throws Exception {
+        Scope scope = new Scope();
+        pushScope(scope);
+        scope.astNode = node;
+        node.scope = currentScope();
+        super.visit(node);
+        popScope();
+    }
+
     @Override void visit(StatementNode node) throws Exception {
         node.scope = node.parent.scope;
         super.visit(node);

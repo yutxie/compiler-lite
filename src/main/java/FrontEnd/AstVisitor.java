@@ -78,8 +78,8 @@ public abstract class AstVisitor {
     }
 
     void visit(MethodCallExpressionNode node) throws Exception {
-        visit(node.caller);
         for (ExpressionStatementNode item : node.actualParameterList) visit(item);
+        visit(node.caller);
     }
 
     void visit(MethodDefinitionNode node) throws Exception {

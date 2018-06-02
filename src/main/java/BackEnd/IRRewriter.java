@@ -552,9 +552,18 @@ public class IRRewriter {
             mov r8, b
             cmp a, r8   */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        Operand src0;
+        if (ins.src0 instanceof Immediate) {
+            Register reg = registerConfig.get("r8");
+            Move move = new Move();
+            move.dst = reg;
+            move.src = ins.src0;
+            res.addLast(move);
+            src0 = reg;
+        } else src0 = ins.src0;
         Operand src1;
         if (ins.src1 instanceof Address) {
-            Register reg = registerConfig.get("r8");
+            Register reg = registerConfig.get("r9");
             Move move = new Move();
             move.dst = reg;
             move.src = ins.src1;
@@ -562,7 +571,7 @@ public class IRRewriter {
             src1 = reg;
         } else src1 = ins.src1;
         Compare cmp = new Compare();
-        cmp.src0 = ins.src0;
+        cmp.src0 = src0;
         cmp.src1 = src1;
         res.addLast(cmp);
         return res;
