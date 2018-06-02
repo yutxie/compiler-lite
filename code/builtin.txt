@@ -2,8 +2,8 @@ class string {
     
     int length() {}
     int ord(int pos) {}
-    // string substring(int left, int right) {}
-    // int parseInt() {}
+    string substring(int left, int right) {}
+    int parseInt() {}
 }
 
 void print(string str) {}

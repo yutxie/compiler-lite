@@ -16,7 +16,7 @@ println:
 	call puts
 	ret
 
-addString:
+addString__:
 	push rbp
 	mov rbp,rsp
 	push rsi

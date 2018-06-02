@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="95">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -124,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CodeGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
+            <state relative-caret-position="627">
               <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
               <folding>
                 <element signature="method#generateCode#1;class#CodeGenerator#0" />
@@ -1085,29 +1085,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
-          <folding>
-            <element signature="method#generateCode#1;class#CodeGenerator#0" />
-            <element signature="method#write#0;class#CodeGenerator#0" />
-            <element signature="method#generateCode#2;class#CodeGenerator#0" />
-            <element signature="method#generateCode#3;class#CodeGenerator#0" />
-            <element signature="method#generateCode#4;class#CodeGenerator#0" />
-            <element signature="method#generateCode#5;class#CodeGenerator#0" />
-            <element signature="method#generateCode#6;class#CodeGenerator#0" />
-            <element signature="method#generateCode#7;class#CodeGenerator#0" />
-            <element signature="method#generateCode#8;class#CodeGenerator#0" />
-            <element signature="method#generateCode#9;class#CodeGenerator#0" />
-            <element signature="method#generateCode#10;class#CodeGenerator#0" />
-            <element signature="method#generateCode#11;class#CodeGenerator#0" />
-            <element signature="method#generateCode#12;class#CodeGenerator#0" />
-            <element signature="method#generateCode#13;class#CodeGenerator#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -1182,9 +1159,32 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/CodeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="58" column="39" selection-start-line="58" selection-start-column="39" selection-end-line="58" selection-end-column="39" />
+          <folding>
+            <element signature="method#generateCode#1;class#CodeGenerator#0" />
+            <element signature="method#write#0;class#CodeGenerator#0" />
+            <element signature="method#generateCode#2;class#CodeGenerator#0" />
+            <element signature="method#generateCode#3;class#CodeGenerator#0" />
+            <element signature="method#generateCode#4;class#CodeGenerator#0" />
+            <element signature="method#generateCode#5;class#CodeGenerator#0" />
+            <element signature="method#generateCode#6;class#CodeGenerator#0" />
+            <element signature="method#generateCode#7;class#CodeGenerator#0" />
+            <element signature="method#generateCode#8;class#CodeGenerator#0" />
+            <element signature="method#generateCode#9;class#CodeGenerator#0" />
+            <element signature="method#generateCode#10;class#CodeGenerator#0" />
+            <element signature="method#generateCode#11;class#CodeGenerator#0" />
+            <element signature="method#generateCode#12;class#CodeGenerator#0" />
+            <element signature="method#generateCode#13;class#CodeGenerator#0" />
           </folding>
         </state>
       </provider>
