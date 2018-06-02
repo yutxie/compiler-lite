@@ -62,7 +62,8 @@ public class IRRewriter {
         throw new Exception();
     }
 
-    Operand rewriteIndexAndMember(Operand oprand, LinkedList<IRCode> codeList) {
+    boolean flip = false;
+    Operand rewriteIndexAndMember(Operand oprand, LinkedList<IRCode> codeList, boolean isSrc) {
         if (oprand instanceof IndexVariable) {
             IndexVariable indexAccess = (IndexVariable) oprand;
             Register base = registerConfig.get("rbx"); // ATTENTION
@@ -79,7 +80,14 @@ public class IRRewriter {
             addr.base = base;
             addr.offsetReg = index;
             addr.offsetNumber = +8;
-            return addr;
+            if (!isSrc) return addr;
+            Register reg = flip ? registerConfig.get("r8") : registerConfig.get("r9");
+            flip = !flip;
+            move = new Move();
+            move.dst = reg;
+            move.src = addr;
+            codeList.addLast(move);
+            return reg;
         } else if (oprand instanceof MemberVariable) {
             MemberVariable memberAccess = (MemberVariable) oprand;
             Register base = registerConfig.get("rbx"); // ATTENTION
@@ -95,80 +103,87 @@ public class IRRewriter {
             Address addr = new Address();
             addr.base = base;
             addr.offsetNumber = index * 8 + 8;
-            return addr;
+            if (!isSrc) return addr;
+            Register reg = flip ? registerConfig.get("r8") : registerConfig.get("r9");
+            flip = !flip;
+            move = new Move();
+            move.dst = reg;
+            move.src = addr;
+            codeList.addLast(move);
+            return reg;
         } else return oprand;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Allocate ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
-        ins.size = rewriteIndexAndMember(ins.size, res);
+        ins.size = rewriteIndexAndMember(ins.size, res, true);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Binary ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
-        ins.src = rewriteIndexAndMember(ins.src, res);
+        ins.src = rewriteIndexAndMember(ins.src, res, true);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Compare ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.src0 = rewriteIndexAndMember(ins.src0, res);
-        ins.src1 = rewriteIndexAndMember(ins.src1, res);
+        ins.src0 = rewriteIndexAndMember(ins.src0, res, true);
+        ins.src1 = rewriteIndexAndMember(ins.src1, res, true);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Idiv ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
-        ins.src0 = rewriteIndexAndMember(ins.src0, res);
-        ins.src1 = rewriteIndexAndMember(ins.src1, res);
+        ins.src0 = rewriteIndexAndMember(ins.src0, res, true);
+        ins.src1 = rewriteIndexAndMember(ins.src1, res, true);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(MethodCall ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
         LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
         for (Operand para : ins.actualParaVarList)
-            newActualParaVarList.addLast(rewriteIndexAndMember(para, res));
+            newActualParaVarList.addLast(rewriteIndexAndMember(para, res, true));
         ins.actualParaVarList = newActualParaVarList;
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Move ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
-        ins.src = rewriteIndexAndMember(ins.src, res);
+        ins.src = rewriteIndexAndMember(ins.src, res, true);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Return ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.src = rewriteIndexAndMember(ins.src, res);
+        ins.src = rewriteIndexAndMember(ins.src, res, true);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Cmove ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
-        ins.src = rewriteIndexAndMember(ins.src, res);
+        ins.src = rewriteIndexAndMember(ins.src, res, true);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }
 
     LinkedList<IRCode> rewriteIndexAndMember(Unary ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        ins.dst = rewriteIndexAndMember(ins.dst, res);
+        ins.dst = rewriteIndexAndMember(ins.dst, res, false);
         res.addLast(ins);
         return res;
     }

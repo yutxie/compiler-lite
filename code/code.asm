@@ -5,6 +5,10 @@ global string_ord
 global string_substring
 global string_parseInt
 global main
+global origin
+global getPrime
+global getResult
+global printF
 global print
 global toString
 global addString__
@@ -12,6 +16,17 @@ global println
 global getInt
 global getString
 
+global _global_N
+global _global_M
+global _global_i
+global _global_j
+global _global_primeCount
+global _global_resultCount
+global _global_b
+global _global_prime
+global _global_gps
+global _global_tmp
+global _global_result
 
 extern malloc
 extern printf
@@ -750,10 +765,10 @@ main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r13, str_const_0
-		mov		r15, str_const_1
-		mov		r14, str_const_2
+		sub		rsp, 240
+		mov		r8, 1001
+		inc		r8
+		imul		r8, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -767,9 +782,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r14
-		mov		rsi, r15
-		call	addString__
+		mov		rdi, r8
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -783,7 +797,22 @@ main_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
+		mov		qword [rbp-8], rax
+		mov		r8, 1001
+		mov		qword [rax+0], r8
+		mov		r13, 0
+		jmp		loop_cond_0
+loop_body_0:
+		inc		r13
+loop_cond_0:
+		cmp		r13, 1001
+		jl		loop_body_0
+loop_end_0:
+		mov		r9, qword [rbp-8]
+		mov		qword [rel _global_b], r9
+		mov		r8, 170
+		inc		r8
+		imul		r8, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -797,9 +826,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
+		mov		rdi, r8
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -813,7 +841,22 @@ main_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
+		mov		qword [rbp-16], rax
+		mov		r8, 170
+		mov		qword [rax+0], r8
+		mov		r13, 0
+		jmp		loop_cond_1
+loop_body_1:
+		inc		r13
+loop_cond_1:
+		cmp		r13, 170
+		jl		loop_body_1
+loop_end_1:
+		mov		r9, qword [rbp-16]
+		mov		qword [rel _global_prime], r9
+		mov		r8, 1001
+		inc		r8
+		imul		r8, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -827,9 +870,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
+		mov		rdi, r8
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -843,7 +885,22 @@ main_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
+		mov		qword [rbp-24], rax
+		mov		r8, 1001
+		mov		qword [rax+0], r8
+		mov		r13, 0
+		jmp		loop_cond_2
+loop_body_2:
+		inc		r13
+loop_cond_2:
+		cmp		r13, 1001
+		jl		loop_body_2
+loop_end_2:
+		mov		r9, qword [rbp-24]
+		mov		qword [rel _global_gps], r9
+		mov		r8, 1
+		inc		r8
+		imul		r8, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -857,2610 +914,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	print
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r12, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r14
-		call	addString__
+		mov		rdi, r8
+		call	malloc
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3475,6 +930,17 @@ main_entry:
 		pop		rsi
 		pop		rdi
 		mov		r13, rax
+		mov		r8, 1
+		mov		qword [rax+0], r8
+		mov		qword [rbp-32], 0
+		jmp		loop_cond_3
+loop_body_3:
+		inc		qword [rbp-32]
+loop_cond_3:
+		cmp		qword [rbp-32], 1
+		jl		loop_body_3
+loop_end_3:
+		mov		qword [rel _global_tmp], r13
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3488,9 +954,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r13
-		mov		rsi, r15
-		call	addString__
+		mov		rdi, 170
+		call	origin
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3505,6 +970,7 @@ main_entry:
 		pop		rsi
 		pop		rdi
 		mov		r13, rax
+		mov		qword [rel _global_N], 1000
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3518,9 +984,128 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r13
-		mov		rsi, r15
-		call	addString__
+		call	getInt
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-40], rax
+		mov		r9, qword [rbp-40]
+		mov		qword [rel _global_M], r9
+		mov		qword [rel _global_primeCount], 0
+		mov		qword [rel _global_resultCount], 0
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		qword [rbx+rcx*8+8], 0
+		mov		qword [rel _global_i], 0
+		jmp		loop_cond_4
+loop_body_4:
+		mov		rbx, qword [rel _global_b]
+		mov		rcx, qword [rel _global_i]
+		mov		qword [rbx+rcx*8+8], 1
+		mov		rbx, qword [rel _global_gps]
+		mov		rcx, qword [rel _global_i]
+		mov		qword [rbx+rcx*8+8], 0
+		mov		r12, qword [rel _global_i]
+		add		r12, 1
+		mov		qword [rel _global_i], r12
+loop_cond_4:
+		mov		r9, qword [rel _global_N]
+		mov		qword [rbp-48], r9
+		mov		r8, qword [rbp-48]
+		add		r8, 1
+		mov		qword [rbp-48], r8
+		mov		r9, qword [rbp-48]
+		cmp		qword [rel _global_i], r9
+		jl		loop_body_4
+		jge		loop_end_4
+loop_end_4:
+		mov		qword [rel _global_i], 0
+		jmp		loop_cond_5
+loop_body_5:
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rel _global_i]
+		mov		qword [rbx+rcx*8+8], 0
+		mov		r9, qword [rel _global_i]
+		mov		qword [rbp-56], r9
+		mov		r8, qword [rbp-56]
+		add		r8, 1
+		mov		qword [rbp-56], r8
+		mov		r9, qword [rbp-56]
+		mov		qword [rel _global_i], r9
+loop_cond_5:
+		mov		r11, qword [rel _global_M]
+		add		r11, 1
+		cmp		qword [rel _global_i], r11
+		jl		loop_body_5
+		jge		loop_end_5
+loop_end_5:
+		mov		qword [rel _global_i], 0
+		jmp		loop_cond_6
+loop_body_6:
+		mov		qword [rel _global_j], 0
+		jmp		loop_cond_7
+loop_body_7:
+		mov		qword [rbp-64], 1
+		neg		qword [rbp-64]
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		qword [rbp-72], r9
+		mov		rbx, qword [rbp-72]
+		mov		rcx, qword [rel _global_j]
+		mov		r9, qword [rbp-64]
+		mov		qword [rbx+rcx*8+8], r9
+		mov		r9, qword [rel _global_j]
+		mov		qword [rbp-80], r9
+		mov		r8, qword [rbp-80]
+		add		r8, 1
+		mov		qword [rbp-80], r8
+		mov		r9, qword [rbp-80]
+		mov		qword [rel _global_j], r9
+loop_cond_7:
+		mov		r9, qword [rel _global_M]
+		cmp		qword [rel _global_j], r9
+		jle		loop_body_7
+		jg		loop_end_7
+loop_end_7:
+		mov		r9, qword [rel _global_i]
+		mov		qword [rbp-88], r9
+		mov		r8, qword [rbp-88]
+		add		r8, 1
+		mov		qword [rbp-88], r8
+		mov		r9, qword [rbp-88]
+		mov		qword [rel _global_i], r9
+loop_cond_6:
+		mov		r9, qword [rel _global_M]
+		cmp		qword [rel _global_i], r9
+		jle		loop_body_6
+		jg		loop_end_6
+loop_end_6:
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rel _global_N]
+		call	getPrime
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3535,6 +1120,36 @@ main_entry:
 		pop		rsi
 		pop		rdi
 		mov		r13, rax
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		qword [rel _global_primeCount], r8
+		mov		qword [rel _global_i], 1
+		jmp		loop_cond_8
+loop_body_8:
+		mov		r9, qword [rel _global_i]
+		mov		qword [rbp-96], r9
+		mov		r8, qword [rbp-96]
+		add		r8, 1
+		mov		qword [rbp-96], r8
+		mov		r9, qword [rbp-96]
+		mov		qword [rel _global_j], r9
+		jmp		loop_cond_9
+loop_body_9:
+		mov		qword [rbp-104], 1
+		neg		qword [rbp-104]
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		r10, r9
+		mov		rbx, r10
+		mov		rcx, qword [rel _global_j]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r9, qword [rbp-104]
+		cmp		r8, r9
+		je		if_true_0
+		jne		if_false_0
+if_true_0:
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3548,9 +1163,73 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r13
-		mov		rsi, r15
-		call	addString__
+		mov		rdi, qword [rel _global_N]
+		mov		rsi, qword [rel _global_i]
+		mov		rdx, qword [rel _global_j]
+		call	getResult
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-112], rax
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		qword [rbp-120], r9
+		mov		rbx, qword [rbp-120]
+		mov		rcx, qword [rel _global_j]
+		mov		r9, qword [rbp-112]
+		mov		qword [rbx+rcx*8+8], r9
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		qword [rbp-128], r8
+		mov		rbx, qword [rbp-128]
+		mov		rcx, qword [rel _global_j]
+		mov		r9, qword [rbx+rcx*8+8]
+		cmp		r9, 1
+		jg		if_true_1
+		jle		if_false_1
+if_true_1:
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r14, r8
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rel _global_i]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rel _global_j]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		rbx, r14
+		mov		rcx, qword [rel _global_j]
+		mov		r9, qword [rbx+rcx*8+8]
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r9
+		mov		rsi, r8
+		mov		rdx, r9
+		call	printF
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3565,6 +1244,43 @@ main_entry:
 		pop		rsi
 		pop		rdi
 		mov		r13, rax
+		mov		r9, qword [rel _global_resultCount]
+		mov		qword [rbp-136], r9
+		mov		r8, qword [rbp-136]
+		add		r8, 1
+		mov		qword [rbp-136], r8
+		mov		r9, qword [rbp-136]
+		mov		qword [rel _global_resultCount], r9
+		jmp		if_end_1
+if_false_1:
+		nop
+if_end_1:
+		jmp		if_end_0
+if_false_0:
+		nop
+if_end_0:
+		mov		r15, qword [rel _global_j]
+		add		r15, 1
+		mov		qword [rel _global_j], r15
+loop_cond_9:
+		mov		r9, qword [rel _global_primeCount]
+		cmp		qword [rel _global_j], r9
+		jle		loop_body_9
+		jg		loop_end_9
+loop_end_9:
+		mov		r9, qword [rel _global_i]
+		mov		qword [rbp-144], r9
+		mov		r8, qword [rbp-144]
+		add		r8, 1
+		mov		qword [rbp-144], r8
+		mov		r9, qword [rbp-144]
+		mov		qword [rel _global_i], r9
+loop_cond_8:
+		mov		r9, qword [rel _global_primeCount]
+		cmp		qword [rel _global_i], r9
+		jl		loop_body_8
+		jge		loop_end_8
+loop_end_8:
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3578,99 +1294,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r13
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r15
-		call	addString__
+		mov		rdi, str_const_0
+		call	print
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3698,9 +1323,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
-		mov		rsi, r14
-		call	addString__
+		mov		rdi, qword [rel _global_resultCount]
+		call	toString
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3714,7 +1338,7 @@ main_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
+		mov		qword [rbp-152], rax
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3728,8 +1352,8 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
-		call	print
+		mov		rdi, qword [rbp-152]
+		call	println
 		pop		r15
 		pop		r14
 		pop		r13
@@ -3752,6 +1376,642 @@ main_entry:
 		pop		rbp
 		ret
 
+origin:
+origin_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 88
+		mov		r13, rdi
+		mov		r8, r13
+		inc		r8
+		imul		r8, 8
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r8
+		call	malloc
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r12, rax
+		mov		r8, r13
+		mov		qword [rax+0], r8
+		mov		r14, 0
+		jmp		loop_cond_10
+loop_body_10:
+		inc		r14
+loop_cond_10:
+		cmp		r14, r13
+		jl		loop_body_10
+loop_end_10:
+		mov		qword [rel _global_result], r12
+		mov		qword [rel _global_i], 0
+		jmp		loop_cond_11
+loop_body_11:
+		mov		r8, r13
+		inc		r8
+		imul		r8, 8
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r8
+		call	malloc
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r12, rax
+		mov		r8, r13
+		mov		qword [rax+0], r8
+		mov		r14, 0
+		jmp		loop_cond_12
+loop_body_12:
+		inc		r14
+loop_cond_12:
+		cmp		r14, r13
+		jl		loop_body_12
+loop_end_12:
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		qword [rbx+rcx*8+8], r12
+		mov		qword [rel _global_j], 0
+		jmp		loop_cond_13
+loop_body_13:
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rel _global_i]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		r15, r9
+		mov		rbx, r15
+		mov		rcx, qword [rel _global_j]
+		mov		qword [rbx+rcx*8+8], 0
+		mov		r14, qword [rel _global_j]
+		inc		qword [rel _global_j]
+loop_cond_13:
+		cmp		qword [rel _global_j], r13
+		jl		loop_body_13
+		jge		loop_end_13
+loop_end_13:
+		mov		r14, qword [rel _global_i]
+		inc		qword [rel _global_i]
+loop_cond_11:
+		cmp		qword [rel _global_i], r13
+		jl		loop_body_11
+		jge		loop_end_11
+loop_end_11:
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+getPrime:
+getPrime_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 120
+		mov		qword [rbp-8], rdi
+		mov		r12, 2
+		mov		r10, 2
+		jmp		loop_cond_14
+loop_body_14:
+		mov		rbx, qword [rel _global_b]
+		mov		rcx, r10
+		mov		r9, qword [rbx+rcx*8+8]
+		cmp		r9, 1
+		je		if_true_2
+		jne		if_false_2
+if_true_2:
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r14, r8
+		add		r14, 1
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		qword [rbx+rcx*8+8], r14
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		r9, qword [rbx+rcx*8+8]
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r9
+		call	toString
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r13, rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r13
+		call	println
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r11, rax
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r11, r8
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, r11
+		mov		qword [rbx+rcx*8+8], r10
+		mov		rbx, qword [rel _global_tmp]
+		mov		rcx, 0
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		rbx, qword [rel _global_gps]
+		mov		rcx, r10
+		mov		qword [rbx+rcx*8+8], r9
+		jmp		if_end_2
+if_false_2:
+		nop
+if_end_2:
+		jmp		loop_cond_15
+loop_body_15:
+		mov		qword [rbp-16], r10
+		mov		r8, qword [rbp-16]
+		imul		r8, r12
+		mov		qword [rbp-16], r8
+		mov		rbx, qword [rel _global_b]
+		mov		rcx, qword [rbp-16]
+		mov		qword [rbx+rcx*8+8], 0
+		mov		qword [rbp-24], r12
+		mov		r8, qword [rbp-24]
+		add		r8, 1
+		mov		qword [rbp-24], r8
+		mov		r12, qword [rbp-24]
+loop_cond_15:
+		mov		r15, r10
+		imul		r15, r12
+		mov		r9, qword [rbp-8]
+		cmp		r15, r9
+		jle		loop_body_15
+		jg		loop_end_15
+loop_end_15:
+		mov		r12, 2
+		mov		qword [rbp-32], r10
+		mov		r8, qword [rbp-32]
+		add		r8, 1
+		mov		qword [rbp-32], r8
+		mov		r10, qword [rbp-32]
+loop_cond_14:
+		mov		r9, qword [rbp-8]
+		cmp		r10, r9
+		jle		loop_body_14
+		jg		loop_end_14
+loop_end_14:
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+getResult:
+getResult_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 144
+		mov		r13, rdi
+		mov		qword [rbp-8], rsi
+		mov		qword [rbp-16], rdx
+		mov		qword [rbp-24], 1
+		neg		qword [rbp-24]
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rbp-8]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		qword [rbp-32], r9
+		mov		rbx, qword [rbp-32]
+		mov		rcx, qword [rbp-16]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r9, qword [rbp-24]
+		cmp		r8, r9
+		je		if_true_3
+		jne		if_false_3
+if_true_3:
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-16]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		r15, r9
+		imul		r15, 2
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-8]
+		mov		r8, qword [rbx+rcx*8+8]
+		sub		r15, r8
+		cmp		r15, r13
+		jle		if_true_4
+		jg		if_false_4
+if_true_4:
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-16]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		r12, r9
+		imul		r12, 2
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-8]
+		mov		r8, qword [rbx+rcx*8+8]
+		sub		r12, r8
+		mov		rbx, qword [rel _global_b]
+		mov		rcx, r12
+		mov		r9, qword [rbx+rcx*8+8]
+		cmp		r9, 0
+		jne		if_true_5
+		je		if_false_5
+if_true_5:
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-16]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r11, r8
+		imul		r11, 2
+		mov		rbx, qword [rel _global_prime]
+		mov		rcx, qword [rbp-8]
+		mov		r9, qword [rbx+rcx*8+8]
+		sub		r11, r9
+		mov		rbx, qword [rel _global_gps]
+		mov		rcx, r11
+		mov		r8, qword [rbx+rcx*8+8]
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r13
+		mov		rsi, qword [rbp-16]
+		mov		rdx, r8
+		call	getResult
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r11, rax
+		mov		qword [rbp-40], r11
+		mov		r8, qword [rbp-40]
+		add		r8, 1
+		mov		qword [rbp-40], r8
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rbp-8]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		r11, r9
+		mov		rbx, r11
+		mov		rcx, qword [rbp-16]
+		mov		r9, qword [rbp-40]
+		mov		qword [rbx+rcx*8+8], r9
+		jmp		if_end_5
+if_false_5:
+		nop
+if_end_5:
+		jmp		if_end_4
+if_false_4:
+		nop
+if_end_4:
+		jmp		if_end_3
+if_false_3:
+		nop
+if_end_3:
+		mov		r10, 1
+		neg		r10
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rbp-8]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		qword [rbp-48], r8
+		mov		rbx, qword [rbp-48]
+		mov		rcx, qword [rbp-16]
+		mov		r9, qword [rbx+rcx*8+8]
+		cmp		r9, r10
+		je		if_true_6
+		jne		if_false_6
+if_true_6:
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rbp-8]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		r14, r8
+		mov		rbx, r14
+		mov		rcx, qword [rbp-16]
+		mov		qword [rbx+rcx*8+8], 1
+		jmp		if_end_6
+if_false_6:
+		nop
+if_end_6:
+		mov		rbx, qword [rel _global_result]
+		mov		rcx, qword [rbp-8]
+		mov		r9, qword [rbx+rcx*8+8]
+		mov		qword [rbp-56], r9
+		mov		rbx, qword [rbp-56]
+		mov		rcx, qword [rbp-16]
+		mov		r8, qword [rbx+rcx*8+8]
+		mov		rax, r8
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+printF:
+printF_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 120
+		mov		qword [rbp-8], rdi
+		mov		r10, rsi
+		mov		r13, rdx
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-8]
+		call	toString
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r11, rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r11
+		call	print
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r11, rax
+		jmp		loop_cond_16
+loop_body_16:
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, str_const_1
+		call	print
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r15, rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, r10
+		call	toString
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-16], rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-16]
+		call	print
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r15, rax
+		mov		r12, r10
+		imul		r12, 2
+		mov		qword [rbp-24], r12
+		mov		r8, qword [rbp-24]
+		mov		r9, qword [rbp-8]
+		sub		r8, r9
+		mov		qword [rbp-24], r8
+		mov		r10, qword [rbp-24]
+		mov		r14, qword [rbp-8]
+		add		r14, r10
+		mov		rax, r14
+		mov		r9, 2
+		cqo
+		idiv		r9
+		mov		qword [rbp-32], rax
+		mov		r9, qword [rbp-32]
+		mov		qword [rbp-8], r9
+		mov		r15, r13
+		sub		r15, 1
+		mov		r13, r15
+loop_cond_16:
+		cmp		r13, 0
+		jg		loop_body_16
+		jle		loop_end_16
+loop_end_16:
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, str_const_2
+		call	print
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		r15, rax
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
 SECTION .bss
 
 stringbuffer:
@@ -3759,17 +2019,39 @@ stringbuffer:
 
 SECTION .data
 
-	dq	20
+_global_N:
+		dq 0
+_global_M:
+		dq 0
+_global_i:
+		dq 0
+_global_j:
+		dq 0
+_global_primeCount:
+		dq 0
+_global_resultCount:
+		dq 0
+_global_b:
+		dq 0
+_global_prime:
+		dq 0
+_global_gps:
+		dq 0
+_global_tmp:
+		dq 0
+_global_result:
+		dq 0
+	dq	7
 str_const_0:
-	db	34, 10, 98, 100, 97, 92, 34, 10, 100, 98, 100, 92, 99, 34, 92, 34, 99, 92, 99, 34, 0
+	db	84, 111, 116, 97, 108, 58, 32, 0
 
-	dq	20
+	dq	1
 str_const_1:
-	db	92, 97, 98, 10, 97, 99, 34, 34, 97, 100, 100, 10, 34, 10, 97, 99, 10, 100, 98, 34, 0
+	db	32, 0
 
-	dq	20
+	dq	1
 str_const_2:
-	db	10, 97, 98, 98, 100, 98, 100, 100, 92, 92, 34, 100, 34, 99, 92, 97, 100, 99, 34, 99, 0
+	db	10, 0
 
 intbuffer:
         dq 0
