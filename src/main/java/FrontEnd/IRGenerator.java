@@ -174,7 +174,7 @@ public class IRGenerator extends AstVisitor {
         boolean addThis = false;
         if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode) {
             methodName = ((ClassDefinitionNode) methodDef.parent).className + "_" + methodName;
-            addThis = true;
+            addThis = !(node.parent instanceof MemberAccessExpressionNode);
         }
         ins.methodName = methodName;
         for (ExpressionStatementNode item : node.actualParameterList)
