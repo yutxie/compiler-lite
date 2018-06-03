@@ -170,23 +170,33 @@ public class IRGenerator extends AstVisitor {
         node.value = new Variable();
         MethodCall ins = new MethodCall();
         ins.dst = node.value;
-        ins.methodName = node.caller.referenceName;
+        String methodName = node.caller.referenceName;
+        MethodDefinitionNode methodDef = node.scope.getMethod(methodName);
+        if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode)
+            methodName = ((ClassDefinitionNode) methodDef.parent).className + "_" + methodName;
+        ins.methodName = methodName;
         for (ExpressionStatementNode item : node.actualParameterList)
             ins.actualParaVarList.addLast(item.value);
         codeList.add(ins);
     }
 
-    void rewriteNew(Operand res, TypeNode type) throws Exception {
+    void rewriteNew(Operand res, TypeNode type,
+                    LinkedList<ExpressionStatementNode> paraList) throws Exception {
         if (type instanceof ClassTypeNode) { // new class
             ClassDefinitionNode classDef = ((ClassTypeNode) type).referenceClass;
-            if (classDef.memberConstructionMethodList.isEmpty()) {
-                Allocate allocate = new Allocate();
-                allocate.dst = res;
-                allocate.size = new Immediate(classDef.memberVariableList.size());
-                codeList.addLast(allocate);
-            } else {
-                // ATTENTION: call construction method
-                throw new Exception();
+            Allocate allocate = new Allocate();
+            allocate.dst = res;
+            allocate.size = new Immediate(classDef.memberVariableList.size());
+            codeList.addLast(allocate);
+            if (!classDef.memberConstructionMethodList.isEmpty()) {
+                Variable t = new Variable();
+                MethodCall call = new MethodCall();
+                call.dst = t;
+                call.caller = res;
+                for (ExpressionStatementNode para : paraList) {
+                    visit(para);
+                    call.actualParaVarList.addLast(para.value);
+                }
             }
         } else if (type instanceof PrimitiveTypeNode) return;
         else if (type instanceof ArrayTypeNode) {
@@ -216,7 +226,7 @@ public class IRGenerator extends AstVisitor {
             IndexVariable indexAcess = new IndexVariable();
             indexAcess.array = res;
             indexAcess.index = iter;
-            rewriteNew(indexAcess, arrayType.innerTypeNode);
+            rewriteNew(indexAcess, arrayType.innerTypeNode, null);
             Unary inc = new Unary();
             inc.dst = iter;
             inc.type = Unary.Type.INC;
@@ -238,7 +248,7 @@ public class IRGenerator extends AstVisitor {
     @Override
     void visit(NewExpressionNode node) throws Exception {
         node.value = new Variable();
-        rewriteNew(node.value, node.variableType);
+        rewriteNew(node.value, node.variableType, node.actualParameterList);
     }
 
     void logicCalculate(ExpressionStatementNode node) throws Exception {

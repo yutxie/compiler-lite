@@ -7,7 +7,7 @@ import java.util.*;
 public class NewExpressionNode extends ExpressionStatementNode {
 
     public VariableTypeNode variableType;
-    public List<ExpressionStatementNode> actualParameterList;
+    public LinkedList<ExpressionStatementNode> actualParameterList;
     
     public NewExpressionNode() {
         actualParameterList = new LinkedList<ExpressionStatementNode>();
