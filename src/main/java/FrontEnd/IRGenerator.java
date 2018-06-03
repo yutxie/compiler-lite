@@ -15,6 +15,7 @@ public class IRGenerator extends AstVisitor {
     IR ir;
     HashMap<String, Integer> labelMap = new HashMap<String, Integer>();
     LinkedList<IRCode> codeList;
+    LinkedList<Integer> loopStack = new LinkedList<Integer>();
 
     int ifCnt = 0;
     int loopCnt = 0;
@@ -554,6 +555,7 @@ public class IRGenerator extends AstVisitor {
          */
         visit(node.init);
         int loopIndex = loopCnt++;
+        loopStack.addLast(loopIndex);
 
         Jump jump = new Jump();
         jump.targetLabel = "loop_cond_" + loopIndex;
@@ -570,6 +572,7 @@ public class IRGenerator extends AstVisitor {
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
+        loopStack.removeLast();
     }
 
     @Override
@@ -582,6 +585,7 @@ public class IRGenerator extends AstVisitor {
                         ...
          */
         int loopIndex = loopCnt++;
+        loopStack.addLast(loopIndex);
 
         Jump jump = new Jump();
         jump.targetLabel = "loop_cond_" + loopIndex;
@@ -597,13 +601,13 @@ public class IRGenerator extends AstVisitor {
 
         labelMap.put("loop_end_" + loopIndex, codeList.size());
         codeList.addLast(new Nop());
+        loopStack.removeLast();
     }
 
     @Override
     void visit(BreakStatementNode node) {
         Jump ins = new Jump();
-        int loopIndex = loopCnt - 1;
-        ins.targetLabel = "loop_end_" + loopIndex;
+        ins.targetLabel = "loop_end_" + loopStack.getLast();
         ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
@@ -612,7 +616,7 @@ public class IRGenerator extends AstVisitor {
     void visit(ContinueStatementNode node) {
         Jump ins = new Jump();
         int loopIndex = loopCnt - 1;
-        ins.targetLabel = "loop_cond_" + loopIndex;
+        ins.targetLabel = "loop_cond_" + loopStack.getLast();
         ins.type = Jump.Type.JMP;
         codeList.add(ins);
     }
