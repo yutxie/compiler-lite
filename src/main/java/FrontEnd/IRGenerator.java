@@ -143,7 +143,6 @@ public class IRGenerator extends AstVisitor {
             MethodCall ins = (MethodCall) codeList.get(codeList.size() - 1);
             node.value = new Variable();
             ins.dst = node.value;
-            ins.caller = node.caller.value;
             ins.methodName = node.caller.exprType.getTypeName() + "_" + memberCaller.referenceName;
             ins.actualParaVarList.addFirst(node.caller.value);
         } else if (node.member instanceof ReferenceNode) {
@@ -172,11 +171,16 @@ public class IRGenerator extends AstVisitor {
         ins.dst = node.value;
         String methodName = node.caller.referenceName;
         MethodDefinitionNode methodDef = node.scope.getMethod(methodName);
-        if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode)
+        boolean addThis = false;
+        if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode) {
             methodName = ((ClassDefinitionNode) methodDef.parent).className + "_" + methodName;
+            addThis = true;
+        }
         ins.methodName = methodName;
         for (ExpressionStatementNode item : node.actualParameterList)
             ins.actualParaVarList.addLast(item.value);
+        if (addThis)
+            ins.actualParaVarList.addFirst(node.scope.getReg("this"));
         codeList.add(ins);
     }
 
@@ -192,7 +196,6 @@ public class IRGenerator extends AstVisitor {
                 Variable t = new Variable();
                 MethodCall call = new MethodCall();
                 call.dst = t;
-                call.caller = res;
                 for (ExpressionStatementNode para : paraList) {
                     visit(para);
                     call.actualParaVarList.addLast(para.value);

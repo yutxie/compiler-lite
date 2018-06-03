@@ -282,7 +282,6 @@ public class IRRewriter {
                 move.src = addr;
             }
             readParas.addLast(move);
-//            method.basicBlockList.getFirst().codeList.addFirst(move);
             ++paraIter;
         }
         method.basicBlockList.getFirst().codeList.addAll(0, readParas);
