@@ -390,8 +390,8 @@ public class IRGenerator extends AstVisitor {
                 bin.dst = node.value;
                 bin.src = node.rhs.value;
                 switch (node.op) {
-//            case LSHIFT: bin.type = Binary.Type.LSHIFT; break;
-//            case RSHIFT: bin.type = Binary.Type.RSHIFT; break;
+                case LSHIFT: bin.type = Binary.Type.SAL; break;
+                case RSHIFT: bin.type = Binary.Type.SAR; break;
                     case ADD: bin.type = Binary.Type.ADD; break;
                     case SUB: bin.type = Binary.Type.SUB; break;
                     case MUL: bin.type = Binary.Type.IMUL; break;
