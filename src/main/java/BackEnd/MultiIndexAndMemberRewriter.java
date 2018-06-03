@@ -86,8 +86,22 @@ public class MultiIndexAndMemberRewriter {
         } else return oprand;
     }
 
+
+
     LinkedList<IRCode> rewriteMultiIndexandMember(Allocate ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if ((ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) &&
+            (ins.size instanceof IndexVariable || ins.size instanceof MemberVariable)) {
+            Variable t = new Variable();
+            Move move = new Move();
+            move.dst = t;
+            move.src = rewriteMultiIndexandMember(ins.size, res, true);
+            res.addLast(move);
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.size = t;
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         ins.size = rewriteMultiIndexandMember(ins.size, res, true);
         res.addLast(ins);
@@ -96,6 +110,18 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(Binary ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if ((ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) &&
+            (ins.src instanceof IndexVariable || ins.src instanceof MemberVariable)) {
+            Variable t = new Variable();
+            Move move = new Move();
+            move.dst = t;
+            move.src = rewriteMultiIndexandMember(ins.src, res, true);
+            res.addLast(move);
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.src = t;
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         ins.src = rewriteMultiIndexandMember(ins.src, res, true);
         res.addLast(ins);
@@ -104,6 +130,18 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(Compare ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if ((ins.src0 instanceof IndexVariable || ins.src0 instanceof MemberVariable) &&
+            (ins.src1 instanceof IndexVariable || ins.src1 instanceof MemberVariable)) {
+            Variable t = new Variable();
+            Move move = new Move();
+            move.dst = t;
+            move.src = rewriteMultiIndexandMember(ins.src1, res, true);
+            res.addLast(move);
+            ins.src0 = rewriteMultiIndexandMember(ins.src0, res, true);
+            ins.src1 = t;
+            res.addLast(ins);
+            return res;
+        }
         ins.src0 = rewriteMultiIndexandMember(ins.src0, res, true);
         ins.src1 = rewriteMultiIndexandMember(ins.src1, res, true);
         res.addLast(ins);
@@ -112,6 +150,27 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(Idiv ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        int cnt = 0;
+        if (ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) ++cnt;
+        if (ins.src0 instanceof IndexVariable || ins.src0 instanceof MemberVariable) ++cnt;
+        if (ins.src1 instanceof IndexVariable || ins.src1 instanceof MemberVariable) ++cnt;
+        if (cnt > 1) {
+            Variable t0 = new Variable();
+            Move move = new Move();
+            move.dst = t0;
+            move.src = rewriteMultiIndexandMember(ins.src0, res, true);
+            res.addLast(move);
+            Variable t1 = new Variable();
+            move = new Move();
+            move.dst = t1;
+            move.src = rewriteMultiIndexandMember(ins.src1, res, true);
+            res.addLast(move);
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.src0 = t0;
+            ins.src1 = t1;
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         ins.src0 = rewriteMultiIndexandMember(ins.src0, res, true);
         ins.src1 = rewriteMultiIndexandMember(ins.src1, res, true);
@@ -121,6 +180,27 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(MethodCall ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        int cnt = 0;
+        if (ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) ++cnt;
+        for (Operand para : ins.actualParaVarList)
+            if (para instanceof IndexVariable || para instanceof MemberVariable) ++cnt;
+        if (cnt > 1) {
+            int n = ins.actualParaVarList.size();
+            ArrayList<Variable> tList = new ArrayList<Variable>();
+            for (int i = 0; i < n; ++i) tList.add(i, new Variable());
+            int i = 0;
+            for (Operand para : ins.actualParaVarList) {
+                Move move = new Move();
+                move.dst = tList.get(i++);
+                move.src = rewriteMultiIndexandMember(para, res, true);
+                res.addLast(move);
+            }
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.actualParaVarList.clear();
+            for (i = 0; i < n; ++i) ins.actualParaVarList.addLast(tList.get(i));
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         LinkedList<Operand> newActualParaVarList = new LinkedList<Operand>();
         for (Operand para : ins.actualParaVarList)
@@ -132,6 +212,18 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(Move ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if ((ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) &&
+                (ins.src instanceof IndexVariable || ins.src instanceof MemberVariable)) {
+            Variable t = new Variable();
+            Move move = new Move();
+            move.dst = t;
+            move.src = rewriteMultiIndexandMember(ins.src, res, true);
+            res.addLast(move);
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.src = t;
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         ins.src = rewriteMultiIndexandMember(ins.src, res, true);
         res.addLast(ins);
@@ -147,6 +239,18 @@ public class MultiIndexAndMemberRewriter {
 
     LinkedList<IRCode> rewriteMultiIndexandMember(Cmove ins) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
+        if ((ins.dst instanceof IndexVariable || ins.dst instanceof MemberVariable) &&
+                (ins.src instanceof IndexVariable || ins.src instanceof MemberVariable)) {
+            Variable t = new Variable();
+            Move move = new Move();
+            move.dst = t;
+            move.src = rewriteMultiIndexandMember(ins.src, res, true);
+            res.addLast(move);
+            ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
+            ins.src = t;
+            res.addLast(ins);
+            return res;
+        }
         ins.dst = rewriteMultiIndexandMember(ins.dst, res, true);
         ins.src = rewriteMultiIndexandMember(ins.src, res, true);
         res.addLast(ins);
