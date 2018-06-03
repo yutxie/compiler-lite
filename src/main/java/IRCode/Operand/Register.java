@@ -14,13 +14,15 @@ public class Register extends Operand {
     // RSI 6
     // RDI 7
     // R8-15
+    // CL 16
 
     public Register(int type) {
         this.type = type;
     }
 
     public Register(String str) {
-        if (str.equals("rsp")) type = 4;
+        if (str.equals("cl")) type = 16;
+        else if (str.equals("rsp")) type = 4;
         else if (str.equals("rbp")) type = 5;
         else if (str.equals("rsi")) type = 6;
         else if (str.equals("rdi")) type = 7;
@@ -41,6 +43,7 @@ public class Register extends Operand {
     @Override
     public String getName() {
         switch (type) {
+            case 16: return "cl";
             case 4: return "rsp";
             case 5: return "rbp";
             case 6: return "rsi";
