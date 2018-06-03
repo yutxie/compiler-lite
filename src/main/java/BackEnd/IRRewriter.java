@@ -271,7 +271,7 @@ public class IRRewriter {
                     case 2: reg = registerConfig.get("rdx"); break;
                     case 3: reg = registerConfig.get("rcx"); break;
                     case 4: reg = registerConfig.get("r8"); break;
-                    case 5: reg = registerConfig.get("r9"); break;
+                    case 5: reg = registerConfig.get("rsi"); break;
                     default: throw new Exception();
                 }
                 move.src = reg;
@@ -453,51 +453,51 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(Allocate ins) throws Exception {
         /*  allocate dst size -->
             ... dst = call malloc, size + 1 ...
-            mov     r8, size
-            mov     [rax], r8   */
+            mov     rdi, size
+            mov     [rax], rdi   */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        Register r8 = registerConfig.get("r8");
+        Register rdi = registerConfig.get("rdi");
         Move move = new Move();
-        move.dst = r8;
+        move.dst = rdi;
         move.src = ins.size;
         res.addLast(move);
         Unary inc = new Unary();
-        inc.dst = r8;
+        inc.dst = rdi;
         inc.type = Unary.Type.INC;
         res.addLast(inc);
         Binary mul = new Binary();
-        mul.dst = r8;
+        mul.dst = rdi;
         mul.src = new Immediate(8);
         mul.type = Binary.Type.IMUL;
         res.addLast(mul);
         MethodCall call = new MethodCall();
         call.methodName = "malloc";
-        call.actualParaVarList.addLast(r8);
+        call.actualParaVarList.addLast(rdi);
         call.dst = ins.dst;
         res.addAll(res.size(), spillCode(call));
         move = new Move();
-        move.dst = r8;
+        move.dst = rdi;
         move.src = ins.size;
         res.addLast(move);
         Address addr = new Address();
         addr.base = registerConfig.get("rax");
         move = new Move();
         move.dst = addr;
-        move.src = r8;
+        move.src = rdi;
         res.addLast(move);
         return res;
     }
 
     LinkedList<IRCode> spillCode(Binary ins) {
         /*  bin a, b -->
-            mov r8, a
-            mov r9, b
-            add r8, r9
-            mov a, r8 */
+            mov rdi, a
+            mov rsi, b
+            add rdi, rsi
+            mov a, rdi */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Operand dst;
         if (ins.dst instanceof Address) {
-            dst = registerConfig.get("r8");
+            dst = registerConfig.get("rdi");
             Move move = new Move();
             move.dst = dst;
             move.src = ins.dst;
@@ -505,7 +505,7 @@ public class IRRewriter {
         } else dst = ins.dst;
         Operand src;
         if (ins.src instanceof Address) {
-            src = registerConfig.get("r9");
+            src = registerConfig.get("rsi");
             Move move = new Move();
             move.dst = src;
             move.src = ins.src;
@@ -527,13 +527,13 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Cmove ins) {
         /*  cmov    dst src -->
-            mov     r8 dst
-            cmov    r8 src
-            mov     dst r8  */
+            mov     rdi dst
+            cmov    rdi src
+            mov     dst rdi  */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         if (ins.dst instanceof Address) {
             Operand dst = ins.dst;
-            Register reg = registerConfig.get("r8");
+            Register reg = registerConfig.get("rdi");
             Move move = new Move();
             move.dst = reg;
             move.src = ins.dst;
@@ -550,12 +550,12 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Compare ins) {
         /*  cmp a, b -->
-            mov r8, b
-            cmp a, r8   */
+            mov rdi, b
+            cmp a, rdi   */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Operand src0;
         if (ins.src0 instanceof Immediate) {
-            Register reg = registerConfig.get("r8");
+            Register reg = registerConfig.get("rdi");
             Move move = new Move();
             move.dst = reg;
             move.src = ins.src0;
@@ -564,7 +564,7 @@ public class IRRewriter {
         } else src0 = ins.src0;
         Operand src1;
         if (ins.src1 instanceof Address) {
-            Register reg = registerConfig.get("r9");
+            Register reg = registerConfig.get("rsi");
             Move move = new Move();
             move.dst = reg;
             move.src = ins.src1;
@@ -581,9 +581,9 @@ public class IRRewriter {
     LinkedList<IRCode> spillCode(Idiv ins) {
         /*  idiv    dst src0 src1 -->
             mov     rax src0
-            mov     r9 src1
+            mov     rsi src1
             cqo
-            idiv    r9
+            idiv    rsi
             mov     dst rax/rdx     */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         Move move = new Move();
@@ -592,7 +592,7 @@ public class IRRewriter {
         res.addLast(move);
         Operand src1 = ins.src1;
         if (!(src1 instanceof Register) && !(src1 instanceof Address)) {
-            Register reg = registerConfig.get("r9");
+            Register reg = registerConfig.get("rsi");
             move = new Move();
             move.dst = reg;
             move.src = src1;
@@ -672,7 +672,7 @@ public class IRRewriter {
         res.addLast(call);
         for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) { // pop paras
             Pop pop = new Pop();
-            pop.dst = registerConfig.get("r8");
+            pop.dst = registerConfig.get("rdi");
             res.addLast(pop);
         }
         for (int i = 12; i >= 0; --i) { // pop regs
@@ -706,19 +706,19 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Move ins) {
         /*  mov a, b -->
-            mov r9, b
-            mov a, r9 */
+            mov rsi, b
+            mov a, rsi */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
         if (ins.dst == ins.src) return res;
         if (ins.src instanceof Address && ins.dst instanceof Address) {
-            Register r9 = registerConfig.get("r9");
+            Register rsi = registerConfig.get("rsi");
             Move move = new Move();
-            move.dst = r9;
+            move.dst = rsi;
             move.src = ins.src;
             res.addLast(move);
             move = new Move();
             move.dst = ins.dst;
-            move.src = r9;
+            move.src = rsi;
             res.addLast(move);
         } else res.addLast(ins);
         return res;

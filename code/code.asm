@@ -768,18 +768,18 @@ main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 64
-		mov		r9, str_const_0
-		mov		qword [rel _global_asciiTable], r9
+		sub		rsp, 48
+		mov		rsi, str_const_0
+		mov		qword [rel _global_asciiTable], rsi
 		mov		qword [rel _global_MAXCHUNK], 100
-		mov		r15, qword [rel _global_MAXCHUNK]
-		sub		r15, 1
-		imul		r15, 64
-		sub		r15, 16
-		mov		qword [rel _global_MAXLENGTH], r15
-		mov		r8, qword [rel _global_MAXCHUNK]
-		inc		r8
-		imul		r8, 8
+		mov		r11, qword [rel _global_MAXCHUNK]
+		sub		r11, 1
+		imul		r11, 64
+		sub		r11, 16
+		mov		qword [rel _global_MAXLENGTH], r11
+		mov		rdi, qword [rel _global_MAXCHUNK]
+		inc		rdi
+		imul		rdi, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -793,7 +793,7 @@ main_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r8
+		mov		rdi, rdi
 		call	malloc
 		pop		r15
 		pop		r14
@@ -808,17 +808,17 @@ main_entry:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r13, rax
-		mov		r8, qword [rel _global_MAXCHUNK]
-		mov		qword [rax+0], r8
-		mov		r15, 0
+		mov		r9, rax
+		mov		rdi, qword [rel _global_MAXCHUNK]
+		mov		qword [rax+0], rdi
+		mov		r11, 0
 		jmp		loop_cond_0
 loop_body_0:
-		mov		rbx, r13
-		mov		rcx, r15
-		mov		r8, 80
-		inc		r8
-		imul		r8, 8
+		mov		rbx, r9
+		mov		rcx, r11
+		mov		rdi, 80
+		inc		rdi
+		imul		rdi, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -832,7 +832,7 @@ loop_body_0:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r8
+		mov		rdi, rdi
 		call	malloc
 		pop		r15
 		pop		r14
@@ -848,26 +848,26 @@ loop_body_0:
 		pop		rsi
 		pop		rdi
 		mov		qword [rbx+rcx*8+8], rax
-		mov		r8, 80
-		mov		qword [rax+0], r8
-		mov		qword [rbp-8], 0
+		mov		rdi, 80
+		mov		qword [rax+0], rdi
+		mov		r8, 0
 		jmp		loop_cond_1
 loop_body_1:
-		inc		qword [rbp-8]
+		inc		r8
 loop_cond_1:
-		cmp		qword [rbp-8], 80
+		cmp		r8, 80
 		jl		loop_body_1
 loop_end_1:
-		inc		r15
+		inc		r11
 loop_cond_0:
-		mov		r9, qword [rel _global_MAXCHUNK]
-		cmp		r15, r9
+		mov		rsi, qword [rel _global_MAXCHUNK]
+		cmp		r11, rsi
 		jl		loop_body_0
 loop_end_0:
-		mov		qword [rel _global_chunks], r13
-		mov		r8, qword [rel _global_MAXLENGTH]
-		inc		r8
-		imul		r8, 8
+		mov		qword [rel _global_chunks], r9
+		mov		rdi, qword [rel _global_MAXLENGTH]
+		inc		rdi
+		imul		rdi, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -881,7 +881,7 @@ loop_end_0:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r8
+		mov		rdi, rdi
 		call	malloc
 		pop		r15
 		pop		r14
@@ -896,22 +896,22 @@ loop_end_0:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		r8, qword [rel _global_MAXLENGTH]
-		mov		qword [rax+0], r8
-		mov		r13, 0
+		mov		r11, rax
+		mov		rdi, qword [rel _global_MAXLENGTH]
+		mov		qword [rax+0], rdi
+		mov		r9, 0
 		jmp		loop_cond_2
 loop_body_2:
-		inc		r13
+		inc		r9
 loop_cond_2:
-		mov		r9, qword [rel _global_MAXLENGTH]
-		cmp		r13, r9
+		mov		rsi, qword [rel _global_MAXLENGTH]
+		cmp		r9, rsi
 		jl		loop_body_2
 loop_end_2:
-		mov		qword [rel _global_inputBuffer], r15
-		mov		r8, 5
-		inc		r8
-		imul		r8, 8
+		mov		qword [rel _global_inputBuffer], r11
+		mov		rdi, 5
+		inc		rdi
+		imul		rdi, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -925,7 +925,7 @@ loop_end_2:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r8
+		mov		rdi, rdi
 		call	malloc
 		pop		r15
 		pop		r14
@@ -940,18 +940,18 @@ loop_end_2:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r13, rax
-		mov		r8, 5
-		mov		qword [rax+0], r8
-		mov		r15, 0
+		mov		r9, rax
+		mov		rdi, 5
+		mov		qword [rax+0], rdi
+		mov		r11, 0
 		jmp		loop_cond_3
 loop_body_3:
-		inc		r15
+		inc		r11
 loop_cond_3:
-		cmp		r15, 5
+		cmp		r11, 5
 		jl		loop_body_3
 loop_end_3:
-		mov		qword [rel _global_outputBuffer], r13
+		mov		qword [rel _global_outputBuffer], r9
 		jmp		loop_cond_4
 loop_body_4:
 		push		rdi
@@ -981,9 +981,9 @@ loop_body_4:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
-		mov		qword [rbp-16], r12
-		cmp		qword [rbp-16], 0
+		mov		r15, rax
+		mov		r12, r15
+		cmp		r12, 0
 		je		if_true_0
 		jne		if_false_0
 if_true_0:
@@ -992,7 +992,7 @@ if_true_0:
 if_false_0:
 		nop
 if_end_0:
-		cmp		qword [rbp-16], 1
+		cmp		r12, 1
 		je		if_true_1
 		jne		if_false_1
 if_true_1:
@@ -1023,8 +1023,8 @@ if_true_1:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r10, rax
-		mov		r11, r10
+		mov		r13, rax
+		mov		r14, r13
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1038,7 +1038,7 @@ if_true_1:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r11
+		mov		rdi, r14
 		call	computeSHA1
 		pop		r15
 		pop		r14
@@ -1053,10 +1053,10 @@ if_true_1:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
+		mov		r11, rax
 		jmp		if_end_1
 if_false_1:
-		cmp		qword [rbp-16], 2
+		cmp		r12, 2
 		je		if_true_2
 		jne		if_false_2
 if_true_2:
@@ -1087,8 +1087,8 @@ if_true_2:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r14, rax
-		mov		r11, r14
+		mov		r10, rax
+		mov		r14, r10
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1102,7 +1102,7 @@ if_true_2:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r11
+		mov		rdi, r14
 		call	crackSHA1
 		pop		r15
 		pop		r14
@@ -1117,7 +1117,7 @@ if_true_2:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
+		mov		r11, rax
 		jmp		if_end_2
 if_false_2:
 		nop
@@ -1126,8 +1126,8 @@ if_end_2:
 if_end_1:
 		nop
 loop_cond_4:
-		mov		r8, 1
-		cmp		r8, 0
+		mov		rdi, 1
+		cmp		rdi, 0
 		jnz		loop_body_4
 		jz		loop_end_4
 loop_end_4:
@@ -1143,7 +1143,7 @@ hex2int:
 hex2int_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 144
+		sub		rsp, 128
 		mov		r11, rdi
 		mov		qword [rbp-8], 0
 		mov		qword [rbp-16], 0
@@ -1178,78 +1178,73 @@ loop_body_5:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-24], rax
-		mov		r9, qword [rbp-24]
-		mov		qword [rbp-32], r9
-		cmp		qword [rbp-32], 48
+		mov		r8, rax
+		mov		qword [rbp-24], r8
+		cmp		qword [rbp-24], 48
 		jl		if_false_3
-		cmp		qword [rbp-32], 57
+		cmp		qword [rbp-24], 57
 		jle		if_true_3
 		jg		if_false_3
 if_true_3:
 		mov		r12, qword [rbp-8]
 		imul		r12, 16
-		mov		qword [rbp-40], r12
-		mov		r8, qword [rbp-40]
-		mov		r9, qword [rbp-32]
-		add		r8, r9
-		mov		qword [rbp-40], r8
-		mov		r9, qword [rbp-40]
-		mov		qword [rbp-48], r9
-		mov		r8, qword [rbp-48]
-		sub		r8, 48
-		mov		qword [rbp-48], r8
-		mov		r9, qword [rbp-48]
-		mov		qword [rbp-8], r9
+		mov		qword [rbp-32], r12
+		mov		rdi, qword [rbp-32]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-32], rdi
+		mov		rsi, qword [rbp-32]
+		mov		qword [rbp-40], rsi
+		mov		rdi, qword [rbp-40]
+		sub		rdi, 48
+		mov		qword [rbp-40], rdi
+		mov		rsi, qword [rbp-40]
+		mov		qword [rbp-8], rsi
 		jmp		if_end_3
 if_false_3:
-		cmp		qword [rbp-32], 65
+		cmp		qword [rbp-24], 65
 		jl		if_false_4
-		cmp		qword [rbp-32], 70
+		cmp		qword [rbp-24], 70
 		jle		if_true_4
 		jg		if_false_4
 if_true_4:
 		mov		r10, qword [rbp-8]
 		imul		r10, 16
-		mov		qword [rbp-56], r10
-		mov		r8, qword [rbp-56]
-		mov		r9, qword [rbp-32]
-		add		r8, r9
-		mov		qword [rbp-56], r8
-		mov		r15, qword [rbp-56]
+		mov		qword [rbp-48], r10
+		mov		rdi, qword [rbp-48]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-48], rdi
+		mov		r15, qword [rbp-48]
 		sub		r15, 65
-		mov		qword [rbp-64], r15
-		mov		r8, qword [rbp-64]
-		add		r8, 10
-		mov		qword [rbp-64], r8
-		mov		r9, qword [rbp-64]
-		mov		qword [rbp-8], r9
+		mov		qword [rbp-56], r15
+		mov		rdi, qword [rbp-56]
+		add		rdi, 10
+		mov		qword [rbp-56], rdi
+		mov		rsi, qword [rbp-56]
+		mov		qword [rbp-8], rsi
 		jmp		if_end_4
 if_false_4:
-		cmp		qword [rbp-32], 97
+		cmp		qword [rbp-24], 97
 		jl		if_false_5
-		cmp		qword [rbp-32], 102
+		cmp		qword [rbp-24], 102
 		jle		if_true_5
 		jg		if_false_5
 if_true_5:
-		mov		r9, qword [rbp-8]
-		mov		qword [rbp-72], r9
-		mov		r8, qword [rbp-72]
-		imul		r8, 16
-		mov		qword [rbp-72], r8
-		mov		r13, qword [rbp-72]
-		mov		r9, qword [rbp-32]
-		add		r13, r9
-		mov		qword [rbp-80], r13
-		mov		r8, qword [rbp-80]
-		sub		r8, 97
-		mov		qword [rbp-80], r8
-		mov		r9, qword [rbp-80]
-		mov		qword [rbp-88], r9
-		mov		r8, qword [rbp-88]
-		add		r8, 10
-		mov		qword [rbp-88], r8
-		mov		r9, qword [rbp-88]
+		mov		rsi, qword [rbp-8]
+		mov		qword [rbp-64], rsi
+		mov		rdi, qword [rbp-64]
+		imul		rdi, 16
+		mov		qword [rbp-64], rdi
+		mov		r13, qword [rbp-64]
+		mov		rsi, qword [rbp-24]
+		add		r13, rsi
+		mov		qword [rbp-72], r13
+		mov		rdi, qword [rbp-72]
+		sub		rdi, 97
+		mov		qword [rbp-72], rdi
+		mov		r9, qword [rbp-72]
+		add		r9, 10
 		mov		qword [rbp-8], r9
 		jmp		if_end_5
 if_false_5:
@@ -1293,9 +1288,9 @@ loop_cond_5:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-96], rax
-		mov		r9, qword [rbp-96]
-		cmp		qword [rbp-16], r9
+		mov		qword [rbp-80], rax
+		mov		rsi, qword [rbp-80]
+		cmp		qword [rbp-16], rsi
 		jl		loop_body_5
 		jge		loop_end_5
 loop_end_5:
@@ -1374,31 +1369,26 @@ toStringHex:
 toStringHex_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 112
+		sub		rsp, 96
 		mov		r11, rdi
-		mov		r9, str_const_2
-		mov		qword [rbp-8], r9
+		mov		rsi, str_const_2
+		mov		qword [rbp-8], rsi
 		mov		qword [rbp-16], 28
 		jmp		loop_cond_6
 loop_body_6:
 		mov		r15, r11
 		mov		rcx, qword [rbp-16]
 		sar		r15, cl
-		mov		qword [rbp-24], r15
-		mov		r8, qword [rbp-24]
+		mov		r8, r15
 		and		r8, 15
 		mov		qword [rbp-24], r8
-		mov		r9, qword [rbp-24]
-		mov		qword [rbp-32], r9
-		cmp		qword [rbp-32], 10
+		cmp		qword [rbp-24], 10
 		jl		if_true_7
 		jge		if_false_7
 if_true_7:
-		mov		qword [rbp-40], 48
-		mov		r8, qword [rbp-40]
-		mov		r9, qword [rbp-32]
-		add		r8, r9
-		mov		qword [rbp-40], r8
+		mov		r9, 48
+		mov		rsi, qword [rbp-24]
+		add		r9, rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1412,7 +1402,7 @@ if_true_7:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-40]
+		mov		rdi, r9
 		call	int2chr
 		pop		r15
 		pop		r14
@@ -1462,12 +1452,12 @@ if_true_7:
 		jmp		if_end_7
 if_false_7:
 		mov		r13, 65
-		mov		r9, qword [rbp-32]
-		add		r13, r9
-		mov		qword [rbp-48], r13
-		mov		r8, qword [rbp-48]
-		sub		r8, 10
-		mov		qword [rbp-48], r8
+		mov		rsi, qword [rbp-24]
+		add		r13, rsi
+		mov		qword [rbp-32], r13
+		mov		rdi, qword [rbp-32]
+		sub		rdi, 10
+		mov		qword [rbp-32], rdi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -1481,7 +1471,7 @@ if_false_7:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-48]
+		mov		rdi, qword [rbp-32]
 		call	int2chr
 		pop		r15
 		pop		r14
@@ -1526,17 +1516,17 @@ if_false_7:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-56], rax
-		mov		r9, qword [rbp-56]
-		mov		qword [rbp-8], r9
+		mov		qword [rbp-40], rax
+		mov		rsi, qword [rbp-40]
+		mov		qword [rbp-8], rsi
 if_end_7:
-		mov		r9, qword [rbp-16]
-		mov		qword [rbp-64], r9
-		mov		r8, qword [rbp-64]
-		sub		r8, 4
-		mov		qword [rbp-64], r8
-		mov		r9, qword [rbp-64]
-		mov		qword [rbp-16], r9
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-48], rsi
+		mov		rdi, qword [rbp-48]
+		sub		rdi, 4
+		mov		qword [rbp-48], rdi
+		mov		rsi, qword [rbp-48]
+		mov		qword [rbp-16], rsi
 loop_cond_6:
 		cmp		qword [rbp-16], 0
 		jge		loop_body_6
@@ -1554,10 +1544,10 @@ rotate_left:
 rotate_left_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 96
+		sub		rsp, 64
 		mov		r10, rdi
-		mov		qword [rbp-8], rsi
-		cmp		qword [rbp-8], 1
+		mov		r9, rsi
+		cmp		r9, 1
 		je		if_true_8
 		jne		if_false_8
 if_true_8:
@@ -1576,25 +1566,25 @@ if_true_8:
 if_false_8:
 		nop
 if_end_8:
-		cmp		qword [rbp-8], 31
+		cmp		r9, 31
 		je		if_true_9
 		jne		if_false_9
 if_true_9:
-		mov		r13, r10
-		and		r13, 1
-		mov		qword [rbp-16], r13
-		mov		r8, qword [rbp-16]
-		sal		r8, 31
-		mov		qword [rbp-16], r8
-		mov		r13, r10
-		sar		r13, 1
-		and		r13, 2147483647
-		mov		r9, qword [rbp-16]
-		mov		qword [rbp-24], r9
-		mov		r8, qword [rbp-24]
-		or		r8, r13
-		mov		qword [rbp-24], r8
-		mov		rax, qword [rbp-24]
+		mov		r15, r10
+		and		r15, 1
+		mov		qword [rbp-8], r15
+		mov		rdi, qword [rbp-8]
+		sal		rdi, 31
+		mov		qword [rbp-8], rdi
+		mov		r15, r10
+		sar		r15, 1
+		and		r15, 2147483647
+		mov		rsi, qword [rbp-8]
+		mov		qword [rbp-16], rsi
+		mov		rdi, qword [rbp-16]
+		or		rdi, r15
+		mov		qword [rbp-16], rdi
+		mov		rax, qword [rbp-16]
 		mov		rsp, rbp
 		pop		rbp
 		ret
@@ -1602,39 +1592,28 @@ if_true_9:
 if_false_9:
 		nop
 if_end_9:
-		mov		r15, 32
-		mov		r9, qword [rbp-8]
-		sub		r15, r9
+		mov		r13, 32
+		sub		r13, r9
 		mov		r12, 1
-		mov		rcx, r15
+		mov		rcx, r13
 		sal		r12, cl
 		sub		r12, 1
-		mov		r15, r10
-		and		r15, r12
-		mov		r12, r15
-		mov		rcx, qword [rbp-8]
+		mov		r13, r10
+		and		r13, r12
+		mov		r12, r13
+		mov		rcx, r9
 		sal		r12, cl
-		mov		qword [rbp-32], 32
-		mov		r8, qword [rbp-32]
-		mov		r9, qword [rbp-8]
+		mov		r8, 32
 		sub		r8, r9
-		mov		qword [rbp-32], r8
-		mov		r15, r10
-		mov		rcx, qword [rbp-32]
-		sar		r15, cl
-		mov		qword [rbp-40], 1
-		mov		rcx, qword [rbp-8]
-		mov		r8, qword [rbp-40]
+		mov		r13, r10
+		mov		rcx, r8
+		sar		r13, cl
+		mov		r8, 1
+		mov		rcx, r9
 		sal		r8, cl
-		mov		qword [rbp-40], r8
-		mov		r9, qword [rbp-40]
-		mov		qword [rbp-48], r9
-		mov		r8, qword [rbp-48]
 		sub		r8, 1
-		mov		qword [rbp-48], r8
-		mov		r9, qword [rbp-48]
-		and		r15, r9
-		or		r12, r15
+		and		r13, r8
+		or		r12, r13
 		mov		rax, r12
 		mov		rsp, rbp
 		pop		rbp
@@ -1701,32 +1680,32 @@ sha1:
 sha1_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 664
+		sub		rsp, 648
 		mov		qword [rbp-8], rdi
 		mov		r12, rsi
 		mov		qword [rbp-16], r12
-		mov		r8, qword [rbp-16]
-		add		r8, 64
-		mov		qword [rbp-16], r8
-		mov		r9, qword [rbp-16]
-		mov		qword [rbp-24], r9
-		mov		r8, qword [rbp-24]
-		sub		r8, 56
-		mov		qword [rbp-24], r8
+		mov		rdi, qword [rbp-16]
+		add		rdi, 64
+		mov		qword [rbp-16], rdi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-24], rsi
+		mov		rdi, qword [rbp-24]
+		sub		rdi, 56
+		mov		qword [rbp-24], rdi
 		mov		rax, qword [rbp-24]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-32], rax
-		mov		r9, qword [rbp-32]
-		mov		qword [rbp-40], r9
-		mov		r8, qword [rbp-40]
-		add		r8, 1
-		mov		qword [rbp-40], r8
-		mov		r9, qword [rbp-40]
-		mov		qword [rbp-48], r9
-		mov		r9, qword [rel _global_MAXCHUNK]
-		cmp		qword [rbp-48], r9
+		mov		rsi, qword [rbp-32]
+		mov		qword [rbp-40], rsi
+		mov		rdi, qword [rbp-40]
+		add		rdi, 1
+		mov		qword [rbp-40], rdi
+		mov		rsi, qword [rbp-40]
+		mov		qword [rbp-48], rsi
+		mov		rsi, qword [rel _global_MAXCHUNK]
+		cmp		qword [rbp-48], rsi
 		jg		if_true_10
 		jle		if_false_10
 if_true_10:
@@ -1775,25 +1754,25 @@ loop_body_7:
 loop_body_8:
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-80], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-80], rsi
 		mov		rbx, qword [rbp-80]
 		mov		rcx, qword [rbp-72]
 		mov		qword [rbx+rcx*8+8], 0
-		mov		r9, qword [rbp-72]
-		mov		qword [rbp-88], r9
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-88], rsi
 		inc		qword [rbp-72]
 loop_cond_8:
 		cmp		qword [rbp-72], 80
 		jl		loop_body_8
 		jge		loop_end_8
 loop_end_8:
-		mov		r9, qword [rbp-64]
-		mov		qword [rbp-96], r9
+		mov		rsi, qword [rbp-64]
+		mov		qword [rbp-96], rsi
 		inc		qword [rbp-64]
 loop_cond_7:
-		mov		r9, qword [rbp-48]
-		cmp		qword [rbp-64], r9
+		mov		rsi, qword [rbp-48]
+		cmp		qword [rbp-64], rsi
 		jl		loop_body_7
 		jge		loop_end_7
 loop_end_7:
@@ -1801,80 +1780,80 @@ loop_end_7:
 		jmp		loop_cond_9
 loop_body_9:
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-104], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		r11, rdx
 		mov		rax, r11
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-112], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-120], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-128], rdx
 		mov		rax, qword [rbp-128]
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-136], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-144], rdx
 		mov		qword [rbp-152], 3
-		mov		r8, qword [rbp-152]
-		mov		r9, qword [rbp-144]
-		sub		r8, r9
-		mov		qword [rbp-152], r8
-		mov		r9, qword [rbp-152]
-		mov		qword [rbp-160], r9
-		mov		r8, qword [rbp-160]
-		imul		r8, 8
-		mov		qword [rbp-160], r8
+		mov		rdi, qword [rbp-152]
+		mov		rsi, qword [rbp-144]
+		sub		rdi, rsi
+		mov		qword [rbp-152], rdi
+		mov		rsi, qword [rbp-152]
+		mov		qword [rbp-160], rsi
+		mov		rdi, qword [rbp-160]
+		imul		rdi, 8
+		mov		qword [rbp-160], rdi
 		mov		rbx, qword [rbp-8]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-168], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-168], rsi
 		mov		rcx, qword [rbp-160]
-		mov		r8, qword [rbp-168]
-		sal		r8, cl
-		mov		qword [rbp-168], r8
+		mov		rdi, qword [rbp-168]
+		sal		rdi, cl
+		mov		qword [rbp-168], rdi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-120]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-176], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-176], rsi
 		mov		rbx, qword [rbp-176]
 		mov		rcx, qword [rbp-136]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-184], r9
-		mov		r8, qword [rbp-184]
-		mov		r9, qword [rbp-168]
-		or		r8, r9
-		mov		qword [rbp-184], r8
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-184], rsi
+		mov		rdi, qword [rbp-184]
+		mov		rsi, qword [rbp-168]
+		or		rdi, rsi
+		mov		qword [rbp-184], rdi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-104]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-192], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-192], rsi
 		mov		rbx, qword [rbp-192]
 		mov		rcx, qword [rbp-112]
-		mov		r9, qword [rbp-184]
-		mov		qword [rbx+rcx*8+8], r9
-		mov		r9, qword [rbp-64]
-		mov		qword [rbp-200], r9
+		mov		rsi, qword [rbp-184]
+		mov		qword [rbx+rcx*8+8], rsi
+		mov		rsi, qword [rbp-64]
+		mov		qword [rbp-200], rsi
 		inc		qword [rbp-64]
 loop_cond_9:
 		cmp		qword [rbp-64], r12
@@ -1882,59 +1861,59 @@ loop_cond_9:
 		jge		loop_end_9
 loop_end_9:
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-208], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		r15, rdx
 		mov		rax, r15
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-216], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		r15, rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 64
+		mov		rsi, 64
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		r13, rdx
 		mov		rax, r13
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-224], rax
 		mov		rax, qword [rbp-64]
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		r13, rdx
 		mov		qword [rbp-232], 3
-		mov		r8, qword [rbp-232]
-		sub		r8, r13
-		mov		qword [rbp-232], r8
+		mov		rdi, qword [rbp-232]
+		sub		rdi, r13
+		mov		qword [rbp-232], rdi
 		mov		r13, qword [rbp-232]
 		imul		r13, 8
 		mov		qword [rbp-240], 128
 		mov		rcx, r13
-		mov		r8, qword [rbp-240]
-		sal		r8, cl
-		mov		qword [rbp-240], r8
+		mov		rdi, qword [rbp-240]
+		sal		rdi, cl
+		mov		qword [rbp-240], rdi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, r15
 		mov		r15, qword [rbx+rcx*8+8]
 		mov		rbx, r15
 		mov		rcx, qword [rbp-224]
 		mov		r15, qword [rbx+rcx*8+8]
-		mov		r9, qword [rbp-240]
-		or		r15, r9
+		mov		rsi, qword [rbp-240]
+		or		r15, rsi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-208]
 		mov		r13, qword [rbx+rcx*8+8]
@@ -2062,67 +2041,63 @@ loop_body_10:
 		mov		qword [rbp-72], 16
 		jmp		loop_cond_11
 loop_body_11:
-		mov		r9, qword [rbp-72]
-		mov		qword [rbp-280], r9
-		mov		r8, qword [rbp-280]
-		sub		r8, 3
-		mov		qword [rbp-280], r8
-		mov		r9, qword [rbp-72]
-		mov		qword [rbp-288], r9
-		mov		r8, qword [rbp-288]
-		sub		r8, 8
-		mov		qword [rbp-288], r8
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-280], rsi
+		mov		rdi, qword [rbp-280]
+		sub		rdi, 3
+		mov		qword [rbp-280], rdi
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-288], rsi
+		mov		rdi, qword [rbp-288]
+		sub		rdi, 8
+		mov		qword [rbp-288], rdi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-296], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-296], rsi
 		mov		rbx, qword [rbp-296]
 		mov		rcx, qword [rbp-280]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-304], r9
+		mov		r8, qword [rbx+rcx*8+8]
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-312], r9
-		mov		rbx, qword [rbp-312]
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-304], rsi
+		mov		rbx, qword [rbp-304]
 		mov		rcx, qword [rbp-288]
-		mov		r8, qword [rbp-304]
-		mov		r9, qword [rbx+rcx*8+8]
-		xor		r8, r9
-		mov		qword [rbp-304], r8
-		mov		r9, qword [rbp-72]
-		mov		qword [rbp-320], r9
-		mov		r8, qword [rbp-320]
-		sub		r8, 14
+		mov		rsi, qword [rbx+rcx*8+8]
+		xor		r8, rsi
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-312], rsi
+		mov		rdi, qword [rbp-312]
+		sub		rdi, 14
+		mov		qword [rbp-312], rdi
 		mov		qword [rbp-320], r8
-		mov		r9, qword [rbp-304]
-		mov		qword [rbp-328], r9
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-336], r9
-		mov		rbx, qword [rbp-336]
-		mov		rcx, qword [rbp-320]
-		mov		r8, qword [rbp-328]
-		mov		r9, qword [rbx+rcx*8+8]
-		xor		r8, r9
-		mov		qword [rbp-328], r8
-		mov		r9, qword [rbp-72]
-		mov		qword [rbp-344], r9
-		mov		r8, qword [rbp-344]
-		sub		r8, 16
-		mov		qword [rbp-344], r8
-		mov		r9, qword [rbp-328]
-		mov		qword [rbp-352], r9
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-328], rsi
+		mov		rbx, qword [rbp-328]
+		mov		rcx, qword [rbp-312]
+		mov		rdi, qword [rbp-320]
+		mov		rsi, qword [rbx+rcx*8+8]
+		xor		rdi, rsi
+		mov		qword [rbp-320], rdi
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-336], rsi
+		mov		rdi, qword [rbp-336]
+		sub		rdi, 16
+		mov		qword [rbp-336], rdi
+		mov		rsi, qword [rbp-320]
+		mov		qword [rbp-344], rsi
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
 		mov		r14, qword [rbx+rcx*8+8]
 		mov		rbx, r14
-		mov		rcx, qword [rbp-344]
-		mov		r8, qword [rbp-352]
-		mov		r9, qword [rbx+rcx*8+8]
-		xor		r8, r9
-		mov		qword [rbp-352], r8
+		mov		rcx, qword [rbp-336]
+		mov		rdi, qword [rbp-344]
+		mov		rsi, qword [rbx+rcx*8+8]
+		xor		rdi, rsi
+		mov		qword [rbp-344], rdi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2136,7 +2111,7 @@ loop_body_11:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-352]
+		mov		rdi, qword [rbp-344]
 		mov		rsi, 1
 		call	rotate_left
 		pop		r15
@@ -2152,15 +2127,15 @@ loop_body_11:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-360], rax
+		mov		qword [rbp-352], rax
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-368], r9
-		mov		rbx, qword [rbp-368]
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-360], rsi
+		mov		rbx, qword [rbp-360]
 		mov		rcx, qword [rbp-72]
-		mov		r9, qword [rbp-360]
-		mov		qword [rbx+rcx*8+8], r9
+		mov		rsi, qword [rbp-352]
+		mov		qword [rbx+rcx*8+8], rsi
 		mov		r13, qword [rbp-72]
 		inc		qword [rbp-72]
 loop_cond_11:
@@ -2168,12 +2143,12 @@ loop_cond_11:
 		jl		loop_body_11
 		jge		loop_end_11
 loop_end_11:
-		mov		r9, qword [rbp-248]
-		mov		qword [rbp-376], r9
-		mov		r9, qword [rbp-256]
-		mov		qword [rbp-384], r9
-		mov		r9, qword [rbp-264]
-		mov		qword [rbp-392], r9
+		mov		rsi, qword [rbp-248]
+		mov		qword [rbp-368], rsi
+		mov		rsi, qword [rbp-256]
+		mov		qword [rbp-376], rsi
+		mov		rsi, qword [rbp-264]
+		mov		qword [rbp-384], rsi
 		mov		r12, qword [rbp-272]
 		mov		r11, r15
 		mov		qword [rbp-72], 0
@@ -2183,28 +2158,26 @@ loop_body_12:
 		jl		if_true_11
 		jge		if_false_11
 if_true_11:
-		mov		r9, qword [rbp-384]
+		mov		rsi, qword [rbp-376]
+		mov		qword [rbp-392], rsi
+		mov		rdi, qword [rbp-392]
+		mov		rsi, qword [rbp-384]
+		and		rdi, rsi
+		mov		qword [rbp-392], rdi
+		mov		r9, qword [rbp-376]
+		not		r9
 		mov		qword [rbp-400], r9
-		mov		r8, qword [rbp-400]
-		mov		r9, qword [rbp-392]
-		and		r8, r9
-		mov		qword [rbp-400], r8
-		mov		r9, qword [rbp-384]
-		mov		qword [rbp-408], r9
-		not		qword [rbp-408]
-		mov		r9, qword [rbp-408]
-		mov		qword [rbp-416], r9
-		mov		r8, qword [rbp-416]
-		and		r8, r12
-		mov		qword [rbp-416], r8
-		mov		r9, qword [rbp-400]
-		mov		qword [rbp-424], r9
-		mov		r8, qword [rbp-424]
-		mov		r9, qword [rbp-416]
-		or		r8, r9
-		mov		qword [rbp-424], r8
-		mov		r9, qword [rbp-424]
-		mov		qword [rbp-432], r9
+		mov		rdi, qword [rbp-400]
+		and		rdi, r12
+		mov		qword [rbp-400], rdi
+		mov		rsi, qword [rbp-392]
+		mov		qword [rbp-408], rsi
+		mov		rdi, qword [rbp-408]
+		mov		rsi, qword [rbp-400]
+		or		rdi, rsi
+		mov		qword [rbp-408], rdi
+		mov		rsi, qword [rbp-408]
+		mov		qword [rbp-416], rsi
 		mov		r13, 1518500249
 		jmp		if_end_11
 if_false_11:
@@ -2212,19 +2185,19 @@ if_false_11:
 		jl		if_true_12
 		jge		if_false_12
 if_true_12:
-		mov		r9, qword [rbp-384]
-		mov		qword [rbp-440], r9
-		mov		r8, qword [rbp-440]
-		mov		r9, qword [rbp-392]
-		xor		r8, r9
-		mov		qword [rbp-440], r8
-		mov		r9, qword [rbp-440]
-		mov		qword [rbp-448], r9
-		mov		r8, qword [rbp-448]
-		xor		r8, r12
-		mov		qword [rbp-448], r8
-		mov		r9, qword [rbp-448]
-		mov		qword [rbp-432], r9
+		mov		rsi, qword [rbp-376]
+		mov		qword [rbp-424], rsi
+		mov		rdi, qword [rbp-424]
+		mov		rsi, qword [rbp-384]
+		xor		rdi, rsi
+		mov		qword [rbp-424], rdi
+		mov		rsi, qword [rbp-424]
+		mov		qword [rbp-432], rsi
+		mov		rdi, qword [rbp-432]
+		xor		rdi, r12
+		mov		qword [rbp-432], rdi
+		mov		rsi, qword [rbp-432]
+		mov		qword [rbp-416], rsi
 		mov		r13, 1859775393
 		jmp		if_end_12
 if_false_12:
@@ -2232,36 +2205,36 @@ if_false_12:
 		jl		if_true_13
 		jge		if_false_13
 if_true_13:
-		mov		r9, qword [rbp-384]
-		mov		qword [rbp-456], r9
-		mov		r8, qword [rbp-456]
-		mov		r9, qword [rbp-392]
-		and		r8, r9
-		mov		qword [rbp-456], r8
-		mov		r9, qword [rbp-384]
-		mov		qword [rbp-464], r9
-		mov		r8, qword [rbp-464]
-		and		r8, r12
-		mov		qword [rbp-464], r8
-		mov		r9, qword [rbp-456]
-		mov		qword [rbp-472], r9
-		mov		r8, qword [rbp-472]
-		mov		r9, qword [rbp-464]
-		or		r8, r9
-		mov		qword [rbp-472], r8
-		mov		r9, qword [rbp-392]
-		mov		qword [rbp-480], r9
-		mov		r8, qword [rbp-480]
-		and		r8, r12
-		mov		qword [rbp-480], r8
-		mov		r9, qword [rbp-472]
-		mov		qword [rbp-488], r9
-		mov		r8, qword [rbp-488]
-		mov		r9, qword [rbp-480]
-		or		r8, r9
-		mov		qword [rbp-488], r8
-		mov		r9, qword [rbp-488]
-		mov		qword [rbp-432], r9
+		mov		rsi, qword [rbp-376]
+		mov		qword [rbp-440], rsi
+		mov		rdi, qword [rbp-440]
+		mov		rsi, qword [rbp-384]
+		and		rdi, rsi
+		mov		qword [rbp-440], rdi
+		mov		rsi, qword [rbp-376]
+		mov		qword [rbp-448], rsi
+		mov		rdi, qword [rbp-448]
+		and		rdi, r12
+		mov		qword [rbp-448], rdi
+		mov		rsi, qword [rbp-440]
+		mov		qword [rbp-456], rsi
+		mov		rdi, qword [rbp-456]
+		mov		rsi, qword [rbp-448]
+		or		rdi, rsi
+		mov		qword [rbp-456], rdi
+		mov		rsi, qword [rbp-384]
+		mov		qword [rbp-464], rsi
+		mov		rdi, qword [rbp-464]
+		and		rdi, r12
+		mov		qword [rbp-464], rdi
+		mov		rsi, qword [rbp-456]
+		mov		qword [rbp-472], rsi
+		mov		rdi, qword [rbp-472]
+		mov		rsi, qword [rbp-464]
+		or		rdi, rsi
+		mov		qword [rbp-472], rdi
+		mov		rsi, qword [rbp-472]
+		mov		qword [rbp-416], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2291,23 +2264,23 @@ if_true_13:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-496], rax
-		mov		r13, qword [rbp-496]
+		mov		qword [rbp-480], rax
+		mov		r13, qword [rbp-480]
 		jmp		if_end_13
 if_false_13:
-		mov		r9, qword [rbp-384]
-		mov		qword [rbp-504], r9
-		mov		r8, qword [rbp-504]
-		mov		r9, qword [rbp-392]
-		xor		r8, r9
-		mov		qword [rbp-504], r8
-		mov		r9, qword [rbp-504]
-		mov		qword [rbp-512], r9
-		mov		r8, qword [rbp-512]
-		xor		r8, r12
-		mov		qword [rbp-512], r8
-		mov		r9, qword [rbp-512]
-		mov		qword [rbp-432], r9
+		mov		rsi, qword [rbp-376]
+		mov		qword [rbp-488], rsi
+		mov		rdi, qword [rbp-488]
+		mov		rsi, qword [rbp-384]
+		xor		rdi, rsi
+		mov		qword [rbp-488], rdi
+		mov		rsi, qword [rbp-488]
+		mov		qword [rbp-496], rsi
+		mov		rdi, qword [rbp-496]
+		xor		rdi, r12
+		mov		qword [rbp-496], rdi
+		mov		rsi, qword [rbp-496]
+		mov		qword [rbp-416], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2337,8 +2310,8 @@ if_false_13:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-520], rax
-		mov		r13, qword [rbp-520]
+		mov		qword [rbp-504], rax
+		mov		r13, qword [rbp-504]
 if_end_13:
 		nop
 if_end_12:
@@ -2357,9 +2330,69 @@ if_end_11:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-376]
+		mov		rdi, qword [rbp-368]
 		mov		rsi, 5
 		call	rotate_left
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-512], rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-512]
+		mov		rsi, r11
+		call	add
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-520], rax
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-416]
+		mov		rsi, r13
+		call	add
 		pop		r15
 		pop		r14
 		pop		r13
@@ -2387,68 +2420,8 @@ if_end_11:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-528]
-		mov		rsi, r11
-		call	add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		qword [rbp-536], rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbp-432]
-		mov		rsi, r13
-		call	add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		qword [rbp-544], rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbp-536]
-		mov		rsi, qword [rbp-544]
+		mov		rdi, qword [rbp-520]
+		mov		rsi, qword [rbp-528]
 		call	add
 		pop		r15
 		pop		r14
@@ -2466,9 +2439,9 @@ if_end_11:
 		mov		r10, rax
 		mov		rbx, qword [rel _global_chunks]
 		mov		rcx, qword [rbp-64]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-552], r9
-		mov		rbx, qword [rbp-552]
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-536], rsi
+		mov		rbx, qword [rbp-536]
 		mov		rcx, qword [rbp-72]
 		push		rdi
 		push		rsi
@@ -2499,11 +2472,11 @@ if_end_11:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-560], rax
-		mov		r9, qword [rbp-560]
-		mov		qword [rbp-568], r9
+		mov		qword [rbp-544], rax
+		mov		rsi, qword [rbp-544]
+		mov		qword [rbp-552], rsi
 		mov		r11, r12
-		mov		r12, qword [rbp-392]
+		mov		r12, qword [rbp-384]
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2517,7 +2490,7 @@ if_end_11:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-384]
+		mov		rdi, qword [rbp-376]
 		mov		rsi, 30
 		call	rotate_left
 		pop		r15
@@ -2533,13 +2506,13 @@ if_end_11:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-576], rax
-		mov		r9, qword [rbp-576]
-		mov		qword [rbp-392], r9
-		mov		r9, qword [rbp-376]
-		mov		qword [rbp-384], r9
-		mov		r9, qword [rbp-568]
-		mov		qword [rbp-376], r9
+		mov		qword [rbp-560], rax
+		mov		rsi, qword [rbp-560]
+		mov		qword [rbp-384], rsi
+		mov		rsi, qword [rbp-368]
+		mov		qword [rbp-376], rsi
+		mov		rsi, qword [rbp-552]
+		mov		qword [rbp-368], rsi
 		mov		r13, qword [rbp-72]
 		inc		qword [rbp-72]
 loop_cond_12:
@@ -2561,6 +2534,38 @@ loop_end_12:
 		push		r14
 		push		r15
 		mov		rdi, qword [rbp-248]
+		mov		rsi, qword [rbp-368]
+		call	add
+		pop		r15
+		pop		r14
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		pop		rbx
+		pop		rcx
+		pop		rdx
+		pop		rsi
+		pop		rdi
+		mov		qword [rbp-568], rax
+		mov		rsi, qword [rbp-568]
+		mov		qword [rbp-248], rsi
+		push		rdi
+		push		rsi
+		push		rdx
+		push		rcx
+		push		rbx
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		push		r12
+		push		r13
+		push		r14
+		push		r15
+		mov		rdi, qword [rbp-256]
 		mov		rsi, qword [rbp-376]
 		call	add
 		pop		r15
@@ -2576,9 +2581,9 @@ loop_end_12:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-584], rax
-		mov		r9, qword [rbp-584]
-		mov		qword [rbp-248], r9
+		mov		qword [rbp-576], rax
+		mov		rsi, qword [rbp-576]
+		mov		qword [rbp-256], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2592,7 +2597,7 @@ loop_end_12:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-256]
+		mov		rdi, qword [rbp-264]
 		mov		rsi, qword [rbp-384]
 		call	add
 		pop		r15
@@ -2608,41 +2613,9 @@ loop_end_12:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-592], rax
-		mov		r9, qword [rbp-592]
-		mov		qword [rbp-256], r9
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbp-264]
-		mov		rsi, qword [rbp-392]
-		call	add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		qword [rbp-600], rax
-		mov		r9, qword [rbp-600]
-		mov		qword [rbp-264], r9
+		mov		qword [rbp-584], rax
+		mov		rsi, qword [rbp-584]
+		mov		qword [rbp-264], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2672,9 +2645,9 @@ loop_end_12:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-608], rax
-		mov		r9, qword [rbp-608]
-		mov		qword [rbp-272], r9
+		mov		qword [rbp-592], rax
+		mov		rsi, qword [rbp-592]
+		mov		qword [rbp-272], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2704,32 +2677,32 @@ loop_end_12:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-616], rax
-		mov		r15, qword [rbp-616]
+		mov		qword [rbp-600], rax
+		mov		r15, qword [rbp-600]
 		mov		r13, qword [rbp-64]
 		inc		qword [rbp-64]
 loop_cond_10:
-		mov		r9, qword [rbp-48]
-		cmp		qword [rbp-64], r9
+		mov		rsi, qword [rbp-48]
+		cmp		qword [rbp-64], rsi
 		jl		loop_body_10
 		jge		loop_end_10
 loop_end_10:
 		mov		rbx, qword [rel _global_outputBuffer]
 		mov		rcx, 0
-		mov		r9, qword [rbp-248]
-		mov		qword [rbx+rcx*8+8], r9
+		mov		rsi, qword [rbp-248]
+		mov		qword [rbx+rcx*8+8], rsi
 		mov		rbx, qword [rel _global_outputBuffer]
 		mov		rcx, 1
-		mov		r9, qword [rbp-256]
-		mov		qword [rbx+rcx*8+8], r9
+		mov		rsi, qword [rbp-256]
+		mov		qword [rbx+rcx*8+8], rsi
 		mov		rbx, qword [rel _global_outputBuffer]
 		mov		rcx, 2
-		mov		r9, qword [rbp-264]
-		mov		qword [rbx+rcx*8+8], r9
+		mov		rsi, qword [rbp-264]
+		mov		qword [rbx+rcx*8+8], rsi
 		mov		rbx, qword [rel _global_outputBuffer]
 		mov		rcx, 3
-		mov		r9, qword [rbp-272]
-		mov		qword [rbx+rcx*8+8], r9
+		mov		rsi, qword [rbp-272]
+		mov		qword [rbx+rcx*8+8], rsi
 		mov		rbx, qword [rel _global_outputBuffer]
 		mov		rcx, 4
 		mov		qword [rbx+rcx*8+8], r15
@@ -2745,8 +2718,8 @@ computeSHA1:
 computeSHA1_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 64
-		mov		r10, rdi
+		sub		rsp, 48
+		mov		r8, rdi
 		mov		r15, 0
 		jmp		loop_cond_13
 loop_body_13:
@@ -2763,7 +2736,7 @@ loop_body_13:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r10
+		mov		rdi, r8
 		mov		rsi, r15
 		call	string_ord
 		pop		r15
@@ -2783,7 +2756,7 @@ loop_body_13:
 		mov		rbx, qword [rel _global_inputBuffer]
 		mov		rcx, r15
 		mov		qword [rbx+rcx*8+8], r13
-		mov		r11, r15
+		mov		r9, r15
 		inc		r15
 loop_cond_13:
 		push		rdi
@@ -2799,7 +2772,7 @@ loop_cond_13:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r10
+		mov		rdi, r8
 		call	string_length
 		pop		r15
 		pop		r14
@@ -2832,7 +2805,7 @@ loop_end_13:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r10
+		mov		rdi, r8
 		call	string_length
 		pop		r15
 		pop		r14
@@ -2847,7 +2820,7 @@ loop_end_13:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
+		mov		r10, rax
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2862,7 +2835,7 @@ loop_end_13:
 		push		r14
 		push		r15
 		mov		rdi, qword [rel _global_inputBuffer]
-		mov		rsi, r12
+		mov		rsi, r10
 		call	sha1
 		pop		r15
 		pop		r14
@@ -2877,8 +2850,8 @@ loop_end_13:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
-		mov		r13, r12
+		mov		r10, rax
+		mov		r13, r10
 		mov		r15, 0
 		jmp		loop_cond_14
 loop_body_14:
@@ -2912,7 +2885,7 @@ loop_body_14:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-8], rax
+		mov		r12, rax
 		push		rdi
 		push		rsi
 		push		rdx
@@ -2926,7 +2899,7 @@ loop_body_14:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-8]
+		mov		rdi, r12
 		call	print
 		pop		r15
 		pop		r14
@@ -2947,10 +2920,8 @@ loop_body_14:
 loop_cond_14:
 		mov		rbx, r13
 		mov		rcx, -1
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-16], r9
-		mov		r9, qword [rbp-16]
-		cmp		r15, r9
+		mov		r11, qword [rbx+rcx*8+8]
+		cmp		r15, r11
 		jl		loop_body_14
 		jge		loop_end_14
 loop_end_14:
@@ -3046,14 +3017,14 @@ nextText_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 48
-		mov		r14, rdi
-		mov		r12, rsi
-		mov		r11, r12
-		sub		r11, 1
+		mov		r11, rdi
+		mov		r14, rsi
+		mov		r13, r14
+		sub		r13, 1
 		jmp		loop_cond_15
 loop_body_15:
-		mov		rbx, r14
-		mov		rcx, r11
+		mov		rbx, r11
+		mov		rcx, r13
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3082,20 +3053,20 @@ loop_body_15:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		rbx, r14
-		mov		rcx, r11
-		mov		qword [rbx+rcx*8+8], r15
-		mov		r13, 1
-		neg		r13
-		mov		rbx, r14
-		mov		rcx, r11
-		cmp		qword [rbx+rcx*8+8], r13
+		mov		r12, rax
+		mov		rbx, r11
+		mov		rcx, r13
+		mov		qword [rbx+rcx*8+8], r12
+		mov		r15, 1
+		neg		r15
+		mov		rbx, r11
+		mov		rcx, r13
+		cmp		qword [rbx+rcx*8+8], r15
 		je		if_true_17
 		jne		if_false_17
 if_true_17:
-		mov		rbx, r14
-		mov		rcx, r11
+		mov		rbx, r11
+		mov		rcx, r13
 		mov		qword [rbx+rcx*8+8], 48
 		jmp		if_end_17
 if_false_17:
@@ -3104,10 +3075,10 @@ if_false_17:
 		pop		rbp
 		ret
 if_end_17:
-		mov		r12, r11
-		dec		r11
+		mov		r14, r13
+		dec		r13
 loop_cond_15:
-		cmp		r11, 0
+		cmp		r13, 0
 		jge		loop_body_15
 		jl		loop_end_15
 loop_end_15:
@@ -3124,15 +3095,15 @@ array_equal_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 48
-		mov		r11, rdi
-		mov		r12, rsi
-		mov		rbx, r11
-		mov		rcx, -1
-		mov		r10, qword [rbx+rcx*8+8]
+		mov		r12, rdi
+		mov		r13, rsi
 		mov		rbx, r12
 		mov		rcx, -1
-		mov		r13, qword [rbx+rcx*8+8]
-		cmp		r10, r13
+		mov		r11, qword [rbx+rcx*8+8]
+		mov		rbx, r13
+		mov		rcx, -1
+		mov		r14, qword [rbx+rcx*8+8]
+		cmp		r11, r14
 		jne		if_true_18
 		je		if_false_18
 if_true_18:
@@ -3144,15 +3115,15 @@ if_true_18:
 if_false_18:
 		nop
 if_end_18:
-		mov		r13, 0
+		mov		r14, 0
 		jmp		loop_cond_16
 loop_body_16:
+		mov		rbx, r13
+		mov		rcx, r14
+		mov		r15, qword [rbx+rcx*8+8]
 		mov		rbx, r12
-		mov		rcx, r13
-		mov		r14, qword [rbx+rcx*8+8]
-		mov		rbx, r11
-		mov		rcx, r13
-		cmp		qword [rbx+rcx*8+8], r14
+		mov		rcx, r14
+		cmp		qword [rbx+rcx*8+8], r15
 		jne		if_true_19
 		je		if_false_19
 if_true_19:
@@ -3164,13 +3135,13 @@ if_true_19:
 if_false_19:
 		nop
 if_end_19:
-		mov		r10, r13
-		inc		r13
+		mov		r11, r14
+		inc		r14
 loop_cond_16:
-		mov		rbx, r11
+		mov		rbx, r12
 		mov		rcx, -1
-		mov		r15, qword [rbx+rcx*8+8]
-		cmp		r13, r15
+		mov		r10, qword [rbx+rcx*8+8]
+		cmp		r14, r10
 		jl		loop_body_16
 		jge		loop_end_16
 loop_end_16:
@@ -3186,11 +3157,11 @@ crackSHA1:
 crackSHA1_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 184
-		mov		r15, rdi
-		mov		r8, 5
-		inc		r8
-		imul		r8, 8
+		sub		rsp, 168
+		mov		r13, rdi
+		mov		rdi, 5
+		inc		rdi
+		imul		rdi, 8
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3204,7 +3175,7 @@ crackSHA1_entry:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r8
+		mov		rdi, rdi
 		call	malloc
 		pop		r15
 		pop		r14
@@ -3220,8 +3191,8 @@ crackSHA1_entry:
 		pop		rsi
 		pop		rdi
 		mov		qword [rbp-8], rax
-		mov		r8, 5
-		mov		qword [rax+0], r8
+		mov		rdi, 5
+		mov		qword [rax+0], rdi
 		mov		qword [rbp-16], 0
 		jmp		loop_cond_17
 loop_body_17:
@@ -3230,8 +3201,8 @@ loop_cond_17:
 		cmp		qword [rbp-16], 5
 		jl		loop_body_17
 loop_end_17:
-		mov		r9, qword [rbp-8]
-		mov		qword [rbp-24], r9
+		mov		rsi, qword [rbp-8]
+		mov		qword [rbp-24], rsi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3245,7 +3216,7 @@ loop_end_17:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
+		mov		rdi, r13
 		call	string_length
 		pop		r15
 		pop		r14
@@ -3260,8 +3231,8 @@ loop_end_17:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r11, rax
-		cmp		r11, 40
+		mov		r9, rax
+		cmp		r9, 40
 		jne		if_true_20
 		je		if_false_20
 if_true_20:
@@ -3293,7 +3264,7 @@ if_true_20:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r11, rax
+		mov		r9, rax
 		mov		rsp, rbp
 		pop		rbp
 		ret
@@ -3307,7 +3278,7 @@ loop_body_18:
 		mov		rbx, qword [rbp-24]
 		mov		rcx, qword [rbp-32]
 		mov		qword [rbx+rcx*8+8], 0
-		mov		r11, qword [rbp-32]
+		mov		r9, qword [rbp-32]
 		inc		qword [rbp-32]
 loop_cond_18:
 		cmp		qword [rbp-32], 5
@@ -3318,20 +3289,20 @@ loop_end_18:
 		jmp		loop_cond_19
 loop_body_19:
 		mov		rax, qword [rbp-32]
-		mov		r9, 8
+		mov		rsi, 8
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-40], rax
 		mov		rax, qword [rbp-32]
-		mov		r9, 8
+		mov		rsi, 8
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-48], rax
-		mov		r9, qword [rbp-32]
-		mov		qword [rbp-56], r9
-		mov		r8, qword [rbp-56]
-		add		r8, 3
-		mov		qword [rbp-56], r8
+		mov		rsi, qword [rbp-32]
+		mov		qword [rbp-56], rsi
+		mov		rdi, qword [rbp-56]
+		add		rdi, 3
+		mov		qword [rbp-56], rdi
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3345,7 +3316,7 @@ loop_body_19:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r15
+		mov		rdi, r13
 		mov		rsi, qword [rbp-32]
 		mov		rdx, qword [rbp-56]
 		call	string_substring
@@ -3391,55 +3362,52 @@ loop_body_19:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r10, rax
+		mov		r8, rax
 		mov		rax, qword [rbp-32]
-		mov		r9, 4
+		mov		rsi, 4
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-72], rax
 		mov		rax, qword [rbp-72]
-		mov		r9, 2
+		mov		rsi, 2
 		cqo
-		idiv		r9
+		idiv		rsi
 		mov		qword [rbp-80], rdx
 		mov		qword [rbp-88], 1
-		mov		r8, qword [rbp-88]
-		mov		r9, qword [rbp-80]
-		sub		r8, r9
-		mov		qword [rbp-88], r8
-		mov		r9, qword [rbp-88]
-		mov		qword [rbp-96], r9
-		mov		r8, qword [rbp-96]
-		imul		r8, 16
-		mov		qword [rbp-96], r8
-		mov		r12, r10
-		mov		rcx, qword [rbp-96]
-		sal		r12, cl
+		mov		rdi, qword [rbp-88]
+		mov		rsi, qword [rbp-80]
+		sub		rdi, rsi
+		mov		qword [rbp-88], rdi
+		mov		r14, qword [rbp-88]
+		imul		r14, 16
+		mov		r10, r8
+		mov		rcx, r14
+		sal		r10, cl
 		mov		rbx, qword [rbp-24]
 		mov		rcx, qword [rbp-48]
-		mov		r9, qword [rbx+rcx*8+8]
-		mov		qword [rbp-104], r9
-		mov		r8, qword [rbp-104]
-		or		r8, r12
-		mov		qword [rbp-104], r8
+		mov		rsi, qword [rbx+rcx*8+8]
+		mov		qword [rbp-96], rsi
+		mov		rdi, qword [rbp-96]
+		or		rdi, r10
+		mov		qword [rbp-96], rdi
 		mov		rbx, qword [rbp-24]
 		mov		rcx, qword [rbp-40]
-		mov		r9, qword [rbp-104]
-		mov		qword [rbx+rcx*8+8], r9
-		mov		r9, qword [rbp-32]
-		mov		qword [rbp-112], r9
-		mov		r8, qword [rbp-112]
-		add		r8, 4
-		mov		qword [rbp-112], r8
-		mov		r9, qword [rbp-112]
-		mov		qword [rbp-32], r9
+		mov		rsi, qword [rbp-96]
+		mov		qword [rbx+rcx*8+8], rsi
+		mov		rsi, qword [rbp-32]
+		mov		qword [rbp-104], rsi
+		mov		rdi, qword [rbp-104]
+		add		rdi, 4
+		mov		qword [rbp-104], rdi
+		mov		rsi, qword [rbp-104]
+		mov		qword [rbp-32], rsi
 loop_cond_19:
 		cmp		qword [rbp-32], 40
 		jl		loop_body_19
 		jge		loop_end_19
 loop_end_19:
-		mov		r15, 4
-		mov		r11, 1
+		mov		r14, 4
+		mov		r10, 1
 		jmp		loop_cond_20
 loop_body_20:
 		mov		qword [rbp-32], 0
@@ -3448,10 +3416,10 @@ loop_body_21:
 		mov		rbx, qword [rel _global_inputBuffer]
 		mov		rcx, qword [rbp-32]
 		mov		qword [rbx+rcx*8+8], 48
-		mov		r12, qword [rbp-32]
+		mov		r13, qword [rbp-32]
 		inc		qword [rbp-32]
 loop_cond_21:
-		cmp		qword [rbp-32], r11
+		cmp		qword [rbp-32], r10
 		jl		loop_body_21
 		jge		loop_end_21
 loop_end_21:
@@ -3471,7 +3439,7 @@ loop_body_22:
 		push		r14
 		push		r15
 		mov		rdi, qword [rel _global_inputBuffer]
-		mov		rsi, r11
+		mov		rsi, r10
 		call	sha1
 		pop		r15
 		pop		r14
@@ -3486,8 +3454,8 @@ loop_body_22:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-120], rax
-		mov		r13, qword [rbp-120]
+		mov		qword [rbp-112], rax
+		mov		r11, qword [rbp-112]
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3501,7 +3469,7 @@ loop_body_22:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, r13
+		mov		rdi, r11
 		mov		rsi, qword [rbp-24]
 		call	array_equal
 		pop		r15
@@ -3517,8 +3485,8 @@ loop_body_22:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-128], rax
-		cmp		qword [rbp-128], 0
+		mov		r15, rax
+		cmp		r15, 0
 		jnz		if_true_21
 		jz		if_false_21
 if_true_21:
@@ -3555,7 +3523,7 @@ loop_body_23:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		qword [rbp-136], rax
+		mov		qword [rbp-120], rax
 		push		rdi
 		push		rsi
 		push		rdx
@@ -3569,7 +3537,7 @@ loop_body_23:
 		push		r13
 		push		r14
 		push		r15
-		mov		rdi, qword [rbp-136]
+		mov		rdi, qword [rbp-120]
 		call	print
 		pop		r15
 		pop		r14
@@ -3584,11 +3552,11 @@ loop_body_23:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
-		mov		r12, qword [rbp-32]
+		mov		r13, rax
+		mov		r13, qword [rbp-32]
 		inc		qword [rbp-32]
 loop_cond_23:
-		cmp		qword [rbp-32], r11
+		cmp		qword [rbp-32], r10
 		jl		loop_body_23
 		jge		loop_end_23
 loop_end_23:
@@ -3620,7 +3588,7 @@ loop_end_23:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r12, rax
+		mov		r13, rax
 		mov		rsp, rbp
 		pop		rbp
 		ret
@@ -3642,7 +3610,7 @@ if_end_21:
 		push		r14
 		push		r15
 		mov		rdi, qword [rel _global_inputBuffer]
-		mov		rsi, r11
+		mov		rsi, r10
 		call	nextText
 		pop		r15
 		pop		r14
@@ -3657,8 +3625,8 @@ if_end_21:
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r14, rax
-		cmp		r14, 0
+		mov		r12, rax
+		cmp		r12, 0
 		jnz		if_false_22
 		jz		if_true_22
 if_true_22:
@@ -3669,15 +3637,15 @@ if_false_22:
 if_end_22:
 		nop
 loop_cond_22:
-		mov		r8, 1
-		cmp		r8, 0
+		mov		rdi, 1
+		cmp		rdi, 0
 		jnz		loop_body_22
 		jz		loop_end_22
 loop_end_22:
-		mov		r12, r11
-		inc		r11
+		mov		r13, r10
+		inc		r10
 loop_cond_20:
-		cmp		r11, r15
+		cmp		r10, r14
 		jle		loop_body_20
 		jg		loop_end_20
 loop_end_20:
