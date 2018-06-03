@@ -271,7 +271,7 @@ public class IRRewriter {
                     case 2: reg = registerConfig.get("rdx"); break;
                     case 3: reg = registerConfig.get("rcx"); break;
                     case 4: reg = registerConfig.get("r8"); break;
-                    case 5: reg = registerConfig.get("rsi"); break;
+                    case 5: reg = registerConfig.get("r9"); break;
                     default: throw new Exception();
                 }
                 move.src = reg;

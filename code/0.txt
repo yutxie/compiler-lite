@@ -1,5 +1,25 @@
-int main() {
-    int[] a = new int[1];
-    a[0] = 10;
-    return a[0] + 20;
+int a(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13, int a14, int a15)
+{
+	println(toString(a1));
+	println(toString(a2));
+	println(toString(a3));
+	println(toString(a4));
+	println(toString(a5));
+	println(toString(a6));
+	println(toString(a7));
+	println(toString(a8));
+	println(toString(a9));
+	println(toString(a10));
+	println(toString(a11));
+	println(toString(a12));
+	println(toString(a13));
+	println(toString(a14));
+	println(toString(a15));
+    return a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 + a11 + a12 + a13 + a14 + a15;
+}
+
+int main()
+{
+    println(toString(a(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)));
+    return 0;
 }
