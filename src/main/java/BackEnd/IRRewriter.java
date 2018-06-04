@@ -631,20 +631,21 @@ public class IRRewriter {
             pop regs
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-//        for (int i = 0; i <= 4; ++i) { // push regs
-//            Register reg;
-//            switch (i) {
-//                case 0: reg = registerConfig.get("rdi"); break;
-//                case 1: reg = registerConfig.get("rsi"); break;
-//                case 2: reg = registerConfig.get("rdx"); break;
-//                case 3: reg = registerConfig.get("rcx"); break;
-//                case 4: reg = registerConfig.get("rbx"); break;
-//                default: throw new Exception();
-//            }
-//            Push push = new Push();
-//            push.src = reg;
-//            res.addLast(push);
-//        }
+        if (ins.dst instanceof Address)
+        for (int i = 3; i <= 4; ++i) { // push regs
+            Register reg;
+            switch (i) {
+                case 0: reg = registerConfig.get("rdi"); break;
+                case 1: reg = registerConfig.get("rsi"); break;
+                case 2: reg = registerConfig.get("rdx"); break;
+                case 3: reg = registerConfig.get("rcx"); break;
+                case 4: reg = registerConfig.get("rbx"); break;
+                default: throw new Exception();
+            }
+            Push push = new Push();
+            push.src = reg;
+            res.addLast(push);
+        }
         for (int i = 0; i < 6; ++i) { // move paras
             if (i >= ins.actualParaVarList.size()) break;
             Operand para = ins.actualParaVarList.get(i);
@@ -676,20 +677,21 @@ public class IRRewriter {
             pop.dst = registerConfig.get("rdi");
             res.addLast(pop);
         }
-//        for (int i = 4; i >= 0; --i) { // pop regs
-//            Register reg;
-//            switch (i) {
-//                case 0: reg = registerConfig.get("rdi"); break;
-//                case 1: reg = registerConfig.get("rsi"); break;
-//                case 2: reg = registerConfig.get("rdx"); break;
-//                case 3: reg = registerConfig.get("rcx"); break;
-//                case 4: reg = registerConfig.get("rbx"); break;
-//                default: throw new Exception();
-//            }
-//            Pop pop = new Pop();
-//            pop.dst = reg;
-//            res.addLast(pop);
-//        }
+        if (ins.dst instanceof Address)
+        for (int i = 4; i >= 3; --i) { // pop regs
+            Register reg;
+            switch (i) {
+                case 0: reg = registerConfig.get("rdi"); break;
+                case 1: reg = registerConfig.get("rsi"); break;
+                case 2: reg = registerConfig.get("rdx"); break;
+                case 3: reg = registerConfig.get("rcx"); break;
+                case 4: reg = registerConfig.get("rbx"); break;
+                default: throw new Exception();
+            }
+            Pop pop = new Pop();
+            pop.dst = reg;
+            res.addLast(pop);
+        }
         Move move = new Move();
         move.dst = ins.dst;
         move.src = registerConfig.get("rax");

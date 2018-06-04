@@ -834,7 +834,11 @@ main_entry:
 		push		r12
 		push		r13
 		push		r8
+		push		rcx
+		push		rbx
 		call	getInt
+		pop		rbx
+		pop		rcx
 		mov		qword [rbp-8], rax
 		mov		rsi, qword [rbp-8]
 		mov		qword [rbp-16], rsi
@@ -848,21 +852,33 @@ main_entry:
 		mov		qword [rbp-72], 1
 		jmp		loop_cond_0
 loop_body_0:
+		push		rcx
+		push		rbx
 		mov		rdi, qword [rbp-16]
 		mov		rsi, qword [rbp-24]
 		call	worka
+		pop		rbx
+		pop		rcx
 		mov		qword [rbp-80], rax
 		mov		rsi, qword [rbp-80]
 		mov		qword [rbp-16], rsi
+		push		rcx
+		push		rbx
 		mov		rdi, qword [rbp-16]
 		mov		rsi, qword [rbp-24]
 		call	workb
+		pop		rbx
+		pop		rcx
 		mov		qword [rbp-88], rax
 		mov		rsi, qword [rbp-88]
 		mov		qword [rbp-24], rsi
+		push		rcx
+		push		rbx
 		mov		rdi, qword [rbp-16]
 		mov		rsi, qword [rbp-24]
 		call	workc
+		pop		rbx
+		pop		rcx
 		mov		qword [rbp-96], rax
 		mov		rsi, qword [rbp-96]
 		mov		qword [rbp-32], rsi
@@ -1051,8 +1067,12 @@ loop_cond_0:
 		jle		loop_body_0
 		jg		loop_end_0
 loop_end_0:
+		push		rcx
+		push		rbx
 		mov		rdi, qword [rbp-64]
 		call	toString
+		pop		rbx
+		pop		rcx
 		mov		qword [rbp-296], rax
 		mov		rdi, qword [rbp-296]
 		call	println
