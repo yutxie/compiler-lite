@@ -631,13 +631,13 @@ public class IRRewriter {
             pop regs
             mov t rax             */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        if (ins.dst instanceof Address)
+        if (ins.dst instanceof Address && ((Address) ins.dst).base.getName().equals("rbx"))
         for (int i = 3; i <= 4; ++i) { // push regs
             Register reg;
             switch (i) {
-                case 0: reg = registerConfig.get("rdi"); break;
-                case 1: reg = registerConfig.get("rsi"); break;
-                case 2: reg = registerConfig.get("rdx"); break;
+//                case 0: reg = registerConfig.get("rdi"); break;
+//                case 1: reg = registerConfig.get("rsi"); break;
+//                case 2: reg = registerConfig.get("rdx"); break;
                 case 3: reg = registerConfig.get("rcx"); break;
                 case 4: reg = registerConfig.get("rbx"); break;
                 default: throw new Exception();
@@ -677,13 +677,13 @@ public class IRRewriter {
             pop.dst = registerConfig.get("rdi");
             res.addLast(pop);
         }
-        if (ins.dst instanceof Address)
+        if (ins.dst instanceof Address && ((Address) ins.dst).base.getName().equals("rbx"))
         for (int i = 4; i >= 3; --i) { // pop regs
             Register reg;
             switch (i) {
-                case 0: reg = registerConfig.get("rdi"); break;
-                case 1: reg = registerConfig.get("rsi"); break;
-                case 2: reg = registerConfig.get("rdx"); break;
+//                case 0: reg = registerConfig.get("rdi"); break;
+//                case 1: reg = registerConfig.get("rsi"); break;
+//                case 2: reg = registerConfig.get("rdx"); break;
                 case 3: reg = registerConfig.get("rcx"); break;
                 case 4: reg = registerConfig.get("rbx"); break;
                 default: throw new Exception();

@@ -20,8 +20,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="106">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,8 +32,8 @@
       <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="635" column="23" selection-start-line="635" selection-start-column="23" selection-end-line="635" selection-end-column="23" />
+            <state relative-caret-position="152">
+              <caret line="642" column="39" selection-start-line="642" selection-start-column="39" selection-end-line="642" selection-end-column="39" />
               <folding>
                 <element signature="e#332#894#0" />
                 <element signature="e#900#1662#0" />
@@ -119,8 +119,8 @@
       <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="470" selection-start-line="470" selection-end-line="470" />
+            <state relative-caret-position="326">
+              <caret line="488" column="55" selection-start-line="488" selection-start-column="55" selection-end-line="488" selection-end-column="55" />
               <folding>
                 <element signature="method#generateIR#0;class#IRGenerator#0" />
                 <element signature="method#visit#0;class#IRGenerator#0" />
@@ -135,12 +135,10 @@
                 <element signature="method#visit#9;class#IRGenerator#0" />
                 <element signature="method#rewriteNew#0;class#IRGenerator#0" />
                 <element signature="method#visit#10;class#IRGenerator#0" />
-                <element signature="method#logicCalculate#0;class#IRGenerator#0" />
                 <element signature="method#visit#11;class#IRGenerator#0" />
                 <element signature="method#visit#12;class#IRGenerator#0" />
                 <element signature="method#conditionJump#0;class#IRGenerator#0" />
                 <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
-                <element signature="method#conditionJump#1;class#IRGenerator#0" />
                 <element signature="method#conditionJump#2;class#IRGenerator#0" />
                 <element signature="method#visit#13;class#IRGenerator#0" />
                 <element signature="method#visit#14;class#IRGenerator#0" />
@@ -195,8 +193,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ifstate</find>
-      <find>forsta</find>
       <find>addS</find>
       <find>condition</find>
       <find>for</find>
@@ -223,8 +219,10 @@
       <find>this</find>
       <find>define</find>
       <find>rdx</find>
-      <find>rbx</find>
       <find>ins.dst</find>
+      <find>short</find>
+      <find>shortCutCnt</find>
+      <find>rbx</find>
     </findStrings>
     <replaceStrings>
       <replace>ins</replace>
@@ -311,10 +309,10 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Register.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/MethodEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -578,7 +576,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java</url>
-          <line>532</line>
+          <line>538</line>
           <properties />
           <option name="timeStamp" value="127" />
         </line-breakpoint>
@@ -1081,41 +1079,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="470" selection-start-line="470" selection-end-line="470" />
-          <folding>
-            <element signature="method#generateIR#0;class#IRGenerator#0" />
-            <element signature="method#visit#0;class#IRGenerator#0" />
-            <element signature="method#visit#1;class#IRGenerator#0" />
-            <element signature="method#visit#2;class#IRGenerator#0" />
-            <element signature="method#visit#3;class#IRGenerator#0" />
-            <element signature="method#visit#4;class#IRGenerator#0" />
-            <element signature="method#visit#5;class#IRGenerator#0" />
-            <element signature="method#visit#6;class#IRGenerator#0" />
-            <element signature="method#visit#7;class#IRGenerator#0" />
-            <element signature="method#visit#8;class#IRGenerator#0" />
-            <element signature="method#visit#9;class#IRGenerator#0" />
-            <element signature="method#rewriteNew#0;class#IRGenerator#0" />
-            <element signature="method#visit#10;class#IRGenerator#0" />
-            <element signature="method#logicCalculate#0;class#IRGenerator#0" />
-            <element signature="method#visit#11;class#IRGenerator#0" />
-            <element signature="method#visit#12;class#IRGenerator#0" />
-            <element signature="method#conditionJump#0;class#IRGenerator#0" />
-            <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
-            <element signature="method#conditionJump#1;class#IRGenerator#0" />
-            <element signature="method#conditionJump#2;class#IRGenerator#0" />
-            <element signature="method#visit#13;class#IRGenerator#0" />
-            <element signature="method#visit#14;class#IRGenerator#0" />
-            <element signature="method#visit#15;class#IRGenerator#0" />
-            <element signature="method#visit#16;class#IRGenerator#0" />
-            <element signature="method#visit#17;class#IRGenerator#0" />
-            <element signature="method#visit#18;class#IRGenerator#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
@@ -1135,8 +1098,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="635" column="23" selection-start-line="635" selection-start-column="23" selection-end-line="635" selection-end-column="23" />
+        <state relative-caret-position="152">
+          <caret line="642" column="39" selection-start-line="642" selection-start-column="39" selection-end-line="642" selection-end-column="39" />
           <folding>
             <element signature="e#332#894#0" />
             <element signature="e#900#1662#0" />
@@ -1187,10 +1150,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="488" column="55" selection-start-line="488" selection-start-column="55" selection-end-line="488" selection-end-column="55" />
+          <folding>
+            <element signature="method#generateIR#0;class#IRGenerator#0" />
+            <element signature="method#visit#0;class#IRGenerator#0" />
+            <element signature="method#visit#1;class#IRGenerator#0" />
+            <element signature="method#visit#2;class#IRGenerator#0" />
+            <element signature="method#visit#3;class#IRGenerator#0" />
+            <element signature="method#visit#4;class#IRGenerator#0" />
+            <element signature="method#visit#5;class#IRGenerator#0" />
+            <element signature="method#visit#6;class#IRGenerator#0" />
+            <element signature="method#visit#7;class#IRGenerator#0" />
+            <element signature="method#visit#8;class#IRGenerator#0" />
+            <element signature="method#visit#9;class#IRGenerator#0" />
+            <element signature="method#rewriteNew#0;class#IRGenerator#0" />
+            <element signature="method#visit#10;class#IRGenerator#0" />
+            <element signature="method#visit#11;class#IRGenerator#0" />
+            <element signature="method#visit#12;class#IRGenerator#0" />
+            <element signature="method#conditionJump#0;class#IRGenerator#0" />
+            <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
+            <element signature="method#conditionJump#2;class#IRGenerator#0" />
+            <element signature="method#visit#13;class#IRGenerator#0" />
+            <element signature="method#visit#14;class#IRGenerator#0" />
+            <element signature="method#visit#15;class#IRGenerator#0" />
+            <element signature="method#visit#16;class#IRGenerator#0" />
+            <element signature="method#visit#17;class#IRGenerator#0" />
+            <element signature="method#visit#18;class#IRGenerator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="106">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

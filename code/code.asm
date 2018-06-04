@@ -5,9 +5,6 @@ global string_ord
 global string_substring
 global string_parseInt
 global main
-global worka
-global workb
-global workc
 global print
 global toString
 global addString__
@@ -825,363 +822,164 @@ main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 296
-		push		r14
-		push		r10
-		push		r9
-		push		r15
-		push		r11
-		push		r12
-		push		r13
+		sub		rsp, 32
 		push		r8
-		push		rcx
-		push		rbx
+		push		r11
+		push		r10
+		push		r14
+		push		r9
+		push		r13
+		push		r15
+		push		r12
 		call	getInt
-		pop		rbx
-		pop		rcx
-		mov		qword [rbp-8], rax
-		mov		rsi, qword [rbp-8]
-		mov		qword [rbp-16], rsi
-		mov		qword [rbp-24], 0
-		mov		qword [rbp-32], 1
-		mov		qword [rbp-40], 0
-		mov		qword [rbp-48], 1
-		mov		qword [rbp-56], 0
-		mov		qword [rbp-64], 1
-		mov		qword [rbp-72], 0
-		mov		qword [rbp-72], 1
+		mov		r15, rax
+		mov		qword [rbp-8], r15
+		mov		r8, 0
+		mov		qword [rbp-16], 0
 		jmp		loop_cond_0
 loop_body_0:
-		push		rcx
-		push		rbx
-		mov		rdi, qword [rbp-16]
+		mov		qword [rbp-24], 0
+		jmp		loop_cond_1
+loop_body_1:
+		mov		r15, 0
+		jmp		loop_cond_2
+loop_body_2:
+		mov		qword [rbp-32], 0
+		jmp		loop_cond_3
+loop_body_3:
+		mov		r10, 0
+		jmp		loop_cond_4
+loop_body_4:
+		mov		r14, 0
+		jmp		loop_cond_5
+loop_body_5:
+		mov		r13, 0
+		jmp		loop_cond_6
+loop_body_6:
 		mov		rsi, qword [rbp-24]
-		call	worka
-		pop		rbx
-		pop		rcx
-		mov		qword [rbp-80], rax
-		mov		rsi, qword [rbp-80]
-		mov		qword [rbp-16], rsi
-		push		rcx
-		push		rbx
-		mov		rdi, qword [rbp-16]
-		mov		rsi, qword [rbp-24]
-		call	workb
-		pop		rbx
-		pop		rcx
-		mov		qword [rbp-88], rax
-		mov		rsi, qword [rbp-88]
-		mov		qword [rbp-24], rsi
-		push		rcx
-		push		rbx
-		mov		rdi, qword [rbp-16]
-		mov		rsi, qword [rbp-24]
-		call	workc
-		pop		rbx
-		pop		rcx
-		mov		qword [rbp-96], rax
-		mov		rsi, qword [rbp-96]
-		mov		qword [rbp-32], rsi
-		mov		rsi, qword [rbp-16]
-		mov		qword [rbp-104], rsi
-		neg		qword [rbp-104]
-		mov		rsi, qword [rbp-104]
-		mov		qword [rbp-112], rsi
-		mov		rdi, qword [rbp-112]
-		mov		rsi, qword [rbp-24]
-		add		rdi, rsi
-		mov		qword [rbp-112], rdi
-		mov		rsi, qword [rbp-112]
-		mov		qword [rbp-120], rsi
-		mov		rdi, qword [rbp-120]
-		mov		rsi, qword [rbp-32]
-		sub		rdi, rsi
-		mov		qword [rbp-120], rdi
-		mov		r10, qword [rbp-120]
-		mov		rsi, qword [rbp-40]
-		add		r10, rsi
-		mov		r12, r10
-		mov		rsi, qword [rbp-48]
-		add		r12, rsi
-		mov		qword [rbp-128], r12
-		mov		rdi, qword [rbp-128]
-		mov		rsi, qword [rbp-56]
-		sub		rdi, rsi
-		mov		qword [rbp-128], rdi
-		mov		rsi, qword [rbp-128]
-		mov		qword [rbp-136], rsi
-		mov		rdi, qword [rbp-136]
-		mov		rsi, qword [rbp-64]
-		add		rdi, rsi
-		mov		qword [rbp-136], rdi
-		mov		rsi, qword [rbp-136]
-		mov		qword [rbp-40], rsi
-		mov		rsi, qword [rbp-16]
-		mov		qword [rbp-144], rsi
-		mov		rdi, qword [rbp-144]
-		mov		rsi, qword [rbp-24]
-		add		rdi, rsi
-		mov		qword [rbp-144], rdi
-		mov		rsi, qword [rbp-144]
-		mov		qword [rbp-152], rsi
-		mov		rdi, qword [rbp-152]
-		mov		rsi, qword [rbp-32]
-		add		rdi, rsi
-		mov		qword [rbp-152], rdi
-		mov		rsi, qword [rbp-152]
-		mov		qword [rbp-160], rsi
-		mov		rdi, qword [rbp-160]
-		mov		rsi, qword [rbp-40]
-		sub		rdi, rsi
-		mov		qword [rbp-160], rdi
-		mov		r14, qword [rbp-160]
-		mov		rsi, qword [rbp-48]
-		sub		r14, rsi
-		mov		r11, r14
-		mov		rsi, qword [rbp-56]
-		sub		r11, rsi
-		mov		qword [rbp-168], r11
-		mov		rdi, qword [rbp-168]
-		mov		rsi, qword [rbp-64]
-		add		rdi, rsi
-		mov		qword [rbp-168], rdi
-		mov		rsi, qword [rbp-168]
-		mov		qword [rbp-48], rsi
-		mov		rsi, qword [rbp-16]
-		mov		qword [rbp-176], rsi
-		mov		rdi, qword [rbp-176]
-		mov		rsi, qword [rbp-24]
-		add		rdi, rsi
-		mov		qword [rbp-176], rdi
-		mov		rsi, qword [rbp-176]
-		mov		qword [rbp-184], rsi
-		mov		rdi, qword [rbp-184]
-		mov		rsi, qword [rbp-32]
-		sub		rdi, rsi
-		mov		qword [rbp-184], rdi
-		mov		r13, qword [rbp-184]
-		mov		rsi, qword [rbp-40]
-		add		r13, rsi
-		mov		qword [rbp-192], r13
-		mov		rdi, qword [rbp-192]
-		mov		rsi, qword [rbp-48]
-		sub		rdi, rsi
-		mov		qword [rbp-192], rdi
-		mov		rsi, qword [rbp-192]
-		mov		qword [rbp-200], rsi
-		mov		rdi, qword [rbp-200]
-		mov		rsi, qword [rbp-56]
-		add		rdi, rsi
-		mov		qword [rbp-200], rdi
-		mov		rsi, qword [rbp-200]
-		mov		qword [rbp-208], rsi
-		mov		rdi, qword [rbp-208]
-		mov		rsi, qword [rbp-64]
-		sub		rdi, rsi
-		mov		qword [rbp-208], rdi
-		mov		rsi, qword [rbp-208]
-		mov		qword [rbp-56], rsi
-		mov		rsi, qword [rbp-16]
-		mov		qword [rbp-216], rsi
-		mov		rdi, qword [rbp-216]
-		mov		rsi, qword [rbp-24]
-		sub		rdi, rsi
-		mov		qword [rbp-216], rdi
-		mov		rsi, qword [rbp-216]
-		mov		qword [rbp-224], rsi
-		mov		rdi, qword [rbp-224]
-		mov		rsi, qword [rbp-32]
-		sub		rdi, rsi
-		mov		qword [rbp-224], rdi
-		mov		rsi, qword [rbp-224]
-		mov		qword [rbp-232], rsi
-		mov		rdi, qword [rbp-232]
-		mov		rsi, qword [rbp-40]
-		sub		rdi, rsi
-		mov		qword [rbp-232], rdi
-		mov		r9, qword [rbp-232]
-		mov		rsi, qword [rbp-48]
-		add		r9, rsi
-		mov		r8, r9
-		mov		rsi, qword [rbp-56]
-		add		r8, rsi
-		mov		qword [rbp-240], r8
-		mov		rdi, qword [rbp-240]
-		mov		rsi, qword [rbp-64]
-		add		rdi, rsi
-		mov		qword [rbp-240], rdi
-		mov		rsi, qword [rbp-240]
-		mov		qword [rbp-64], rsi
-		mov		rsi, qword [rbp-16]
-		mov		qword [rbp-248], rsi
-		mov		rdi, qword [rbp-248]
-		mov		rsi, qword [rbp-24]
-		add		rdi, rsi
-		mov		qword [rbp-248], rdi
-		mov		rsi, qword [rbp-248]
-		mov		qword [rbp-256], rsi
-		mov		rdi, qword [rbp-256]
-		mov		rsi, qword [rbp-32]
-		add		rdi, rsi
-		mov		qword [rbp-256], rdi
-		mov		r15, qword [rbp-256]
-		mov		rsi, qword [rbp-40]
-		add		r15, rsi
-		mov		qword [rbp-264], r15
-		mov		rdi, qword [rbp-264]
-		mov		rsi, qword [rbp-48]
-		add		rdi, rsi
-		mov		qword [rbp-264], rdi
-		mov		rsi, qword [rbp-264]
-		mov		qword [rbp-272], rsi
-		mov		rdi, qword [rbp-272]
-		mov		rsi, qword [rbp-56]
-		add		rdi, rsi
-		mov		qword [rbp-272], rdi
-		mov		rsi, qword [rbp-272]
-		mov		qword [rbp-280], rsi
-		mov		rdi, qword [rbp-280]
-		mov		rsi, qword [rbp-64]
-		add		rdi, rsi
-		mov		qword [rbp-280], rdi
-		cmp		qword [rbp-280], 100000000
-		jg		if_true_0
-		jle		if_false_0
+		cmp		qword [rbp-16], rsi
+		je		short_mid_4
+		jne		short_mid_3
+short_mid_4:
+		cmp		r15, 0
+		jg		short_true_0
+		jle		short_mid_3
+short_mid_3:
+		cmp		qword [rbp-32], r10
+		je		short_mid_6
+		jne		short_mid_2
+short_mid_6:
+		cmp		r14, 0
+		jg		short_mid_5
+		jle		short_mid_2
+short_mid_5:
+		cmp		r13, 0
+		jg		short_true_0
+		jle		short_mid_2
+short_mid_2:
+		cmp		qword [rbp-16], r13
+		je		short_true_0
+		jne		short_mid_1
+short_mid_1:
+		cmp		qword [rbp-32], 0
+		jg		short_mid_7
+		jle		short_false_0
+short_mid_7:
+		cmp		r14, 0
+		jg		short_true_0
+		jle		short_false_0
+short_true_0:
+		mov		r11, 1
+		jmp		short_end_0
+short_false_0:
+		mov		r11, 0
+short_end_0:
+		mov		r9, r11
+		cmp		r9, 0
+		jnz		if_true_0
+		jz		if_false_0
 if_true_0:
-		mov		qword [rbp-16], 123
-		mov		qword [rbp-24], 456
-		mov		qword [rbp-32], 789
-		mov		qword [rbp-40], 155
-		mov		qword [rbp-48], 123
-		mov		qword [rbp-56], 55
-		mov		qword [rbp-64], 32
+		mov		r11, r8
+		inc		r8
 		jmp		if_end_0
 if_false_0:
 		nop
 if_end_0:
-		mov		rsi, qword [rbp-72]
-		mov		qword [rbp-288], rsi
-		inc		qword [rbp-72]
+		inc		r13
+loop_cond_6:
+		mov		rsi, qword [rbp-8]
+		cmp		r13, rsi
+		jl		loop_body_6
+		jge		loop_end_6
+loop_end_6:
+		inc		r14
+loop_cond_5:
+		mov		rsi, qword [rbp-8]
+		cmp		r14, rsi
+		jl		loop_body_5
+		jge		loop_end_5
+loop_end_5:
+		inc		r10
+loop_cond_4:
+		mov		rsi, qword [rbp-8]
+		cmp		r10, rsi
+		jl		loop_body_4
+		jge		loop_end_4
+loop_end_4:
+		inc		qword [rbp-32]
+loop_cond_3:
+		mov		rsi, qword [rbp-8]
+		cmp		qword [rbp-32], rsi
+		jl		loop_body_3
+		jge		loop_end_3
+loop_end_3:
+		inc		r15
+loop_cond_2:
+		mov		rsi, qword [rbp-8]
+		cmp		r15, rsi
+		jl		loop_body_2
+		jge		loop_end_2
+loop_end_2:
+		inc		qword [rbp-24]
+loop_cond_1:
+		mov		rsi, qword [rbp-8]
+		cmp		qword [rbp-24], rsi
+		jl		loop_body_1
+		jge		loop_end_1
+loop_end_1:
+		inc		qword [rbp-16]
 loop_cond_0:
-		cmp		qword [rbp-72], 100000000
-		jle		loop_body_0
-		jg		loop_end_0
+		mov		rsi, qword [rbp-8]
+		cmp		qword [rbp-16], rsi
+		jl		loop_body_0
+		jge		loop_end_0
 loop_end_0:
-		push		rcx
-		push		rbx
-		mov		rdi, qword [rbp-64]
+		mov		rdi, r8
 		call	toString
-		pop		rbx
-		pop		rcx
-		mov		qword [rbp-296], rax
-		mov		rdi, qword [rbp-296]
-		call	println
+		mov		r12, rax
+		mov		rdi, r12
+		call	print
 		mov		r15, rax
 		mov		rax, 0
-		pop		r8
-		pop		r13
 		pop		r12
-		pop		r11
 		pop		r15
+		pop		r13
 		pop		r9
-		pop		r10
 		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
+		pop		r10
+		pop		r11
 		pop		r8
-		pop		r13
+		mov		rsp, rbp
+		pop		rbp
+		ret
 		pop		r12
-		pop		r11
 		pop		r15
+		pop		r13
 		pop		r9
+		pop		r14
 		pop		r10
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-worka:
-worka_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		push		r14
-		push		r15
-		push		r13
-		mov		r13, rdi
-		mov		r14, rsi
-		mov		r15, r13
-		add		r15, r13
-		sub		r15, r14
-		mov		rax, r15
-		pop		r13
-		pop		r15
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		pop		r13
-		pop		r15
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-workb:
-workb_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		push		r14
-		push		r15
-		push		r13
-		mov		r14, rdi
-		mov		r15, rsi
-		mov		r13, r14
-		neg		r13
-		mov		r14, r13
-		add		r14, r15
-		add		r14, r15
-		mov		rax, r14
-		pop		r13
-		pop		r15
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		pop		r13
-		pop		r15
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-workc:
-workc_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		push		r14
-		push		r15
-		push		r13
-		mov		r14, rdi
-		mov		r13, rsi
-		mov		r15, r14
-		add		r15, r14
-		add		r15, r14
-		sub		r15, r13
-		sub		r15, r13
-		mov		rax, r15
-		pop		r13
-		pop		r15
-		pop		r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		pop		r13
-		pop		r15
-		pop		r14
+		pop		r11
+		pop		r8
 		mov		rsp, rbp
 		pop		rbp
 		ret

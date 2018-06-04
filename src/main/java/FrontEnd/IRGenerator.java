@@ -476,12 +476,18 @@ public class IRGenerator extends AstVisitor {
             return;
         }
         if (node.op == LAND) {
-            conditionJump(node.lhs, null, falseLabel);
+            int shortCutIndex = shortCutCnt++;
+            String midLabel = "short_mid_" + shortCutIndex;
+            conditionJump(node.lhs, midLabel, falseLabel);
+            labelMap.put(midLabel, codeList.size());
             conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
         if (node.op == LOR) {
-            conditionJump(node.lhs, trueLabel, null);
+            int shortCutIndex = shortCutCnt++;
+            String midLabel = "short_mid_" + shortCutIndex;
+            conditionJump(node.lhs, trueLabel, midLabel);
+            labelMap.put(midLabel, codeList.size());
             conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
