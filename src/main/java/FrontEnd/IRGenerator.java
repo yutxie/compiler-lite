@@ -480,6 +480,7 @@ public class IRGenerator extends AstVisitor {
             String midLabel = "short_mid_" + shortCutIndex;
             conditionJump(node.lhs, midLabel, falseLabel);
             labelMap.put(midLabel, codeList.size());
+            codeList.addLast(new Nop());
             conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
@@ -488,6 +489,7 @@ public class IRGenerator extends AstVisitor {
             String midLabel = "short_mid_" + shortCutIndex;
             conditionJump(node.lhs, trueLabel, midLabel);
             labelMap.put(midLabel, codeList.size());
+            codeList.addLast(new Nop());
             conditionJump(node.rhs, trueLabel, falseLabel);
             return;
         }
