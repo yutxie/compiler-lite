@@ -1,6 +1,10 @@
 toString:
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	mov rdx,rdi
 	mov rax,0
 	mov rdi,stringbuffer
@@ -8,17 +12,33 @@ toString:
 	call sprintf
 	mov rdi,stringbuffer
 	call transtring
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
 
 println:
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	call puts
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	ret
 
 addString__:
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	push rsi
 	mov rsi,rdi
 	mov rdi,stringbuffer
@@ -33,6 +53,10 @@ addString__:
 	call memcpy
 	mov rdi,stringbuffer
 	call transtring
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -40,11 +64,19 @@ addString__:
 getInt:
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	mov rax,0
 	mov rdi,format1
 	mov rsi,intbuffer
 	call scanf
 	mov rax,[intbuffer]
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -86,10 +118,18 @@ string_ord:
 print:
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	mov rax,0
 	mov rsi,rdi
 	mov rdi,format2
 	call printf
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -98,6 +138,10 @@ transtring:
 
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	call strlen
 	push rdi
 	mov rdi,rax
@@ -115,6 +159,10 @@ transtring:
 	push rax
 	call memcpy
 	pop rax
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -123,12 +171,20 @@ getString:
 
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	mov rax,0
 	mov rdi,format2
 	mov rsi,stringbuffer
 	call scanf
 	mov rdi,stringbuffer
 	call transtring
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -136,6 +192,10 @@ getString:
 string_substring:
 	push rbp
 	mov rbp,rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	push rdi
 	push rsi
 	mov rdi,rdx
@@ -157,6 +217,10 @@ string_substring:
 	pop rax
 	pop rdx
 	mov qword[rax+rdx],0
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	mov rsp,rbp
 	pop rbp
 	ret
@@ -164,6 +228,10 @@ string_substring:
 string_parseInt:
 	push    rbp
 	mov     rbp, rsp
+	push	r8
+	push	r9
+	push	r10
+	push	r11
 	sub     rsp, 32
 	mov     qword [rbp-18H], rdi
 	mov     edi, 256
@@ -226,6 +294,10 @@ Lpar_004:  mov     eax, dword [rbp-10H]
 	cmp     al, 57
 	jle     Lpar_003
 Lpar_005:  mov     eax, dword [rbp-0CH]
+	pop	r11
+	pop	r10
+	pop	r9
+	pop	r8
 	leave
 	ret
 
