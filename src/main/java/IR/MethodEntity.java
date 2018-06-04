@@ -11,6 +11,7 @@ public class MethodEntity {
     public LinkedList<Variable> formalParaVarList = new LinkedList<Variable>();
     public LinkedList<IRCode> codeList = new LinkedList<IRCode>();
     public LinkedList<BasicBlock> basicBlockList = new LinkedList<BasicBlock>();
+    public HashSet<Register> usedRegSet = new HashSet<Register>();
 
     public void printInformation() {
         System.out.print(methodName + " ");

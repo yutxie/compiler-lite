@@ -1,19 +1,13 @@
 default rel
 
-global point_point
-global point_set
-global point_sqrLen
-global point_sqrDis
-global point_dot
-global point_cross
-global point_add
-global point_sub
-global point_printPoint
 global string_length
 global string_ord
 global string_substring
 global string_parseInt
 global main
+global worka
+global workb
+global workc
 global print
 global toString
 global addString__
@@ -755,2030 +749,296 @@ Llege_021:  mov     eax, 1
 Llege_022:  pop     rbp
 	ret
 
-point_point:
-point_point_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r15, rdi
-		mov		rbx, r15
-		mov		qword [rbx+8], 0
-		mov		rbx, r15
-		mov		qword [rbx+16], 0
-		mov		rbx, r15
-		mov		qword [rbx+24], 0
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_set:
-point_set_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r13, rdi
-		mov		r14, rsi
-		mov		r12, rdx
-		mov		r15, rcx
-		mov		rbx, r13
-		mov		qword [rbx+8], r14
-		mov		rbx, r13
-		mov		qword [rbx+16], r12
-		mov		rbx, r13
-		mov		qword [rbx+24], r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_sqrLen:
-point_sqrLen_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r13, rdi
-		mov		rbx, r13
-		mov		r15, qword [rbx+8]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+8]
-		imul		r15, rsi
-		mov		rbx, r13
-		mov		r14, qword [rbx+16]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+16]
-		imul		r14, rsi
-		add		r15, r14
-		mov		rbx, r13
-		mov		r14, qword [rbx+24]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+24]
-		imul		r14, rsi
-		add		r15, r14
-		mov		rax, r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_sqrDis:
-point_sqrDis_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r12, rdi
-		mov		r15, rsi
-		mov		rbx, r12
-		mov		r13, qword [rbx+8]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+8]
-		sub		r13, rsi
-		mov		rbx, r12
-		mov		r14, qword [rbx+8]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+8]
-		sub		r14, rsi
-		mov		r11, r13
-		imul		r11, r14
-		mov		rbx, r12
-		mov		r14, qword [rbx+16]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+16]
-		sub		r14, rsi
-		mov		rbx, r12
-		mov		r13, qword [rbx+16]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+16]
-		sub		r13, rsi
-		imul		r14, r13
-		mov		r13, r11
-		add		r13, r14
-		mov		rbx, r12
-		mov		r14, qword [rbx+24]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+24]
-		sub		r14, rsi
-		mov		rbx, r12
-		mov		r12, qword [rbx+24]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+24]
-		sub		r12, rsi
-		mov		r15, r14
-		imul		r15, r12
-		mov		r14, r13
-		add		r14, r15
-		mov		rax, r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_dot:
-point_dot_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r13, rdi
-		mov		r15, rsi
-		mov		rbx, r13
-		mov		r12, qword [rbx+8]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+8]
-		imul		r12, rsi
-		mov		rbx, r13
-		mov		r14, qword [rbx+16]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+16]
-		imul		r14, rsi
-		add		r12, r14
-		mov		rbx, r13
-		mov		r14, qword [rbx+24]
-		mov		rbx, r15
-		mov		rsi, qword [rbx+24]
-		imul		r14, rsi
-		mov		r15, r12
-		add		r15, r14
-		mov		rax, r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_cross:
-point_cross_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r15, rdi
-		mov		r14, rsi
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		mov		rdi, 3
-		inc		rdi
-		imul		rdi, 8
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, rdi
-		call	malloc
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		mov		rdi, 3
-		mov		qword [rax+0], rdi
-		mov		r10, r13
-		mov		rbx, r15
-		mov		r13, qword [rbx+16]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+24]
-		imul		r13, rsi
-		mov		rbx, r15
-		mov		r12, qword [rbx+24]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+16]
-		imul		r12, rsi
-		mov		r11, r13
-		sub		r11, r12
-		mov		rbx, r15
-		mov		r13, qword [rbx+24]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+8]
-		imul		r13, rsi
-		mov		rbx, r15
-		mov		r12, qword [rbx+8]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+24]
-		imul		r12, rsi
-		mov		r9, r13
-		sub		r9, r12
-		mov		rbx, r15
-		mov		r13, qword [rbx+8]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+16]
-		imul		r13, rsi
-		mov		rbx, r15
-		mov		r15, qword [rbx+16]
-		mov		rbx, r14
-		mov		rsi, qword [rbx+8]
-		imul		r15, rsi
-		mov		r14, r13
-		sub		r14, r15
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r10
-		mov		rsi, r11
-		mov		rdx, r9
-		mov		rcx, r14
-		call	point_set
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		rax, r10
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_add:
-point_add_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r14, rdi
-		mov		r13, rsi
-		mov		rbx, r14
-		mov		r15, qword [rbx+8]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+8]
-		add		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+8], r15
-		mov		rbx, r14
-		mov		r15, qword [rbx+16]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+16]
-		add		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+16], r15
-		mov		rbx, r14
-		mov		r15, qword [rbx+24]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+24]
-		add		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+24], r15
-		mov		rax, r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_sub:
-point_sub_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r14, rdi
-		mov		r13, rsi
-		mov		rbx, r14
-		mov		r15, qword [rbx+8]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+8]
-		sub		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+8], r15
-		mov		rbx, r14
-		mov		r15, qword [rbx+16]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+16]
-		sub		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+16], r15
-		mov		rbx, r14
-		mov		r15, qword [rbx+24]
-		mov		rbx, r13
-		mov		rsi, qword [rbx+24]
-		sub		r15, rsi
-		mov		rbx, r14
-		mov		qword [rbx+24], r15
-		mov		rax, r14
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-point_printPoint:
-point_printPoint_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 0
-		mov		r15, rdi
-		mov		rbx, r15
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbx+8]
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, str_const_0
-		mov		rsi, r14
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, str_const_1
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		mov		rbx, r15
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbx+16]
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r13
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, str_const_2
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		mov		rbx, r15
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, qword [rbx+24]
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r15
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, str_const_3
-		call	addString__
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r15, rax
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
 main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 0
-		mov		rdi, 3
-		inc		rdi
-		imul		rdi, 8
+		sub		rsp, 296
+		push		r14
+		push		r10
+		push		r9
+		push		r15
+		push		r11
+		push		r12
+		push		r13
+		push		r8
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, rdi
-		call	malloc
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
+		call	getInt
 		pop		rbx
 		pop		rcx
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		rdi, 3
-		mov		qword [rax+0], rdi
-		mov		r13, r15
-		mov		rdi, 3
-		inc		rdi
-		imul		rdi, 8
+		mov		qword [rbp-8], rax
+		mov		rsi, qword [rbp-8]
+		mov		qword [rbp-16], rsi
+		mov		qword [rbp-24], 0
+		mov		qword [rbp-32], 1
+		mov		qword [rbp-40], 0
+		mov		qword [rbp-48], 1
+		mov		qword [rbp-56], 0
+		mov		qword [rbp-64], 1
+		mov		qword [rbp-72], 0
+		mov		qword [rbp-72], 1
+		jmp		loop_cond_0
+loop_body_0:
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, rdi
-		call	malloc
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
+		mov		rdi, qword [rbp-16]
+		mov		rsi, qword [rbp-24]
+		call	worka
 		pop		rbx
 		pop		rcx
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		rdi, 3
-		mov		qword [rax+0], rdi
-		mov		r12, r15
-		mov		rdi, 3
-		inc		rdi
-		imul		rdi, 8
+		mov		qword [rbp-80], rax
+		mov		rsi, qword [rbp-80]
+		mov		qword [rbp-16], rsi
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, rdi
-		call	malloc
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
+		mov		rdi, qword [rbp-16]
+		mov		rsi, qword [rbp-24]
+		call	workb
 		pop		rbx
 		pop		rcx
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		rdi, 3
-		mov		qword [rax+0], rdi
-		mov		r14, r15
-		mov		rdi, 3
-		inc		rdi
-		imul		rdi, 8
+		mov		qword [rbp-88], rax
+		mov		rsi, qword [rbp-88]
+		mov		qword [rbp-24], rsi
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, rdi
-		call	malloc
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
+		mov		rdi, qword [rbp-16]
+		mov		rsi, qword [rbp-24]
+		call	workc
 		pop		rbx
 		pop		rcx
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r15, rax
-		mov		rdi, 3
-		mov		qword [rax+0], rdi
+		mov		qword [rbp-96], rax
+		mov		rsi, qword [rbp-96]
+		mov		qword [rbp-32], rsi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-104], rsi
+		neg		qword [rbp-104]
+		mov		rsi, qword [rbp-104]
+		mov		qword [rbp-112], rsi
+		mov		rdi, qword [rbp-112]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-112], rdi
+		mov		rsi, qword [rbp-112]
+		mov		qword [rbp-120], rsi
+		mov		rdi, qword [rbp-120]
+		mov		rsi, qword [rbp-32]
+		sub		rdi, rsi
+		mov		qword [rbp-120], rdi
+		mov		r10, qword [rbp-120]
+		mov		rsi, qword [rbp-40]
+		add		r10, rsi
+		mov		r12, r10
+		mov		rsi, qword [rbp-48]
+		add		r12, rsi
+		mov		qword [rbp-128], r12
+		mov		rdi, qword [rbp-128]
+		mov		rsi, qword [rbp-56]
+		sub		rdi, rsi
+		mov		qword [rbp-128], rdi
+		mov		rsi, qword [rbp-128]
+		mov		qword [rbp-136], rsi
+		mov		rdi, qword [rbp-136]
+		mov		rsi, qword [rbp-64]
+		add		rdi, rsi
+		mov		qword [rbp-136], rdi
+		mov		rsi, qword [rbp-136]
+		mov		qword [rbp-40], rsi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-144], rsi
+		mov		rdi, qword [rbp-144]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-144], rdi
+		mov		rsi, qword [rbp-144]
+		mov		qword [rbp-152], rsi
+		mov		rdi, qword [rbp-152]
+		mov		rsi, qword [rbp-32]
+		add		rdi, rsi
+		mov		qword [rbp-152], rdi
+		mov		rsi, qword [rbp-152]
+		mov		qword [rbp-160], rsi
+		mov		rdi, qword [rbp-160]
+		mov		rsi, qword [rbp-40]
+		sub		rdi, rsi
+		mov		qword [rbp-160], rdi
+		mov		r14, qword [rbp-160]
+		mov		rsi, qword [rbp-48]
+		sub		r14, rsi
+		mov		r11, r14
+		mov		rsi, qword [rbp-56]
+		sub		r11, rsi
+		mov		qword [rbp-168], r11
+		mov		rdi, qword [rbp-168]
+		mov		rsi, qword [rbp-64]
+		add		rdi, rsi
+		mov		qword [rbp-168], rdi
+		mov		rsi, qword [rbp-168]
+		mov		qword [rbp-48], rsi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-176], rsi
+		mov		rdi, qword [rbp-176]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-176], rdi
+		mov		rsi, qword [rbp-176]
+		mov		qword [rbp-184], rsi
+		mov		rdi, qword [rbp-184]
+		mov		rsi, qword [rbp-32]
+		sub		rdi, rsi
+		mov		qword [rbp-184], rdi
+		mov		r13, qword [rbp-184]
+		mov		rsi, qword [rbp-40]
+		add		r13, rsi
+		mov		qword [rbp-192], r13
+		mov		rdi, qword [rbp-192]
+		mov		rsi, qword [rbp-48]
+		sub		rdi, rsi
+		mov		qword [rbp-192], rdi
+		mov		rsi, qword [rbp-192]
+		mov		qword [rbp-200], rsi
+		mov		rdi, qword [rbp-200]
+		mov		rsi, qword [rbp-56]
+		add		rdi, rsi
+		mov		qword [rbp-200], rdi
+		mov		rsi, qword [rbp-200]
+		mov		qword [rbp-208], rsi
+		mov		rdi, qword [rbp-208]
+		mov		rsi, qword [rbp-64]
+		sub		rdi, rsi
+		mov		qword [rbp-208], rdi
+		mov		rsi, qword [rbp-208]
+		mov		qword [rbp-56], rsi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-216], rsi
+		mov		rdi, qword [rbp-216]
+		mov		rsi, qword [rbp-24]
+		sub		rdi, rsi
+		mov		qword [rbp-216], rdi
+		mov		rsi, qword [rbp-216]
+		mov		qword [rbp-224], rsi
+		mov		rdi, qword [rbp-224]
+		mov		rsi, qword [rbp-32]
+		sub		rdi, rsi
+		mov		qword [rbp-224], rdi
+		mov		rsi, qword [rbp-224]
+		mov		qword [rbp-232], rsi
+		mov		rdi, qword [rbp-232]
+		mov		rsi, qword [rbp-40]
+		sub		rdi, rsi
+		mov		qword [rbp-232], rdi
+		mov		r9, qword [rbp-232]
+		mov		rsi, qword [rbp-48]
+		add		r9, rsi
+		mov		r8, r9
+		mov		rsi, qword [rbp-56]
+		add		r8, rsi
+		mov		qword [rbp-240], r8
+		mov		rdi, qword [rbp-240]
+		mov		rsi, qword [rbp-64]
+		add		rdi, rsi
+		mov		qword [rbp-240], rdi
+		mov		rsi, qword [rbp-240]
+		mov		qword [rbp-64], rsi
+		mov		rsi, qword [rbp-16]
+		mov		qword [rbp-248], rsi
+		mov		rdi, qword [rbp-248]
+		mov		rsi, qword [rbp-24]
+		add		rdi, rsi
+		mov		qword [rbp-248], rdi
+		mov		rsi, qword [rbp-248]
+		mov		qword [rbp-256], rsi
+		mov		rdi, qword [rbp-256]
+		mov		rsi, qword [rbp-32]
+		add		rdi, rsi
+		mov		qword [rbp-256], rdi
+		mov		r15, qword [rbp-256]
+		mov		rsi, qword [rbp-40]
+		add		r15, rsi
+		mov		qword [rbp-264], r15
+		mov		rdi, qword [rbp-264]
+		mov		rsi, qword [rbp-48]
+		add		rdi, rsi
+		mov		qword [rbp-264], rdi
+		mov		rsi, qword [rbp-264]
+		mov		qword [rbp-272], rsi
+		mov		rdi, qword [rbp-272]
+		mov		rsi, qword [rbp-56]
+		add		rdi, rsi
+		mov		qword [rbp-272], rdi
+		mov		rsi, qword [rbp-272]
+		mov		qword [rbp-280], rsi
+		mov		rdi, qword [rbp-280]
+		mov		rsi, qword [rbp-64]
+		add		rdi, rsi
+		mov		qword [rbp-280], rdi
+		cmp		qword [rbp-280], 100000000
+		jg		if_true_0
+		jle		if_false_0
+if_true_0:
+		mov		qword [rbp-16], 123
+		mov		qword [rbp-24], 456
+		mov		qword [rbp-32], 789
+		mov		qword [rbp-40], 155
+		mov		qword [rbp-48], 123
+		mov		qword [rbp-56], 55
+		mov		qword [rbp-64], 32
+		jmp		if_end_0
+if_false_0:
+		nop
+if_end_0:
+		mov		rsi, qword [rbp-72]
+		mov		qword [rbp-288], rsi
+		inc		qword [rbp-72]
+loop_cond_0:
+		cmp		qword [rbp-72], 100000000
+		jle		loop_body_0
+		jg		loop_end_0
+loop_end_0:
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		mov		r11, 463
-		neg		r11
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, 849
-		mov		rdx, r11
-		mov		rcx, 480
-		call	point_set
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		mov		r10, 208
-		neg		r10
-		mov		r11, 150
-		neg		r11
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r10
-		mov		rdx, 585
-		mov		rcx, r11
-		call	point_set
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		mov		r10, 670
-		neg		r10
-		mov		r11, 742
-		neg		r11
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, 360
-		mov		rdx, r10
-		mov		rcx, r11
-		call	point_set
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		mov		r10, 29
-		neg		r10
-		mov		r11, 591
-		neg		r11
-		mov		r9, 960
-		neg		r9
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r10
-		mov		rdx, r11
-		mov		rcx, r9
-		call	point_set
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r12
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r14
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r13
-		call	point_sub
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	point_sub
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r14
-		call	point_sub
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r12
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r12
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r12
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r14
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r15
-		call	point_sub
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		mov		rsi, r12
-		call	point_add
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	point_sub
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		call	point_sqrLen
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
+		mov		rdi, qword [rbp-64]
 		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
 		pop		rbx
 		pop		rcx
 		pop		rdx
 		pop		rsi
 		pop		rdi
-		mov		r11, rax
+		mov		qword [rbp-296], rax
 		push		rdi
 		push		rsi
 		push		rdx
 		push		rcx
 		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
+		mov		rdi, qword [rbp-296]
 		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	point_sqrLen
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r14
-		call	point_sqrDis
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		mov		rsi, r13
-		call	point_sqrDis
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		mov		rsi, r13
-		call	point_dot
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	toString
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	println
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		mov		rsi, r15
-		call	point_cross
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r11
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r11, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r13
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r12
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r13, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r14
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		pop		rbx
-		pop		rcx
-		pop		rdx
-		pop		rsi
-		pop		rdi
-		mov		r14, rax
-		push		rdi
-		push		rsi
-		push		rdx
-		push		rcx
-		push		rbx
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		push		r12
-		push		r13
-		push		r14
-		push		r15
-		mov		rdi, r15
-		call	point_printPoint
-		pop		r15
-		pop		r14
-		pop		r13
-		pop		r12
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
 		pop		rbx
 		pop		rcx
 		pop		rdx
@@ -2786,9 +1046,110 @@ main_entry:
 		pop		rdi
 		mov		r15, rax
 		mov		rax, 0
+		pop		r8
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r15
+		pop		r9
+		pop		r10
+		pop		r14
 		mov		rsp, rbp
 		pop		rbp
 		ret
+		pop		r8
+		pop		r13
+		pop		r12
+		pop		r11
+		pop		r15
+		pop		r9
+		pop		r10
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+worka:
+worka_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 0
+		push		r14
+		push		r15
+		push		r13
+		mov		r13, rdi
+		mov		r14, rsi
+		mov		r15, r13
+		add		r15, r13
+		sub		r15, r14
+		mov		rax, r15
+		pop		r13
+		pop		r15
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		pop		r13
+		pop		r15
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+workb:
+workb_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 0
+		push		r14
+		push		r15
+		push		r13
+		mov		r14, rdi
+		mov		r15, rsi
+		mov		r13, r14
+		neg		r13
+		mov		r14, r13
+		add		r14, r15
+		add		r14, r15
+		mov		rax, r14
+		pop		r13
+		pop		r15
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		pop		r13
+		pop		r15
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+workc:
+workc_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 0
+		push		r14
+		push		r15
+		push		r13
+		mov		r14, rdi
+		mov		r13, rsi
+		mov		r15, r14
+		add		r15, r14
+		add		r15, r14
+		sub		r15, r13
+		sub		r15, r13
+		mov		rax, r15
+		pop		r13
+		pop		r15
+		pop		r14
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		pop		r13
+		pop		r15
+		pop		r14
 		mov		rsp, rbp
 		pop		rbp
 		ret
@@ -2799,22 +1160,6 @@ stringbuffer:
 		resb	256
 
 SECTION .data
-
-	dq	1
-str_const_0:
-	db	40, 0
-
-	dq	2
-str_const_1:
-	db	44, 32, 0
-
-	dq	2
-str_const_2:
-	db	44, 32, 0
-
-	dq	1
-str_const_3:
-	db	41, 0
 
 intbuffer:
         dq 0

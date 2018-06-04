@@ -20,6 +20,7 @@ public class RegisterAllocator {
 
     LinkedList<InterferenceGraph.Node> toColorStack;
     HashMap<Variable, Register> assignedMap;
+    HashSet<Register> methodUsedRegSet;
     void acllocateRegister(MethodEntity method) throws Exception {
         init(method);
         livenessAnalysis(method);
@@ -29,6 +30,7 @@ public class RegisterAllocator {
             if (spill()) continue;
             break;
         }
+        methodUsedRegSet = method.usedRegSet;
         assignColors();
 
         IRRewriter irRewriter = new IRRewriter();
@@ -150,8 +152,10 @@ public class RegisterAllocator {
                 if (!set.contains(idx)) break;
             if (idx < n) {
                 u.color = idx;
+                Register reg = registerConfig.get(registerConfig.numOfAll - idx - 1);
 //                System.out.println("assign color: " + u.var.getName() + " --> " + u.color);
-                assignedMap.put(u.var, registerConfig.get(registerConfig.numOfAll - idx - 1));
+                assignedMap.put(u.var, reg);
+                methodUsedRegSet.add(reg);
             }
         }
     }
