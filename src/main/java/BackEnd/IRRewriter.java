@@ -646,6 +646,13 @@ public class IRRewriter {
             push.src = reg;
             res.addLast(push);
         }
+        if (ins.methodName.equals("malloc"))
+        for (int i = 8; i <= 11; ++i) {
+            Register reg = registerConfig.get(i);
+            Push push = new Push();
+            push.src = reg;
+            res.addLast(push);
+        }
         for (int i = 0; i < 6; ++i) { // move paras
             if (i >= ins.actualParaVarList.size()) break;
             Operand para = ins.actualParaVarList.get(i);
@@ -677,6 +684,13 @@ public class IRRewriter {
             pop.dst = registerConfig.get("rdi");
             res.addLast(pop);
         }
+        if (ins.methodName.equals("malloc"))
+            for (int i = 11; i >= 8; --i) {
+                Register reg = registerConfig.get(i);
+                Push push = new Push();
+                push.src = reg;
+                res.addLast(push);
+            }
         if (ins.dst instanceof Address && ((Address) ins.dst).base.getName().equals("rbx"))
         for (int i = 4; i >= 3; --i) { // pop regs
             Register reg;

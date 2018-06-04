@@ -17,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+            <state relative-caret-position="152">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,16 +32,18 @@
       <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="641" column="42" selection-start-line="641" selection-start-column="42" selection-end-line="641" selection-end-column="42" />
+            <state relative-caret-position="70">
+              <caret line="692" column="13" lean-forward="true" selection-start-line="692" selection-start-column="13" selection-end-line="692" selection-end-column="13" />
               <folding>
                 <element signature="e#332#894#0" />
                 <element signature="e#900#1662#0" />
                 <element signature="e#1668#2676#0" />
+                <element signature="e#2708#4291#0" />
                 <element signature="e#4297#4576#0" />
                 <element signature="e#4582#4857#0" />
                 <element signature="e#4863#5143#0" />
                 <element signature="e#5149#5481#0" />
+                <element signature="e#5487#5970#0" />
                 <element signature="e#5976#6249#0" />
                 <element signature="e#6255#6475#0" />
                 <element signature="e#6481#6755#0" />
@@ -56,47 +58,43 @@
                 <element signature="e#8873#9206#0" />
                 <element signature="e#9212#9335#0" />
                 <element signature="e#9429#9553#0" />
+                <element signature="e#9774#11713#0" />
+                <element signature="e#11719#11897#0" />
+                <element signature="e#11903#12298#0" />
+                <element signature="e#12304#12603#0" />
+                <element signature="e#12609#13401#0" />
+                <element signature="e#13407#13550#0" />
+                <element signature="e#13556#13695#0" />
+                <element signature="e#13701#13845#0" />
+                <element signature="e#13851#14034#0" />
+                <element signature="e#14040#14387#0" />
+                <element signature="e#14393#14530#0" />
+                <element signature="e#14536#14633#0" />
+                <element signature="e#14639#14777#0" />
+                <element signature="e#14783#14879#0" />
+                <element signature="e#14992#15354#0" />
+                <element signature="e#15360#16853#0" />
+                <element signature="e#16859#17732#0" />
+                <element signature="e#17738#17879#0" />
+                <element signature="e#17885#19112#0" />
+                <element signature="e#19118#20212#0" />
+                <element signature="e#20218#20930#0" />
+                <element signature="e#20936#21861#0" />
+                <element signature="e#21867#22961#0" />
+                <element signature="e#23524#23589#0" />
+                <element signature="e#25697#25762#0" />
+                <element signature="e#26349#27000#0" />
+                <element signature="e#27006#27988#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MultiIndexAndMemberRewriter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/MultiIndexAndMemberRewriter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="70" selection-start-line="70" selection-end-line="70" />
-              <folding>
-                <element signature="method#rewriteMultiIndexandMember#0;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#1;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#2;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#dontRewrite#0;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#4;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#5;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#6;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#7;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#8;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#10;class#MultiIndexAndMemberRewriter#0" />
-                <element signature="method#rewriteMultiIndexandMember#12;class#MultiIndexAndMemberRewriter#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Scope.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/Scope.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="483" column="31" lean-forward="true" selection-start-line="483" selection-start-column="31" selection-end-line="483" selection-end-column="31" />
+            <state relative-caret-position="-595">
+              <caret line="499" column="32" lean-forward="true" selection-start-line="499" selection-start-column="32" selection-end-line="499" selection-end-column="32" />
               <folding>
                 <element signature="method#generateIR#0;class#IRGenerator#0" />
                 <element signature="method#visit#0;class#IRGenerator#0" />
@@ -123,36 +121,6 @@
                 <element signature="method#visit#17;class#IRGenerator#0" />
                 <element signature="method#visit#18;class#IRGenerator#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ThisAppender.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/ThisAppender.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -287,9 +255,9 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/MethodEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
       </list>
     </option>
   </component>
@@ -301,8 +269,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="437" />
-    <option name="y" value="-21" />
+    <option name="x" value="245" />
+    <option name="y" value="-16" />
     <option name="width" value="697" />
     <option name="height" value="391" />
   </component>
@@ -312,8 +280,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -355,18 +321,12 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="FrontEnd" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="IR" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -388,10 +348,10 @@
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/gen-visitor" value="true" />
     <property name="$PROJECT_DIR$/src/main/java/MxParser.g4::/output-dir" value="D:\Users\DELL\Desktop\compiler-lite\Mx\src\main\java" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -503,7 +463,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32789317" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2967359" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3560831" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -991,54 +951,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/ThisAppender.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
           <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/MultiIndexAndMemberRewriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-          <folding>
-            <element signature="method#rewriteMultiIndexandMember#0;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#1;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#2;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#dontRewrite#0;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#4;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#5;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#6;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#7;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#8;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#10;class#MultiIndexAndMemberRewriter#0" />
-            <element signature="method#rewriteMultiIndexandMember#12;class#MultiIndexAndMemberRewriter#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/Scope.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
         </state>
       </provider>
     </entry>
@@ -1069,50 +985,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/MultiIndexAndMemberRewriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="641" column="42" selection-start-line="641" selection-start-column="42" selection-end-line="641" selection-end-column="42" />
+        <state relative-caret-position="19">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
           <folding>
-            <element signature="e#332#894#0" />
-            <element signature="e#900#1662#0" />
-            <element signature="e#1668#2676#0" />
-            <element signature="e#4297#4576#0" />
-            <element signature="e#4582#4857#0" />
-            <element signature="e#4863#5143#0" />
-            <element signature="e#5149#5481#0" />
-            <element signature="e#5976#6249#0" />
-            <element signature="e#6255#6475#0" />
-            <element signature="e#6481#6755#0" />
-            <element signature="e#6761#6980#0" />
-            <element signature="e#6986#7247#0" />
-            <element signature="e#7253#7481#0" />
-            <element signature="e#7487#8289#0" />
-            <element signature="e#8295#8424#0" />
-            <element signature="e#8430#8555#0" />
-            <element signature="e#8561#8691#0" />
-            <element signature="e#8697#8867#0" />
-            <element signature="e#8873#9206#0" />
-            <element signature="e#9212#9335#0" />
-            <element signature="e#9429#9553#0" />
+            <element signature="method#rewriteMultiIndexandMember#0;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#1;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#2;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#dontRewrite#0;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#4;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#5;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#6;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#7;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#8;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#10;class#MultiIndexAndMemberRewriter#0" />
+            <element signature="method#rewriteMultiIndexandMember#12;class#MultiIndexAndMemberRewriter#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/Scope.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
+        <state relative-caret-position="19">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/ThisAppender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" lean-forward="true" selection-start-column="10" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="483" column="31" lean-forward="true" selection-start-line="483" selection-start-column="31" selection-end-line="483" selection-end-column="31" />
+        <state relative-caret-position="-595">
+          <caret line="499" column="32" lean-forward="true" selection-start-line="499" selection-start-column="32" selection-end-line="499" selection-end-column="32" />
           <folding>
             <element signature="method#generateIR#0;class#IRGenerator#0" />
             <element signature="method#visit#0;class#IRGenerator#0" />
@@ -1138,6 +1058,75 @@
             <element signature="method#visit#16;class#IRGenerator#0" />
             <element signature="method#visit#17;class#IRGenerator#0" />
             <element signature="method#visit#18;class#IRGenerator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="692" column="13" lean-forward="true" selection-start-line="692" selection-start-column="13" selection-end-line="692" selection-end-column="13" />
+          <folding>
+            <element signature="e#332#894#0" />
+            <element signature="e#900#1662#0" />
+            <element signature="e#1668#2676#0" />
+            <element signature="e#2708#4291#0" />
+            <element signature="e#4297#4576#0" />
+            <element signature="e#4582#4857#0" />
+            <element signature="e#4863#5143#0" />
+            <element signature="e#5149#5481#0" />
+            <element signature="e#5487#5970#0" />
+            <element signature="e#5976#6249#0" />
+            <element signature="e#6255#6475#0" />
+            <element signature="e#6481#6755#0" />
+            <element signature="e#6761#6980#0" />
+            <element signature="e#6986#7247#0" />
+            <element signature="e#7253#7481#0" />
+            <element signature="e#7487#8289#0" />
+            <element signature="e#8295#8424#0" />
+            <element signature="e#8430#8555#0" />
+            <element signature="e#8561#8691#0" />
+            <element signature="e#8697#8867#0" />
+            <element signature="e#8873#9206#0" />
+            <element signature="e#9212#9335#0" />
+            <element signature="e#9429#9553#0" />
+            <element signature="e#9774#11713#0" />
+            <element signature="e#11719#11897#0" />
+            <element signature="e#11903#12298#0" />
+            <element signature="e#12304#12603#0" />
+            <element signature="e#12609#13401#0" />
+            <element signature="e#13407#13550#0" />
+            <element signature="e#13556#13695#0" />
+            <element signature="e#13701#13845#0" />
+            <element signature="e#13851#14034#0" />
+            <element signature="e#14040#14387#0" />
+            <element signature="e#14393#14530#0" />
+            <element signature="e#14536#14633#0" />
+            <element signature="e#14639#14777#0" />
+            <element signature="e#14783#14879#0" />
+            <element signature="e#14992#15354#0" />
+            <element signature="e#15360#16853#0" />
+            <element signature="e#16859#17732#0" />
+            <element signature="e#17738#17879#0" />
+            <element signature="e#17885#19112#0" />
+            <element signature="e#19118#20212#0" />
+            <element signature="e#20218#20930#0" />
+            <element signature="e#20936#21861#0" />
+            <element signature="e#21867#22961#0" />
+            <element signature="e#23524#23589#0" />
+            <element signature="e#25697#25762#0" />
+            <element signature="e#26349#27000#0" />
+            <element signature="e#27006#27988#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
