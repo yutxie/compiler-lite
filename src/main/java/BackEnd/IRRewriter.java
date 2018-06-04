@@ -687,9 +687,9 @@ public class IRRewriter {
         if (ins.methodName.equals("malloc"))
             for (int i = 11; i >= 8; --i) {
                 Register reg = registerConfig.get(i);
-                Push push = new Push();
-                push.src = reg;
-                res.addLast(push);
+                Pop pop = new Pop();
+                pop.dst = reg;
+                res.addLast(pop);
             }
         if (ins.dst instanceof Address && ((Address) ins.dst).base.getName().equals("rbx"))
         for (int i = 4; i >= 3; --i) { // pop regs
