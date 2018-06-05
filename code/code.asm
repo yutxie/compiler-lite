@@ -823,22 +823,52 @@ main_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 0
+		push		r11
+		push		r13
 		push		r15
-		mov		r15, 5
-		mov		r15, 3
-		mov		r15, 1
-		mov		r15, 1
-		mov		r15, 1
-		mov		r15, 1
-		mov		r15, 2
-		mov		r15, 2
-		mov		rdi, 1
-		call	toString
-		mov		r15, rax
-		mov		rdi, r15
-		call	println
-		mov		r15, rax
+		push		r14
+		push		r12
+		mov		r11, 10
+		mov		r14, 0
+		mov		r13, 1
+		jmp		loop_cond_0
+loop_body_0:
+		mov		r12, r14
+		add		r12, r13
+		mov		r14, r12
+		inc		r13
+loop_cond_0:
+		cmp		r13, r11
+		jle		loop_body_0
+		jg		loop_end_0
+loop_end_0:
+		mov		r13, 1
+		jmp		loop_cond_1
+loop_body_1:
+		mov		r15, r14
+		add		r15, 10
+		add		r15, r13
+		mov		r14, r15
+		inc		r13
+loop_cond_1:
+		cmp		r13, r11
+		jle		loop_body_1
+		jg		loop_end_1
+loop_end_1:
+		mov		rax, r14
+		pop		r12
+		pop		r14
 		pop		r15
+		pop		r13
+		pop		r11
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		pop		r12
+		pop		r14
+		pop		r15
+		pop		r13
+		pop		r11
 		mov		rsp, rbp
 		pop		rbp
 		ret

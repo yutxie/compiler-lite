@@ -1,8 +1,9 @@
-int main () {
-	int a = 5;
-	int b = 3;
-	int c = a / b;
-	int d = a / b;
-	int e = a % b;
-	println(toString(d));
+int main() {
+    int n = 10;
+    int sum = 0;
+    int i;
+    for (i = 1; i <= n; ++i) sum = sum + i;
+    int j;
+    for (j = 1; j <= n; ++j) sum = sum + 10 + j;
+    return sum;
 }

@@ -24,6 +24,9 @@ public class RegisterAllocator {
     void acllocateRegister(MethodEntity method) throws Exception {
         init(method);
         livenessAnalysis(method);
+//        if (method.methodName.equals("main")) method.printInformation();
+        removeUselessCode(method);
+//        if (method.methodName.equals("main")) method.printInformation();
         buildInterGraph(method);
         while (true) {
             if (simplify()) continue;
@@ -54,8 +57,11 @@ public class RegisterAllocator {
     void initLivenessAnalysis(MethodEntity method) {
         sorted = new LinkedList<BasicBlock>();
         visited = new HashSet<BasicBlock>();
-        for (BasicBlock u : method.basicBlockList)
+        for (ListIterator<BasicBlock> it =
+             method.basicBlockList.listIterator(method.basicBlockList.size()); it.hasPrevious();) {
+            BasicBlock u = it.previous();
             if (!visited.contains(u)) dfs(u);
+        }
     }
     void livenessAnalysis(MethodEntity method) {
         // in block
@@ -86,6 +92,45 @@ public class RegisterAllocator {
                 bb.liveOut = newOut;
             }
         }
+    }
+
+    ///////////////////// remove useless code ////////////////////////
+    void removeUselessCode(MethodEntity method) {
+        for (BasicBlock bb : method.basicBlockList)
+            bb.codeList = removeUselessCode(bb);
+    }
+
+    boolean isRemovable(IRCode ins) {
+        if (ins instanceof Move || ins instanceof Cmove ||
+            ins instanceof Binary || ins instanceof Unary) return true;
+        return false;
+    }
+
+    LinkedList<IRCode> removeUselessCode(BasicBlock bb) {
+        LinkedList<IRCode> res = new LinkedList<IRCode>();
+        HashSet<Variable> liveSet = bb.liveOut;
+        for (ListIterator<IRCode> it = bb.codeList.listIterator(bb.codeList.size());
+             it.hasPrevious(); ) {
+            IRCode ins = it.previous();
+            HashSet<Variable> def = ins.def;
+            HashSet<Variable> use = ins.use;
+            boolean removable = true;
+            if (ins.def.isEmpty()) removable = false;
+            for (Variable var : def) {
+                if (removable == false) break;
+                if (liveSet.contains(var) || var.global == true) {
+                    removable = false;
+                    break;
+                }
+            }
+            if (!isRemovable(ins)) removable = false;
+            if (!removable) {
+                res.addFirst(ins);
+                liveSet.removeAll(def);
+                liveSet.addAll(use);
+            }
+        }
+        return res;
     }
 
     ////////////////////// simplify ////////////////////////
