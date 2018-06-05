@@ -79,6 +79,10 @@ public class RegisterAllocator {
             }
         }
         // among blocks
+//        for (Variable para : method.formalParaVarList) {
+//            BasicBlock firstBB = method.basicBlockList.getFirst();
+//            firstBB.liveIn.addAll(para.colorable());
+//        }
         boolean modified = true;
         while (modified) {
             modified = false;
@@ -208,6 +212,11 @@ public class RegisterAllocator {
             for (IRCode ins : bb.codeList)
                 for (Variable var : ins.allVariable)
                     interGraph.addNode(var);
+        for (Variable u : method.formalParaVarList)
+            for (Variable v : method.formalParaVarList) {
+                if (u == v) continue;
+                interGraph.addEdge(u, v);
+            }
         for (BasicBlock bb : method.basicBlockList) {
             HashSet<Variable> liveSet = new HashSet<Variable>(bb.liveOut);
             int n = bb.codeList.size();
@@ -225,7 +234,7 @@ public class RegisterAllocator {
                 ins.liveIn = new HashSet<Variable>(liveSet);
             }
         }
-//        if (method.methodName.equals("main")) {
+//        if (method.methodName.equals("a")) {
 //            System.out.println("========== " + method.methodName);
 //            method.printInformation();
 //            interGraph.printInformation();

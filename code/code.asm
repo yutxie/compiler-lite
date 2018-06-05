@@ -839,25 +839,25 @@ main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 208
+		sub		rsp, 224
 		push		r9
 		push		r8
 		push		r11
 		push		r10
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		qword [rel _global_A], 48271
 		mov		qword [rel _global_M], 2147483647
 		mov		qword [rel _global_seed], 1
 		mov		qword [rbp-8], 0
 		mov		qword [rbp-16], 0
 		mov		qword [rbp-24], 0
-		mov		r9, 3
-		mov		r9, 21
-		mov		r9, 21
-		mov		r9, 210
+		mov		r8, 3
+		mov		r8, 21
+		mov		r8, 21
+		mov		r8, 210
 		mov		qword [rel _global_n], 210
 		mov		qword [rel _global_h], 0
 		mov		rdi, 100
@@ -873,7 +873,7 @@ main_entry:
 		pop		r10
 		pop		r9
 		pop		r8
-		mov		r9, rax
+		mov		r8, rax
 		mov		rdi, 100
 		mov		qword [rax+0], rdi
 		mov		qword [rbp-32], 0
@@ -884,7 +884,7 @@ loop_cond_0:
 		cmp		qword [rbp-32], 100
 		jl		loop_body_0
 loop_end_0:
-		mov		qword [rel _global_a], r9
+		mov		qword [rel _global_a], r8
 		mov		rax, qword [rel _global_M]
 		cqo
 		idiv		qword [rel _global_A]
@@ -906,11 +906,11 @@ loop_end_0:
 if_true_0:
 		mov		rdi, str_const_0
 		call	println
-		mov		r9, rax
+		mov		r8, rax
 		mov		rax, 1
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -925,49 +925,50 @@ if_false_0:
 if_end_0:
 		mov		rdi, str_const_1
 		call	println
-		mov		r10, rax
+		mov		r9, rax
 		mov		rdi, 3654898
 		call	initialize
-		mov		r10, rax
+		mov		r9, rax
 		call	random
-		mov		r10, rax
-		mov		rax, r10
+		mov		r9, rax
+		mov		rax, r9
 		mov		rsi, 10
 		cqo
 		idiv		rsi
-		mov		r10, rdx
-		add		r10, 1
-		mov		qword [rel _global_now], r10
+		mov		r9, rdx
+		add		r9, 1
+		mov		qword [rel _global_now], r9
 		mov		rdi, qword [rel _global_now]
 		call	toString
-		mov		r10, rax
-		mov		rdi, r10
+		mov		r9, rax
+		mov		rdi, r9
 		call	println
-		mov		r10, rax
+		mov		r9, rax
 		jmp		loop_cond_1
 loop_body_1:
 		call	random
-		mov		qword [rbp-64], rax
-		mov		rax, qword [rbp-64]
+		mov		r15, rax
+		mov		rax, r15
 		mov		rsi, 10
 		cqo
 		idiv		rsi
-		mov		qword [rbp-72], rdx
-		mov		r15, qword [rbp-72]
-		add		r15, 1
+		mov		qword [rbp-64], rdx
+		mov		r10, qword [rbp-64]
+		add		r10, 1
 		mov		rbx, qword [rel _global_a]
 		mov		rcx, qword [rbp-8]
-		mov		qword [rbx+rcx*8+8], r15
+		mov		qword [rbx+rcx*8+8], r10
 		jmp		loop_cond_2
 loop_body_2:
 		call	random
-		mov		qword [rbp-80], rax
-		mov		rax, qword [rbp-80]
+		mov		qword [rbp-72], rax
+		mov		rax, qword [rbp-72]
 		mov		rsi, 10
 		cqo
 		idiv		rsi
-		mov		r11, rdx
-		mov		qword [rbp-88], r11
+		mov		qword [rbp-80], rdx
+		mov		rsi, qword [rbp-80]
+		mov		qword [rbp-88], rsi
 		mov		rdi, qword [rbp-88]
 		add		rdi, 1
 		mov		qword [rbp-88], rdi
@@ -1011,21 +1012,14 @@ loop_cond_1:
 		jl		loop_body_1
 		jge		loop_end_1
 loop_end_1:
-		mov		rsi, qword [rel _global_now]
-		mov		qword [rbp-120], rsi
-		mov		rdi, qword [rbp-120]
-		sub		rdi, 1
-		mov		qword [rbp-120], rdi
-		mov		rsi, qword [rel _global_n]
-		mov		qword [rbp-128], rsi
-		mov		rdi, qword [rbp-128]
+		mov		r13, qword [rel _global_now]
+		sub		r13, 1
+		mov		r14, qword [rel _global_n]
 		mov		rsi, qword [rbp-16]
-		sub		rdi, rsi
-		mov		qword [rbp-128], rdi
+		sub		r14, rsi
 		mov		rbx, qword [rel _global_a]
-		mov		rcx, qword [rbp-120]
-		mov		rsi, qword [rbp-128]
-		mov		qword [rbx+rcx*8+8], rsi
+		mov		rcx, r13
+		mov		qword [rbx+rcx*8+8], r14
 		call	show
 		mov		r15, rax
 		call	merge
@@ -1035,16 +1029,16 @@ loop_body_3:
 		inc		qword [rbp-24]
 		mov		rdi, qword [rbp-24]
 		call	toString
-		mov		r14, rax
-		mov		rdi, str_const_2
-		mov		rsi, r14
-		call	addString__
 		mov		r12, rax
-		mov		rdi, r12
+		mov		rdi, str_const_2
+		mov		rsi, r12
+		call	addString__
+		mov		qword [rbp-120], rax
+		mov		rdi, qword [rbp-120]
 		mov		rsi, str_const_3
 		call	addString__
-		mov		r13, rax
-		mov		rdi, r13
+		mov		r11, rax
+		mov		rdi, r11
 		call	println
 		mov		r15, rax
 		call	move
@@ -1055,29 +1049,29 @@ loop_body_3:
 		mov		r15, rax
 loop_cond_3:
 		call	win
-		mov		qword [rbp-136], rax
-		cmp		qword [rbp-136], 0
+		mov		qword [rbp-128], rax
+		cmp		qword [rbp-128], 0
 		jnz		loop_end_3
 		jz		loop_body_3
 loop_end_3:
 		mov		rdi, qword [rbp-24]
 		call	toString
-		mov		r8, rax
+		mov		qword [rbp-136], rax
 		mov		rdi, str_const_4
-		mov		rsi, r8
+		mov		rsi, qword [rbp-136]
 		call	addString__
-		mov		r8, rax
-		mov		rdi, r8
+		mov		qword [rbp-144], rax
+		mov		rdi, qword [rbp-144]
 		mov		rsi, str_const_5
 		call	addString__
-		mov		r8, rax
-		mov		rdi, r8
+		mov		qword [rbp-152], rax
+		mov		rdi, qword [rbp-152]
 		call	println
 		mov		r15, rax
 		mov		rax, 0
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1086,9 +1080,9 @@ loop_end_3:
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1104,9 +1098,9 @@ random_entry:
 		mov		rbp, rsp
 		sub		rsp, 72
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		rax, qword [rel _global_seed]
 		cqo
 		idiv		qword [rel _global_Q]
@@ -1133,16 +1127,16 @@ if_false_1:
 		mov		qword [rel _global_seed], r13
 if_end_1:
 		mov		rax, qword [rel _global_seed]
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
@@ -1167,24 +1161,26 @@ swap_entry:
 		mov		rbp, rsp
 		sub		rsp, 72
 		push		r15
-		push		r14
 		push		r13
-		mov		r15, rdi
+		push		r12
+		push		r14
+		mov		r13, rdi
 		mov		r15, rsi
 		mov		rbx, qword [rel _global_a]
-		mov		rcx, r15
-		mov		r13, qword [rbx+rcx*8+8]
+		mov		rcx, r13
+		mov		r12, qword [rbx+rcx*8+8]
 		mov		rbx, qword [rel _global_a]
 		mov		rcx, r15
 		mov		r14, qword [rbx+rcx*8+8]
 		mov		rbx, qword [rel _global_a]
-		mov		rcx, r15
+		mov		rcx, r13
 		mov		qword [rbx+rcx*8+8], r14
 		mov		rbx, qword [rel _global_a]
 		mov		rcx, r15
-		mov		qword [rbx+rcx*8+8], r13
-		pop		r13
+		mov		qword [rbx+rcx*8+8], r12
 		pop		r14
+		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
@@ -1196,9 +1192,9 @@ pd_entry:
 		mov		rbp, rsp
 		sub		rsp, 72
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		r13, rdi
 		jmp		loop_cond_4
 loop_body_4:
@@ -1216,9 +1212,9 @@ loop_body_4:
 		jne		if_false_2
 if_true_2:
 		mov		rax, 1
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
@@ -1234,16 +1230,16 @@ loop_cond_4:
 		jg		loop_end_4
 loop_end_4:
 		mov		rax, 0
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
@@ -1255,9 +1251,9 @@ show_entry:
 		mov		rbp, rsp
 		sub		rsp, 72
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		r12, 0
 		jmp		loop_cond_5
 loop_body_5:
@@ -1283,9 +1279,9 @@ loop_end_5:
 		mov		rdi, str_const_7
 		call	println
 		mov		r15, rax
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
@@ -1301,9 +1297,9 @@ win_entry:
 		push		r11
 		push		r10
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		rdi, 100
 		inc		rdi
 		imul		rdi, 8
@@ -1335,9 +1331,9 @@ loop_end_6:
 		je		if_false_3
 if_true_3:
 		mov		rax, 0
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1428,9 +1424,9 @@ loop_body_10:
 		je		if_false_5
 if_true_5:
 		mov		rax, 0
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1451,9 +1447,9 @@ loop_cond_10:
 		jge		loop_end_10
 loop_end_10:
 		mov		rax, 1
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1462,9 +1458,9 @@ loop_end_10:
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		pop		r10
 		pop		r11
@@ -1480,9 +1476,9 @@ merge_entry:
 		mov		rbp, rsp
 		sub		rsp, 72
 		push		r15
+		push		r13
 		push		r12
 		push		r14
-		push		r13
 		mov		r13, 0
 		jmp		loop_cond_11
 loop_body_11:
@@ -1552,9 +1548,9 @@ loop_cond_13:
 		jl		loop_body_13
 		jge		loop_end_13
 loop_end_13:
-		pop		r13
 		pop		r14
 		pop		r12
+		pop		r13
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
