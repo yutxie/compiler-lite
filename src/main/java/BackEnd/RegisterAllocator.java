@@ -24,9 +24,10 @@ public class RegisterAllocator {
     void acllocateRegister(MethodEntity method) throws Exception {
         init(method);
         livenessAnalysis(method);
-//        if (method.methodName.equals("main")) method.printInformation();
+//        method.printInformation();
         removeUselessCode(method);
-//        if (method.methodName.equals("main")) method.printInformation();
+//        System.out.println(removeCnt);
+//        method.printInformation();
         buildInterGraph(method);
         while (true) {
             if (simplify()) continue;
@@ -38,6 +39,7 @@ public class RegisterAllocator {
 
         IRRewriter irRewriter = new IRRewriter();
         irRewriter.rewriteIR(ir, method, assignedMap, registerConfig);
+//        if (method.methodName.equals("foo")) method.printInformation();
     }
     void init(MethodEntity method) {
         initLivenessAnalysis(method);
@@ -106,9 +108,10 @@ public class RegisterAllocator {
         return false;
     }
 
+    int removeCnt = 0;
     LinkedList<IRCode> removeUselessCode(BasicBlock bb) {
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        HashSet<Variable> liveSet = bb.liveOut;
+        HashSet<Variable> liveSet = (HashSet<Variable>) bb.liveOut.clone();
         for (ListIterator<IRCode> it = bb.codeList.listIterator(bb.codeList.size());
              it.hasPrevious(); ) {
             IRCode ins = it.previous();
@@ -128,7 +131,7 @@ public class RegisterAllocator {
                 res.addFirst(ins);
                 liveSet.removeAll(def);
                 liveSet.addAll(use);
-            }
+            } else ++removeCnt;
         }
         return res;
     }
@@ -159,23 +162,6 @@ public class RegisterAllocator {
             return true;
         }
         return false;
-//        for (InterferenceGraph.Node u : interGraph.nodeSet) {
-//            if (u.selected == true) continue;
-//            boolean flag = true;
-//            for (InterferenceGraph.Node v : u.edges)
-//                if (v.selected == false) {
-//                    flag = false;
-//                    break;
-//                }
-//            if (flag) {
-//                for (InterferenceGraph.Node v : u.edges)
-//                    --v.degree;
-//                u.selected = true;
-//                toColorStack.addLast(u);
-//                return true;
-//            }
-//        }
-//        return false;
     }
 
     /////////////////// assign colors /////////////////////
@@ -232,9 +218,11 @@ public class RegisterAllocator {
                 ins.liveIn = new HashSet<Variable>(liveSet);
             }
         }
-//        System.out.println("========== " + method.methodName);
-//        method.printInformation();
-//        interGraph.printInformation();
+//        if (method.methodName.equals("main")) {
+//            System.out.println("========== " + method.methodName);
+//            method.printInformation();
+//            interGraph.printInformation();
+//        }
     }
 
 }

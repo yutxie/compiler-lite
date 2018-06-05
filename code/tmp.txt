@@ -1,11 +1,13 @@
+void foo(int d, int x, int y) {
+    println(toString(d*1000 + x*10 + y));
+    if (d == 1) return;
+    int t = x; x = y; y = t;
+    foo(1, x, y);
+    println(toString(d*1000 + x*10 + y));
+}
 int main() {
-    int n = 10;
-    int sum = 0;
-    int i;
-    for (i = 1; i <= n; ++i) sum = sum + i;
-    int j;
-    for (j = 1; j <= n; ++j) sum = sum + 10 + j;
-    return sum;
+    foo(7, 5, 3);
+    return 0;
 }class string {
     
     int length() {}

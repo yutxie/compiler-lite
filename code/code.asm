@@ -5,6 +5,7 @@ global string_ord
 global string_substring
 global string_parseInt
 global main
+global foo
 global print
 global toString
 global addString__
@@ -823,52 +824,96 @@ main_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 0
-		push		r11
-		push		r13
 		push		r15
-		push		r14
-		push		r12
-		mov		r11, 10
-		mov		r14, 0
-		mov		r13, 1
-		jmp		loop_cond_0
-loop_body_0:
-		mov		r12, r14
-		add		r12, r13
-		mov		r14, r12
-		inc		r13
-loop_cond_0:
-		cmp		r13, r11
-		jle		loop_body_0
-		jg		loop_end_0
-loop_end_0:
-		mov		r13, 1
-		jmp		loop_cond_1
-loop_body_1:
-		mov		r15, r14
-		add		r15, 10
-		add		r15, r13
-		mov		r14, r15
-		inc		r13
-loop_cond_1:
-		cmp		r13, r11
-		jle		loop_body_1
-		jg		loop_end_1
-loop_end_1:
-		mov		rax, r14
-		pop		r12
-		pop		r14
+		mov		rdi, 7
+		mov		rsi, 5
+		mov		rdx, 3
+		call	foo
+		mov		r15, rax
+		mov		rax, 0
 		pop		r15
-		pop		r13
-		pop		r11
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r12
-		pop		r14
 		pop		r15
+		mov		rsp, rbp
+		pop		rbp
+		ret
+
+foo:
+foo_entry:
+		push		rbp
+		mov		rbp, rsp
+		sub		rsp, 0
+		push		r9
+		push		r11
+		push		r13
+		push		r12
+		push		r15
+		push		r10
+		push		r14
+		mov		r13, rdi
+		mov		r10, rsi
+		mov		r9, rdx
+		mov		r11, r13
+		imul		r11, 1000
+		mov		r15, r10
+		imul		r15, 10
+		add		r11, r15
+		mov		r15, r11
+		add		r15, r9
+		mov		rdi, r15
+		call	toString
+		mov		r15, rax
+		mov		rdi, r15
+		call	println
+		mov		r15, rax
+		cmp		r13, 1
+		je		if_true_0
+		jne		if_false_0
+if_true_0:
+		pop		r14
+		pop		r10
+		pop		r15
+		pop		r12
 		pop		r13
 		pop		r11
+		pop		r9
+		mov		rsp, rbp
+		pop		rbp
+		ret
+		jmp		if_end_0
+if_false_0:
+		nop
+if_end_0:
+		mov		r14, r10
+		mov		r10, r9
+		mov		r9, r14
+		mov		rdi, 1
+		mov		rsi, r10
+		mov		rdx, r9
+		call	foo
+		mov		r15, rax
+		mov		r12, r13
+		imul		r12, 1000
+		mov		r14, r10
+		imul		r14, 10
+		add		r12, r14
+		mov		r14, r12
+		add		r14, r9
+		mov		rdi, r14
+		call	toString
+		mov		r14, rax
+		mov		rdi, r14
+		call	println
+		mov		r15, rax
+		pop		r14
+		pop		r10
+		pop		r15
+		pop		r12
+		pop		r13
+		pop		r11
+		pop		r9
 		mov		rsp, rbp
 		pop		rbp
 		ret

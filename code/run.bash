@@ -3,4 +3,4 @@ nasm -felf64 code.asm && gcc -o code code.o
 # nasm -felf64 code.asm
 # gcc code.o -g -o code -m64
 ./code
-# echo $?
+echo $?
