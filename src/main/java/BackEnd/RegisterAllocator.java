@@ -25,8 +25,9 @@ public class RegisterAllocator {
         init(method);
         livenessAnalysis(method);
 //        method.printInformation();
-        removeUselessCode(method);
-//        System.out.println(removeCnt);
+//        removeCnt = 0;
+//        removeUselessCode(method);
+//        System.out.println(method.methodName + " - " + removeCnt);
 //        method.printInformation();
         buildInterGraph(method);
         while (true) {
@@ -103,8 +104,11 @@ public class RegisterAllocator {
     }
 
     boolean isRemovable(IRCode ins) {
-        if (ins instanceof Move || ins instanceof Cmove ||
-            ins instanceof Binary || ins instanceof Unary) return true;
+        if (ins instanceof Move ||
+            ins instanceof Cmove ||
+            ins instanceof Binary ||
+            ins instanceof Unary ||
+            ins instanceof Idiv) return true;
         return false;
     }
 
@@ -131,7 +135,10 @@ public class RegisterAllocator {
                 res.addFirst(ins);
                 liveSet.removeAll(def);
                 liveSet.addAll(use);
-            } else ++removeCnt;
+            } else {
+                ++removeCnt;
+//                ins.printInformation();
+            }
         }
         return res;
     }

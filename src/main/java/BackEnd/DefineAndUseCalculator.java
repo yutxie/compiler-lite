@@ -11,10 +11,10 @@ public class DefineAndUseCalculator {
             for (BasicBlock bb : methodEntity.basicBlockList)
                 for (IRCode ins : bb.codeList)
                     calculateDefineAndUse(ins);
-            for (Variable para : methodEntity.formalParaVarList) {
-                methodEntity.basicBlockList.getFirst().codeList.getFirst().
-                    def.addAll(para.colorable());
-            }
+//            for (Variable para : methodEntity.formalParaVarList) {
+//                methodEntity.basicBlockList.getFirst().codeList.getFirst().
+//                    def.addAll(para.colorable());
+//            }
         }
     }
 
