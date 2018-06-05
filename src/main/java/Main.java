@@ -45,7 +45,6 @@ public class Main {
         cfgGenerator.generateCFG(ir);
         multiIndexAndMemberRewriter.rewriteMultiIndexandMember(ir);
         localValueNumberer.numberLocalValue(ir);
-//        System.out.println("\n\nlocal value numbering:\n\n");
 //        ir.printInformation();
         defineAndUseCalculator.calculateDefineAndUse(ir);
         allVariableCalculator.calculateAllVariable(ir);

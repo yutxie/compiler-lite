@@ -20,7 +20,7 @@ public class LocalValueNumberer {
         ADD, SUB, IMUL,
         XOR, OR, AND,
         SAL, SAR,
-        IDIV,
+        IDIV, IMOD,
         INC, DEC, NEG, NOT
     }
     class Pair {
@@ -223,10 +223,18 @@ public class LocalValueNumberer {
         codeList.addLast(ins);
     }
 
-    void numberLocalValue(Idiv ins) {
+    InstType getInstType(Idiv ins) throws Exception {
+        switch (ins.type) {
+            case IDIV: return InstType.IDIV;
+            case IMOD: return InstType.IMOD;
+            default: throw new Exception();
+        }
+    }
+
+    void numberLocalValue(Idiv ins) throws Exception {
         ins.src0 = getVar(ins.src0);
         ins.src1 = getVar(ins.src1);
-        Pair pair = new Pair(InstType.IDIV, getValue(ins.src0), getValue(ins.src1));
+        Pair pair = new Pair(getInstType(ins), getValue(ins.src0), getValue(ins.src1));
         Value value =  getValue(pair);
         Operand operand = getVar(value);
         if (operand != null) {

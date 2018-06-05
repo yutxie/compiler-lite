@@ -263,22 +263,22 @@ public class IRRewriter {
             Move move = new Move();
             move.dst = assignedMap.get(para);
             if (move.dst == null) move.dst = getAddress(para);
-            if (paraIter < 6) {
+            if (paraIter <= 3) {
                 Register reg;
                 switch (paraIter) {
                     case 0: reg = registerConfig.get("rdi"); break;
                     case 1: reg = registerConfig.get("rsi"); break;
                     case 2: reg = registerConfig.get("rdx"); break;
                     case 3: reg = registerConfig.get("rcx"); break;
-                    case 4: reg = registerConfig.get("r8"); break;
-                    case 5: reg = registerConfig.get("r9"); break;
+//                    case 4: reg = registerConfig.get("r8"); break;
+//                    case 5: reg = registerConfig.get("r9"); break;
                     default: throw new Exception();
                 }
                 move.src = reg;
             } else {
                 Address addr = new Address();
                 addr.base = registerConfig.get("rbp");
-                addr.offsetNumber = (paraIter - 6) * 8 + 16;
+                addr.offsetNumber = (paraIter - 4) * 8 + 16;
                 move.src = addr;
             }
             readParas.addLast(move);
@@ -646,14 +646,14 @@ public class IRRewriter {
             push.src = reg;
             res.addLast(push);
         }
-        if (ins.methodName.equals("malloc"))
+        if (ins.methodName.equals("malloc")) // malloc
         for (int i = 8; i <= 11; ++i) {
             Register reg = registerConfig.get(i);
             Push push = new Push();
             push.src = reg;
             res.addLast(push);
         }
-        for (int i = 0; i < 6; ++i) { // move paras
+        for (int i = 0; i <= 3; ++i) { // move paras
             if (i >= ins.actualParaVarList.size()) break;
             Operand para = ins.actualParaVarList.get(i);
             Register reg;
@@ -662,8 +662,8 @@ public class IRRewriter {
                 case 1: reg = registerConfig.get("rsi"); break;
                 case 2: reg = registerConfig.get("rdx"); break;
                 case 3: reg = registerConfig.get("rcx"); break;
-                case 4: reg = registerConfig.get("r8"); break;
-                case 5: reg = registerConfig.get("r9"); break;
+//                case 4: reg = registerConfig.get("r8"); break;
+//                case 5: reg = registerConfig.get("r9"); break;
                 default: throw new Exception();
             }
             Move move = new Move();
@@ -671,7 +671,7 @@ public class IRRewriter {
             move.src = para;
             res.addLast(move);
         }
-        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) { // push paras
+        for (int i = ins.actualParaVarList.size() - 1; i >= 4; --i) { // push paras
             Push push = new Push();
             push.src = ins.actualParaVarList.get(i);
             res.addLast(push);
@@ -679,12 +679,12 @@ public class IRRewriter {
         MethodCall call = new MethodCall();
         call.methodName = ins.methodName;
         res.addLast(call);
-        for (int i = ins.actualParaVarList.size() - 1; i >= 6; --i) { // pop paras
+        for (int i = ins.actualParaVarList.size() - 1; i >= 4; --i) { // pop paras
             Pop pop = new Pop();
             pop.dst = registerConfig.get("rdi");
             res.addLast(pop);
         }
-        if (ins.methodName.equals("malloc"))
+        if (ins.methodName.equals("malloc")) // malloc
             for (int i = 11; i >= 8; --i) {
                 Register reg = registerConfig.get(i);
                 Pop pop = new Pop();
