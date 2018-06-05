@@ -21,6 +21,7 @@ public class Main {
         IRGenerator irGenerator = new IRGenerator();
         CFGGenerator cfgGenerator = new CFGGenerator();
         MultiIndexAndMemberRewriter multiIndexAndMemberRewriter = new MultiIndexAndMemberRewriter();
+        LocalValueNumberer localValueNumberer = new LocalValueNumberer();
         DefineAndUseCalculator defineAndUseCalculator = new DefineAndUseCalculator();
         AllVariableCalculator allVariableCalculator = new AllVariableCalculator();
         RegisterConfig registerConfig = new RegisterConfig();
@@ -43,12 +44,12 @@ public class Main {
         // non trivial
         cfgGenerator.generateCFG(ir);
         multiIndexAndMemberRewriter.rewriteMultiIndexandMember(ir);
+        localValueNumberer.numberLocalValue(ir);
+//        System.out.println("\n\nlocal value numbering:\n\n");
 //        ir.printInformation();
         defineAndUseCalculator.calculateDefineAndUse(ir);
         allVariableCalculator.calculateAllVariable(ir);
-//        ir.printInformation();
         regisgerAllocator.allocateRegister(ir, registerConfig);
-//        ir.printInformation();
         codeGenerator.generateCode(ir);
     }
 }

@@ -823,119 +823,23 @@ main_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 0
-		push		r10
-		push		r9
-		push		r13
-		push		r12
-		push		r11
-		push		r15
 		push		r14
-		call	getInt
-		mov		r15, rax
-		mov		r11, 0
-		mov		r9, r15
-		add		r9, 5
-		mov		rdi, r9
-		inc		rdi
-		imul		rdi, 8
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		mov		rdi, rdi
-		call	malloc
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r11, rax
-		mov		rdi, r9
-		mov		qword [rax+0], rdi
-		mov		r10, 0
-		jmp		loop_cond_0
-loop_body_0:
-		inc		r10
-loop_cond_0:
-		cmp		r10, r9
-		jl		loop_body_0
-loop_end_0:
-		mov		r10, 0
-		jmp		loop_cond_1
-loop_body_1:
-		mov		r13, r10
-		inc		r10
-		mov		rbx, r11
-		mov		rcx, r13
-		mov		qword [rbx+rcx*8+8], 1
-loop_cond_1:
-		cmp		r10, r15
-		jle		loop_body_1
-		jg		loop_end_1
-loop_end_1:
+		push		r15
+		mov		r15, 5
+		mov		r15, 3
+		mov		r15, 5
+		add		r15, 3
+		mov		r14, 5
 		mov		r14, r15
-		add		r14, 5
-		mov		rdi, r14
-		inc		rdi
-		imul		rdi, 8
-		push		r8
-		push		r9
-		push		r10
-		push		r11
-		mov		rdi, rdi
-		call	malloc
-		pop		r11
-		pop		r10
-		pop		r9
-		pop		r8
-		mov		r11, rax
-		mov		rdi, r14
-		mov		qword [rax+0], rdi
-		mov		r13, 0
-		jmp		loop_cond_2
-loop_body_2:
-		inc		r13
-loop_cond_2:
-		cmp		r13, r14
-		jl		loop_body_2
-loop_end_2:
-		mov		r12, r11
-		mov		rbx, r12
-		mov		rcx, 1
-		mov		qword [rbx+rcx*8+8], 1
-		mov		r10, 2
-		jmp		loop_cond_3
-loop_body_3:
-		cmp		r10, r15
-		jg		if_true_0
-		jle		if_false_0
-if_true_0:
-		jmp		loop_end_3
-		jmp		if_end_0
-if_false_0:
-		nop
-if_end_0:
-		inc		r10
-loop_cond_3:
-		jmp		loop_body_3
-loop_end_3:
-		mov		rax, 0
-		pop		r14
+		mov		r14, r15
+		mov		rdi, r15
+		call	toString
+		mov		r15, rax
+		mov		rdi, r15
+		call	println
+		mov		r15, rax
 		pop		r15
-		pop		r11
-		pop		r12
-		pop		r13
-		pop		r9
-		pop		r10
-		mov		rsp, rbp
-		pop		rbp
-		ret
 		pop		r14
-		pop		r15
-		pop		r11
-		pop		r12
-		pop		r13
-		pop		r9
-		pop		r10
 		mov		rsp, rbp
 		pop		rbp
 		ret

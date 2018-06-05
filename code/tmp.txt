@@ -1,27 +1,9 @@
-// Input: 10
-
 int main() {
-    int N;
-    N = getInt();
-
-    int M = 0;
-    bool[] check;
-
-    //println(toString(N));
-
-	check = new bool[N+5];
-	int i = 0;
-
-	while ( i <= N )
-        check[i++] = true;
-
-	int[] phi = new int[N+5];
-	phi[1] = 1;
-
-	for (i = 2; ; ++i ) {
-		if ( i > N ) break;
-	}
-    return 0;
+	int a = 5;
+	int b = 3;
+	int c = a + b;
+	int d = a + b;
+	println(toString(d));
 }class string {
     
     int length() {}

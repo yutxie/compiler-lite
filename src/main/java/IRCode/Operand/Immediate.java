@@ -8,7 +8,7 @@ import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
 public class Immediate extends Operand {
 
-    int value;
+    public int value;
 
     public Immediate(ConstantNode node) {
         if (node.exprType.isPrimitiveType(BOOL)) {
