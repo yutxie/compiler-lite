@@ -29,27 +29,39 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MethodCall.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LocalValueNumberer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="236" column="44" selection-start-line="236" selection-start-column="44" selection-end-line="236" selection-end-column="44" />
+            <state relative-caret-position="131">
+              <caret line="263" column="42" selection-start-line="263" selection-start-column="42" selection-end-line="263" selection-end-column="42" />
               <folding>
                 <element signature="class#Value#0;class#LocalValueNumberer#0" />
+                <element signature="class#InstType#0;class#LocalValueNumberer#0" />
+                <element signature="class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#Pair#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#hashCode#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#equals#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#0;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#1;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#2;class#LocalValueNumberer#0" />
+                <element signature="method#getValue#1;class#LocalValueNumberer#0" />
+                <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+                <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+                <element signature="method#getImm#0;class#LocalValueNumberer#0" />
+                <element signature="method#getVar#0;class#LocalValueNumberer#0" />
+                <element signature="method#getVar#1;class#LocalValueNumberer#0" />
+                <element signature="method#linkVarAndValue#1;class#LocalValueNumberer#0" />
+                <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
+                <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
                 <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
                 <element signature="method#getInstType#0;class#LocalValueNumberer#0" />
                 <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
                 <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
+                <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#8;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#9;class#LocalValueNumberer#0" />
                 <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
+                <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
               </folding>
             </state>
           </provider>
@@ -246,8 +258,8 @@
         <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Immediate.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Unary.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -260,8 +272,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="539" />
-    <option name="y" value="-16" />
+    <option name="x" value="239" />
+    <option name="y" value="-22" />
     <option name="width" value="697" />
     <option name="height" value="391" />
   </component>
@@ -465,7 +477,7 @@
       <window_info id="UI Designer" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.231454" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.40207714" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
       <window_info anchor="right" id="Coverage" order="7" side_tool="true" weight="0.32869694" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -559,7 +571,7 @@
           <option name="timeStamp" value="205" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="219" />
+      <option name="time" value="220" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1033,21 +1045,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="236" column="44" selection-start-line="236" selection-start-column="44" selection-end-line="236" selection-end-column="44" />
-          <folding>
-            <element signature="class#Value#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
-            <element signature="method#getInstType#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
@@ -1110,6 +1107,42 @@
             <element signature="e#26038#26103#0" />
             <element signature="e#26690#27341#0" />
             <element signature="e#27347#28329#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="263" column="42" selection-start-line="263" selection-start-column="42" selection-end-line="263" selection-end-column="42" />
+          <folding>
+            <element signature="class#Value#0;class#LocalValueNumberer#0" />
+            <element signature="class#InstType#0;class#LocalValueNumberer#0" />
+            <element signature="class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#Pair#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#hashCode#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#equals#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#1;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#2;class#LocalValueNumberer#0" />
+            <element signature="method#getValue#1;class#LocalValueNumberer#0" />
+            <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+            <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+            <element signature="method#getImm#0;class#LocalValueNumberer#0" />
+            <element signature="method#getVar#0;class#LocalValueNumberer#0" />
+            <element signature="method#getVar#1;class#LocalValueNumberer#0" />
+            <element signature="method#linkVarAndValue#1;class#LocalValueNumberer#0" />
+            <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
+            <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
+            <element signature="method#getInstType#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
+            <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#8;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#9;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
+            <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
           </folding>
         </state>
       </provider>

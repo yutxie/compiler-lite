@@ -5,7 +5,6 @@ global string_ord
 global string_substring
 global string_parseInt
 global main
-global a
 global print
 global toString
 global addString__
@@ -825,128 +824,21 @@ main_entry:
 		mov		rbp, rsp
 		sub		rsp, 0
 		push		r15
+		mov		r15, 5
+		mov		r15, 3
+		mov		r15, 1
+		mov		r15, 1
+		mov		r15, 1
+		mov		r15, 1
+		mov		r15, 2
+		mov		r15, 2
 		mov		rdi, 1
-		mov		rsi, 2
-		mov		rdx, 3
-		mov		rcx, 4
-		push		15
-		push		14
-		push		13
-		push		12
-		push		11
-		push		10
-		push		9
-		push		8
-		push		7
-		push		6
-		push		5
-		call	a
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		pop		rdi
-		mov		r15, rax
-		mov		rdi, r15
 		call	toString
 		mov		r15, rax
 		mov		rdi, r15
 		call	println
 		mov		r15, rax
-		mov		rax, 0
 		pop		r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		pop		r15
-		mov		rsp, rbp
-		pop		rbp
-		ret
-
-a:
-a_entry:
-		push		rbp
-		mov		rbp, rsp
-		sub		rsp, 64
-		push		r9
-		push		r12
-		push		r11
-		push		r10
-		push		r8
-		push		r13
-		push		r15
-		push		r14
-		mov		qword [rbp-8], rdi
-		mov		r8, rsi
-		mov		r10, rdx
-		mov		r9, rcx
-		mov		rsi, qword [rbp+16]
-		mov		qword [rbp-16], rsi
-		mov		r12, qword [rbp+24]
-		mov		rsi, qword [rbp+32]
-		mov		qword [rbp-24], rsi
-		mov		rsi, qword [rbp+40]
-		mov		qword [rbp-32], rsi
-		mov		r15, qword [rbp+48]
-		mov		r14, qword [rbp+56]
-		mov		rsi, qword [rbp+64]
-		mov		qword [rbp-40], rsi
-		mov		rsi, qword [rbp+72]
-		mov		qword [rbp-48], rsi
-		mov		r11, qword [rbp+80]
-		mov		rsi, qword [rbp+88]
-		mov		qword [rbp-56], rsi
-		mov		rsi, qword [rbp+96]
-		mov		qword [rbp-64], rsi
-		mov		r13, qword [rbp-8]
-		add		r13, r8
-		add		r13, r10
-		add		r13, r9
-		mov		rsi, qword [rbp-16]
-		add		r13, rsi
-		add		r13, r12
-		mov		rsi, qword [rbp-24]
-		add		r13, rsi
-		mov		rsi, qword [rbp-32]
-		add		r13, rsi
-		add		r13, r15
-		mov		r15, r13
-		add		r15, r14
-		mov		rsi, qword [rbp-40]
-		add		r15, rsi
-		mov		rsi, qword [rbp-48]
-		add		r15, rsi
-		add		r15, r11
-		mov		rsi, qword [rbp-56]
-		add		r15, rsi
-		mov		rsi, qword [rbp-64]
-		add		r15, rsi
-		mov		rax, r15
-		pop		r14
-		pop		r15
-		pop		r13
-		pop		r8
-		pop		r10
-		pop		r11
-		pop		r12
-		pop		r9
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		pop		r14
-		pop		r15
-		pop		r13
-		pop		r8
-		pop		r10
-		pop		r11
-		pop		r12
-		pop		r9
 		mov		rsp, rbp
 		pop		rbp
 		ret

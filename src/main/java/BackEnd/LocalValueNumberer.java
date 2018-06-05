@@ -199,6 +199,29 @@ public class LocalValueNumberer {
 
     void numberLocalValue(Binary ins) throws Exception {
         ins.src = getVar(ins.src);
+        Operand dst = getVar(ins.dst);
+        if (ins.src instanceof Immediate && dst instanceof Immediate) {
+            int dstImm = ((Immediate) dst).value;
+            int srcImm = ((Immediate) ins.src).value;
+            switch (ins.type) {
+                case XOR: dstImm = dstImm ^ srcImm; break;
+                case AND: dstImm = dstImm & srcImm; break;
+                case OR: dstImm = dstImm | srcImm; break;
+                case IMUL: dstImm = dstImm * srcImm; break;
+                case ADD: dstImm = dstImm + srcImm; break;
+                case SUB: dstImm = dstImm - srcImm; break;
+                case SAR: dstImm = dstImm >> srcImm; break;
+                case SAL: dstImm = dstImm << srcImm; break;
+            }
+            Immediate imm = new Immediate(dstImm);
+            Value value = getValue(imm);
+            Move move = new Move();
+            move.dst = ins.dst;
+            move.src = imm;
+            codeList.addLast(move);
+            linkVarAndValue(ins.dst, value);
+            return;
+        }
         Pair pair = new Pair(getInstType(ins), getValue(ins.dst), getValue(ins.src));
         Value value = getValue(pair);
         Operand operand = getVar(value);
@@ -234,6 +257,25 @@ public class LocalValueNumberer {
     void numberLocalValue(Idiv ins) throws Exception {
         ins.src0 = getVar(ins.src0);
         ins.src1 = getVar(ins.src1);
+        if (ins.src0 instanceof Immediate && ins.src1 instanceof Immediate) {
+            int dstImm;
+            int src0Imm = ((Immediate) ins.src0).value;
+            int src1Imm = ((Immediate) ins.src1).value;
+            if (src1Imm == 0) src1Imm = 1;
+            switch (ins.type) {
+                case IMOD: dstImm = src0Imm % src1Imm; break;
+                case IDIV: dstImm = src0Imm / src1Imm; break;
+                default: throw new Exception();
+            }
+            Immediate imm = new Immediate(dstImm);
+            Value value = getValue(imm);
+            Move move = new Move();
+            move.dst = ins.dst;
+            move.src = imm;
+            codeList.addLast(move);
+            linkVarAndValue(ins.dst, value);
+            return;
+        }
         Pair pair = new Pair(getInstType(ins), getValue(ins.src0), getValue(ins.src1));
         Value value =  getValue(pair);
         Operand operand = getVar(value);
@@ -278,6 +320,25 @@ public class LocalValueNumberer {
     }
 
     void numberLocalValue(Unary ins) throws Exception {
+        Operand dst = getVar(ins.dst);
+        if (dst instanceof Immediate) {
+            int dstImm = ((Immediate) dst).value;
+            switch (ins.type) {
+                case NEG: dstImm = -dstImm; break;
+                case DEC: dstImm = dstImm - 1; break;
+                case INC: dstImm = dstImm + 1; break;
+                case NOT: dstImm = ~dstImm; break;
+                default: throw new Exception();
+            }
+            Immediate imm = new Immediate(dstImm);
+            Value value = getValue(imm);
+            Move move = new Move();
+            move.dst = ins.dst;
+            move.src = imm;
+            codeList.addLast(move);
+            linkVarAndValue(ins.dst, value);
+            return;
+        }
         Pair pair = new Pair(getInstType(ins), getValue(ins.dst), null);
         Value value = getValue(pair);
         Operand operand = getVar(value);
