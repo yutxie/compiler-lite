@@ -26,7 +26,7 @@ public class RegisterAllocator {
         livenessAnalysis(method);
 //        method.printInformation();
 //        removeCnt = 0;
-//        removeUselessCode(method);
+        removeUselessCode(method);
 //        System.out.println(method.methodName + " - " + removeCnt);
 //        method.printInformation();
         buildInterGraph(method);
