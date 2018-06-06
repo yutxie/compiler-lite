@@ -5,6 +5,8 @@ import IR.*;
 import IRCode.*;
 import IRCode.Operand.*;
 
+import javax.lang.model.type.PrimitiveType;
+
 import static AstNode.BinaryExpressionNode.BinaryOp.*;
 import static AstNode.PrimitiveTypeNode.PrimitiveTypeKeyword.*;
 
@@ -171,6 +173,7 @@ public class IRGenerator extends AstVisitor {
         node.value = value;
     }
 
+    ///////////////////// method inline /////////////////////////////
     boolean inlineOn;
     HashSet<MethodDefinitionNode> inlineMethodSet =
         new HashSet<MethodDefinitionNode>();
@@ -179,6 +182,7 @@ public class IRGenerator extends AstVisitor {
     LinkedList<Operand> inlineResStack = new LinkedList<Operand>();
     LinkedList<String> inlineEndLabelStack = new LinkedList<String>();
     int inlineCnt = 0;
+
     boolean inlineMethod(MethodCallExpressionNode call,
                          MethodDefinitionNode method) throws Exception {
         if (inlineOn == false) return false;
@@ -200,7 +204,12 @@ public class IRGenerator extends AstVisitor {
         int numOfPara = call.actualParameterList.size();
         for (int i = 0; i < numOfPara; ++i) {
             String ref = method.formalArgumentList.get(i).variableName;
-            Operand var = call.actualParameterList.get(i).value;
+            Operand operand = call.actualParameterList.get(i).value;
+            Variable var = new Variable();
+            Move move = new Move();
+            move.dst = var;
+            move.src = operand;
+            codeList.addLast(move);
             inlineVarMap.put(ref, var);
         }
         inlineVarMapStack.addLast(inlineVarMap);
@@ -212,7 +221,10 @@ public class IRGenerator extends AstVisitor {
         inlineVarMapStack.removeLast();
         inlineResStack.removeLast();
         inlineEndLabelStack.removeLast();
+        codeList.addLast(new Nop());
         labelMap.put(endLabel, codeList.size());
+//        System.out.println(method.methodName);
+//        System.out.println(endLabel + " " + codeList.size());
         codeList.addLast(new Nop());
         return true;
     }
@@ -384,34 +396,38 @@ public class IRGenerator extends AstVisitor {
             logicCalculate(node);
             return;
         }
-        int sizeRecord = codeList.size();
+//        int sizeRecord = codeList.size();
         if (!node.lhs.exprType.getTypeName().equals("string"))
         if (node.op == ASSIGN && node.rhs instanceof BinaryExpressionNode) {
             BinaryExpressionNode rhs = (BinaryExpressionNode) node.rhs;
-            visit(node.lhs);
-            visit(rhs.lhs);
-            visit(rhs.rhs);
-            Operand x = rhs.lhs.value;
-            Operand y = rhs.rhs.value;
-            Operand z = node.lhs.value;
-            if (z == x || z == y) {
-                Binary bin = new Binary();
-                bin.dst = z;
-                bin.src = z == x ? y : x;
-                switch (rhs.op) {
-                    case ADD: bin.type = Binary.Type.ADD; break;
-                    case OR: bin.type = Binary.Type.OR; break;
-                    case XOR: bin.type = Binary.Type.XOR; break;
-                    case AND: bin.type = Binary.Type.AND; break;
-                    case MUL: bin.type = Binary.Type.IMUL; break;
-                }
-                if (bin.type != null) {
-                    codeList.addLast(bin);
-                    return;
+            if (node.lhs instanceof PrimitiveType &&
+                rhs.lhs instanceof PrimitiveType &&
+                rhs.rhs instanceof PrimitiveType) {
+                visit(node.lhs);
+                visit(rhs.lhs);
+                visit(rhs.rhs);
+                Operand x = rhs.lhs.value;
+                Operand y = rhs.rhs.value;
+                Operand z = node.lhs.value;
+                if (z == x || z == y) {
+                    Binary bin = new Binary();
+                    bin.dst = z;
+                    bin.src = z == x ? y : x;
+                    switch (rhs.op) {
+                        case ADD: bin.type = Binary.Type.ADD; break;
+                        case OR: bin.type = Binary.Type.OR; break;
+                        case XOR: bin.type = Binary.Type.XOR; break;
+                        case AND: bin.type = Binary.Type.AND; break;
+                        case MUL: bin.type = Binary.Type.IMUL; break;
+                    }
+                    if (bin.type != null) {
+                        codeList.addLast(bin);
+                        return;
+                    }
                 }
             }
         }
-        while (codeList.size() > sizeRecord) codeList.removeLast();
+//        while (codeList.size() > sizeRecord) codeList.removeLast();
         super.visit(node);
         if (node.lhs.exprType.getTypeName().equals("string")
             && node.op != ASSIGN) { // addString__

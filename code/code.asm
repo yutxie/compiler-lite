@@ -5,7 +5,7 @@ global string_ord
 global string_substring
 global string_parseInt
 global main
-global gcd
+global foo
 global print
 global toString
 global addString__
@@ -825,131 +825,132 @@ main_entry:
 		mov		rbp, rsp
 		sub		rsp, 0
 		push		r15
-		mov		rdi, 0
-		cmp		rdi, 0
+		push		r14
+		push		r13
+		push		r12
+		mov		r12, 7
+		mov		r14, 5
+		mov		r13, 3
+		mov		rdi, 7053
+		call	toString
+		mov		r15, rax
+		mov		rdi, r15
+		call	println
+		mov		r15, rax
+		mov		rdi, 7
+		cmp		rdi, 1
 		je		if_true_0
 		jne		if_false_0
 if_true_0:
-		mov		r15, 1
 		jmp		inline_0
 		jmp		if_end_0
 if_false_0:
-		mov		rdi, 1
-		mov		rsi, 0
-		call	gcd
-		mov		r15, rax
-		jmp		inline_0
+		nop
 if_end_0:
+		mov		r15, r14
+		mov		r14, r13
+		mov		r13, r15
+		mov		rdi, 1
+		mov		rsi, r14
+		mov		rdx, r13
+		call	foo
+		mov		r15, rax
+		mov		r15, r12
+		imul		r15, 1000
+		imul		r14, 10
+		add		r15, r14
+		add		r15, r13
+		mov		rdi, r15
+		call	toString
+		mov		r15, rax
+		mov		rdi, r15
+		call	println
+		mov		r15, rax
 		nop
 inline_0:
-		mov		rdi, r15
-		call	toString
-		mov		r15, rax
-		mov		rdi, r15
-		call	println
-		mov		r15, rax
-		mov		rdi, 1029
-		cmp		rdi, 0
-		je		if_true_1
-		jne		if_false_1
-if_true_1:
-		mov		r15, 3087
-		jmp		inline_1
-		jmp		if_end_1
-if_false_1:
-		mov		rdi, 3087
-		mov		rsi, 1029
-		call	gcd
-		mov		r15, rax
-		jmp		inline_1
-if_end_1:
-		nop
-inline_1:
-		mov		rdi, r15
-		call	toString
-		mov		r15, rax
-		mov		rdi, r15
-		call	println
-		mov		r15, rax
-		mov		rdi, 1368
-		cmp		rdi, 0
-		je		if_true_2
-		jne		if_false_2
-if_true_2:
-		mov		r15, 1539
-		jmp		inline_2
-		jmp		if_end_2
-if_false_2:
-		mov		rdi, 1539
-		mov		rsi, 1368
-		call	gcd
-		mov		r15, rax
-		jmp		inline_2
-if_end_2:
-		nop
-inline_2:
-		mov		rdi, r15
-		call	toString
-		mov		r15, rax
-		mov		rdi, r15
-		call	println
-		mov		r15, rax
 		mov		rax, 0
+		pop		r12
+		pop		r13
+		pop		r14
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
+		pop		r12
+		pop		r13
+		pop		r14
 		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
 
-gcd:
-gcd_entry:
+foo:
+foo_entry:
 		push		rbp
 		mov		rbp, rsp
 		sub		rsp, 0
-		push		r13
 		push		r15
+		push		r11
 		push		r14
-		mov		r13, rdi
-		mov		r14, rsi
-		mov		rax, r13
-		cqo
-		idiv		r14
-		mov		r15, rdx
-		cmp		r15, 0
-		je		if_true_3
-		jne		if_false_3
-if_true_3:
-		mov		rax, r14
-		pop		r14
-		pop		r15
-		pop		r13
-		mov		rsp, rbp
-		pop		rbp
-		ret
-		jmp		if_end_3
-if_false_3:
-		mov		rax, r13
-		cqo
-		idiv		r14
-		mov		r15, rdx
+		push		r13
+		push		r12
+		mov		r11, rdi
+		mov		r15, rsi
+		mov		r13, rdx
+		mov		r12, r11
+		imul		r12, 1000
+		mov		r14, r15
+		imul		r14, 10
+		add		r12, r14
+		mov		r14, r12
+		add		r14, r13
 		mov		rdi, r14
-		mov		rsi, r15
-		call	gcd
-		mov		r15, rax
-		mov		rax, r15
-		pop		r14
-		pop		r15
+		call	toString
+		mov		r14, rax
+		mov		rdi, r14
+		call	println
+		mov		r14, rax
+		cmp		r11, 1
+		je		if_true_1
+		jne		if_false_1
+if_true_1:
+		pop		r12
 		pop		r13
+		pop		r14
+		pop		r11
+		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
-if_end_3:
-		pop		r14
-		pop		r15
+		jmp		if_end_1
+if_false_1:
+		nop
+if_end_1:
+		mov		r14, r15
+		mov		r15, r13
+		mov		r13, r14
+		mov		rdi, 1
+		mov		rsi, r15
+		mov		rdx, r13
+		call	foo
+		mov		r14, rax
+		mov		r14, r11
+		imul		r14, 1000
+		imul		r15, 10
+		add		r14, r15
+		mov		r15, r14
+		add		r15, r13
+		mov		rdi, r15
+		call	toString
+		mov		r15, rax
+		mov		rdi, r15
+		call	println
+		mov		r15, rax
+		pop		r12
 		pop		r13
+		pop		r14
+		pop		r11
+		pop		r15
 		mov		rsp, rbp
 		pop		rbp
 		ret
