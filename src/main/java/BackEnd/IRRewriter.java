@@ -509,7 +509,14 @@ public class IRRewriter {
             mov rsi, b
             add a, rsi */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        Operand dst = ins.dst;
+        Operand dst;
+        if (ins.dst instanceof Address && ins.type == Binary.Type.IMUL) {
+            dst = registerConfig.get("rdi");
+            Move move = new Move();
+            move.dst = dst;
+            move.src = ins.dst;
+            res.addLast(move);
+        } else dst = ins.dst;
         Operand src;
         if (ins.src instanceof Address && ins.dst instanceof Address) {
             src = registerConfig.get("rsi");
@@ -523,6 +530,12 @@ public class IRRewriter {
         bin.src = src;
         bin.type = ins.type;
         res.addLast(bin);
+        if (dst != ins.dst) {
+            Move move = new Move();
+            move.dst = ins.dst;
+            move.src = dst;
+            res.addLast(move);
+        }
         return res;
     }
 
