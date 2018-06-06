@@ -20,7 +20,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
+            <state relative-caret-position="198">
               <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -32,21 +32,49 @@
       <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="174">
-              <caret line="239" column="18" selection-start-line="239" selection-start-column="18" selection-end-line="239" selection-end-column="18" />
+            <state relative-caret-position="304">
+              <caret line="237" column="20" selection-start-line="237" selection-start-column="20" selection-end-line="237" selection-end-column="20" />
               <folding>
                 <element signature="method#init#0;class#RegisterAllocator#0" />
                 <element signature="method#dfs#0;class#RegisterAllocator#0" />
                 <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
-                <element signature="e#3025#3035#0" expanded="true" />
-                <element signature="e#3214#3224#0" expanded="true" />
                 <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
                 <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
-                <element signature="e#4131#4139#0" expanded="true" />
                 <element signature="method#simplify#0;class#RegisterAllocator#0" />
                 <element signature="method#spill#0;class#RegisterAllocator#0" />
-                <element signature="e#6440#6449#0" expanded="true" />
-                <element signature="e#8003#8013#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalValueNumberer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1968">
+              <caret line="186" selection-start-line="186" selection-end-line="186" />
+              <folding>
+                <element signature="class#Value#0;class#LocalValueNumberer#0" />
+                <element signature="class#InstType#0;class#LocalValueNumberer#0" />
+                <element signature="class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#Pair#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#hashCode#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#equals#0;class#Pair#0;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#0;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#1;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#2;class#LocalValueNumberer#0" />
+                <element signature="method#getValue#1;class#LocalValueNumberer#0" />
+                <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+                <element signature="method#getImm#0;class#LocalValueNumberer#0" />
+                <element signature="method#getVar#0;class#LocalValueNumberer#0" />
+                <element signature="method#getVar#1;class#LocalValueNumberer#0" />
+                <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
+                <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#8;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#9;class#LocalValueNumberer#0" />
+                <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
               </folding>
             </state>
           </provider>
@@ -55,8 +83,8 @@
       <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="333" selection-start-line="333" selection-end-line="333" />
+            <state relative-caret-position="-1005">
+              <caret line="358" column="67" selection-start-line="358" selection-start-column="67" selection-end-line="358" selection-end-column="67" />
               <folding>
                 <element signature="e#343#360#0" expanded="true" />
                 <element signature="e#447#456#0" expanded="true" />
@@ -89,21 +117,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="525" column="9" selection-start-line="525" selection-start-column="9" selection-end-line="525" selection-end-column="9" />
+            <state relative-caret-position="299">
+              <caret line="506" column="45" selection-start-line="506" selection-start-column="45" selection-end-line="506" selection-end-column="45" />
               <folding>
+                <element signature="e#332#894#0" />
                 <element signature="e#900#1662#0" />
                 <element signature="e#1668#2676#0" />
                 <element signature="e#2708#4664#0" />
@@ -146,15 +166,16 @@
                 <element signature="e#17253#18126#0" />
                 <element signature="e#18132#18273#0" />
                 <element signature="e#18279#19506#0" />
-                <element signature="e#20612#21324#0" />
-                <element signature="e#21330#22255#0" />
-                <element signature="e#22261#23355#0" />
-                <element signature="e#23361#27103#0" />
-                <element signature="e#23918#23983#0" />
-                <element signature="e#25136#25200#0" />
-                <element signature="e#26457#26522#0" />
-                <element signature="e#27109#27760#0" />
-                <element signature="e#27766#28748#0" />
+                <element signature="e#19512#20175#0" />
+                <element signature="e#20181#20893#0" />
+                <element signature="e#20899#21824#0" />
+                <element signature="e#21830#22924#0" />
+                <element signature="e#22930#26672#0" />
+                <element signature="e#23487#23552#0" />
+                <element signature="e#24705#24769#0" />
+                <element signature="e#26026#26091#0" />
+                <element signature="e#26678#27329#0" />
+                <element signature="e#27335#28317#0" />
               </folding>
             </state>
           </provider>
@@ -191,7 +212,6 @@
       <find>short</find>
       <find>shortCutCnt</find>
       <find>rbx</find>
-      <find>push</find>
       <find>oprand</find>
       <find />
       <find>iterator</find>
@@ -202,6 +222,7 @@
       <find>def</find>
       <find>print</find>
       <find>assignAddress</find>
+      <find>push</find>
     </findStrings>
     <replaceStrings>
       <replace>dst</replace>
@@ -221,7 +242,6 @@
       <replace>LinkedList&lt;IRCode&gt;</replace>
       <replace>rewriteIndexAndMember</replace>
       <replace>memberAccess</replace>
-      <replace />
       <replace>colorable(false)</replace>
       <replace>Cmove</replace>
       <replace>CMOV</replace>
@@ -289,8 +309,8 @@
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
@@ -570,7 +590,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java</url>
-          <line>565</line>
+          <line>567</line>
           <properties />
           <option name="timeStamp" value="127" />
         </line-breakpoint>
@@ -607,15 +627,8 @@
           <properties />
           <option name="timeStamp" value="247" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <condition expression="method.methodName.equals(&quot;main&quot;)" language="JAVA" />
-          <url>file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java</url>
-          <line>88</line>
-          <properties />
-          <option name="timeStamp" value="255" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="256" />
+      <option name="time" value="258" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1028,38 +1041,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1862">
-          <caret line="226" column="25" selection-start-line="226" selection-start-column="25" selection-end-line="226" selection-end-column="25" />
-          <folding>
-            <element signature="class#Value#0;class#LocalValueNumberer#0" />
-            <element signature="class#InstType#0;class#LocalValueNumberer#0" />
-            <element signature="class#Pair#0;class#LocalValueNumberer#0" />
-            <element signature="method#Pair#0;class#Pair#0;class#LocalValueNumberer#0" />
-            <element signature="method#hashCode#0;class#Pair#0;class#LocalValueNumberer#0" />
-            <element signature="method#equals#0;class#Pair#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#1;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#2;class#LocalValueNumberer#0" />
-            <element signature="method#getValue#1;class#LocalValueNumberer#0" />
-            <element signature="method#getValue#2;class#LocalValueNumberer#0" />
-            <element signature="method#getImm#0;class#LocalValueNumberer#0" />
-            <element signature="method#getVar#0;class#LocalValueNumberer#0" />
-            <element signature="method#getVar#1;class#LocalValueNumberer#0" />
-            <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
-            <element signature="method#getInstType#0;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
-            <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#8;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#9;class#LocalValueNumberer#0" />
-            <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/IRCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -1104,9 +1085,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="525" column="9" selection-start-line="525" selection-start-column="9" selection-end-line="525" selection-end-column="9" />
+        <state relative-caret-position="299">
+          <caret line="506" column="45" selection-start-line="506" selection-start-column="45" selection-end-line="506" selection-end-column="45" />
           <folding>
+            <element signature="e#332#894#0" />
             <element signature="e#900#1662#0" />
             <element signature="e#1668#2676#0" />
             <element signature="e#2708#4664#0" />
@@ -1149,23 +1131,55 @@
             <element signature="e#17253#18126#0" />
             <element signature="e#18132#18273#0" />
             <element signature="e#18279#19506#0" />
-            <element signature="e#20612#21324#0" />
-            <element signature="e#21330#22255#0" />
-            <element signature="e#22261#23355#0" />
-            <element signature="e#23361#27103#0" />
-            <element signature="e#23918#23983#0" />
-            <element signature="e#25136#25200#0" />
-            <element signature="e#26457#26522#0" />
-            <element signature="e#27109#27760#0" />
-            <element signature="e#27766#28748#0" />
+            <element signature="e#19512#20175#0" />
+            <element signature="e#20181#20893#0" />
+            <element signature="e#20899#21824#0" />
+            <element signature="e#21830#22924#0" />
+            <element signature="e#22930#26672#0" />
+            <element signature="e#23487#23552#0" />
+            <element signature="e#24705#24769#0" />
+            <element signature="e#26026#26091#0" />
+            <element signature="e#26678#27329#0" />
+            <element signature="e#27335#28317#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1968">
+          <caret line="186" selection-start-line="186" selection-end-line="186" />
+          <folding>
+            <element signature="class#Value#0;class#LocalValueNumberer#0" />
+            <element signature="class#InstType#0;class#LocalValueNumberer#0" />
+            <element signature="class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#Pair#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#hashCode#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#equals#0;class#Pair#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#1;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#2;class#LocalValueNumberer#0" />
+            <element signature="method#getValue#1;class#LocalValueNumberer#0" />
+            <element signature="method#getValue#2;class#LocalValueNumberer#0" />
+            <element signature="method#getImm#0;class#LocalValueNumberer#0" />
+            <element signature="method#getVar#0;class#LocalValueNumberer#0" />
+            <element signature="method#getVar#1;class#LocalValueNumberer#0" />
+            <element signature="method#defineNewValue#0;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#3;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#5;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#6;class#LocalValueNumberer#0" />
+            <element signature="method#getInstType#1;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#8;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#9;class#LocalValueNumberer#0" />
+            <element signature="method#numberLocalValue#10;class#LocalValueNumberer#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="333" selection-start-line="333" selection-end-line="333" />
+        <state relative-caret-position="-1005">
+          <caret line="358" column="67" selection-start-line="358" selection-start-column="67" selection-end-line="358" selection-end-column="67" />
           <folding>
             <element signature="e#343#360#0" expanded="true" />
             <element signature="e#447#456#0" expanded="true" />
@@ -1199,28 +1213,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="239" column="18" selection-start-line="239" selection-start-column="18" selection-end-line="239" selection-end-column="18" />
+        <state relative-caret-position="304">
+          <caret line="237" column="20" selection-start-line="237" selection-start-column="20" selection-end-line="237" selection-end-column="20" />
           <folding>
             <element signature="method#init#0;class#RegisterAllocator#0" />
             <element signature="method#dfs#0;class#RegisterAllocator#0" />
             <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
-            <element signature="e#3025#3035#0" expanded="true" />
-            <element signature="e#3214#3224#0" expanded="true" />
             <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
             <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
-            <element signature="e#4131#4139#0" expanded="true" />
             <element signature="method#simplify#0;class#RegisterAllocator#0" />
             <element signature="method#spill#0;class#RegisterAllocator#0" />
-            <element signature="e#6440#6449#0" expanded="true" />
-            <element signature="e#8003#8013#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
+        <state relative-caret-position="198">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />

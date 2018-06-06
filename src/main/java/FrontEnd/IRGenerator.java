@@ -330,6 +330,7 @@ public class IRGenerator extends AstVisitor {
             logicCalculate(node);
             return;
         }
+        int sizeRecord = codeList.size();
         if (node.op == ASSIGN && node.rhs instanceof BinaryExpressionNode) {
             BinaryExpressionNode rhs = (BinaryExpressionNode) node.rhs;
             visit(node.lhs);
@@ -349,12 +350,13 @@ public class IRGenerator extends AstVisitor {
                     case AND: bin.type = Binary.Type.AND; break;
                     case MUL: bin.type = Binary.Type.IMUL; break;
                 }
-                if (node.op != null) {
+                if (bin.type != null) {
                     codeList.addLast(bin);
                     return;
                 }
             }
         }
+        while (codeList.size() > sizeRecord) codeList.removeLast();
         super.visit(node);
         if (node.lhs.exprType.getTypeName().equals("string")
             && node.op != ASSIGN) { // addString__

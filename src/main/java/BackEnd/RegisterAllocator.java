@@ -24,11 +24,7 @@ public class RegisterAllocator {
     void acllocateRegister(MethodEntity method) throws Exception {
         init(method);
         livenessAnalysis(method);
-//        method.printInformation();
-//        removeCnt = 0;
         removeUselessCode(method);
-//        System.out.println(method.methodName + " - " + removeCnt);
-//        method.printInformation();
         buildInterGraph(method);
         while (true) {
             if (simplify()) continue;
@@ -40,7 +36,6 @@ public class RegisterAllocator {
 
         IRRewriter irRewriter = new IRRewriter();
         irRewriter.rewriteIR(ir, method, assignedMap, registerConfig);
-//        if (method.methodName.equals("foo")) method.printInformation();
     }
     void init(MethodEntity method) {
         initLivenessAnalysis(method);
@@ -74,11 +69,12 @@ public class RegisterAllocator {
             bb.liveIn.clear();
             bb.liveOut.clear();
             for (IRCode ins : bb.codeList) {
-                bb.def.addAll(ins.def);
                 for (Variable var : ins.use)
                     if (!bb.def.contains(var))
                         bb.use.add(var);
 //                bb.use.addAll(ins.use);
+                bb.def.addAll(ins.def);
+
             }
         }
         // among blocks
@@ -237,7 +233,7 @@ public class RegisterAllocator {
                 ins.liveIn = new HashSet<Variable>(liveSet);
             }
         }
-//        if (method.methodName.equals("adjustHeap") || true) {
+//        if (method.methodName.equals("main")) {
 //            System.out.println("========== " + method.methodName);
 //            method.printInformation();
 //            interGraph.printInformation();

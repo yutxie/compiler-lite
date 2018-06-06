@@ -12,29 +12,6 @@ global println
 global getInt
 global getString
 
-global _global_i
-global _global_a0
-global _global_a1
-global _global_a2
-global _global_a3
-global _global_a4
-global _global_a5
-global _global_a6
-global _global_a7
-global _global_a8
-global _global_a9
-global _global_a10
-global _global_b0
-global _global_b1
-global _global_b2
-global _global_b3
-global _global_b4
-global _global_b5
-global _global_b6
-global _global_b7
-global _global_b8
-global _global_b9
-global _global_b10
 
 extern malloc
 extern printf
@@ -845,142 +822,155 @@ main:
 main_entry:
 		push		rbp
 		mov		rbp, rsp
-		sub		rsp, 184
-		push		r15
-		push		r13
+		sub		rsp, 0
 		push		r12
+		push		r11
+		push		r15
+		push		r9
 		push		r14
-		mov		qword [rel _global_i], 0
-		mov		qword [rel _global_a0], 0
-		mov		qword [rel _global_a1], 0
-		mov		qword [rel _global_a2], 0
-		mov		qword [rel _global_a3], 0
-		mov		qword [rel _global_a4], 0
-		mov		qword [rel _global_a5], 0
-		mov		qword [rel _global_a6], 0
-		mov		qword [rel _global_a7], 0
-		mov		qword [rel _global_a8], 0
-		mov		qword [rel _global_a9], 0
-		mov		qword [rel _global_a10], 0
-		mov		qword [rel _global_b0], 0
-		mov		qword [rel _global_b1], 0
-		mov		qword [rel _global_b2], 0
-		mov		qword [rel _global_b3], 0
-		mov		qword [rel _global_b4], 0
-		mov		qword [rel _global_b5], 0
-		mov		qword [rel _global_b6], 0
-		mov		qword [rel _global_b7], 0
-		mov		qword [rel _global_b8], 0
-		mov		qword [rel _global_b9], 0
-		mov		qword [rel _global_b10], 0
-		mov		r12, 0
-		call	getInt
-		mov		r15, rax
-		mov		qword [rel _global_i], 0
+		push		r13
+		push		r10
+		push		r8
+		mov		r12, 10000
+		mov		r13, 0
+		mov		r14, 2800
+		mov		r15, 0
+		mov		rdi, 2801
+		inc		rdi
+		imul		rdi, 8
+		push		r8
+		push		r9
+		push		r10
+		push		r11
+		mov		rdi, rdi
+		call	malloc
+		pop		r11
+		pop		r10
+		pop		r9
+		pop		r8
+		mov		r10, rax
+		mov		rdi, 2801
+		mov		qword [rax+0], rdi
+		mov		r11, 0
 		jmp		loop_cond_0
 loop_body_0:
-		add		qword [rel _global_a0], 1
-		add		qword [rel _global_a1], 1
-		add		qword [rel _global_a2], 1
-		mov		r14, qword [rel _global_a0]
-		add		r14, 1
-		mov		qword [rel _global_a3], r14
-		mov		r14, qword [rel _global_a1]
-		add		r14, 1
-		mov		qword [rel _global_a4], r14
-		mov		r13, qword [rel _global_a2]
-		add		r13, 1
-		mov		qword [rel _global_a5], r13
-		mov		rsi, qword [rel _global_a3]
-		mov		qword [rel _global_a6], rsi
-		mov		qword [rel _global_a7], r14
-		mov		qword [rel _global_a8], r13
-		mov		rsi, qword [rel _global_a3]
-		mov		qword [rel _global_a9], rsi
-		mov		r14, qword [rel _global_a1]
-		add		r14, 0
-		mov		qword [rel _global_a10], r14
-		mov		rsi, qword [rel _global_a0]
-		mov		qword [rel _global_b0], rsi
-		mov		rsi, qword [rel _global_a1]
-		mov		qword [rel _global_b1], rsi
-		mov		rsi, qword [rel _global_a2]
-		mov		qword [rel _global_b2], rsi
-		mov		rsi, qword [rel _global_a3]
-		mov		qword [rel _global_b3], rsi
-		mov		rsi, qword [rel _global_a7]
-		mov		qword [rel _global_b4], rsi
-		mov		qword [rel _global_b5], r13
-		mov		rsi, qword [rel _global_a3]
-		mov		qword [rel _global_b6], rsi
-		mov		rsi, qword [rel _global_a7]
-		mov		qword [rel _global_b7], rsi
-		mov		qword [rel _global_b8], r13
-		mov		rsi, qword [rel _global_b6]
-		mov		qword [rel _global_b9], rsi
-		mov		qword [rel _global_b10], r14
-		mov		rax, qword [rel _global_i]
-		mov		rsi, 10000000
+		inc		r11
+loop_cond_0:
+		cmp		r11, 2801
+		jl		loop_body_0
+loop_end_0:
+		jmp		loop_cond_1
+loop_body_1:
+		mov		r9, r13
+		inc		r13
+		mov		rax, r12
+		mov		rsi, 5
 		cqo
 		idiv		rsi
-		mov		r14, rdx
-		cmp		r14, 0
+		mov		r11, rax
+		mov		rbx, r10
+		mov		rcx, r9
+		mov		qword [rbx+rcx*8+8], r11
+loop_cond_1:
+		mov		r11, r13
+		sub		r11, r14
+		cmp		r11, 0
+		jne		loop_body_1
+		je		loop_end_1
+loop_end_1:
+		jmp		loop_cond_2
+loop_body_2:
+		mov		r9, 0
+		mov		r13, r14
+		imul		r13, 2
+		mov		r11, r13
+		cmp		r11, 0
 		je		if_true_0
 		jne		if_false_0
 if_true_0:
-		mov		r14, r12
-		add		r14, qword [rel _global_a0]
-		add		r14, qword [rel _global_a1]
-		add		r14, qword [rel _global_a2]
-		add		r14, qword [rel _global_a3]
-		add		r14, qword [rel _global_a4]
-		add		r14, qword [rel _global_a5]
-		add		r14, qword [rel _global_a6]
-		add		r14, qword [rel _global_a7]
-		add		r14, qword [rel _global_a8]
-		add		r14, qword [rel _global_a9]
-		add		r14, qword [rel _global_a10]
-		add		r14, qword [rel _global_b0]
-		add		r14, qword [rel _global_b1]
-		add		r14, qword [rel _global_b2]
-		add		r14, qword [rel _global_b3]
-		add		r14, qword [rel _global_b4]
-		add		r14, qword [rel _global_b5]
-		add		r14, qword [rel _global_b6]
-		add		r14, qword [rel _global_b7]
-		add		r14, qword [rel _global_b8]
-		add		r14, qword [rel _global_b9]
-		add		r14, qword [rel _global_b10]
-		and		r14, 2147450879
-		mov		r12, r14
+		jmp		loop_end_2
 		jmp		if_end_0
 if_false_0:
 		nop
 if_end_0:
-		add		qword [rel _global_i], 1
-loop_cond_0:
-		cmp		qword [rel _global_i], r15
-		jl		loop_body_0
-		jge		loop_end_0
-loop_end_0:
-		mov		rdi, r12
+		mov		r13, r14
+		jmp		loop_cond_3
+loop_body_3:
+		mov		rbx, r10
+		mov		rcx, r13
+		mov		r8, qword [rbx+rcx*8+8]
+		imul		r8, r12
+		add		r9, r8
+		dec		r11
+		mov		rax, r9
+		cqo
+		idiv		r11
+		mov		r8, rdx
+		mov		rbx, r10
+		mov		rcx, r13
+		mov		qword [rbx+rcx*8+8], r8
+		mov		r8, r11
+		dec		r11
+		mov		rax, r9
+		cqo
+		idiv		r8
+		mov		r9, rax
+		dec		r13
+		cmp		r13, 0
+		je		if_true_1
+		jne		if_false_1
+if_true_1:
+		jmp		loop_end_3
+		jmp		if_end_1
+if_false_1:
+		nop
+if_end_1:
+		imul		r9, r13
+loop_cond_3:
+		jmp		loop_body_3
+loop_end_3:
+		sub		r14, 14
+		mov		rax, r9
+		cqo
+		idiv		r12
+		mov		r13, rax
+		add		r15, r13
+		mov		rdi, r15
 		call	toString
 		mov		r15, rax
 		mov		rdi, r15
-		call	println
+		call	print
+		mov		r15, rax
+		mov		rax, r9
+		cqo
+		idiv		r12
+		mov		r15, rdx
+loop_cond_2:
+		jmp		loop_body_2
+loop_end_2:
+		mov		rdi, str_const_0
+		call	print
 		mov		r15, rax
 		mov		rax, 0
-		pop		r14
-		pop		r12
+		pop		r8
+		pop		r10
 		pop		r13
+		pop		r14
+		pop		r9
 		pop		r15
+		pop		r11
+		pop		r12
 		mov		rsp, rbp
 		pop		rbp
 		ret
-		pop		r14
-		pop		r12
+		pop		r8
+		pop		r10
 		pop		r13
+		pop		r14
+		pop		r9
 		pop		r15
+		pop		r11
+		pop		r12
 		mov		rsp, rbp
 		pop		rbp
 		ret
@@ -992,52 +982,10 @@ stringbuffer:
 
 SECTION .data
 
-_global_i:
-		dq 0
-_global_a0:
-		dq 0
-_global_a1:
-		dq 0
-_global_a2:
-		dq 0
-_global_a3:
-		dq 0
-_global_a4:
-		dq 0
-_global_a5:
-		dq 0
-_global_a6:
-		dq 0
-_global_a7:
-		dq 0
-_global_a8:
-		dq 0
-_global_a9:
-		dq 0
-_global_a10:
-		dq 0
-_global_b0:
-		dq 0
-_global_b1:
-		dq 0
-_global_b2:
-		dq 0
-_global_b3:
-		dq 0
-_global_b4:
-		dq 0
-_global_b5:
-		dq 0
-_global_b6:
-		dq 0
-_global_b7:
-		dq 0
-_global_b8:
-		dq 0
-_global_b9:
-		dq 0
-_global_b10:
-		dq 0
+	dq	1
+str_const_0:
+	db	10, 0
+
 intbuffer:
         dq 0
 format1:
