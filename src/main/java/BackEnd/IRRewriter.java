@@ -506,21 +506,12 @@ public class IRRewriter {
 
     LinkedList<IRCode> spillCode(Binary ins) {
         /*  bin a, b -->
-            mov rdi, a
             mov rsi, b
-            add rdi, rsi
-            mov a, rdi */
+            add a, rsi */
         LinkedList<IRCode> res = new LinkedList<IRCode>();
-        Operand dst;
-        if (ins.dst instanceof Address) {
-            dst = registerConfig.get("rdi");
-            Move move = new Move();
-            move.dst = dst;
-            move.src = ins.dst;
-            res.addLast(move);
-        } else dst = ins.dst;
+        Operand dst = ins.dst;
         Operand src;
-        if (ins.src instanceof Address) {
+        if (ins.src instanceof Address && ins.dst instanceof Address) {
             src = registerConfig.get("rsi");
             Move move = new Move();
             move.dst = src;
@@ -532,12 +523,6 @@ public class IRRewriter {
         bin.src = src;
         bin.type = ins.type;
         res.addLast(bin);
-        if (ins.dst instanceof Address) {
-            Move move = new Move();
-            move.dst = ins.dst;
-            move.src = dst;
-            res.addLast(move);
-        }
         return res;
     }
 

@@ -32,26 +32,68 @@
       <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+            <state relative-caret-position="174">
+              <caret line="239" column="18" selection-start-line="239" selection-start-column="18" selection-end-line="239" selection-end-column="18" />
               <folding>
                 <element signature="method#init#0;class#RegisterAllocator#0" />
                 <element signature="method#dfs#0;class#RegisterAllocator#0" />
                 <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+                <element signature="e#3025#3035#0" expanded="true" />
+                <element signature="e#3214#3224#0" expanded="true" />
                 <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
                 <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
+                <element signature="e#4131#4139#0" expanded="true" />
                 <element signature="method#simplify#0;class#RegisterAllocator#0" />
                 <element signature="method#spill#0;class#RegisterAllocator#0" />
+                <element signature="e#6440#6449#0" expanded="true" />
+                <element signature="e#8003#8013#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DefineAndUseCalculator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+      <file leaf-file-name="IRGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+            <state relative-caret-position="230">
+              <caret line="333" selection-start-line="333" selection-end-line="333" />
+              <folding>
+                <element signature="e#343#360#0" expanded="true" />
+                <element signature="e#447#456#0" expanded="true" />
+                <element signature="method#visit#0;class#IRGenerator#0" />
+                <element signature="method#visit#1;class#IRGenerator#0" />
+                <element signature="method#visit#2;class#IRGenerator#0" />
+                <element signature="method#visit#3;class#IRGenerator#0" />
+                <element signature="method#visit#4;class#IRGenerator#0" />
+                <element signature="method#visit#5;class#IRGenerator#0" />
+                <element signature="method#visit#6;class#IRGenerator#0" />
+                <element signature="method#visit#7;class#IRGenerator#0" />
+                <element signature="method#visit#8;class#IRGenerator#0" />
+                <element signature="method#visit#9;class#IRGenerator#0" />
+                <element signature="method#rewriteNew#0;class#IRGenerator#0" />
+                <element signature="method#visit#10;class#IRGenerator#0" />
+                <element signature="method#logicCalculate#0;class#IRGenerator#0" />
+                <element signature="method#visit#11;class#IRGenerator#0" />
+                <element signature="method#conditionJump#0;class#IRGenerator#0" />
+                <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
+                <element signature="method#conditionJump#1;class#IRGenerator#0" />
+                <element signature="method#conditionJump#2;class#IRGenerator#0" />
+                <element signature="method#visit#13;class#IRGenerator#0" />
+                <element signature="method#visit#14;class#IRGenerator#0" />
+                <element signature="method#visit#15;class#IRGenerator#0" />
+                <element signature="method#visit#16;class#IRGenerator#0" />
+                <element signature="method#visit#17;class#IRGenerator#0" />
+                <element signature="method#visit#18;class#IRGenerator#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AstVisitor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
             </state>
           </provider>
         </entry>
@@ -59,41 +101,61 @@
       <file leaf-file-name="IRRewriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="94" column="67" selection-start-line="94" selection-start-column="67" selection-end-line="94" selection-end-column="67" />
+            <state relative-caret-position="247">
+              <caret line="525" column="9" selection-start-line="525" selection-start-column="9" selection-end-line="525" selection-end-column="9" />
               <folding>
-                <element signature="e#332#894#0" />
                 <element signature="e#900#1662#0" />
                 <element signature="e#1668#2676#0" />
-                <element signature="e#4297#4576#0" />
-                <element signature="e#4582#4857#0" />
-                <element signature="e#4863#5143#0" />
-                <element signature="e#5149#5481#0" />
-                <element signature="e#5487#5970#0" />
-                <element signature="e#5976#6249#0" />
-                <element signature="e#6255#6475#0" />
-                <element signature="e#6481#6755#0" />
-                <element signature="e#6761#6980#0" />
-                <element signature="e#6986#7247#0" />
-                <element signature="e#7253#7481#0" />
-                <element signature="e#7487#8289#0" />
-                <element signature="e#8295#8424#0" />
-                <element signature="e#8430#8555#0" />
-                <element signature="e#8561#8691#0" />
-                <element signature="e#8697#8867#0" />
-                <element signature="e#8873#9206#0" />
-                <element signature="e#9212#9335#0" />
-                <element signature="e#9429#9553#0" />
+                <element signature="e#2708#4664#0" />
+                <element signature="e#4670#4949#0" />
+                <element signature="e#4955#5230#0" />
+                <element signature="e#5236#5516#0" />
+                <element signature="e#5522#5854#0" />
+                <element signature="e#5860#6343#0" />
+                <element signature="e#6349#6622#0" />
+                <element signature="e#6628#6848#0" />
+                <element signature="e#6854#7128#0" />
+                <element signature="e#7134#7353#0" />
+                <element signature="e#7359#7620#0" />
+                <element signature="e#7626#7854#0" />
+                <element signature="e#7860#8662#0" />
+                <element signature="e#8668#8797#0" />
+                <element signature="e#8803#8928#0" />
+                <element signature="e#8934#9064#0" />
+                <element signature="e#9070#9240#0" />
+                <element signature="e#9246#9579#0" />
+                <element signature="e#9585#9708#0" />
+                <element signature="e#9802#9926#0" />
+                <element signature="e#10147#12091#0" />
+                <element signature="e#10951#11019#0" />
+                <element signature="e#12097#12275#0" />
+                <element signature="e#12281#12676#0" />
+                <element signature="e#12682#12997#0" />
+                <element signature="e#13003#13795#0" />
+                <element signature="e#13801#13944#0" />
+                <element signature="e#13950#14089#0" />
+                <element signature="e#14095#14239#0" />
+                <element signature="e#14245#14428#0" />
+                <element signature="e#14434#14781#0" />
+                <element signature="e#14787#14924#0" />
+                <element signature="e#14930#15027#0" />
+                <element signature="e#15033#15171#0" />
+                <element signature="e#15177#15273#0" />
+                <element signature="e#15386#15748#0" />
+                <element signature="e#15754#17247#0" />
+                <element signature="e#17253#18126#0" />
+                <element signature="e#18132#18273#0" />
+                <element signature="e#18279#19506#0" />
+                <element signature="e#20612#21324#0" />
+                <element signature="e#21330#22255#0" />
+                <element signature="e#22261#23355#0" />
+                <element signature="e#23361#27103#0" />
+                <element signature="e#23918#23983#0" />
+                <element signature="e#25136#25200#0" />
+                <element signature="e#26457#26522#0" />
+                <element signature="e#27109#27760#0" />
+                <element signature="e#27766#28748#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllVariableCalculator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1368">
-              <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -131,7 +193,7 @@
       <find>rbx</find>
       <find>push</find>
       <find>oprand</find>
-      <find>new V</find>
+      <find />
       <find>iterator</find>
       <find>define</find>
       <find>equals</find>
@@ -147,7 +209,7 @@
       <replace>assignAddress</replace>
       <replace>src0</replace>
       <replace>src1</replace>
-      <replace>return spillCode</replace>
+      <replace />
       <replace>generateCode</replace>
       <replace>offsetNumber</replace>
       <replace>r9</replace>
@@ -159,7 +221,7 @@
       <replace>LinkedList&lt;IRCode&gt;</replace>
       <replace>rewriteIndexAndMember</replace>
       <replace>memberAccess</replace>
-      <replace>int i = 8</replace>
+      <replace />
       <replace>colorable(false)</replace>
       <replace>Cmove</replace>
       <replace>CMOV</replace>
@@ -222,13 +284,13 @@
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/MethodCall.java" />
         <option value="$PROJECT_DIR$/src/main/java/IR/MethodEntity.java" />
-        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Operand/Immediate.java" />
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Unary.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
@@ -254,8 +316,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,21 +347,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="IRCode" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="compiler-lite" type="b2602c69:ProjectViewProjectNode" />
-              <item name="compiler-lite" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="IRCode" type="462c0819:PsiDirectoryNode" />
-              <item name="Operand" type="462c0819:PsiDirectoryNode" />
+              <item name="BackEnd" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -459,11 +512,12 @@
     </layout>
     <layout-to-restore>
       <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24980783" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="bottom" id="Messages" order="12" weight="0.3249258" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Tool Output" order="11" weight="0.32740742" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.4653313" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -473,7 +527,6 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.2857143" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
-      <window_info anchor="bottom" id="ANTLR Preview" order="10" weight="0.28635016" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.32789317" />
       <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39465874" />
@@ -483,8 +536,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info id="Capture Tool" order="6" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="10" weight="0.28635016" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3249258" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info id="Favorites" order="5" side_tool="true" />
     </layout-to-restore>
@@ -517,7 +570,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java</url>
-          <line>540</line>
+          <line>565</line>
           <properties />
           <option name="timeStamp" value="127" />
         </line-breakpoint>
@@ -554,25 +607,39 @@
           <properties />
           <option name="timeStamp" value="247" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="method.methodName.equals(&quot;main&quot;)" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="255" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="248" />
+      <option name="time" value="256" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="((IndexAccessExprContext)context.children.get(3)).index" custom="AstBuilder.MxParser.IndexAccessExprContext" />
         <watch expression="classDefinition" />
+        <watch expression="codeList" language="JAVA" />
+        <watch expression="bin.dst" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
       <expression>
+        <expression-string>method.methodName.equals(&quot;main&quot;)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>bb.leadLabel.equals(&quot;loop_body_1&quot;)</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>ins.dst.getName().equals(&quot;$_global_i&quot;) &amp;&amp; ins.src.getName().equals(&quot;$ending&quot;)</expression-string>
+        <expression-string />
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -587,7 +654,7 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>bb.leadLabel.equals(&quot;improve_entry&quot;) &amp;&amp; removeCnt &gt; 0</expression-string>
+        <expression-string />
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -597,17 +664,12 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>bb.leadLabel.equals(&quot;improve_entry&quot;) &amp;&amp; removeCnt == 2</expression-string>
+        <expression-string />
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
         <expression-string>bb.leadLabel.equals()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>var.global == true</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -869,13 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IR/MethodEntity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -921,13 +976,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="481" column="23" selection-start-line="481" selection-start-column="23" selection-end-line="481" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1030,70 +1078,142 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="e#176#177#0" expanded="true" />
-            <element signature="e#259#260#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/AllVariableCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1368">
-          <caret line="74" column="7" lean-forward="true" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="94" column="67" selection-start-line="94" selection-start-column="67" selection-end-line="94" selection-end-column="67" />
-          <folding>
-            <element signature="e#332#894#0" />
-            <element signature="e#900#1662#0" />
-            <element signature="e#1668#2676#0" />
-            <element signature="e#4297#4576#0" />
-            <element signature="e#4582#4857#0" />
-            <element signature="e#4863#5143#0" />
-            <element signature="e#5149#5481#0" />
-            <element signature="e#5487#5970#0" />
-            <element signature="e#5976#6249#0" />
-            <element signature="e#6255#6475#0" />
-            <element signature="e#6481#6755#0" />
-            <element signature="e#6761#6980#0" />
-            <element signature="e#6986#7247#0" />
-            <element signature="e#7253#7481#0" />
-            <element signature="e#7487#8289#0" />
-            <element signature="e#8295#8424#0" />
-            <element signature="e#8430#8555#0" />
-            <element signature="e#8561#8691#0" />
-            <element signature="e#8697#8867#0" />
-            <element signature="e#8873#9206#0" />
-            <element signature="e#9212#9335#0" />
-            <element signature="e#9429#9553#0" />
-          </folding>
+          <caret line="74" column="7" selection-start-line="74" selection-start-column="7" selection-end-line="74" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state relative-caret-position="19">
           <caret line="42" column="60" selection-start-line="42" selection-start-column="60" selection-end-line="42" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/AstVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="525" column="9" selection-start-line="525" selection-start-column="9" selection-end-line="525" selection-end-column="9" />
+          <folding>
+            <element signature="e#900#1662#0" />
+            <element signature="e#1668#2676#0" />
+            <element signature="e#2708#4664#0" />
+            <element signature="e#4670#4949#0" />
+            <element signature="e#4955#5230#0" />
+            <element signature="e#5236#5516#0" />
+            <element signature="e#5522#5854#0" />
+            <element signature="e#5860#6343#0" />
+            <element signature="e#6349#6622#0" />
+            <element signature="e#6628#6848#0" />
+            <element signature="e#6854#7128#0" />
+            <element signature="e#7134#7353#0" />
+            <element signature="e#7359#7620#0" />
+            <element signature="e#7626#7854#0" />
+            <element signature="e#7860#8662#0" />
+            <element signature="e#8668#8797#0" />
+            <element signature="e#8803#8928#0" />
+            <element signature="e#8934#9064#0" />
+            <element signature="e#9070#9240#0" />
+            <element signature="e#9246#9579#0" />
+            <element signature="e#9585#9708#0" />
+            <element signature="e#9802#9926#0" />
+            <element signature="e#10147#12091#0" />
+            <element signature="e#10951#11019#0" />
+            <element signature="e#12097#12275#0" />
+            <element signature="e#12281#12676#0" />
+            <element signature="e#12682#12997#0" />
+            <element signature="e#13003#13795#0" />
+            <element signature="e#13801#13944#0" />
+            <element signature="e#13950#14089#0" />
+            <element signature="e#14095#14239#0" />
+            <element signature="e#14245#14428#0" />
+            <element signature="e#14434#14781#0" />
+            <element signature="e#14787#14924#0" />
+            <element signature="e#14930#15027#0" />
+            <element signature="e#15033#15171#0" />
+            <element signature="e#15177#15273#0" />
+            <element signature="e#15386#15748#0" />
+            <element signature="e#15754#17247#0" />
+            <element signature="e#17253#18126#0" />
+            <element signature="e#18132#18273#0" />
+            <element signature="e#18279#19506#0" />
+            <element signature="e#20612#21324#0" />
+            <element signature="e#21330#22255#0" />
+            <element signature="e#22261#23355#0" />
+            <element signature="e#23361#27103#0" />
+            <element signature="e#23918#23983#0" />
+            <element signature="e#25136#25200#0" />
+            <element signature="e#26457#26522#0" />
+            <element signature="e#27109#27760#0" />
+            <element signature="e#27766#28748#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/FrontEnd/IRGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="333" selection-start-line="333" selection-end-line="333" />
+          <folding>
+            <element signature="e#343#360#0" expanded="true" />
+            <element signature="e#447#456#0" expanded="true" />
+            <element signature="method#visit#0;class#IRGenerator#0" />
+            <element signature="method#visit#1;class#IRGenerator#0" />
+            <element signature="method#visit#2;class#IRGenerator#0" />
+            <element signature="method#visit#3;class#IRGenerator#0" />
+            <element signature="method#visit#4;class#IRGenerator#0" />
+            <element signature="method#visit#5;class#IRGenerator#0" />
+            <element signature="method#visit#6;class#IRGenerator#0" />
+            <element signature="method#visit#7;class#IRGenerator#0" />
+            <element signature="method#visit#8;class#IRGenerator#0" />
+            <element signature="method#visit#9;class#IRGenerator#0" />
+            <element signature="method#rewriteNew#0;class#IRGenerator#0" />
+            <element signature="method#visit#10;class#IRGenerator#0" />
+            <element signature="method#logicCalculate#0;class#IRGenerator#0" />
+            <element signature="method#visit#11;class#IRGenerator#0" />
+            <element signature="method#conditionJump#0;class#IRGenerator#0" />
+            <element signature="method#trivialConditionJump#0;class#IRGenerator#0" />
+            <element signature="method#conditionJump#1;class#IRGenerator#0" />
+            <element signature="method#conditionJump#2;class#IRGenerator#0" />
+            <element signature="method#visit#13;class#IRGenerator#0" />
+            <element signature="method#visit#14;class#IRGenerator#0" />
+            <element signature="method#visit#15;class#IRGenerator#0" />
+            <element signature="method#visit#16;class#IRGenerator#0" />
+            <element signature="method#visit#17;class#IRGenerator#0" />
+            <element signature="method#visit#18;class#IRGenerator#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <state relative-caret-position="174">
+          <caret line="239" column="18" selection-start-line="239" selection-start-column="18" selection-end-line="239" selection-end-column="18" />
           <folding>
             <element signature="method#init#0;class#RegisterAllocator#0" />
             <element signature="method#dfs#0;class#RegisterAllocator#0" />
             <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+            <element signature="e#3025#3035#0" expanded="true" />
+            <element signature="e#3214#3224#0" expanded="true" />
             <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
             <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
+            <element signature="e#4131#4139#0" expanded="true" />
             <element signature="method#simplify#0;class#RegisterAllocator#0" />
             <element signature="method#spill#0;class#RegisterAllocator#0" />
+            <element signature="e#6440#6449#0" expanded="true" />
+            <element signature="e#8003#8013#0" expanded="true" />
           </folding>
         </state>
       </provider>

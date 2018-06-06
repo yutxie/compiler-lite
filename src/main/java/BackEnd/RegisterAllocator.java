@@ -75,7 +75,10 @@ public class RegisterAllocator {
             bb.liveOut.clear();
             for (IRCode ins : bb.codeList) {
                 bb.def.addAll(ins.def);
-                bb.use.addAll(ins.use);
+                for (Variable var : ins.use)
+                    if (!bb.def.contains(var))
+                        bb.use.add(var);
+//                bb.use.addAll(ins.use);
             }
         }
         // among blocks
@@ -234,7 +237,7 @@ public class RegisterAllocator {
                 ins.liveIn = new HashSet<Variable>(liveSet);
             }
         }
-//        if (method.methodName.equals("adjustHeap")) {
+//        if (method.methodName.equals("adjustHeap") || true) {
 //            System.out.println("========== " + method.methodName);
 //            method.printInformation();
 //            interGraph.printInformation();

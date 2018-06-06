@@ -330,6 +330,31 @@ public class IRGenerator extends AstVisitor {
             logicCalculate(node);
             return;
         }
+        if (node.op == ASSIGN && node.rhs instanceof BinaryExpressionNode) {
+            BinaryExpressionNode rhs = (BinaryExpressionNode) node.rhs;
+            visit(node.lhs);
+            visit(rhs.lhs);
+            visit(rhs.rhs);
+            Operand x = rhs.lhs.value;
+            Operand y = rhs.rhs.value;
+            Operand z = node.lhs.value;
+            if (z == x || z == y) {
+                Binary bin = new Binary();
+                bin.dst = z;
+                bin.src = z == x ? y : x;
+                switch (rhs.op) {
+                    case ADD: bin.type = Binary.Type.ADD; break;
+                    case OR: bin.type = Binary.Type.OR; break;
+                    case XOR: bin.type = Binary.Type.XOR; break;
+                    case AND: bin.type = Binary.Type.AND; break;
+                    case MUL: bin.type = Binary.Type.IMUL; break;
+                }
+                if (node.op != null) {
+                    codeList.addLast(bin);
+                    return;
+                }
+            }
+        }
         super.visit(node);
         if (node.lhs.exprType.getTypeName().equals("string")
             && node.op != ASSIGN) { // addString__
