@@ -71,10 +71,14 @@ public class IRRewriter {
             Move move = new Move();
             move.dst = base;
             move.src = indexAccess.array;
+            if (indexAccess.array instanceof Variable)
+                move.allVariable.add((Variable) indexAccess.array);
             codeList.addLast(move);
             move = new Move();
             move.dst = index;
             move.src = indexAccess.index;
+            if (indexAccess.index instanceof Variable)
+                move.allVariable.add((Variable) indexAccess.index);
             codeList.addLast(move);
             Address addr = new Address();
             addr.base = base;
@@ -87,6 +91,8 @@ public class IRRewriter {
             Move move = new Move();
             move.dst = base;
             move.src = memberAccess.object;
+            if (memberAccess.object instanceof Variable)
+                move.allVariable.add((Variable) memberAccess.object);
             codeList.addLast(move);
             int index = 0;
             ClassDefinitionNode classDef = (ClassDefinitionNode) memberAccess.memberVar.parent;
@@ -321,7 +327,8 @@ public class IRRewriter {
     Operand assignAddress(Operand var) throws Exception {
         if (var instanceof Variable) {
             Address addr = varToAddrMap.get(var);
-            if (addr == null) throw new Exception("no address assigned to " + var.getName());
+            if (addr == null)
+                throw new Exception("no address assigned to " + var.getName());
             else return addr;
         } else return var;
     }
