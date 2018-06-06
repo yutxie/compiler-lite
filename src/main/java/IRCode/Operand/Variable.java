@@ -12,7 +12,7 @@ public class Variable extends Operand {
     static int tmpCnt = 0;
 
     public Variable(String name) {
-        this.name = name;
+        this.name = name + tmpCnt++;
     }
 
     public Variable() {

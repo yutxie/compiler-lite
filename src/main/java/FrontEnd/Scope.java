@@ -29,10 +29,11 @@ public class Scope {
     }
 
     public void define(String varName, Variable var) throws Exception {
-        if (varMap.get(varName) != null)
-            return;
-//            throw new Exception("var " + varName + " dupllicated");
-        else varMap.put(varName, var);
+        varMap.put(varName, var);
+//        if (varMap.get(varName) != null)
+//            return;
+////            throw new Exception("var " + varName + " dupllicated");
+//        else varMap.put(varName, var);
     }
 
     public Variable getReg(String varName) throws Exception {

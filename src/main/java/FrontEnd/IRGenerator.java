@@ -85,7 +85,13 @@ public class IRGenerator extends AstVisitor {
                 (DefinitionExpressionNode) classNode.scope.get(node.referenceName);
             node.value = value;
         }
-        else node.value = node.scope.getReg(node.referenceName);
+        else {
+            Operand var = null;
+            if (!inlineVarMapStack.isEmpty())
+                var = inlineVarMapStack.getLast().get(node.referenceName);
+            if (var != null) node.value = var;
+            else node.value = node.scope.getReg(node.referenceName);
+        }
     }
 
     @Override
@@ -163,19 +169,63 @@ public class IRGenerator extends AstVisitor {
         node.value = value;
     }
 
+    HashSet<MethodDefinitionNode> inlineMethodSet =
+        new HashSet<MethodDefinitionNode>();
+    LinkedList<HashMap<String, Operand>> inlineVarMapStack =
+        new LinkedList<HashMap<String, Operand>>();
+    LinkedList<Operand> inlineResStack = new LinkedList<Operand>();
+    LinkedList<String> inlineEndLabelStack = new LinkedList<String>();
+    int inlineCnt = 0;
+    boolean inlineMethod(MethodCallExpressionNode call,
+                         MethodDefinitionNode method) throws Exception {
+        if (method.methodName.equals("string_length") ||
+            method.methodName.equals("string_ord") ||
+            method.methodName.equals("string_parseInt") ||
+            method.methodName.equals("string_substring") ||
+            method.methodName.equals("getInt") ||
+            method.methodName.equals("getString") ||
+            method.methodName.equals("print") ||
+            method.methodName.equals("println") ||
+            method.methodName.equals("toString") ||
+            method.methodName.equals("addString__")) return false;
+        if (inlineMethodSet.contains(method)) return false;
+        inlineMethodSet.add(method);
+        HashMap<String, Operand> inlineVarMap = new HashMap<String, Operand>();
+        int numOfPara = call.actualParameterList.size();
+        for (int i = 0; i < numOfPara; ++i) {
+            String ref = method.formalArgumentList.get(i).variableName;
+            Operand var = call.actualParameterList.get(i).value;
+            inlineVarMap.put(ref, var);
+        }
+        inlineVarMapStack.addLast(inlineVarMap);
+        inlineResStack.addLast(call.value = new Variable());
+        String endLabel = "inline_" + inlineCnt++;
+        inlineEndLabelStack.addLast(endLabel);
+        visit(method.block);
+        inlineMethodSet.remove(method);
+        inlineVarMapStack.removeLast();
+        inlineResStack.removeLast();
+        inlineEndLabelStack.removeLast();
+        labelMap.put(endLabel, codeList.size());
+        codeList.addLast(new Nop());
+        return true;
+    }
+
     @Override
     void visit(MethodCallExpressionNode node) throws Exception {
         super.visit(node);
-        node.value = new Variable();
-        MethodCall ins = new MethodCall();
-        ins.dst = node.value;
         String methodName = node.caller.referenceName;
         MethodDefinitionNode methodDef = node.scope.getMethod(methodName);
+        if (methodDef != null &&
+            !(methodDef.parent instanceof ClassDefinitionNode) &&
+            inlineMethod(node, methodDef)) return;
         boolean addThis = false;
         if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode) {
             methodName = ((ClassDefinitionNode) methodDef.parent).className + "_" + methodName;
             addThis = !(node.parent instanceof MemberAccessExpressionNode);
         }
+        MethodCall ins = new MethodCall();
+        ins.dst = node.value = new Variable();
         ins.methodName = methodName;
         for (ExpressionStatementNode item : node.actualParameterList)
             ins.actualParaVarList.addLast(item.value);
@@ -681,6 +731,21 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(ReturnStatementNode node) throws Exception {
+        if (!inlineEndLabelStack.isEmpty()) {
+            String label = inlineEndLabelStack.getLast();
+            if (node.returnValue != null) {
+                visit(node.returnValue);
+                Move move = new Move();
+                move.dst = inlineResStack.getLast();
+                move.src = node.returnValue.value;
+                codeList.addLast(move);
+            }
+            Jump jump = new Jump();
+            jump.type = Jump.Type.JMP;
+            jump.targetLabel = label;
+            codeList.addLast(jump);
+            return;
+        }
         Return ins = new Return();
         if (node.returnValue != null) {
             visit(node.returnValue);
