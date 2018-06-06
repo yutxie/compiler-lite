@@ -1,36 +1,10 @@
 # Compiler-Lite
 ACM Class 2018 Compiler
 
-## Q&A
-
-## To-Do
-
-- generate code
-  - array and malloc
-  - class member var and method
-- optimization
-  - coloring start over
-  - reduce #reserved register
-  - static single assignment
-  - coalesce interference graph
-    - reduce mov x, x
-  - leaf method
-    - inline
-    - reduce sub rsp
-
-## To-Fix
-
-- def and use in index/member access
-- replace set by cmov
-- global allocation
-- built-in class and method
-
-## Process
+## Compiling Process
 
 - front end: scr -g4-> parse tree -AstBuilder-> AST -IRGenerator-> IR
-- back end:
-  - trivial: IR (var) -TrivialRegisterAllocator-> IR (spill code) -> #
-  - non-trivial: IR (linear) -CFGGenerator-> IR (CFG) -RegisterAllocator-> IR (linear, spill code) -> #
+- back end: IR (linear) -CFGGenerator-> IR (CFG) -RegisterAllocator-> IR (linear) -CodeSpiller-> target code #
 
 ## Structure
 
@@ -79,7 +53,7 @@ ACM Class 2018 Compiler
 - mapped to AST
 - also as symbol table
 
-## Variable
+### Variable
 
 - (normal) Variable
 - Member/IndexVariable: implement with load & store
@@ -93,6 +67,13 @@ ACM Class 2018 Compiler
 - Return
 - Jump
 
+## Optimization
+
+- liveness analysis and register allocation by coloring
+- local value numbering
+- redundant instruction reducing
+- method inlining
+
 ## Hint
 
 - visitor interface
@@ -104,4 +85,6 @@ ACM Class 2018 Compiler
 - The Definitive ANTLR4 Reference
 - [antlr/grammars-v4 at GitHub](https://github.com/antlr/grammars-v4/tree/master/java)
 - [ANTLR4使用技巧](https://abcdabcd987.com/using-antlr4/)
-- [compiler2016 by abcdabcd987 at GitHub](https://github.com/abcdabcd987/compiler2016)
+- Engineering a Compiler
+- Modern Compiler Implementation in Java (the Tiger Book)
+- Compilers: Principles, Techniques & Tools (the Dragon Book)
