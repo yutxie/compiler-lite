@@ -79,10 +79,10 @@ public class RegisterAllocator {
             }
         }
         // among blocks
-//        for (Variable para : method.formalParaVarList) {
-//            BasicBlock firstBB = method.basicBlockList.getFirst();
-//            firstBB.liveIn.addAll(para.colorable());
-//        }
+        for (Variable para : method.formalParaVarList) {
+            BasicBlock firstBB = method.basicBlockList.getFirst();
+            firstBB.liveIn.addAll(para.colorable());
+        }
         boolean modified = true;
         while (modified) {
             modified = false;
@@ -234,7 +234,7 @@ public class RegisterAllocator {
                 ins.liveIn = new HashSet<Variable>(liveSet);
             }
         }
-//        if (method.methodName.equals("a")) {
+//        if (method.methodName.equals("adjustHeap")) {
 //            System.out.println("========== " + method.methodName);
 //            method.printInformation();
 //            interGraph.printInformation();

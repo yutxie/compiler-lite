@@ -37,6 +37,8 @@ public class DefineAndUseCalculator {
 
     public void calculateDefineAndUse(Allocate ins) {
         ins.def.addAll(ins.dst.colorable());
+        ins.use.addAll(ins.dst.colorable());
+        ins.use.addAll(ins.size.colorable());
     }
 
     public void calculateDefineAndUse(Binary ins) {

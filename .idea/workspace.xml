@@ -20,7 +20,7 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
+            <state relative-caret-position="228">
               <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -32,14 +32,28 @@
       <file leaf-file-name="RegisterAllocator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="198" column="29" lean-forward="true" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
+            <state relative-caret-position="285">
+              <caret line="207" column="33" lean-forward="true" selection-start-line="207" selection-start-column="33" selection-end-line="207" selection-end-column="33" />
               <folding>
+                <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
                 <element signature="method#init#0;class#RegisterAllocator#0" />
-                <element signature="e#2819#2829#0" expanded="true" />
-                <element signature="e#3008#3018#0" expanded="true" />
+                <element signature="method#dfs#0;class#RegisterAllocator#0" />
+                <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+                <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
+                <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
+                <element signature="method#removeUselessCode#1;class#RegisterAllocator#0" />
                 <element signature="method#simplify#0;class#RegisterAllocator#0" />
+                <element signature="method#spill#0;class#RegisterAllocator#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefineAndUseCalculator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="741">
+              <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -174,8 +188,8 @@
         <option value="$PROJECT_DIR$/src/main/java/IRCode/Unary.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/IRRewriter.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/LocalValueNumberer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
@@ -391,7 +405,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32789317" />
       <window_info anchor="right" id="Maven Projects" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.46884274" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.268546" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
@@ -1010,13 +1024,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="8" column="55" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/IRCode/Move.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -1037,20 +1044,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/RegisterAllocator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="198" column="29" lean-forward="true" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
+        <state relative-caret-position="285">
+          <caret line="207" column="33" lean-forward="true" selection-start-line="207" selection-start-column="33" selection-end-line="207" selection-end-column="33" />
           <folding>
+            <element signature="method#allocateRegister#0;class#RegisterAllocator#0" />
             <element signature="method#init#0;class#RegisterAllocator#0" />
-            <element signature="e#2819#2829#0" expanded="true" />
-            <element signature="e#3008#3018#0" expanded="true" />
+            <element signature="method#dfs#0;class#RegisterAllocator#0" />
+            <element signature="method#initLivenessAnalysis#0;class#RegisterAllocator#0" />
+            <element signature="method#removeUselessCode#0;class#RegisterAllocator#0" />
+            <element signature="method#isRemovable#0;class#RegisterAllocator#0" />
+            <element signature="method#removeUselessCode#1;class#RegisterAllocator#0" />
             <element signature="method#simplify#0;class#RegisterAllocator#0" />
+            <element signature="method#spill#0;class#RegisterAllocator#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/BackEnd/DefineAndUseCalculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="41" column="5" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="228">
           <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
           <folding>
             <element signature="imports" expanded="true" />
