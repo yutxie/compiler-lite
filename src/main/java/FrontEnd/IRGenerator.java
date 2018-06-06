@@ -53,6 +53,8 @@ public class IRGenerator extends AstVisitor {
 
     @Override
     void visit(MethodDefinitionNode node) throws Exception {
+        if (node.methodName.equals("main")) inlineOn = true;
+        else inlineOn = false;
         MethodEntity methodEntity = new MethodEntity();
         if (node.parent instanceof ClassDefinitionNode) {
             String className = ((ClassDefinitionNode) node.parent).className;
@@ -169,6 +171,7 @@ public class IRGenerator extends AstVisitor {
         node.value = value;
     }
 
+    boolean inlineOn;
     HashSet<MethodDefinitionNode> inlineMethodSet =
         new HashSet<MethodDefinitionNode>();
     LinkedList<HashMap<String, Operand>> inlineVarMapStack =
@@ -178,6 +181,9 @@ public class IRGenerator extends AstVisitor {
     int inlineCnt = 0;
     boolean inlineMethod(MethodCallExpressionNode call,
                          MethodDefinitionNode method) throws Exception {
+        if (inlineOn == false) return false;
+        if (method == null ||
+            method.parent instanceof ClassDefinitionNode) return false;
         if (method.methodName.equals("string_length") ||
             method.methodName.equals("string_ord") ||
             method.methodName.equals("string_parseInt") ||
@@ -216,9 +222,7 @@ public class IRGenerator extends AstVisitor {
         super.visit(node);
         String methodName = node.caller.referenceName;
         MethodDefinitionNode methodDef = node.scope.getMethod(methodName);
-        if (methodDef != null &&
-            !(methodDef.parent instanceof ClassDefinitionNode) &&
-            inlineMethod(node, methodDef)) return;
+        if (inlineMethod(node, methodDef)) return;
         boolean addThis = false;
         if (methodDef != null && methodDef.parent instanceof ClassDefinitionNode) {
             methodName = ((ClassDefinitionNode) methodDef.parent).className + "_" + methodName;

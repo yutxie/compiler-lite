@@ -1,16 +1,14 @@
-int foo(int x) {
-	int y = x;
-	return y;
-}
-
-int goo(int x) {
-	return foo(x);
+int gcd(int x, int y) {
+  if (x%y == 0) return y;
+  else return gcd(y, x%y);
 }
 
 int main() {
-	int x = 1;
-	println(toString(goo(1)));
-	println(toString(goo(2)));
+    println(toString(gcd(10,1)));
+    println(toString(gcd(34986,3087)));
+    println(toString(gcd(2907,1539)));
+
+    return 0;
 }class string {
     
     int length() {}
