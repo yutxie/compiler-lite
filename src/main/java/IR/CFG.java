@@ -32,9 +32,32 @@ public class CFG {
 
     public void reduceNop() {
         for (BasicBlock node : basicBlockList) {
-            if (node.codeList.size() <= 1) continue;
-            if (node.codeList.getFirst() instanceof Nop)
-                node.codeList.removeFirst();
+            LinkedList<IRCode> codeList = new LinkedList<IRCode>();
+            for (IRCode ins : node.codeList) {
+                if (ins instanceof Nop) {
+                    Nop nop = (Nop) ins;
+                    if (nop.realName == null) continue;
+                }
+                codeList.addLast(ins);
+            }
+            if (codeList.isEmpty()) codeList.addLast(new Nop());
+            node.codeList = codeList;
+        }
+    }
+
+    public void reduceJump() {
+        int n = basicBlockList.size();
+        for (int i = 0; i < n - 1; ++i) {
+            BasicBlock u = basicBlockList.get(i);
+            BasicBlock v = basicBlockList.get(i + 1);
+            IRCode ins = u.codeList.getLast();
+            if (!(ins instanceof Jump)) continue;
+            Jump jump = (Jump) ins;
+            if (jump.type != Jump.Type.JMP) continue;
+            if (jump.targetLabel != v.leadLabel) continue;
+            u.codeList.removeLast();
+            if (u.codeList.isEmpty())
+                u.codeList.addLast(new Nop());
         }
     }
 

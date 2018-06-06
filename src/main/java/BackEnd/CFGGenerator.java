@@ -24,6 +24,7 @@ public class CFGGenerator {
             }
             cfg.addEdge();
             cfg.reduceNop();
+            cfg.reduceJump();
             method.basicBlockList = cfg.basicBlockList;
         }
     }
