@@ -331,6 +331,7 @@ public class IRGenerator extends AstVisitor {
             return;
         }
         int sizeRecord = codeList.size();
+        if (!node.lhs.exprType.getTypeName().equals("string"))
         if (node.op == ASSIGN && node.rhs instanceof BinaryExpressionNode) {
             BinaryExpressionNode rhs = (BinaryExpressionNode) node.rhs;
             visit(node.lhs);
